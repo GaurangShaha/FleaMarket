@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Flea Market</string>
+    <string name="network_error">"Unable to connect internet. Please check your conncection. "</string>
+    <string name="server_error">Unable to process you request. Please try later.</string>
+    <string name="error_icon_content_description">Error icon</string>
+    <string name="retry">Retry</string>
+</resources>
