@@ -68,7 +68,7 @@ internal fun FleaMarketNavigationBar(
         ) {
             BottomNavigation(
                 modifier = modifier
-                    .padding(16.dp)
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                     .clip(MaterialTheme.extraShape.capsuleShape)
             ) {
                 destinations.forEachIndexed { index, it ->
@@ -170,8 +170,7 @@ enum class BottomNavigationScreens(
 @FleaMarketPreview
 private fun FleaMarketNavigationBarPreview() {
     FleaMarketThemePreview {
-        FleaMarketNavigationBar(
-            selectedNavigationItemIndex = 0,
+        FleaMarketNavigationBar(selectedNavigationItemIndex = 0,
             updateSelectedNavigationItemIndex = {})
     }
 }
