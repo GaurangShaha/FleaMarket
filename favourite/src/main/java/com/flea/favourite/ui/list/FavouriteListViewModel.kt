@@ -1,7 +1,7 @@
 package com.flea.favourite.ui.list
 
 import androidx.lifecycle.viewModelScope
-import com.flea.common.ui.app.state.SnackbarDelegate.SnackbarType
+import com.flea.common.ui.component.SnackbarDelegate.SnackbarType
 import com.flea.common.ui.base.viewmodel.BaseViewModel
 import com.flea.common.ui.slice.SnackBarSlice
 import com.flea.common.ui.slice.SnackBarSlice.SnackBarDetails

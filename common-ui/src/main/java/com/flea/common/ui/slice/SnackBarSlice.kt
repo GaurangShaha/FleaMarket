@@ -1,8 +1,8 @@
 package com.flea.common.ui.slice
 
 import androidx.annotation.StringRes
-import com.flea.common.ui.app.state.SnackbarDelegate.SnackbarType
 import com.flea.common.ui.base.viewmodel.BaseViewModelSlice
+import com.flea.common.ui.component.SnackbarDelegate.SnackbarType
 import com.flea.common.ui.slice.SnackBarSlice.SnackBarDetails
 import kotlinx.coroutines.flow.StateFlow
 

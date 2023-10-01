@@ -4,7 +4,6 @@ import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
-import com.flea.common.ui.app.state.rememberSnackBarDelegate
 import com.flea.common.ui.component.compositionlocal.LocalSnackbarHostStateProvider
 import com.flea.common.ui.slice.SnackBarSlice.SnackBarDetails
 import kotlinx.coroutines.launch

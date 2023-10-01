@@ -20,8 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.flea.common.ui.app.state.SnackbarDelegate
-import com.flea.common.ui.app.state.SnackbarDelegate.SnackbarType
+import com.flea.common.ui.component.SnackbarDelegate.SnackbarType
 import com.flea.common.ui.component.compositionlocal.LocalSnackbarHostStateProvider
 import com.flea.common.ui.theme.extraColors
 

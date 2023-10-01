@@ -1,4 +1,4 @@
-package com.flea.common.ui.app.state
+package com.flea.common.ui.component
 
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.SnackbarResult
