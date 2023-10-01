@@ -19,9 +19,7 @@ import com.flea.favourite.ui.list.FavouriteListUiState
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun FavouriteListContent(
-    uiState: FavouriteListUiState.Content,
-    handleIntent: (FavouriteListIntent) -> Unit,
-    navigateToProductDetails: (productId: Int) -> Unit
+    uiState: FavouriteListUiState.Content, handleIntent: (FavouriteListIntent) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(156.dp),
@@ -31,13 +29,10 @@ internal fun FavouriteListContent(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items = uiState.favouriteProductList, key = { it.id }) { favouriteItemViewEntity ->
-            FavouriteProductItem(
-                modifier = Modifier.animateItemPlacement(),
+            FavouriteProductItem(modifier = Modifier.animateItemPlacement(),
                 favouriteItem = favouriteItemViewEntity,
-                navigateToProductDetails = navigateToProductDetails,
                 removeFromFavourite = { handleIntent(RemoveFromFavourite(it)) },
-                moveToCart = { handleIntent(FavouriteListIntent.MoveToCart(it)) }
-            )
+                moveToCart = { handleIntent(FavouriteListIntent.MoveToCart(it)) })
         }
     }
 }
@@ -46,10 +41,6 @@ internal fun FavouriteListContent(
 @Composable
 private fun FavouriteListContentPreview() {
     FleaMarketThemePreview {
-        FavouriteListContent(
-            uiState = dummyContent,
-            handleIntent = {},
-            navigateToProductDetails = {}
-        )
+        FavouriteListContent(uiState = dummyContent, handleIntent = {})
     }
 }

@@ -19,11 +19,10 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.flea.cart.ui.details.navigation.CART_DETAILS_ROUTE
-import com.flea.common.ui.app.state.FleaMarketAppState
+import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
+import com.flea.common.ui.component.compositionlocal.LocalWindowSizeClass
 import com.flea.common.ui.component.preview.FleaMarketPreview
 import com.flea.common.ui.component.preview.FleaMarketThemePreview
-import com.flea.common.ui.component.preview.fleaMarketAppState
-import com.flea.common.ui.component.compositionlocal.LocalWindowSizeClass
 import com.flea.common.ui.theme.extraColors
 import com.flea.common.ui.theme.extraShape
 import com.flea.favourite.ui.list.navigation.FAVOURITE_LIST_ROUTE
@@ -36,11 +35,11 @@ import java.util.*
 @Composable
 internal fun FleaMarketNavigationBar(
     modifier: Modifier = Modifier,
-    appState: FleaMarketAppState,
     selectedNavigationItemIndex: Int,
     updateSelectedNavigationItemIndex: (Int) -> Unit
 ) {
-    val navBackStackEntry by appState.navController.currentBackStackEntryAsState()
+    val navController = LocalNavControllerProvider.current
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestinationRoute = navBackStackEntry?.destination?.route
 
     val destinations = BottomNavigationScreens.values()
@@ -51,11 +50,11 @@ internal fun FleaMarketNavigationBar(
         if (currentDestinationRoute != bottomNavigationScreens.route) {
             updateSelectedNavigationItemIndex(index)
             val topLevelNavOptions = navOptions {
-                popUpTo(appState.navController.graph.findStartDestination().id)
+                popUpTo(navController.graph.findStartDestination().id)
                 launchSingleTop = true
             }
 
-            appState.navController.navigate(
+            navController.navigate(
                 route = bottomNavigationScreens.route, navOptions = topLevelNavOptions
             )
         }
@@ -171,7 +170,7 @@ enum class BottomNavigationScreens(
 @FleaMarketPreview
 private fun FleaMarketNavigationBarPreview() {
     FleaMarketThemePreview {
-        FleaMarketNavigationBar(appState = fleaMarketAppState,
+        FleaMarketNavigationBar(
             selectedNavigationItemIndex = 0,
             updateSelectedNavigationItemIndex = {})
     }

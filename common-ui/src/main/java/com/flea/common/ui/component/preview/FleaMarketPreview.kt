@@ -15,8 +15,9 @@ import androidx.compose.ui.tooling.preview.Devices.TABLET
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.navigation.compose.rememberNavController
-import com.flea.common.ui.app.state.FleaMarketAppState
-import com.flea.common.ui.app.state.rememberFleaMarketAppState
+import com.flea.common.ui.component.compositionlocal.LocalDrawerStateProvider
+import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
+import com.flea.common.ui.component.compositionlocal.LocalSnackbarHostStateProvider
 import com.flea.common.ui.component.compositionlocal.LocalWindowSizeClass
 import com.flea.common.ui.theme.FleaMarketTheme
 
@@ -58,20 +59,15 @@ import com.flea.common.ui.theme.FleaMarketTheme
 )
 annotation class FleaMarketPreview
 
-val fleaMarketAppState: FleaMarketAppState
-    @Composable get() {
-        return rememberFleaMarketAppState(navController = rememberNavController(),
-            drawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
-            snackbarHostState = remember { SnackbarHostState() })
-    }
-
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
     FleaMarketTheme {
         CompositionLocalProvider(
-            LocalWindowSizeClass provides WindowSizeClass.calculateFromSize(DpSize.Zero)
-        ) {
+            LocalWindowSizeClass provides WindowSizeClass.calculateFromSize(DpSize.Zero),
+            LocalNavControllerProvider provides rememberNavController(),
+            LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
+            LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {
             Surface {
                 content()
             }

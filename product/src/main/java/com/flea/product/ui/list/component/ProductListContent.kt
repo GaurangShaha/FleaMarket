@@ -12,9 +12,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
 import com.flea.common.ui.component.preview.FleaMarketPreview
 import com.flea.common.ui.component.preview.FleaMarketThemePreview
 import com.flea.product.ui.R
+import com.flea.product.ui.details.navigation.navigateToProductDetails
 import com.flea.product.ui.list.ProductListIntent
 import com.flea.product.ui.list.ProductListUiState.Content
 
@@ -23,7 +25,6 @@ import com.flea.product.ui.list.ProductListUiState.Content
 internal fun ProductListContent(
     state: Content,
     handleIntent: (ProductListIntent) -> Unit,
-    navigateToProductDetails: (productId: Int) -> Unit
 ) {
     LazyVerticalStaggeredGrid(
         verticalItemSpacing = 22.dp,
@@ -52,7 +53,10 @@ internal fun ProductListContent(
         }
 
         items(items = state.productList, key = { it.id }, contentType = { "productList" }) {
-            ProductListItem(productDetails = it, onProductClick = navigateToProductDetails)
+            val navController = LocalNavControllerProvider.current
+            ProductListItem(
+                productDetails = it, onProductClick = navController::navigateToProductDetails
+            )
         }
     }
 }
@@ -62,10 +66,6 @@ internal fun ProductListContent(
 @Composable
 private fun ProductListContentPreview() {
     FleaMarketThemePreview {
-        ProductListContent(
-            state = dummyProductListContent,
-            handleIntent = {},
-            navigateToProductDetails = {},
-        )
+        ProductListContent(state = dummyProductListContent, handleIntent = {})
     }
 }

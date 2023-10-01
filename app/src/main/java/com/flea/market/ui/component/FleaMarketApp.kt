@@ -9,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import com.flea.cart.ui.navigation.addCartGraph
-import com.flea.common.ui.app.state.FleaMarketAppState
+import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
 import com.flea.common.ui.component.compositionlocal.LocalWindowSizeClass
 import com.flea.favourite.ui.navigation.addFavouriteGraph
 import com.flea.market.ui.main.MainIntent.UpdateSelectedNavigationItemIndex
@@ -20,17 +20,18 @@ import com.flea.product.ui.navigation.addProductGraph
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-internal fun FleaMarketApp(appState: FleaMarketAppState) {
+internal fun FleaMarketApp() {
     val navHost = remember {
         movableContentOf {
             Surface {
                 NavHost(
-                    navController = appState.navController, startDestination = PRODUCT_LIST_ROUTE
+                    navController = LocalNavControllerProvider.current,
+                    startDestination = PRODUCT_LIST_ROUTE
                 ) {
-                    addProductGraph(appState)
-                    addCartGraph(appState)
-                    addFavouriteGraph(appState)
-                    addMoreGraph(appState)
+                    addProductGraph()
+                    addCartGraph()
+                    addFavouriteGraph()
+                    addMoreGraph()
                 }
             }
         }
@@ -39,14 +40,14 @@ internal fun FleaMarketApp(appState: FleaMarketAppState) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val selectedIndex by uiState.selectedNavigationItemIndex.collectAsStateWithLifecycle()
     when (LocalWindowSizeClass.current.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> ScreenWithBottomBar(appState = appState,
+        WindowWidthSizeClass.Compact -> ScreenWithBottomBar(
             navHost = navHost,
             selectedIndex = selectedIndex,
             updateSelectedNavigationItemIndex = {
                 viewModel.handleIntent(UpdateSelectedNavigationItemIndex(it))
             })
 
-        else -> ScreenWithNavigationRail(appState = appState,
+        else -> ScreenWithNavigationRail(
             navHost = navHost,
             selectedIndex = selectedIndex,
             updateSelectedNavigationItemIndex = {

@@ -20,25 +20,19 @@ import com.flea.product.ui.list.component.dummyProductListContent
 
 @Composable
 internal fun ProductListScreen(
-    state: ProductListUiState,
-    handleIntent: (ProductListIntent) -> Unit,
-    navigateToProductDetails: (productId: Int) -> Unit
+    state: ProductListUiState, handleIntent: (ProductListIntent) -> Unit
 ) {
     Column {
         FleaMarketAppBar()
         when (state) {
-            is Error -> ErrorLayout(
-                errorMessage = stringResource(id = state.throwable.toAPIErrorMessage()),
+            is Error -> ErrorLayout(errorMessage = stringResource(id = state.throwable.toAPIErrorMessage()),
                 errorIcon = painterResource(id = state.throwable.toAPIErrorIcon()),
-                retry = { handleIntent(ProductListIntent.Reload) }
-            )
+                retry = { handleIntent(ProductListIntent.Reload) })
 
             Loading -> ProductListLoading()
 
             is Content -> ProductListContent(
-                state = state,
-                handleIntent = handleIntent,
-                navigateToProductDetails = navigateToProductDetails
+                state = state, handleIntent = handleIntent
             )
         }
     }
@@ -48,11 +42,7 @@ internal fun ProductListScreen(
 @Composable
 private fun ProductListScreenLoadingPreview() {
     FleaMarketThemePreview {
-        ProductListScreen(
-            state = Loading,
-            navigateToProductDetails = {},
-            handleIntent = {}
-        )
+        ProductListScreen(state = Loading, handleIntent = {})
     }
 }
 
@@ -60,11 +50,7 @@ private fun ProductListScreenLoadingPreview() {
 @Composable
 private fun ProductListScreenErrorPreview() {
     FleaMarketThemePreview {
-        ProductListScreen(
-            state = Error(throwable = NetworkException),
-            navigateToProductDetails = {},
-            handleIntent = {}
-        )
+        ProductListScreen(state = Error(throwable = NetworkException), handleIntent = {})
     }
 }
 
@@ -72,10 +58,6 @@ private fun ProductListScreenErrorPreview() {
 @Composable
 private fun ProductListScreenContentPreview() {
     FleaMarketThemePreview {
-        ProductListScreen(
-            state = dummyProductListContent,
-            navigateToProductDetails = {},
-            handleIntent = {}
-        )
+        ProductListScreen(state = dummyProductListContent, handleIntent = {})
     }
 }

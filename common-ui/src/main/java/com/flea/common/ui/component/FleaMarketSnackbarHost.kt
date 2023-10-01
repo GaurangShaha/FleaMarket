@@ -9,7 +9,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarHost
-import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
@@ -21,19 +20,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.flea.common.ui.app.state.SnackbarDelegate
 import com.flea.common.ui.app.state.SnackbarDelegate.SnackbarType
+import com.flea.common.ui.component.compositionlocal.LocalSnackbarHostStateProvider
 import com.flea.common.ui.theme.extraColors
 
 @Composable
-fun FleaMarketSnackbarHost(
-    snackbarHostState: SnackbarHostState, getSnackbarType: () -> SnackbarType
-) {
+fun FleaMarketSnackbarHost() {
     SnackbarHost(
-        modifier = Modifier.padding(16.dp), hostState = snackbarHostState
+        modifier = Modifier.padding(16.dp), hostState = LocalSnackbarHostStateProvider.current
     ) { snackbarData ->
         val iconColor: Color
         val icon: ImageVector?
-        when (getSnackbarType()) {
+        when (SnackbarDelegate.currentSnackbarType) {
             SnackbarType.ERROR -> {
                 iconColor = MaterialTheme.colors.error
                 icon = Icons.Default.Close

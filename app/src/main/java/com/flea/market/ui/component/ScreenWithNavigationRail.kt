@@ -8,16 +8,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.flea.common.ui.app.state.FleaMarketAppState
 import com.flea.common.ui.component.FleaMarketSnackbarHost
 import com.flea.common.ui.component.preview.FleaMarketPreview
 import com.flea.common.ui.component.preview.FleaMarketThemePreview
-import com.flea.common.ui.component.preview.fleaMarketAppState
 
 @Composable
 fun ScreenWithNavigationRail(
     modifier: Modifier = Modifier,
-    appState: FleaMarketAppState,
     navHost: @Composable () -> Unit,
     selectedIndex: Int,
     updateSelectedNavigationItemIndex: (Int) -> Unit
@@ -28,14 +25,12 @@ fun ScreenWithNavigationRail(
             .navigationBarsPadding()
     ) {
         FleaMarketNavigationBar(
-            appState = appState,
             selectedNavigationItemIndex = selectedIndex,
             updateSelectedNavigationItemIndex = updateSelectedNavigationItemIndex
         )
         Box(contentAlignment = Alignment.BottomCenter) {
             navHost()
-            FleaMarketSnackbarHost(snackbarHostState = appState.snackbarHostState,
-                getSnackbarType = { appState.snackbarType })
+            FleaMarketSnackbarHost()
         }
     }
 }
@@ -45,8 +40,7 @@ fun ScreenWithNavigationRail(
 @Composable
 fun ScreenWithNavigationRailPreview() {
     FleaMarketThemePreview {
-        ScreenWithNavigationRail(appState = fleaMarketAppState,
-            navHost = {},
+        ScreenWithNavigationRail(navHost = {},
             selectedIndex = 0,
             updateSelectedNavigationItemIndex = {})
     }

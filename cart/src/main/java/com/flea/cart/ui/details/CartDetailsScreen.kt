@@ -23,9 +23,7 @@ import com.flea.market.foundation.model.NetworkException
 
 @Composable
 internal fun CartDetailsScreen(
-    uiState: CartDetailsUiState,
-    handleIntent: (CartDetailsIntent) -> Unit,
-    navigateToProductDetails: (Int) -> Unit
+    uiState: CartDetailsUiState, handleIntent: (CartDetailsIntent) -> Unit
 ) {
     Column {
         FleaMarketAppBar(title = R.string.cart)
@@ -37,11 +35,7 @@ internal fun CartDetailsScreen(
                 icon = painterResource(id = R.drawable.ic_empty_cart)
             )
 
-            is Content -> CartDetailsContent(
-                uiState = uiState,
-                handleIntent = handleIntent,
-                navigateToProductDetails = navigateToProductDetails
-            )
+            is Content -> CartDetailsContent(uiState = uiState, handleIntent = handleIntent)
 
             is Error -> ErrorLayout(
                 errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
@@ -55,7 +49,7 @@ internal fun CartDetailsScreen(
 @FleaMarketPreview
 private fun CartDetailsContentScreenPreview() {
     FleaMarketThemePreview {
-        CartDetailsScreen(uiState = dummyContent, handleIntent = {}, navigateToProductDetails = {})
+        CartDetailsScreen(uiState = dummyContent, handleIntent = {})
     }
 }
 
@@ -63,7 +57,7 @@ private fun CartDetailsContentScreenPreview() {
 @FleaMarketPreview
 private fun CartDetailsEmptyScreenPreview() {
     FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Empty, handleIntent = {}, navigateToProductDetails = {})
+        CartDetailsScreen(uiState = Empty, handleIntent = {})
     }
 }
 
@@ -71,7 +65,7 @@ private fun CartDetailsEmptyScreenPreview() {
 @FleaMarketPreview
 private fun CartDetailsLoadingScreenPreview() {
     FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Loading, handleIntent = {}, navigateToProductDetails = {})
+        CartDetailsScreen(uiState = Loading, handleIntent = {})
     }
 }
 
@@ -79,8 +73,6 @@ private fun CartDetailsLoadingScreenPreview() {
 @FleaMarketPreview
 private fun CartDetailsErrorScreenPreview() {
     FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Error(NetworkException),
-            handleIntent = {},
-            navigateToProductDetails = {})
+        CartDetailsScreen(uiState = Error(NetworkException), handleIntent = {})
     }
 }

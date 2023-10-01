@@ -8,7 +8,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.flea.common.ui.app.state.FleaMarketAppState
 import com.flea.common.ui.navigation.ProductDetailsDeepLink
 import com.flea.common.ui.navigation.ProductDetailsDeepLink.PRODUCT_DETAILS_DEEPLINK_ARGUMENT_PRODUCT_ID
 import com.flea.product.ui.details.ProductDetailsScreen
@@ -20,7 +19,7 @@ private const val PRODUCT_DETAILS_ROUTE_BY_ID = "product_details/%d"
 private const val PRODUCT_DETAILS_ROUTE =
     "product_details/{$PRODUCT_DETAILS_DEEPLINK_ARGUMENT_PRODUCT_ID}"
 
-internal fun NavGraphBuilder.productDetailsScreen(appState: FleaMarketAppState) {
+internal fun NavGraphBuilder.productDetailsScreen() {
     composable(
         route = PRODUCT_DETAILS_ROUTE,
         arguments = listOf(navArgument(PRODUCT_DETAILS_ARGUMENT_PRODUCT_ID) {
@@ -32,9 +31,7 @@ internal fun NavGraphBuilder.productDetailsScreen(appState: FleaMarketAppState) 
         val uiState by productDetailsViewModel.uiState.collectAsStateWithLifecycle()
 
         ProductDetailsScreen(
-            uiState = uiState,
-            handleIntent = productDetailsViewModel::handleIntent,
-            navigateUp = appState.navController::navigateUp
+            uiState = uiState, handleIntent = productDetailsViewModel::handleIntent
         )
     }
 }

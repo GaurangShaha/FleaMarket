@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flea.common.ui.component.ErrorLayout
 import com.flea.common.ui.component.FleaMarketAppBar
 import com.flea.common.ui.component.HeartToggleButton
+import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
 import com.flea.common.ui.component.preview.FleaMarketPreview
 import com.flea.common.ui.component.preview.FleaMarketThemePreview
 import com.flea.common.ui.mapper.toAPIErrorIcon
@@ -34,9 +35,7 @@ import com.flea.product.ui.details.component.dummyContent
 
 @Composable
 internal fun ProductDetailsScreen(
-    uiState: ProductDetailsUiState,
-    handleIntent: (ProductDetailsIntent) -> Unit,
-    navigateUp: () -> Unit
+    uiState: ProductDetailsUiState, handleIntent: (ProductDetailsIntent) -> Unit
 ) {
     DarkStatusBarDisposableEffect()
 
@@ -62,9 +61,10 @@ internal fun ProductDetailsScreen(
             Loading -> ProductDetailsLoading()
         }
 
+        val navController = LocalNavControllerProvider.current
         FleaMarketAppBar(
             title = R.string.product_details,
-            navigationIcon = Icons.Default.ArrowBack to navigateUp,
+            navigationIcon = Icons.Default.ArrowBack to { navController.navigateUp() },
             actionItems = actionItems,
             backgroundColor = Color.Transparent,
             contentColor = MaterialTheme.extraColors.onScrimColor,
@@ -77,7 +77,7 @@ internal fun ProductDetailsScreen(
 @FleaMarketPreview
 private fun ProductDetailsLoadingScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Loading, handleIntent = {}) {}
+        ProductDetailsScreen(uiState = Loading, handleIntent = {})
     }
 }
 
@@ -85,7 +85,7 @@ private fun ProductDetailsLoadingScreenPreview() {
 @FleaMarketPreview
 private fun ProductDetailsErrorScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Error(NetworkException), handleIntent = {}) {}
+        ProductDetailsScreen(uiState = Error(NetworkException), handleIntent = {})
     }
 }
 
@@ -93,6 +93,6 @@ private fun ProductDetailsErrorScreenPreview() {
 @FleaMarketPreview
 private fun ProductDetailsContentScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = dummyContent, handleIntent = {}) {}
+        ProductDetailsScreen(uiState = dummyContent, handleIntent = {})
     }
 }

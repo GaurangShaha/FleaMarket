@@ -1,13 +1,11 @@
 package com.flea.favourite.ui.list
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.flea.common.ui.app.state.SnackbarDelegate.SnackbarType
 import com.flea.common.ui.component.EmptyLayout
 import com.flea.common.ui.component.ErrorLayout
 import com.flea.common.ui.component.FleaMarketAppBar
@@ -30,8 +28,6 @@ import com.flea.market.foundation.model.NetworkException
 internal fun FavouriteListScreen(
     uiState: FavouriteListUiState,
     handleIntent: (FavouriteListIntent) -> Unit,
-    navigateToProductDetails: (productId: Int) -> Unit,
-    showSnackbar: suspend (String, String?, SnackbarType) -> SnackbarResult,
     notifySnackbarResult: (Boolean) -> Unit
 ) {
     Column {
@@ -45,17 +41,11 @@ internal fun FavouriteListScreen(
             )
 
             is Content -> {
-                FavouriteListContent(
-                    uiState = uiState,
-                    handleIntent = handleIntent,
-                    navigateToProductDetails = navigateToProductDetails
-                )
+                FavouriteListContent(uiState = uiState, handleIntent = handleIntent)
 
                 val snackBarUiState by uiState.snackbarUiState.collectAsStateWithLifecycle()
                 FleaMarketSnackBar(
-                    snackBarUiState = snackBarUiState,
-                    showSnackbar = showSnackbar,
-                    notifySnackbarResult = notifySnackbarResult
+                    snackBarUiState = snackBarUiState, notifySnackbarResult = notifySnackbarResult
                 )
             }
 
@@ -71,11 +61,7 @@ internal fun FavouriteListScreen(
 @Composable
 private fun FavouriteListScreenLoadingPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Loading,
-            handleIntent = {},
-            navigateToProductDetails = {},
-            notifySnackbarResult = {},
-            showSnackbar = { _, _, _ -> SnackbarResult.ActionPerformed })
+        FavouriteListScreen(uiState = Loading, handleIntent = {}, notifySnackbarResult = {})
     }
 }
 
@@ -83,11 +69,7 @@ private fun FavouriteListScreenLoadingPreview() {
 @Composable
 private fun FavouriteListScreenContentPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = dummyContent,
-            handleIntent = {},
-            navigateToProductDetails = {},
-            notifySnackbarResult = {},
-            showSnackbar = { _, _, _ -> SnackbarResult.ActionPerformed })
+        FavouriteListScreen(uiState = dummyContent, handleIntent = {}, notifySnackbarResult = {})
     }
 }
 
@@ -95,11 +77,7 @@ private fun FavouriteListScreenContentPreview() {
 @Composable
 private fun FavouriteListScreenEmptyPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Empty,
-            handleIntent = {},
-            navigateToProductDetails = {},
-            notifySnackbarResult = {},
-            showSnackbar = { _, _, _ -> SnackbarResult.ActionPerformed })
+        FavouriteListScreen(uiState = Empty, handleIntent = {}, notifySnackbarResult = {})
     }
 }
 
@@ -109,8 +87,6 @@ private fun FavouriteListScreenErrorPreview() {
     FleaMarketThemePreview {
         FavouriteListScreen(uiState = Error(NetworkException),
             handleIntent = {},
-            navigateToProductDetails = {},
-            notifySnackbarResult = {},
-            showSnackbar = { _, _, _ -> SnackbarResult.ActionPerformed })
+            notifySnackbarResult = {})
     }
 }

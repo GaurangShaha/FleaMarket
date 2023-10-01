@@ -33,6 +33,9 @@ fun LazyImage(
 @Composable
 fun LazyImagePreview() {
     FleaMarketThemePreview {
-        LazyImage(Modifier.size(50.dp), url = "")
+        LazyImage(
+            modifier = Modifier.size(50.dp),
+            url = "https://www.gstatic.com/devrel-devsite/prod/v0f868bacf787bf31b228952b4e9f9c852485b2025a1f6f6571309b6d62ea4de2/android/images/lockup.svg"
+        )
     }
 }

@@ -5,23 +5,19 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.flea.common.ui.app.state.FleaMarketAppState
-import com.flea.product.ui.details.navigation.navigateToProductDetails
 import com.flea.product.ui.list.ProductListScreen
 import com.flea.product.ui.list.ProductListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 const val PRODUCT_LIST_ROUTE = "product_list"
 
-internal fun NavGraphBuilder.productListScreen(appState: FleaMarketAppState) {
+internal fun NavGraphBuilder.productListScreen() {
     composable(route = PRODUCT_LIST_ROUTE) {
         val productListViewModel = koinViewModel<ProductListViewModel>()
         val uiState by productListViewModel.uiState.collectAsStateWithLifecycle()
 
         ProductListScreen(
-            state = uiState,
-            handleIntent = productListViewModel::handleIntent,
-            navigateToProductDetails = appState.navController::navigateToProductDetails
+            state = uiState, handleIntent = productListViewModel::handleIntent
         )
     }
 }

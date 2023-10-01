@@ -1,6 +1,5 @@
 package com.flea.common.ui.theme
 
-import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
@@ -14,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.flea.common.ui.mapper.toActivity
 
 private val LightColorPalette = lightColors(
     primary = Black200,
@@ -63,9 +63,10 @@ fun FleaMarketTheme(
     }
 
     val view = LocalView.current
-    if (!view.isInEditMode) {
+    val activity = view.context.toActivity()
+    if (!view.isInEditMode && activity != null) {
         SideEffect {
-            val window = (view.context as Activity).window
+            val window = activity.window
             WindowCompat.setDecorFitsSystemWindows(window, false)
             window.statusBarColor = Color.Transparent.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
@@ -87,13 +88,15 @@ fun FleaMarketTheme(
 @Composable
 fun DarkStatusBarDisposableEffect(useDarkTheme: Boolean = isSystemInDarkTheme()) {
     val view = LocalView.current
-    DisposableEffect(Unit) {
-        val window = (view.context as Activity).window
-        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+    view.context.toActivity()?.let { activity ->
+        DisposableEffect(Unit) {
+            val window = activity.window
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
 
-        onDispose {
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
-                !useDarkTheme
+            onDispose {
+                WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
+                    !useDarkTheme
+            }
         }
     }
 }

@@ -18,7 +18,6 @@ interface SnackBarSlice {
         val snackbarType: SnackbarType = SnackbarType.DEFAULT,
         val onActionPerformed: (() -> Unit)? = null
     )
-
 }
 
 class SnackBarSliceImpl : BaseViewModelSlice<SnackBarDetails?>(null), SnackBarSlice {

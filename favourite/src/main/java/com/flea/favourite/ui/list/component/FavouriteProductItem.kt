@@ -15,8 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.flea.common.ui.component.LazyImage
+import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
 import com.flea.common.ui.component.preview.FleaMarketPreview
 import com.flea.common.ui.component.preview.FleaMarketThemePreview
+import com.flea.common.ui.navigation.ProductDetailsDeepLink
 import com.flea.common.ui.theme.extraTypography
 import com.flea.favourite.R
 import com.flea.favourite.ui.list.entity.FavouriteItemViewEntity
@@ -27,7 +29,6 @@ import java.text.NumberFormat
 internal fun FavouriteProductItem(
     modifier: Modifier = Modifier,
     favouriteItem: FavouriteItemViewEntity,
-    navigateToProductDetails: (productId: Int) -> Unit,
     removeFromFavourite: (productId: Int) -> Unit,
     moveToCart: (FavouriteItemViewEntity) -> Unit
 ) {
@@ -39,8 +40,9 @@ internal fun FavouriteProductItem(
             modifier = Modifier.clip(MaterialTheme.shapes.large),
             contentAlignment = Alignment.TopEnd
         ) {
+            val navController = LocalNavControllerProvider.current
             Card(
-                onClick = { navigateToProductDetails(favouriteItem.id) },
+                onClick = { navController.navigate(ProductDetailsDeepLink.getUri(favouriteItem.id)) },
                 backgroundColor = MaterialTheme.colors.secondary,
                 modifier = Modifier.width(156.dp),
                 elevation = 2.dp,
@@ -128,6 +130,6 @@ private fun ProductListItemPreview() {
             category = "Men's clothing",
             image = "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
             rating = 4.7
-        ), navigateToProductDetails = {}, removeFromFavourite = {}, moveToCart = {})
+        ), removeFromFavourite = {}, moveToCart = {})
     }
 }
