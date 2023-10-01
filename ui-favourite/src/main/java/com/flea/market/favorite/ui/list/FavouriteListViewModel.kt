@@ -1,7 +1,7 @@
 package com.flea.market.favorite.ui.list
 
 import androidx.lifecycle.viewModelScope
-import com.flea.favourite.R
+import com.flea.market.cart.repository.CartRepository
 import com.flea.market.common.base.viewmodel.BaseViewModel
 import com.flea.market.favorite.ui.list.FavouriteListIntent.MoveToCart
 import com.flea.market.favorite.ui.list.FavouriteListIntent.RemoveFromFavourite
@@ -12,10 +12,10 @@ import com.flea.market.favorite.ui.list.FavouriteListUiState.Loading
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.favorite.ui.list.mapper.toCartProductDetails
 import com.flea.market.favorite.ui.list.mapper.toFavouriteItemViewEntity
-import com.flea.market.data.cart.repository.CartRepository
-import com.flea.market.data.favourite.repository.FavouriteRepository
+import com.flea.market.favourite.repository.FavouriteRepository
 import com.flea.market.foundation.extension.onSuccess
 import com.flea.market.ui.component.SnackbarDelegate.SnackbarType
+import com.flea.market.ui.favourite.R
 import com.flea.market.ui.slice.SnackBarSlice
 import com.flea.market.ui.slice.SnackBarSlice.SnackBarDetails
 import kotlinx.coroutines.delay

@@ -25,8 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.flea.cart.R
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
+import com.flea.market.ui.cart.R
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.component.Stepper
 import com.flea.market.ui.preview.FleaMarketPreview

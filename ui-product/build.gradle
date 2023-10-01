@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.flea.product.ui'
+    namespace 'com.flea.market.ui.product'
     compileSdk 33
 
     defaultConfig {
@@ -44,7 +44,6 @@ android {
 dependencies {
     implementation project(path: ':data')
     api project(path: ':ui-common')
-    api project(path: ':foundation')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

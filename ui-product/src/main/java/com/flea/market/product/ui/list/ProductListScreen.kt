@@ -23,7 +23,7 @@ internal fun ProductListScreen(
     state: ProductListUiState, handleIntent: (ProductListIntent) -> Unit
 ) {
     Column {
-        FleaMarketAppBar(title = com.flea.common.ui.R.string.app_name)
+        FleaMarketAppBar(title = com.flea.market.ui.common.R.string.app_name)
         when (state) {
             is Error -> ErrorLayout(errorMessage = stringResource(id = state.throwable.toAPIErrorMessage()),
                 errorIcon = painterResource(id = state.throwable.toAPIErrorIcon()),

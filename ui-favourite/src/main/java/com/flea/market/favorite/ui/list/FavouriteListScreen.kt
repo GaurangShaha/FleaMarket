@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.flea.favourite.R
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Content
@@ -21,6 +20,7 @@ import com.flea.market.ui.component.EmptyLayout
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
 import com.flea.market.ui.component.FleaMarketSnackBar
+import com.flea.market.ui.favourite.R
 import com.flea.market.ui.preview.FleaMarketPreview
 import com.flea.market.ui.preview.FleaMarketThemePreview
 

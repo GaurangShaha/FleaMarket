@@ -11,7 +11,6 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 
 @Composable
 fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, notifySnackbarResult: (Boolean) -> Unit) {
-    val snackbarDelegate = rememberSnackBarDelegate()
     val context = LocalContext.current
     val snackbarHostState = LocalSnackbarHostStateProvider.current
     LaunchedEffect(snackBarUiState) {

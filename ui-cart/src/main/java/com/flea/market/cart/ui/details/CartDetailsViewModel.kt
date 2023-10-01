@@ -12,15 +12,15 @@ import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
 import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
 import com.flea.market.cart.ui.details.mapper.toItemsInCartViewEntity
 import com.flea.market.common.base.viewmodel.BaseViewModel
-import com.flea.market.data.cart.local.entity.CartProductDetailsEntity
-import com.flea.market.data.cart.repository.CartRepository
+import com.flea.market.cart.local.entity.CartProductDetailsEntity
+import com.flea.market.cart.repository.CartRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-internal class CartDetailsViewModel(private val cartRepository: CartRepository) :
+internal class CartDetailsViewModel(private val cartRepository: com.flea.market.cart.repository.CartRepository) :
     BaseViewModel<CartDetailsIntent, CartDetailsUiState>(Loading) {
 
     init {
@@ -72,7 +72,7 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
 
     }
 
-    private fun getPriceDetails(productList: List<CartProductDetailsEntity>): PriceDetailsViewEntity {
+    private fun getPriceDetails(productList: List<com.flea.market.cart.local.entity.CartProductDetailsEntity>): PriceDetailsViewEntity {
         val discountPercentage = 0.1
         val texPercentage = 0.1
         val subTotal = productList.sumOf { it.price * it.quantity }

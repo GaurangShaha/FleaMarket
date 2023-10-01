@@ -14,11 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.flea.favourite.R
 import com.flea.market.common.navigation.ProductDetailsDeepLink
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
+import com.flea.market.ui.favourite.R
 import com.flea.market.ui.preview.FleaMarketPreview
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography

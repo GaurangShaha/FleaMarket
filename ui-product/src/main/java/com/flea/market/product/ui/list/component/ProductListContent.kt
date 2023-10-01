@@ -18,7 +18,7 @@ import com.flea.market.product.ui.list.ProductListUiState.Content
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
 import com.flea.market.ui.preview.FleaMarketPreview
 import com.flea.market.ui.preview.FleaMarketThemePreview
-import com.flea.product.ui.R
+import com.flea.market.ui.product.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

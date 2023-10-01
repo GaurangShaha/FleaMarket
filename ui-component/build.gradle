@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.flea.market.component'
+    namespace 'com.flea.market.ui.component'
     compileSdk 33
 
     defaultConfig {

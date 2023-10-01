@@ -32,16 +32,12 @@ android {
 }
 
 dependencies {
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    api 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+    api(project(path: ':data:cart'))
+    api(project(path: ':data:favourite'))
+    api(project(path: ':data:product'))
 
     implementation "androidx.room:room-runtime:2.5.2"
+    implementation "androidx.room:room-ktx:2.5.2"
     annotationProcessor "androidx.room:room-compiler:2.5.2"
     ksp "androidx.room:room-compiler:2.5.2"
-    implementation "androidx.room:room-ktx:2.5.2"
-
-    implementation "io.insert-koin:koin-androidx-compose:3.4.5"
-
-    implementation project(path: ':foundation')
 }

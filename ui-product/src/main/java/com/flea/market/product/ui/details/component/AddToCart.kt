@@ -17,9 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flea.market.ui.component.AddToCartButton
 import com.flea.market.ui.component.ButtonState
+import com.flea.market.ui.product.R
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraShape
-import com.flea.product.ui.R
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable

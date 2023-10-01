@@ -2,10 +2,10 @@ package com.flea.market.product.ui.details
 
 import androidx.lifecycle.viewModelScope
 import com.flea.market.common.base.viewmodel.BaseViewModel
-import com.flea.market.data.cart.repository.CartRepository
-import com.flea.market.data.favourite.repository.FavouriteRepository
-import com.flea.market.data.product.remote.entity.ProductDetailsEntity
-import com.flea.market.data.product.repository.ProductRepository
+import com.flea.market.cart.repository.CartRepository
+import com.flea.market.favourite.repository.FavouriteRepository
+import com.flea.market.product.remote.entity.ProductDetailsEntity
+import com.flea.market.product.repository.ProductRepository
 import com.flea.market.foundation.extension.fold
 import com.flea.market.foundation.extension.onSuccess
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
@@ -28,9 +28,9 @@ import kotlin.random.Random
 
 internal class ProductDetailsViewModel(
     private val productDetailsArgs: ProductDetailsArgs,
-    private val productRepository: ProductRepository,
-    private val cartRepository: CartRepository,
-    private val favouriteRepository: FavouriteRepository
+    private val productRepository: com.flea.market.product.repository.ProductRepository,
+    private val cartRepository: com.flea.market.cart.repository.CartRepository,
+    private val favouriteRepository: com.flea.market.favourite.repository.FavouriteRepository
 ) : BaseViewModel<ProductDetailsIntent, ProductDetailsUiState>(Loading) {
     private val markedAsFavouriteStateFlow = MutableStateFlow(false)
     private val addToCartButtonState: MutableStateFlow<ButtonState> = MutableStateFlow(Initial)
@@ -94,7 +94,7 @@ internal class ProductDetailsViewModel(
         updateUiState(Error(throwable))
     }
 
-    private fun handleGetProductDetailsSuccess(productDetailsEntity: ProductDetailsEntity) {
+    private fun handleGetProductDetailsSuccess(productDetailsEntity: com.flea.market.product.remote.entity.ProductDetailsEntity) {
         updateUiState(
             Content(
                 productDetails = productDetailsEntity.toProductDetailsViewEntity(),

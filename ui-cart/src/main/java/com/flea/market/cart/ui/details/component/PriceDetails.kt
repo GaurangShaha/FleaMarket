@@ -12,8 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.flea.cart.R
 import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
+import com.flea.market.ui.cart.R
 import com.flea.market.ui.preview.FleaMarketPreview
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors

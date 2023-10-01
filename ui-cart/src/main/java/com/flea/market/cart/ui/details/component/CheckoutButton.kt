@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.flea.cart.R
+import com.flea.market.ui.cart.R
 import com.flea.market.ui.component.FMButton
 
 @Composable

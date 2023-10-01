@@ -2,8 +2,8 @@ package com.flea.market.product.ui.list
 
 import androidx.lifecycle.viewModelScope
 import com.flea.market.common.base.viewmodel.BaseViewModel
-import com.flea.market.data.product.remote.entity.ProductDetailsEntity
-import com.flea.market.data.product.repository.ProductRepository
+import com.flea.market.product.remote.entity.ProductDetailsEntity
+import com.flea.market.product.repository.ProductRepository
 import com.flea.market.foundation.extension.fold
 import com.flea.market.product.ui.common.mapper.toCategoryList
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
@@ -14,7 +14,7 @@ import com.flea.market.product.ui.list.ProductListUiState.Error
 import com.flea.market.product.ui.list.ProductListUiState.Loading
 import kotlinx.coroutines.launch
 
-internal class ProductListViewModel(private val productRepository: ProductRepository) :
+internal class ProductListViewModel(private val productRepository: com.flea.market.product.repository.ProductRepository) :
     BaseViewModel<ProductListIntent, ProductListUiState>(Loading) {
     private var selectedCategoryIndex: Int = 0
     private lateinit var productList: List<com.flea.market.product.ui.common.entity.ProductDetailsViewEntity>
@@ -50,7 +50,7 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
         updateUiState(Error(throwable))
     }
 
-    private fun handleProductListSuccess(productDetailsEntities: List<ProductDetailsEntity>) {
+    private fun handleProductListSuccess(productDetailsEntities: List<com.flea.market.product.remote.entity.ProductDetailsEntity>) {
         productList = productDetailsEntities.map { it.toProductDetailsViewEntity() }
         updateUiState(
             Content(

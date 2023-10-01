@@ -29,9 +29,9 @@ import com.flea.market.ui.component.HeartToggleButton
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
 import com.flea.market.ui.preview.FleaMarketPreview
 import com.flea.market.ui.preview.FleaMarketThemePreview
+import com.flea.market.ui.product.R
 import com.flea.market.ui.theme.DarkStatusBarDisposableEffect
 import com.flea.market.ui.theme.extraColors
-import com.flea.product.ui.R
 
 @Composable
 internal fun ProductDetailsScreen(
