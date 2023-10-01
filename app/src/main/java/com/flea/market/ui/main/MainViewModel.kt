@@ -1,6 +1,6 @@
 package com.flea.market.ui.main
 
-import com.flea.common.ui.base.viewmodel.BaseViewModel
+import com.flea.market.common.base.viewmodel.BaseViewModel
 import com.flea.market.ui.main.MainIntent.UpdateSelectedNavigationItemIndex
 
 internal class MainViewModel(

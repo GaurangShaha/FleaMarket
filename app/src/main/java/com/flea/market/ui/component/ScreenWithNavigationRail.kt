@@ -8,9 +8,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.flea.common.ui.component.FleaMarketSnackbarHost
-import com.flea.common.ui.component.preview.FleaMarketPreview
-import com.flea.common.ui.component.preview.FleaMarketThemePreview
+import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 fun ScreenWithNavigationRail(

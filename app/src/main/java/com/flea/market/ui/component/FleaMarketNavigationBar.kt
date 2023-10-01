@@ -18,17 +18,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
-import com.flea.cart.ui.details.navigation.CART_DETAILS_ROUTE
-import com.flea.common.ui.component.compositionlocal.LocalNavControllerProvider
-import com.flea.common.ui.component.compositionlocal.LocalWindowSizeClass
-import com.flea.common.ui.component.preview.FleaMarketPreview
-import com.flea.common.ui.component.preview.FleaMarketThemePreview
-import com.flea.common.ui.theme.extraColors
-import com.flea.common.ui.theme.extraShape
-import com.flea.favourite.ui.list.navigation.FAVOURITE_LIST_ROUTE
+import com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE
+import com.flea.market.favorite.ui.list.navigation.FAVOURITE_LIST_ROUTE
 import com.flea.market.R
-import com.flea.more.ui.dummy.navigation.DUMMY_MORE_ROUTE
-import com.flea.product.ui.list.navigation.PRODUCT_LIST_ROUTE
+import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
+import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketThemePreview
+import com.flea.market.ui.theme.extraColors
+import com.flea.market.ui.theme.extraShape
+import com.flea.market.more.ui.dummy.navigation.DUMMY_MORE_ROUTE
+import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
 import java.util.*
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -150,7 +150,7 @@ enum class BottomNavigationScreens(
     CART(
         route = CART_DETAILS_ROUTE,
         labelResourceId = R.string.cart,
-        iconResourceId = com.flea.common.ui.R.drawable.ic_cart
+        iconResourceId = com.flea.market.component.R.drawable.ic_cart
     ),
 
     FAVOURITE(

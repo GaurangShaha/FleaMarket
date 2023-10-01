@@ -5,11 +5,10 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.flea.common.ui.component.FleaMarketSnackbarHost
-import com.flea.common.ui.component.compositionlocal.LocalDrawerStateProvider
-import com.flea.common.ui.component.compositionlocal.LocalSnackbarHostStateProvider
-import com.flea.common.ui.component.preview.FleaMarketPreview
-import com.flea.common.ui.component.preview.FleaMarketThemePreview
+import com.flea.market.ui.compositionlocal.LocalDrawerStateProvider
+import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
+import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable

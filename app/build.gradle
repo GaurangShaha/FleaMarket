@@ -54,11 +54,11 @@ android {
 
 dependencies {
     implementation project(path: ':data')
-    api project(path: ':common-ui')
-    implementation project(path: ':product')
-    implementation project(path: ':cart')
-    implementation project(path: ':favourite')
-    implementation project(path: ':more')
+    api project(path: ':ui-common')
+    implementation project(path: ':ui-product')
+    implementation project(path: ':ui-cart')
+    implementation project(path: ':ui-favourite')
+    implementation project(path: ':ui-more')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
