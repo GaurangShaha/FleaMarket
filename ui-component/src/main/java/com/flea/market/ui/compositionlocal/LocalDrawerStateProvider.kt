@@ -5,4 +5,4 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 
 val LocalDrawerStateProvider: ProvidableCompositionLocal<DrawerState> =
-    compositionLocalOf { TODO("DrawerState is not provided") }
+    compositionLocalOf { error("DrawerState is not provided") }

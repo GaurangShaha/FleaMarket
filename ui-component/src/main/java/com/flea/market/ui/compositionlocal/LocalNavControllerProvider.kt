@@ -5,4 +5,4 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.navigation.NavHostController
 
 val LocalNavControllerProvider: ProvidableCompositionLocal<NavHostController> =
-    compositionLocalOf { TODO("NavHostController is not provided") }
+    compositionLocalOf { error("NavHostController is not provided") }
