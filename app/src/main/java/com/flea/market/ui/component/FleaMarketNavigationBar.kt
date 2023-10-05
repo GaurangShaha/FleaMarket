@@ -21,8 +21,8 @@ import androidx.navigation.navOptions
 import com.flea.market.R
 import com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE
 import com.flea.market.favorite.ui.list.navigation.FAVOURITE_LIST_ROUTE
-import com.flea.market.more.ui.dummy.navigation.DUMMY_MORE_ROUTE
 import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
+import com.flea.market.profile.ui.navigation.PROFILE_ROUTE
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.preview.FleaMarketPreview
@@ -62,7 +62,7 @@ internal fun FleaMarketNavigationBar(
 
     if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) {
         AnimatedVisibility(
-            visible = destinations.any { currentDestinationRoute?.equals(it.route) ?: true },
+            visible = destinations.any { currentDestinationRoute?.equals(it.route) ?: false },
             enter = scaleIn(),
             exit = scaleOut()
         ) {
@@ -159,9 +159,9 @@ enum class BottomNavigationScreens(
         iconResourceId = R.drawable.ic_favourite
     ),
 
-    MORE(
-        route = DUMMY_MORE_ROUTE,
-        labelResourceId = R.string.more,
+    PROFILE(
+        route = PROFILE_ROUTE,
+        labelResourceId = com.flea.market.ui.profile.R.string.profile,
         iconResourceId = R.drawable.ic_more
     );
 }

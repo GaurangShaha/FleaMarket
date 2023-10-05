@@ -55,5 +55,4 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_ui_version"
     api "io.insert-koin:koin-androidx-compose:3.4.5"
     api "androidx.navigation:navigation-compose:2.6.0"
-    debugApi 'com.squareup.leakcanary:leakcanary-android:2.12'
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Profile</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="order_history">Order history</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="support_center">Support Center</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+</resources>

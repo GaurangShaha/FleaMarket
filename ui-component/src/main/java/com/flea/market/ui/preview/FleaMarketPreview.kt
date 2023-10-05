@@ -1,6 +1,7 @@
 package com.flea.market.ui.preview
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Surface
@@ -63,13 +64,16 @@ annotation class FleaMarketPreview
 @Composable
 fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
     FleaMarketTheme {
-        CompositionLocalProvider(
-            LocalWindowSizeClass provides WindowSizeClass.calculateFromSize(DpSize.Zero),
-            LocalNavControllerProvider provides rememberNavController(),
-            LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
-            LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {
-            Surface {
-                content()
+        BoxWithConstraints {
+            val calculateFromSize =
+                WindowSizeClass.calculateFromSize(DpSize(width = maxWidth, height = maxHeight))
+            CompositionLocalProvider(LocalWindowSizeClass provides calculateFromSize,
+                LocalNavControllerProvider provides rememberNavController(),
+                LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
+                LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {
+                Surface {
+                    content()
+                }
             }
         }
     }

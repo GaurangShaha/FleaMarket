@@ -58,7 +58,7 @@ dependencies {
     implementation project(path: ':ui-product')
     implementation project(path: ':ui-cart')
     implementation project(path: ':ui-favourite')
-    implementation project(path: ':ui-more')
+    implementation project(path: ':ui-profile')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
