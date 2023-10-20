@@ -36,8 +36,8 @@ dependencies {
     api(project(path: ':data:favourite'))
     api(project(path: ':data:product'))
 
-    implementation "androidx.room:room-runtime:2.5.2"
-    implementation "androidx.room:room-ktx:2.5.2"
+    implementation(project(path: ':data:common'))
+
     annotationProcessor "androidx.room:room-compiler:2.5.2"
     ksp "androidx.room:room-compiler:2.5.2"
 }

@@ -17,16 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 @Composable
 fun Stepper(
-    modifier: Modifier = Modifier,
     quantity: Int,
-    decreaseQuantity: () -> Unit,
-    increaseQuantity: () -> Unit
+    onIncreaseQuantity: () -> Unit,
+    onDecreaseQuantity: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -39,7 +39,7 @@ fun Stepper(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(modifier = Modifier.size(28.dp), onClick = decreaseQuantity) {
+        IconButton(modifier = Modifier.size(28.dp), onClick = onDecreaseQuantity) {
             Icon(
                 modifier = Modifier.padding(8.dp),
                 painter = painterResource(id = R.drawable.ic_minus),
@@ -49,7 +49,7 @@ fun Stepper(
 
         Text(text = quantity.toString())
 
-        IconButton(modifier = Modifier.size(28.dp), onClick = increaseQuantity) {
+        IconButton(modifier = Modifier.size(28.dp), onClick = onIncreaseQuantity) {
             Icon(
                 modifier = Modifier.padding(5.dp),
                 imageVector = Icons.Rounded.Add,
@@ -60,9 +60,9 @@ fun Stepper(
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 fun StepperPreview() {
     FleaMarketThemePreview {
-        Stepper(quantity = 0, decreaseQuantity = { }, increaseQuantity = {})
+        Stepper(quantity = 0, onIncreaseQuantity = {}, onDecreaseQuantity = { })
     }
 }

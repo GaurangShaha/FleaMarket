@@ -20,20 +20,22 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
+
+private const val SHIMMER_ANIMATION_TIME = 1000
 
 fun Modifier.shimmer(): Modifier = composed {
     var size by remember { mutableStateOf(IntSize.Zero) }
 
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "shimmerTransition")
     val startOffsetX by transition.animateFloat(
         initialValue = -2 * size.width.toFloat(),
         targetValue = 2 * size.width.toFloat(),
         animationSpec = infiniteRepeatable(
-            animation = tween(1000)
-        )
+            animation = tween(SHIMMER_ANIMATION_TIME)
+        ), label = "ShifferStartOffsetX"
     )
 
     background(
@@ -48,7 +50,7 @@ fun Modifier.shimmer(): Modifier = composed {
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 fun ShimmerPreview() {
     FleaMarketThemePreview {
         Box(

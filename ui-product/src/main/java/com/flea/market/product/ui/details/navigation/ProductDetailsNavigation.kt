@@ -31,7 +31,7 @@ internal fun NavGraphBuilder.productDetailsScreen() {
         val uiState by productDetailsViewModel.uiState.collectAsStateWithLifecycle()
 
         ProductDetailsScreen(
-            uiState = uiState, handleIntent = productDetailsViewModel::handleIntent
+            uiState = uiState, onHandleIntent = productDetailsViewModel::onHandleIntent
         )
     }
 }

@@ -8,15 +8,15 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 fun ScreenWithNavigationRail(
-    modifier: Modifier = Modifier,
-    navHost: @Composable () -> Unit,
     selectedIndex: Int,
-    updateSelectedNavigationItemIndex: (Int) -> Unit
+    navHost: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    onSelectNavigationItem: (Int) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -25,7 +25,7 @@ fun ScreenWithNavigationRail(
     ) {
         FleaMarketNavigationBar(
             selectedNavigationItemIndex = selectedIndex,
-            updateSelectedNavigationItemIndex = updateSelectedNavigationItemIndex
+            onSelectNavigationItem = onSelectNavigationItem
         )
         Box(contentAlignment = Alignment.BottomCenter) {
             navHost()
@@ -35,12 +35,12 @@ fun ScreenWithNavigationRail(
 }
 
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun ScreenWithNavigationRailPreview() {
     FleaMarketThemePreview {
-        ScreenWithNavigationRail(navHost = {},
-            selectedIndex = 0,
-            updateSelectedNavigationItemIndex = {})
+        ScreenWithNavigationRail(selectedIndex = 0,
+            navHost = {}
+        ) {}
     }
 }

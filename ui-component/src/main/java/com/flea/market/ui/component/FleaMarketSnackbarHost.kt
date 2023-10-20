@@ -25,9 +25,9 @@ import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
 import com.flea.market.ui.theme.extraColors
 
 @Composable
-fun FleaMarketSnackbarHost() {
+fun FleaMarketSnackbarHost(modifier: Modifier = Modifier) {
     SnackbarHost(
-        modifier = Modifier.padding(16.dp), hostState = LocalSnackbarHostStateProvider.current
+        modifier = modifier.padding(16.dp), hostState = LocalSnackbarHostStateProvider.current
     ) { snackbarData ->
         val iconColor: Color
         val icon: ImageVector?

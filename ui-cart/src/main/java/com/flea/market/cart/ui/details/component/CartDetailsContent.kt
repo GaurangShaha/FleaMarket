@@ -1,7 +1,11 @@
 package com.flea.market.cart.ui.details.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -15,34 +19,38 @@ import com.flea.market.cart.ui.details.CartDetailsIntent.RemoveFromCart
 import com.flea.market.cart.ui.details.CartDetailsUiState.Content
 import com.flea.market.common.navigation.ProductDetailsDeepLink
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
-internal fun CartDetailsContent(uiState: Content, handleIntent: (CartDetailsIntent) -> Unit) {
-    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) {
-        ContentForCompactScreen(uiState = uiState, handleIntent = handleIntent)
+internal fun CartDetailsContent(uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit) {
+    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) {
+        ContentForCompactScreen(uiState = uiState, onHandleIntent = onHandleIntent)
     } else {
-        ContentForMediumAndExpandedScreen(uiState = uiState, handleIntent = handleIntent)
+        ContentForMediumAndExpandedScreen(uiState = uiState, onHandleIntent = onHandleIntent)
     }
 
 }
 
+
+internal const val FIRST_COLUMN_WEIGHT_LARGE_SCREENS = 0.4f
+internal const val SECOND_COLUMN_WEIGHT_LARGE_SCREENS = 1 - FIRST_COLUMN_WEIGHT_LARGE_SCREENS
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ContentForMediumAndExpandedScreen(
-    uiState: Content, handleIntent: (CartDetailsIntent) -> Unit
+    uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit
 ) {
     Row {
         LazyColumn(
             modifier = Modifier
                 .fillMaxHeight()
-                .weight(0.4f),
+                .weight(FIRST_COLUMN_WEIGHT_LARGE_SCREENS),
             contentPadding = PaddingValues(bottom = 8.dp)
         ) {
             stickyHeader(contentType = "Checkout") {
-                CheckoutButton { handleIntent(CartDetailsIntent.Checkout) }
+                CheckoutButton { onHandleIntent(CartDetailsIntent.Checkout) }
             }
 
             item(contentType = "PriceDetails") {
@@ -51,20 +59,21 @@ private fun ContentForMediumAndExpandedScreen(
         }
 
         LazyColumn(
-            modifier = Modifier.weight(0.6f),
+            modifier = Modifier.weight(SECOND_COLUMN_WEIGHT_LARGE_SCREENS),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(bottom = 8.dp)
         ) {
             items(key = { it.id }, items = uiState.productList) { itemsInCartViewEntity ->
                 val navController = LocalNavControllerProvider.current
-                CartItemProductDetails(modifier = Modifier.animateItemPlacement(),
+                CartItemProductDetails(
                     itemsInCart = itemsInCartViewEntity,
-                    decreaseQuantity = { handleIntent(DecreaseQuantity(it)) },
-                    increaseQuantity = { handleIntent(IncreaseQuantity(it)) },
-                    removeFromCart = { handleIntent(RemoveFromCart(it)) },
-                    navigateToProductDetails = {
-                        navController.navigate(ProductDetailsDeepLink.getUri(it))
-                    })
+                    onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
+                    onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
+                    onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
+                    modifier = Modifier.animateItemPlacement()
+                ) {
+                    navController.navigate(ProductDetailsDeepLink.getUri(itemsInCartViewEntity.id))
+                }
             }
         }
     }
@@ -72,7 +81,7 @@ private fun ContentForMediumAndExpandedScreen(
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-private fun ContentForCompactScreen(uiState: Content, handleIntent: (CartDetailsIntent) -> Unit) {
+private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(top = 16.dp, bottom = 90.dp),
@@ -83,28 +92,29 @@ private fun ContentForCompactScreen(uiState: Content, handleIntent: (CartDetails
         }
 
         stickyHeader(contentType = "Checkout") {
-            CheckoutButton { handleIntent(CartDetailsIntent.Checkout) }
+            CheckoutButton { onHandleIntent(CartDetailsIntent.Checkout) }
         }
 
         items(key = { it.id },
             items = uiState.productList,
             contentType = { "productItem" }) { itemsInCartViewEntity ->
             val navController = LocalNavControllerProvider.current
-            CartItemProductDetails(modifier = Modifier.animateItemPlacement(),
+            CartItemProductDetails(
+                modifier = Modifier.animateItemPlacement(),
                 itemsInCart = itemsInCartViewEntity,
-                decreaseQuantity = { handleIntent(DecreaseQuantity(it)) },
-                increaseQuantity = { handleIntent(IncreaseQuantity(it)) },
-                removeFromCart = { handleIntent(RemoveFromCart(it)) },
-                navigateToProductDetails = { navController.navigate(ProductDetailsDeepLink.getUri(it)) })
+                onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
+                onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
+                onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
+            ) { navController.navigate(ProductDetailsDeepLink.getUri(itemsInCartViewEntity.id)) }
         }
     }
 }
 
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 private fun CartDetailsContentPreview() {
     FleaMarketThemePreview {
-        CartDetailsContent(uiState = dummyContent, handleIntent = {})
+        CartDetailsContent(uiState = dummyContent, onHandleIntent = {})
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -13,39 +14,42 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import com.flea.market.common.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.component.PageIndicator
 import kotlinx.coroutines.delay
 
+private const val PARALLAX_FACTOR = 0.4f
+
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
 internal fun PagerWithIndicator(
-    modifier: Modifier = Modifier,
     uiState: Content,
-    scrollState: ScrollState? = null,
-    delayForSwitchingImage: Long = 0
+    modifier: Modifier = Modifier,
+    delayForSwitchingImage: Long = 0,
+    scrollState: ScrollState? = null
 ) {
     Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.graphicsLayer {
-        scrollState?.value?.let { translationY = 0.4f * it
+        scrollState?.value?.let { translationY = PARALLAX_FACTOR * it
         }
     }) {
         val pagerState = rememberPagerState()
         HorizontalPager(
             state = pagerState,
             pageCount = uiState.productDetails.imageList.size,
-            modifier = modifier.aspectRatio(0.75f)
+            modifier = modifier.aspectRatio(PRODUCT_IMAGE_ASPECT_RATIO)
         ) {
             LazyImage(
-                url = uiState.productDetails.imageList[it], modifier = modifier.aspectRatio(0.75f)
+                url = uiState.productDetails.imageList[it], modifier = Modifier.fillMaxSize()
             )
         }
 
-        PageIndicator(modifier = Modifier.padding(bottom = scrollState?.let { 40.dp } ?: 8.dp,
-            start = 8.dp,
-            end = 8.dp),
-            totalPages = uiState.productDetails.imageList.size,
-            currentPage = pagerState.currentPage)
+        PageIndicator(totalPages = uiState.productDetails.imageList.size,
+            currentPage = pagerState.currentPage,
+            modifier = Modifier.padding(bottom = scrollState?.let { 40.dp } ?: 8.dp,
+                start = 8.dp,
+                end = 8.dp))
 
         if (delayForSwitchingImage != 0L) {
             LaunchedEffect(pagerState.settledPage) {

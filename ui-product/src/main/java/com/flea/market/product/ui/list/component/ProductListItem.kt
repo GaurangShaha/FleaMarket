@@ -1,30 +1,38 @@
 package com.flea.market.product.ui.list.component
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography
-import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import java.text.NumberFormat
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun ProductListItem(
+    productDetails: ProductDetailsViewEntity,
     modifier: Modifier = Modifier,
-    productDetails: com.flea.market.product.ui.common.entity.ProductDetailsViewEntity,
-    onProductClick: (productId: Int) -> Unit
+    onProductClick: () -> Unit
 ) {
     Box(contentAlignment = Alignment.Center) {
         Card(
-            onClick = { onProductClick(productDetails.id) },
+            onClick = { onProductClick() },
             shape = MaterialTheme.shapes.large,
             backgroundColor = MaterialTheme.colors.secondary,
             modifier = modifier.width(150.dp),
@@ -32,11 +40,11 @@ internal fun ProductListItem(
         ) {
             Column {
                 LazyImage(
-                    modifier = Modifier
+                    url = productDetails.imageList.first(), modifier = Modifier
                         .height(200.dp)
                         .width(150.dp)
                         .padding(1.dp)
-                        .clip(MaterialTheme.shapes.large), url = productDetails.imageList.first()
+                        .clip(MaterialTheme.shapes.large)
                 )
 
                 Text(
@@ -69,10 +77,10 @@ internal fun ProductListItem(
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 private fun ProductListItemPreview() {
     FleaMarketThemePreview {
-        ProductListItem(productDetails = dummyProductList.first(), onProductClick = {})
+        ProductListItem(productDetails = dummyProductList.first()) {}
     }
 }

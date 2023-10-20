@@ -27,7 +27,7 @@ import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
 import com.flea.market.ui.component.HeartToggleButton
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.product.R
 import com.flea.market.ui.theme.DarkStatusBarDisposableEffect
@@ -35,7 +35,7 @@ import com.flea.market.ui.theme.extraColors
 
 @Composable
 internal fun ProductDetailsScreen(
-    uiState: ProductDetailsUiState, handleIntent: (ProductDetailsIntent) -> Unit
+    uiState: ProductDetailsUiState, onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
     DarkStatusBarDisposableEffect()
 
@@ -44,19 +44,20 @@ internal fun ProductDetailsScreen(
 
         when (uiState) {
             is Content -> {
-                ProductDetailsContent(state = uiState, handleIntent = handleIntent)
+                ProductDetailsContent(state = uiState, onHandleIntent = onHandleIntent)
 
                 val addedToFavourite by uiState.markedAsFavouriteFlow.collectAsStateWithLifecycle()
                 actionItems = {
-                    HeartToggleButton(addedToFavourite = addedToFavourite, toggleMarkAsFavourite = {
-                        handleIntent(ProductDetailsIntent.ToggleMarkAsFavourite(it))
+                    HeartToggleButton(onAddToFavourite = addedToFavourite, onToggleMarkAsFavourite = {
+                        onHandleIntent(ProductDetailsIntent.ToggleMarkAsFavourite(it))
                     })
                 }
             }
 
-            is Error -> ErrorLayout(errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
-                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon()),
-                retry = { handleIntent(ProductDetailsIntent.Reload) })
+            is Error -> ErrorLayout(
+                errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
+                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
+            ) { onHandleIntent(ProductDetailsIntent.Reload) }
 
             Loading -> ProductDetailsLoading()
         }
@@ -64,35 +65,35 @@ internal fun ProductDetailsScreen(
         val navController = LocalNavControllerProvider.current
         FleaMarketAppBar(
             title = R.string.product_details,
+            modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor)),
             navigationIcon = Icons.Default.ArrowBack to { navController.navigateUp() },
             actionItems = actionItems,
             backgroundColor = Color.Transparent,
-            contentColor = MaterialTheme.extraColors.onScrimColor,
-            modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor))
+            contentColor = MaterialTheme.extraColors.onScrimColor
         )
     }
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 private fun ProductDetailsLoadingScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Loading, handleIntent = {})
+        ProductDetailsScreen(uiState = Loading, onHandleIntent = {})
     }
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 private fun ProductDetailsErrorScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Error(NetworkException), handleIntent = {})
+        ProductDetailsScreen(uiState = Error(NetworkException), onHandleIntent = {})
     }
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 private fun ProductDetailsContentScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = dummyContent, handleIntent = {})
+        ProductDetailsScreen(uiState = dummyContent, onHandleIntent = {})
     }
 }

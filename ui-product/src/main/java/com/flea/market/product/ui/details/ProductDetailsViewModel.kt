@@ -1,13 +1,13 @@
 package com.flea.market.product.ui.details
 
 import androidx.lifecycle.viewModelScope
-import com.flea.market.common.base.viewmodel.BaseViewModel
 import com.flea.market.cart.repository.CartRepository
+import com.flea.market.common.base.viewmodel.BaseViewModel
 import com.flea.market.favourite.repository.FavouriteRepository
-import com.flea.market.product.remote.entity.ProductDetailsEntity
-import com.flea.market.product.repository.ProductRepository
 import com.flea.market.foundation.extension.fold
 import com.flea.market.foundation.extension.onSuccess
+import com.flea.market.product.remote.entity.ProductDetailsEntity
+import com.flea.market.product.repository.ProductRepository
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavourite
@@ -20,17 +20,17 @@ import com.flea.market.product.ui.details.navigation.ProductDetailsArgs
 import com.flea.market.ui.component.ButtonState
 import com.flea.market.ui.component.ButtonState.Initial
 import com.flea.market.ui.component.ButtonState.Result
+import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 internal class ProductDetailsViewModel(
     private val productDetailsArgs: ProductDetailsArgs,
-    private val productRepository: com.flea.market.product.repository.ProductRepository,
-    private val cartRepository: com.flea.market.cart.repository.CartRepository,
-    private val favouriteRepository: com.flea.market.favourite.repository.FavouriteRepository
+    private val productRepository: ProductRepository,
+    private val cartRepository: CartRepository,
+    private val favouriteRepository: FavouriteRepository
 ) : BaseViewModel<ProductDetailsIntent, ProductDetailsUiState>(Loading) {
     private val markedAsFavouriteStateFlow = MutableStateFlow(false)
     private val addToCartButtonState: MutableStateFlow<ButtonState> = MutableStateFlow(Initial)
@@ -39,7 +39,7 @@ internal class ProductDetailsViewModel(
         getProductDetails()
     }
 
-    override fun handleIntent(intent: ProductDetailsIntent) {
+    override fun onHandleIntent(intent: ProductDetailsIntent) {
         when (intent) {
             AddToCart -> addToCart()
             is ToggleMarkAsFavourite -> toggleMarkAsFavourite(intent.markAsFavourite)
@@ -62,12 +62,12 @@ internal class ProductDetailsViewModel(
         if (currentUiState is Content) {
             viewModelScope.launch {
                 addToCartButtonState.value = ButtonState.Loading
-                delay(Random.nextLong(100, 3000))
+                delay(Random.nextLong(MIN_DELAY, MAX_DELAY))
                 cartRepository.addOrUpdateItem(currentUiState.productDetails.toCartProductDetails())
                     .onSuccess {
                         addToCartButtonState.value = Result
                         //Code to reset the button after
-                        delay(4000)
+                        delay(RESET_DELAY)
                         addToCartButtonState.value = Initial
                     }
             }
@@ -94,7 +94,7 @@ internal class ProductDetailsViewModel(
         updateUiState(Error(throwable))
     }
 
-    private fun handleGetProductDetailsSuccess(productDetailsEntity: com.flea.market.product.remote.entity.ProductDetailsEntity) {
+    private fun handleGetProductDetailsSuccess(productDetailsEntity: ProductDetailsEntity) {
         updateUiState(
             Content(
                 productDetails = productDetailsEntity.toProductDetailsViewEntity(),
@@ -102,5 +102,11 @@ internal class ProductDetailsViewModel(
                 addToCartButtonState = addToCartButtonState.asStateFlow()
             )
         )
+    }
+
+    companion object{
+        private const val MIN_DELAY: Long = 100
+        private const val MAX_DELAY: Long = 3000
+        private const val RESET_DELAY: Long = 5000
     }
 }

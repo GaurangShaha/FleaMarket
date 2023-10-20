@@ -6,7 +6,7 @@ import com.flea.market.ui.main.MainIntent.UpdateSelectedNavigationItemIndex
 internal class MainViewModel(
     private val navigationBarVMSlice: NavigationBarVMSlice
 ) : BaseViewModel<MainIntent, MainState>(MainState(navigationBarVMSlice.selectedNavigationItemIndex)) {
-    override fun handleIntent(intent: MainIntent) {
+    override fun onHandleIntent(intent: MainIntent) {
         when (intent) {
             is UpdateSelectedNavigationItemIndex -> navigationBarVMSlice.updateSelectedNavigationItemIndex(
                 intent.index

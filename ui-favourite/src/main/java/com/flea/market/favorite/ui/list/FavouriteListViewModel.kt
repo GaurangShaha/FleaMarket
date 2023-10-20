@@ -24,6 +24,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
+private const val DELAY_FOR_SIMULATING_LOADING = 1000L
+
 internal class FavouriteListViewModel(
     private val favouriteRepository: FavouriteRepository,
     private val cartRepository: CartRepository,
@@ -37,11 +39,11 @@ internal class FavouriteListViewModel(
             } else {
                 Empty
             }
-        }.catch { emit(Error(it)) }.onStart { /*Added delay to simulate loading*/ delay(1000L) }
+        }.catch { emit(Error(it)) }.onStart { delay(DELAY_FOR_SIMULATING_LOADING) }
             .collectAndUpdateUiState()
     }
 
-    override fun handleIntent(intent: FavouriteListIntent) {
+    override fun onHandleIntent(intent: FavouriteListIntent) {
         when (intent) {
             is MoveToCart -> moveToCart(intent.favouriteItemViewEntity)
             is RemoveFromFavourite -> removeFromFavourite(intent.productId)

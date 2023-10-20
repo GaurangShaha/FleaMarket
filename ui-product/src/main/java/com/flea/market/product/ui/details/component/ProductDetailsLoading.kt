@@ -17,16 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
 import com.flea.market.ui.modifier.shimmer
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 @Composable
 internal fun ProductDetailsLoading() {
-    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact
-        || LocalWindowSizeClass.current.heightSizeClass == WindowHeightSizeClass.Expanded
+    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact
+        || LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
     ) {
         LoadingCompactScreen()
     } else {
@@ -35,13 +35,15 @@ internal fun ProductDetailsLoading() {
 
 }
 
+private const val LOADING_BOX_ASPECT_RATIO = 0.9f
+
 @Composable
 internal fun LoadingMediumAndExpandedScreen() {
     Row {
         Box(
             Modifier
                 .fillMaxHeight()
-                .aspectRatio(0.9f)
+                .aspectRatio(LOADING_BOX_ASPECT_RATIO)
         ) {
             ProductImagesShimmer()
         }
@@ -89,12 +91,12 @@ private fun ProductImagesShimmer() {
     Box(
         Modifier
             .fillMaxWidth()
-            .aspectRatio(0.9f)
+            .aspectRatio(LOADING_BOX_ASPECT_RATIO)
             .shimmer()
     )
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 private fun ProductDetailsLoadingPreview() {
     FleaMarketThemePreview {

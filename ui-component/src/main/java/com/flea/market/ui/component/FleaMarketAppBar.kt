@@ -24,14 +24,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
 fun FleaMarketAppBar(
-    modifier: Modifier = Modifier,
     @StringRes title: Int,
+    modifier: Modifier = Modifier,
     navigationIcon: Pair<ImageVector, () -> Unit> = Icons.Default.Menu to {},
     actionItems: @Composable() (RowScope.() -> Unit) = {},
     backgroundColor: Color = MaterialTheme.colors.background,
@@ -53,7 +53,7 @@ fun FleaMarketAppBar(
     )
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun FleaMarketAppBarPreview() {
     FleaMarketThemePreview {
@@ -61,7 +61,7 @@ fun FleaMarketAppBarPreview() {
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun FleaMarketAppBarNavigationItemPreview() {
     FleaMarketThemePreview {
@@ -69,7 +69,7 @@ fun FleaMarketAppBarNavigationItemPreview() {
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun FleaMarketAppBarActionIconPreview() {
     FleaMarketThemePreview {
@@ -83,18 +83,19 @@ fun FleaMarketAppBarActionIconPreview() {
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun FleaMarketAppBarWithScrimPreview() {
     FleaMarketThemePreview {
-        FleaMarketAppBar(title = R.string.retry,
+        FleaMarketAppBar(
+            title = R.string.retry,
+            modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor)),
             navigationIcon = Icons.Default.ArrowBack to {},
             actionItems = {
                 Icon(
                     imageVector = Icons.Default.Search, contentDescription = null
                 )
             },
-            modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor)),
             backgroundColor = Color.Transparent
         )
     }

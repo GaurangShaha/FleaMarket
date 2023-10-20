@@ -14,7 +14,7 @@ class SnackBarSliceImpl : BaseViewModelSlice<SnackBarDetails?>(null), SnackBarSl
         updateSliceUiState(snackBarDetails)
     }
 
-    override fun notifySnackbarResult(isActionPerformed: Boolean) {
+    override fun onSnackbarResult(isActionPerformed: Boolean) {
         updateSliceUiState(null)
         if (isActionPerformed) {
             onActionPerformed?.invoke()

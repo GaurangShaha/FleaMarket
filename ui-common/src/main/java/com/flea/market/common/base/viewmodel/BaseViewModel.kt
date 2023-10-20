@@ -1,5 +1,6 @@
 package com.flea.market.common.base.viewmodel
 
+import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
@@ -13,12 +14,14 @@ abstract class BaseViewModel<I, S>(initialUiState: S) : ViewModel() {
     private val _uiState: MutableStateFlow<S> = MutableStateFlow(initialUiState)
     open val uiState: StateFlow<S> = _uiState.asStateFlow()
 
-    abstract fun handleIntent(intent: I)
+    abstract fun onHandleIntent(intent: I)
 
+    @CallSuper
     protected fun updateUiState(uiState: S) {
         _uiState.value = uiState
     }
 
+    @CallSuper
     fun Flow<S>.collectAndUpdateUiState(scope: CoroutineScope = viewModelScope) {
         scope.launch {
             collect { updateUiState(it) }

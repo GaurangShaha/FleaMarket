@@ -1,6 +1,8 @@
 package com.flea.market.cart.ui.details
 
 import androidx.lifecycle.viewModelScope
+import com.flea.market.cart.local.entity.CartProductDetailsEntity
+import com.flea.market.cart.repository.CartRepository
 import com.flea.market.cart.ui.details.CartDetailsIntent.DecreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.IncreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.RemoveFromCart
@@ -12,32 +14,34 @@ import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
 import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
 import com.flea.market.cart.ui.details.mapper.toItemsInCartViewEntity
 import com.flea.market.common.base.viewmodel.BaseViewModel
-import com.flea.market.cart.local.entity.CartProductDetailsEntity
-import com.flea.market.cart.repository.CartRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-internal class CartDetailsViewModel(private val cartRepository: com.flea.market.cart.repository.CartRepository) :
+private const val DELAY_FOR_SIMULATING_LOADING = 1000L
+
+private const val DISCOUNT_AND_TAX_PERCENTAGE = 0.1
+
+internal class CartDetailsViewModel(private val cartRepository: CartRepository) :
     BaseViewModel<CartDetailsIntent, CartDetailsUiState>(Loading) {
 
     init {
-        cartRepository.getAllItems().map {
-            if (it.isNotEmpty()) {
+        cartRepository.getAllItems().map { productList ->
+            if (productList.isNotEmpty()) {
                 Content(
-                    productList = it.map { it.toItemsInCartViewEntity() },
-                    priceDetails = getPriceDetails(it)
+                    productList = productList.map { it.toItemsInCartViewEntity() },
+                    priceDetails = getPriceDetails(productList)
                 )
             } else {
                 Empty
             }
-        }.catch { emit(Error(it)) }.onStart { /*Added delay to simulate loading*/ delay(1000L) }
+        }.catch { emit(Error(it)) }.onStart { delay(DELAY_FOR_SIMULATING_LOADING) }
             .collectAndUpdateUiState()
     }
 
-    override fun handleIntent(intent: CartDetailsIntent) = when (intent) {
+    override fun onHandleIntent(intent: CartDetailsIntent) = when (intent) {
         is DecreaseQuantity -> decreaseQuantity(intent.itemsInCartViewEntity)
         is IncreaseQuantity -> increaseQuantity(intent.itemsInCartViewEntity)
         is RemoveFromCart -> removeFromCart(intent.itemsInCartViewEntity)
@@ -72,12 +76,10 @@ internal class CartDetailsViewModel(private val cartRepository: com.flea.market.
 
     }
 
-    private fun getPriceDetails(productList: List<com.flea.market.cart.local.entity.CartProductDetailsEntity>): PriceDetailsViewEntity {
-        val discountPercentage = 0.1
-        val texPercentage = 0.1
+    private fun getPriceDetails(productList: List<CartProductDetailsEntity>): PriceDetailsViewEntity {
         val subTotal = productList.sumOf { it.price * it.quantity }
-        val discount = subTotal * discountPercentage
-        val tax = (subTotal - discount) * texPercentage
+        val discount = subTotal * DISCOUNT_AND_TAX_PERCENTAGE
+        val tax = (subTotal - discount) * DISCOUNT_AND_TAX_PERCENTAGE
         val totalPayable = subTotal - discount + tax
 
         return PriceDetailsViewEntity(subTotal, discount, tax, totalPayable)

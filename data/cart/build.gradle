@@ -32,6 +32,4 @@ android {
 
 dependencies {
     implementation(project(":data:common"))
-    annotationProcessor "androidx.room:room-compiler:2.5.2"
-    ksp "androidx.room:room-compiler:2.5.2"
 }

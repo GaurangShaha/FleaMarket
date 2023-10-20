@@ -10,13 +10,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 @Composable
-fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, notifySnackbarResult: (Boolean) -> Unit) {
+fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, onSnackbarResult: (Boolean) -> Unit) {
     val context = LocalContext.current
     val snackbarHostState = LocalSnackbarHostStateProvider.current
     LaunchedEffect(snackBarUiState) {
         launch {
             snackBarUiState?.let { snackBarDetails ->
-                notifySnackbarResult(
+                onSnackbarResult(
                     SnackbarDelegate.showSnackbar(
                         snackbarHostState,
                         context.getString(snackBarDetails.message),
@@ -27,12 +27,13 @@ fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, notifySnackbarResult: 
             }
         }
 
-        //Snackbar is getting displayed on navigating back to screen if LaunchEffect got cancelled before receiving SnackbarResult.
-        // This is a fix created to avoid this. Created a suspendCancellableCoroutine which reset the snackbarFlow.
+        //Snackbar is getting displayed on navigating back to screen if LaunchEffect got cancelled
+        // before receiving SnackbarResult. This is a fix created to avoid this.
+        // Created a suspendCancellableCoroutine which reset the snackbarFlow.
         snackBarUiState?.let {
             launch {
                 suspendCancellableCoroutine<Unit> {
-                    it.invokeOnCancellation { notifySnackbarResult(false) }
+                    it.invokeOnCancellation { onSnackbarResult(false) }
                 }
             }
         }

@@ -20,9 +20,7 @@ import com.gowtham.ratingbar.RatingBarStyle
 import java.text.NumberFormat
 
 @Composable
-internal fun ProductInformation(
-    modifier: Modifier = Modifier, state: Content
-) {
+internal fun ProductInformation(state: Content, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(
             text = state.productDetails.title,

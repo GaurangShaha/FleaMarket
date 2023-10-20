@@ -1,4 +1,4 @@
-package com.flea.market.common.di
+package com.flea.market.data.di
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

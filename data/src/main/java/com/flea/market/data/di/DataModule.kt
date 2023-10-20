@@ -1,7 +1,6 @@
 package com.flea.market.data.di
 
 import com.flea.market.cart.di.cartDataModule
-import com.flea.market.common.di.networkModule
 import com.flea.market.data.local.DatabaseProvider
 import com.flea.market.data.local.FleaMarketDatabase
 import com.flea.market.favourite.di.favouriteDataModule

@@ -4,6 +4,7 @@ import com.flea.market.favorite.ui.list.FavouriteListUiState
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 
+@Suppress("MaxLineLength")
 internal val dummyFavouriteItemList = listOf(
     FavouriteItemViewEntity(
         title = "Mens Cotton Jacket",

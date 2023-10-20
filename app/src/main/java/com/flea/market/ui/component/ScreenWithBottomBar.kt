@@ -2,21 +2,22 @@ package com.flea.market.ui.component
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.material.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.flea.market.ui.compositionlocal.LocalDrawerStateProvider
 import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ScreenWithBottomBar(
-    modifier: Modifier = Modifier,
-    navHost: @Composable () -> Unit,
     selectedIndex: Int,
-    updateSelectedNavigationItemIndex: (Int) -> Unit
+    navHost: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    onSelectNavigationItem: (Int) -> Unit
 ) {
     val scaffoldState = rememberScaffoldState(
         drawerState = LocalDrawerStateProvider.current,
@@ -29,17 +30,17 @@ fun ScreenWithBottomBar(
         bottomBar = {
             FleaMarketNavigationBar(
                 selectedNavigationItemIndex = selectedIndex,
-                updateSelectedNavigationItemIndex = updateSelectedNavigationItemIndex
+                onSelectNavigationItem = onSelectNavigationItem
             )
         }) { _ ->
         navHost()
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun ScreenWithBottomBarPreview() {
     FleaMarketThemePreview {
-        ScreenWithBottomBar(navHost = {}, selectedIndex = 0, updateSelectedNavigationItemIndex = {})
+        ScreenWithBottomBar(selectedIndex = 0, navHost = {}) {}
     }
 }

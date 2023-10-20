@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.ui.modifier.shimmer
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
+
+private const val PRODUCT_COUNT = 10
 
 @Composable
 internal fun ProductListLoading() {
@@ -25,7 +27,7 @@ internal fun ProductListLoading() {
         contentPadding = PaddingValues(bottom = 90.dp, start = 16.dp, end = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(10) {
+        items(PRODUCT_COUNT) {
             Box(
                 modifier = Modifier
                     .size(width = 146.dp, height = 250.dp)
@@ -37,7 +39,7 @@ internal fun ProductListLoading() {
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 internal fun ProductListLoadingPreview() {
     FleaMarketThemePreview {
         ProductListLoading()

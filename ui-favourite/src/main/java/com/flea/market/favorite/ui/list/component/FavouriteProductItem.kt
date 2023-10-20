@@ -1,9 +1,21 @@
 package com.flea.market.favorite.ui.list.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
@@ -18,8 +30,8 @@ import com.flea.market.common.navigation.ProductDetailsDeepLink
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.favourite.R
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.favourite.R.string
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
@@ -27,10 +39,10 @@ import java.text.NumberFormat
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun FavouriteProductItem(
-    modifier: Modifier = Modifier,
     favouriteItem: FavouriteItemViewEntity,
-    removeFromFavourite: (productId: Int) -> Unit,
-    moveToCart: (FavouriteItemViewEntity) -> Unit
+    onRemoveFromFavourite: () -> Unit,
+    onMoveToCart: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.clip(MaterialTheme.shapes.large),
@@ -49,11 +61,12 @@ internal fun FavouriteProductItem(
             ) {
                 Column {
                     LazyImage(
+                        url = favouriteItem.image,
                         modifier = Modifier
                             .height(208.dp)
                             .width(156.dp)
                             .padding(1.dp)
-                            .clip(MaterialTheme.shapes.large), url = favouriteItem.image
+                            .clip(MaterialTheme.shapes.large)
                     )
 
                     Text(
@@ -82,54 +95,58 @@ internal fun FavouriteProductItem(
                         style = MaterialTheme.extraTypography.body1Bold
                     )
 
-                    Button(modifier = Modifier
-                        .padding(1.dp)
-                        .fillMaxWidth()
-                        .height(44.dp),
-                        shape = MaterialTheme.shapes.large,
-                        elevation = ButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
-                        onClick = { moveToCart(favouriteItem) }) {
-                        Text(
-                            text = stringResource(id = R.string.move_to_cart),
-                            maxLines = 1,
-                            overflow = TextOverflow.Visible,
-                            softWrap = false
-                        )
-                    }
+                    AddToCartButton(onMoveToCart)
                 }
             }
 
-            Surface(
-                modifier = Modifier
-                    .height(32.dp)
-                    .width(44.dp)
-                    .padding(top = 1.dp, end = 1.dp)
-                    .clickable { removeFromFavourite(favouriteItem.id) },
-                color = MaterialTheme.colors.error,
-                shape = RoundedCornerShape(topEnd = 22.dp, bottomStart = 22.dp)
-            ) {
-                Icon(
-                    modifier = Modifier.padding(6.dp),
-                    imageVector = Icons.Default.Clear,
-                    contentDescription = null
-                )
-            }
+            RemoveFromFavouriteButton(onRemoveFromFavourite)
         }
     }
 }
 
-@FleaMarketPreview
+@Composable
+private fun AddToCartButton(onMoveToCart: () -> Unit) {
+    Button(modifier = Modifier
+        .padding(1.dp)
+        .fillMaxWidth()
+        .height(44.dp),
+        shape = MaterialTheme.shapes.large,
+        elevation = ButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
+        onClick = { onMoveToCart() }) {
+        Text(
+            text = stringResource(id = string.move_to_cart),
+            maxLines = 1,
+            overflow = TextOverflow.Visible,
+            softWrap = false
+        )
+    }
+}
+
+@Composable
+private fun RemoveFromFavouriteButton(onRemoveFromFavourite: () -> Unit) {
+    Surface(
+        modifier = Modifier
+            .height(32.dp)
+            .width(44.dp)
+            .padding(top = 1.dp, end = 1.dp)
+            .clickable { onRemoveFromFavourite() },
+        color = MaterialTheme.colors.error,
+        shape = RoundedCornerShape(topEnd = 22.dp, bottomStart = 22.dp)
+    ) {
+        Icon(
+            modifier = Modifier.padding(6.dp),
+            imageVector = Icons.Default.Clear,
+            contentDescription = null
+        )
+    }
+}
+
+@FleaMarketPreviews
 @Composable
 private fun ProductListItemPreview() {
     FleaMarketThemePreview {
-        FavouriteProductItem(favouriteItem = FavouriteItemViewEntity(
-            title = "Mens Cotton Jacket",
-            id = 0,
-            price = 55.99,
-            description = "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-            category = "Men's clothing",
-            image = "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-            rating = 4.7
-        ), removeFromFavourite = {}, moveToCart = {})
+        FavouriteProductItem(favouriteItem = dummyFavouriteItemList.first(),
+            onRemoveFromFavourite = {},
+            onMoveToCart = {})
     }
 }

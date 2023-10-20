@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,27 +27,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
-import com.flea.market.ui.cart.R
+import com.flea.market.common.defaults.PRODUCT_IMAGE_ASPECT_RATIO
+import com.flea.market.ui.cart.R.string
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.component.Stepper
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
 @Composable
 internal fun CartItemProductDetails(
-    modifier: Modifier = Modifier,
     itemsInCart: ItemsInCartViewEntity,
-    decreaseQuantity: (ItemsInCartViewEntity) -> Unit,
-    increaseQuantity: (ItemsInCartViewEntity) -> Unit,
-    removeFromCart: (ItemsInCartViewEntity) -> Unit,
-    navigateToProductDetails: (Int) -> Unit
+    onDecreaseQuantity: () -> Unit,
+    onIncreaseQuantity: () -> Unit,
+    onRemoveFromCart: () -> Unit,
+    modifier: Modifier = Modifier,
+    onNavigateToProductDetails: () -> Unit
 ) {
     Card(
         modifier = modifier
             .padding(horizontal = 16.dp)
-            .clickable { navigateToProductDetails(itemsInCart.id) },
+            .clickable { onNavigateToProductDetails() },
         shape = MaterialTheme.shapes.medium,
         elevation = 2.dp,
         backgroundColor = MaterialTheme.colors.secondary
@@ -54,74 +56,88 @@ internal fun CartItemProductDetails(
         Box(contentAlignment = Alignment.TopEnd) {
             Row(Modifier.fillMaxWidth()) {
                 LazyImage(
-                    modifier = Modifier
+                    url = itemsInCart.image, modifier = Modifier
                         .height(90.dp)
-                        .aspectRatio(0.75f)
+                        .aspectRatio(PRODUCT_IMAGE_ASPECT_RATIO)
                         .padding(1.dp)
-                        .clip(MaterialTheme.shapes.medium), url = itemsInCart.image
+                        .clip(MaterialTheme.shapes.medium)
                 )
 
-                Column(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f)
-                ) {
-                    Text(
-                        modifier = Modifier.padding(end = 32.dp),
-                        text = itemsInCart.title,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.extraTypography.body1Bold
-                    )
-
-                    Text(
-                        modifier = Modifier.padding(top = 4.dp),
-                        text = stringResource(id = R.string.free_shipping),
-                        style = MaterialTheme.extraTypography.captionDarkGray
-                    )
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        val currencyFormatter = remember {
-                            NumberFormat.getCurrencyInstance().apply { maximumFractionDigits = 2 }
-                        }
-                        Text(
-                            modifier = Modifier.weight(1f),
-                            text = currencyFormatter.format(itemsInCart.price),
-                            style = MaterialTheme.extraTypography.body1Bold
-                        )
-
-                        Stepper(quantity = itemsInCart.quantity,
-                            decreaseQuantity = { decreaseQuantity(itemsInCart) },
-                            increaseQuantity = { increaseQuantity(itemsInCart) })
-                    }
-                }
+                ItemDetailsSection(itemsInCart, onDecreaseQuantity, onIncreaseQuantity)
             }
 
-            Surface(modifier = Modifier
-                .height(32.dp)
-                .width(40.dp)
-                .clickable { removeFromCart(itemsInCart) }
-                .padding(bottom = 6.dp),
-                color = MaterialTheme.colors.error,
-                shape = RoundedCornerShape(topEnd = 16.dp, bottomStart = 16.dp)) {
-                Icon(
-                    modifier = Modifier.padding(4.dp),
-                    imageVector = Icons.Default.Clear,
-                    contentDescription = null
-                )
-            }
+            RemoveFromCartButton(onRemoveFromCart)
         }
     }
 }
 
 @Composable
-@FleaMarketPreview
+private fun RemoveFromCartButton(onRemoveFromCart: () -> Unit) {
+    Surface(modifier = Modifier
+        .height(32.dp)
+        .width(40.dp)
+        .clickable { onRemoveFromCart() }
+        .padding(bottom = 6.dp),
+        color = MaterialTheme.colors.error,
+        shape = RoundedCornerShape(topEnd = 16.dp, bottomStart = 16.dp)) {
+        Icon(
+            modifier = Modifier.padding(4.dp),
+            imageVector = Icons.Default.Clear,
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun RowScope.ItemDetailsSection(
+    itemsInCart: ItemsInCartViewEntity,
+    onDecreaseQuantity: () -> Unit,
+    onIncreaseQuantity: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+            .weight(1f)
+    ) {
+        Text(
+            modifier = Modifier.padding(end = 32.dp),
+            text = itemsInCart.title,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.extraTypography.body1Bold
+        )
+
+        Text(
+            modifier = Modifier.padding(top = 4.dp),
+            text = stringResource(id = string.free_shipping),
+            style = MaterialTheme.extraTypography.captionDarkGray
+        )
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val currencyFormatter = remember {
+                NumberFormat.getCurrencyInstance().apply { maximumFractionDigits = 2 }
+            }
+            Text(
+                modifier = Modifier.weight(1f),
+                text = currencyFormatter.format(itemsInCart.price),
+                style = MaterialTheme.extraTypography.body1Bold
+            )
+
+            Stepper(quantity = itemsInCart.quantity,
+                onIncreaseQuantity = { onIncreaseQuantity() },
+                onDecreaseQuantity = { onDecreaseQuantity() })
+        }
+    }
+}
+
+@Composable
+@FleaMarketPreviews
 private fun CartItemDetailsPreview() {
     FleaMarketThemePreview {
         CartItemProductDetails(itemsInCart = dummyItemsInCartList.first(),
-            decreaseQuantity = {},
-            increaseQuantity = {},
-            removeFromCart = {},
-            navigateToProductDetails = {})
+            onDecreaseQuantity = {},
+            onIncreaseQuantity = {},
+            onRemoveFromCart = {}
+        ) {}
     }
 }

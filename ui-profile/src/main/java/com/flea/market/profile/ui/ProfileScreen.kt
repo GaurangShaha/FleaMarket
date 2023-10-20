@@ -38,8 +38,8 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.ui.component.FMButton
 import com.flea.market.ui.component.FleaMarketAppBar
 import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.profile.R
 import com.flea.market.ui.theme.extraColors
@@ -52,7 +52,7 @@ internal fun ProfileScreen() {
         FleaMarketAppBar(title = R.string.profile)
 
         val columnCount =
-            if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
+            if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
 
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(columnCount),
@@ -68,11 +68,11 @@ internal fun ProfileScreen() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     LazyImage(
+                        url = "https://miro.medium.com/v2/resize:fit:2400/2*AXmi0bvdz7eiHuUyaD2KBg.jpeg",
                         modifier = Modifier
                             .padding(16.dp)
                             .size(104.dp)
-                            .clip(CircleShape),
-                        url = "https://miro.medium.com/v2/resize:fit:2400/2*AXmi0bvdz7eiHuUyaD2KBg.jpeg"
+                            .clip(CircleShape)
                     )
 
                     Text(text = "Gaurang Shaha", style = MaterialTheme.typography.h6)
@@ -114,12 +114,11 @@ internal fun ProfileScreen() {
 
             item(span = StaggeredGridItemSpan.SingleLane) {
                 FMButton(
+                    text = stringResource(id = R.string.logout),
                     modifier = Modifier
                         .padding(16.dp)
-                        .fillMaxWidth(),
-                    onClick = { /*TODO*/ },
-                    text = stringResource(id = R.string.logout)
-                )
+                        .fillMaxWidth()
+                ) { /*TODO*/ }
             }
         }
     }
@@ -152,7 +151,7 @@ private fun ProfileRowItem(icon: ImageVector, @StringRes textRes: Int) {
 }
 
 @Composable
-@FleaMarketPreview
+@FleaMarketPreviews
 internal fun ProfileScreenPreview() {
     FleaMarketThemePreview {
         ProfileScreen()

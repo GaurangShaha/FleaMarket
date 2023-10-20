@@ -24,14 +24,21 @@ import com.flea.market.ui.theme.extraColors
 
 @SuppressLint("UnusedTransitionTargetStateParameter")
 @Composable
-fun HeartToggleButton(addedToFavourite: Boolean, toggleMarkAsFavourite: (Boolean) -> Unit) {
-    IconToggleButton(checked = addedToFavourite, onCheckedChange = toggleMarkAsFavourite) {
-        val transition = updateTransition(targetState = addedToFavourite, label = "transition")
+fun HeartToggleButton(
+    onAddToFavourite: Boolean,
+    modifier: Modifier = Modifier,
+    onToggleMarkAsFavourite: (Boolean) -> Unit
+) {
+    IconToggleButton(
+        modifier = modifier, checked = onAddToFavourite, onCheckedChange = onToggleMarkAsFavourite
+    ) {
+        val transition = updateTransition(targetState = onAddToFavourite, label = "transition")
 
         val tint by transition.animateColor(label = "iconColor") { isChecked ->
             if (isChecked) MaterialTheme.colors.error else MaterialTheme.extraColors.onScrimColor
         }
 
+        @Suppress("MagicNumber")
         val size by transition.animateDp(
             transitionSpec = {
                 if (false isTransitioningTo true) {
@@ -49,7 +56,7 @@ fun HeartToggleButton(addedToFavourite: Boolean, toggleMarkAsFavourite: (Boolean
         ) { _ -> 30.dp }
 
         Icon(
-            imageVector = if (addedToFavourite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
+            imageVector = if (onAddToFavourite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
             contentDescription = null,
             tint = tint,
             modifier = Modifier.size(size),

@@ -17,16 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.list.ProductListIntent
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
+private const val TEXT_COLOR_ANIMATION_TIME = 300
+
 @Composable
 internal fun CategorySection(
-    modifier: Modifier = Modifier,
     categories: List<String>,
     selectedCategoryIndex: Int,
-    handleIntent: (ProductListIntent) -> Unit
+    modifier: Modifier = Modifier,
+    onHandleIntent: (ProductListIntent) -> Unit
 ) {
     LazyRow(
         modifier = modifier
@@ -34,16 +36,16 @@ internal fun CategorySection(
             .padding(top = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        itemsIndexed(items = categories, key = { _, it -> it }) { index, it ->
+        itemsIndexed(items = categories, key = { _, category -> category }) { index, category ->
             val bgColor by animateColorAsState(
-                targetValue = if (selectedCategoryIndex == index) MaterialTheme.colors.primary else MaterialTheme.colors.secondary,
-                animationSpec = tween(300),
+                targetValue = getBackgroundColor(selectedCategoryIndex, index),
+                animationSpec = tween(TEXT_COLOR_ANIMATION_TIME),
                 label = "categoryBgColor"
             )
 
             val textColor by animateColorAsState(
-                targetValue = if (selectedCategoryIndex == index) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSecondary,
-                animationSpec = tween(300),
+                targetValue = getTextColor(selectedCategoryIndex, index),
+                animationSpec = tween(TEXT_COLOR_ANIMATION_TIME),
                 label = "categoryBgColor"
             )
 
@@ -51,24 +53,41 @@ internal fun CategorySection(
                 modifier = Modifier
                     .clip(MaterialTheme.extraShape.capsuleShape)
                     .selectable(selectedCategoryIndex == index, onClick = {
-                        handleIntent(ProductListIntent.FilterByCategory(index))
+                        onHandleIntent(ProductListIntent.FilterByCategory(index))
                     })
                     .background(bgColor)
                     .padding(
                         start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp
-                    ), text = it, color = textColor
+                    ), text = category, color = textColor
             )
         }
     }
 }
 
-@FleaMarketPreview
+@Composable
+private fun getTextColor(
+    selectedCategoryIndex: Int, index: Int
+) = if (selectedCategoryIndex == index) {
+    MaterialTheme.colors.onPrimary
+} else {
+    MaterialTheme.colors.onSecondary
+}
+
+@Composable
+private fun getBackgroundColor(
+    selectedCategoryIndex: Int, index: Int
+) = if (selectedCategoryIndex == index) {
+    MaterialTheme.colors.primary
+} else {
+    MaterialTheme.colors.secondary
+}
+
+@FleaMarketPreviews
 @Composable
 private fun CategorySectionPreview() {
     FleaMarketThemePreview {
         CategorySection(
-            categories = dummyCategoryList,
-            selectedCategoryIndex = 0,
-            handleIntent = {})
+            categories = dummyCategoryList, selectedCategoryIndex = 0
+        ) {}
     }
 }

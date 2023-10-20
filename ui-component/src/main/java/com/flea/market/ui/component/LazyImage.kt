@@ -10,14 +10,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.flea.market.ui.modifier.shimmer
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
 fun LazyImage(
-    modifier: Modifier = Modifier,
     url: String,
+    modifier: Modifier = Modifier,
     contentDescription: String? = null,
     contentScale: ContentScale = ContentScale.Crop
 ) {
@@ -29,13 +29,14 @@ fun LazyImage(
         error = { Box(modifier = Modifier.background(MaterialTheme.extraColors.darkGrey)) })
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun LazyImagePreview() {
     FleaMarketThemePreview {
+        @Suppress("MaxLineLength")
         LazyImage(
-            modifier = Modifier.size(50.dp),
-            url = "https://www.gstatic.com/devrel-devsite/prod/v0f868bacf787bf31b228952b4e9f9c852485b2025a1f6f6571309b6d62ea4de2/android/images/lockup.svg"
+            url = "https://www.gstatic.com/devrel-devsite/prod/v0f868bacf787bf31b228952b4e9f9c852485b2025a1f6f6571309b6d62ea4de2/android/images/lockup.svg",
+            modifier = Modifier.size(50.dp)
         )
     }
 }

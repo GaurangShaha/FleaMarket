@@ -15,7 +15,7 @@ import com.flea.market.ui.component.FleaMarketApp
 import com.flea.market.ui.compositionlocal.LocalDrawerStateProvider
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
 import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
 import com.flea.market.ui.theme.FleaMarketTheme
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FleaMarketTheme {
-                CompositionLocalProvider(LocalWindowSizeClass provides calculateWindowSizeClass(this),
+                CompositionLocalProvider(LocalWindowSizeClassProvider provides calculateWindowSizeClass(this),
                     LocalNavControllerProvider provides rememberNavController(),
                     LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
                     LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {

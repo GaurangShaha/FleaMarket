@@ -19,7 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.flea.market.ui.compositionlocal.LocalDrawerStateProvider
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
 import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
 import com.flea.market.ui.theme.FleaMarketTheme
 
 @Preview(group = "Day", name = "Phone - Portrait", device = PHONE)
@@ -58,8 +58,9 @@ import com.flea.market.ui.theme.FleaMarketTheme
     device = "spec:width=1280dp,height=800dp,orientation=portrait",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
-annotation class FleaMarketPreview
+annotation class FleaMarketPreviews
 
+@Suppress("ModifierMissing")
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
@@ -67,7 +68,7 @@ fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
         BoxWithConstraints {
             val calculateFromSize =
                 WindowSizeClass.calculateFromSize(DpSize(width = maxWidth, height = maxHeight))
-            CompositionLocalProvider(LocalWindowSizeClass provides calculateFromSize,
+            CompositionLocalProvider(LocalWindowSizeClassProvider provides calculateFromSize,
                 LocalNavControllerProvider provides rememberNavController(),
                 LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
                 LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {

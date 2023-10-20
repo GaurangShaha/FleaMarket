@@ -13,13 +13,13 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.favorite.ui.list.FavouriteListIntent
 import com.flea.market.favorite.ui.list.FavouriteListIntent.RemoveFromFavourite
 import com.flea.market.favorite.ui.list.FavouriteListUiState
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun FavouriteListContent(
-    uiState: FavouriteListUiState.Content, handleIntent: (FavouriteListIntent) -> Unit
+    uiState: FavouriteListUiState.Content, onHandleIntent: (FavouriteListIntent) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(156.dp),
@@ -29,18 +29,20 @@ internal fun FavouriteListContent(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items = uiState.favouriteProductList, key = { it.id }) { favouriteItemViewEntity ->
-            FavouriteProductItem(modifier = Modifier.animateItemPlacement(),
-                favouriteItem = favouriteItemViewEntity,
-                removeFromFavourite = { handleIntent(RemoveFromFavourite(it)) },
-                moveToCart = { handleIntent(FavouriteListIntent.MoveToCart(it)) })
+            FavouriteProductItem(favouriteItem = favouriteItemViewEntity, onRemoveFromFavourite = {
+                onHandleIntent(RemoveFromFavourite(favouriteItemViewEntity.id))
+            }, onMoveToCart = {
+                onHandleIntent(FavouriteListIntent.MoveToCart(favouriteItemViewEntity))
+            }, modifier = Modifier.animateItemPlacement()
+            )
         }
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 private fun FavouriteListContentPreview() {
     FleaMarketThemePreview {
-        FavouriteListContent(uiState = dummyContent, handleIntent = {})
+        FavouriteListContent(uiState = dummyContent, onHandleIntent = {})
     }
 }

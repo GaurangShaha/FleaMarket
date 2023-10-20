@@ -8,7 +8,7 @@ interface SnackBarSlice {
     val snackbarUiState: StateFlow<SnackBarDetails?>
 
     fun showSnackBar(snackBarDetails: SnackBarDetails)
-    fun notifySnackbarResult(isActionPerformed: Boolean)
+    fun onSnackbarResult(isActionPerformed: Boolean)
 
     data class SnackBarDetails(
         @StringRes val message: Int,

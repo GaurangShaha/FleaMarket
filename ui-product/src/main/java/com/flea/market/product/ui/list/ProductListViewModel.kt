@@ -2,9 +2,10 @@ package com.flea.market.product.ui.list
 
 import androidx.lifecycle.viewModelScope
 import com.flea.market.common.base.viewmodel.BaseViewModel
+import com.flea.market.foundation.extension.fold
 import com.flea.market.product.remote.entity.ProductDetailsEntity
 import com.flea.market.product.repository.ProductRepository
-import com.flea.market.foundation.extension.fold
+import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.common.mapper.toCategoryList
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.list.ProductListIntent.FilterByCategory
@@ -14,16 +15,16 @@ import com.flea.market.product.ui.list.ProductListUiState.Error
 import com.flea.market.product.ui.list.ProductListUiState.Loading
 import kotlinx.coroutines.launch
 
-internal class ProductListViewModel(private val productRepository: com.flea.market.product.repository.ProductRepository) :
+internal class ProductListViewModel(private val productRepository: ProductRepository) :
     BaseViewModel<ProductListIntent, ProductListUiState>(Loading) {
     private var selectedCategoryIndex: Int = 0
-    private lateinit var productList: List<com.flea.market.product.ui.common.entity.ProductDetailsViewEntity>
+    private lateinit var productList: List<ProductDetailsViewEntity>
 
     init {
         getProductList()
     }
 
-    override fun handleIntent(intent: ProductListIntent) {
+    override fun onHandleIntent(intent: ProductListIntent) {
         when (intent) {
             Reload -> getProductList()
             is FilterByCategory -> filterByCategory(intent.selectedCategoryIndex)
@@ -50,7 +51,7 @@ internal class ProductListViewModel(private val productRepository: com.flea.mark
         updateUiState(Error(throwable))
     }
 
-    private fun handleProductListSuccess(productDetailsEntities: List<com.flea.market.product.remote.entity.ProductDetailsEntity>) {
+    private fun handleProductListSuccess(productDetailsEntities: List<ProductDetailsEntity>) {
         productList = productDetailsEntities.map { it.toProductDetailsViewEntity() }
         updateUiState(
             Content(

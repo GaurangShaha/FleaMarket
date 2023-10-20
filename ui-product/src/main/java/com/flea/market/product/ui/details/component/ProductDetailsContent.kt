@@ -22,35 +22,37 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.details.ProductDetailsIntent
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 
 @Composable
 internal fun ProductDetailsContent(
-    state: Content, handleIntent: (ProductDetailsIntent) -> Unit
+    state: Content, onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
-    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact || LocalWindowSizeClass.current.heightSizeClass == WindowHeightSizeClass.Expanded) {
-        ContentForCompactScreen(state, handleIntent)
+    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact
+        || LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
+    ) {
+        ContentForCompactScreen(state, onHandleIntent)
     } else {
-        ContentForMediumAndExpandedScreen(state, handleIntent)
+        ContentForMediumAndExpandedScreen(state, onHandleIntent)
     }
 }
 
-internal const val delayForSwitchingImage: Long = 8000
+internal const val DELAY_FOR_SWITCHING_IMAGE: Long = 8000
 
 @Composable
 private fun ContentForMediumAndExpandedScreen(
-    state: Content, handleIntent: (ProductDetailsIntent) -> Unit
+    state: Content, onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
 
     Row {
         PagerWithIndicator(
-            modifier = Modifier.fillMaxHeight(),
             uiState = state,
-            delayForSwitchingImage = delayForSwitchingImage
+            modifier = Modifier.fillMaxHeight(),
+            delayForSwitchingImage = DELAY_FOR_SWITCHING_IMAGE
         )
 
         Box(
@@ -61,23 +63,24 @@ private fun ContentForMediumAndExpandedScreen(
         ) {
 
             ProductInformation(
+                state = state,
                 modifier = Modifier
                     .fillMaxHeight()
                     .verticalScroll(rememberScrollState())
-                    .padding(start = 16.dp, end = 16.dp, bottom = 70.dp, top = 72.dp), state = state
+                    .padding(start = 16.dp, end = 16.dp, bottom = 70.dp, top = 72.dp)
             )
-            AddToCart(modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-                state = state.addToCartButtonState,
-                addToCart = { handleIntent(AddToCart) })
+            AddToCart(
+                state = state.addToCartButtonState, modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+            ) { onHandleIntent(AddToCart) }
         }
     }
 }
 
 @Composable
 private fun ContentForCompactScreen(
-    state: Content, handleIntent: (ProductDetailsIntent) -> Unit
+    state: Content, onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
     Box(contentAlignment = Alignment.BottomCenter) {
         val scrollState = rememberScrollState()
@@ -90,10 +93,10 @@ private fun ContentForCompactScreen(
             verticalArrangement = Arrangement.spacedBy(-(32.dp))
         ) {
             PagerWithIndicator(
-                modifier = Modifier.fillMaxWidth(),
                 uiState = state,
-                scrollState = scrollState,
-                delayForSwitchingImage = delayForSwitchingImage
+                modifier = Modifier.fillMaxWidth(),
+                delayForSwitchingImage = DELAY_FOR_SWITCHING_IMAGE,
+                scrollState = scrollState
             )
 
             Surface(
@@ -101,19 +104,19 @@ private fun ContentForCompactScreen(
                 color = MaterialTheme.colors.secondary,
                 modifier = Modifier.fillMaxSize()
             ) {
-                ProductInformation(modifier = Modifier.padding(16.dp), state = state)
+                ProductInformation(state = state, modifier = Modifier.padding(16.dp))
             }
         }
-        AddToCart(modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-            state = state.addToCartButtonState,
-            addToCart = { handleIntent(AddToCart) })
+        AddToCart(
+            state = state.addToCartButtonState, modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+        ) { onHandleIntent(AddToCart) }
     }
 }
 
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 private fun ProductDetailsContentScreen() {
     FleaMarketThemePreview {

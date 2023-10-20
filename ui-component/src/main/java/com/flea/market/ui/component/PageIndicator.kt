@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.preview.FleaMarketPreview
+import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
-fun PageIndicator(modifier: Modifier = Modifier, totalPages: Int, currentPage: Int) {
+fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier = Modifier) {
     if (totalPages == 1) return
     Row(modifier = modifier, horizontalArrangement = Arrangement.Center) {
         repeat(totalPages) {
@@ -41,7 +41,7 @@ fun PageIndicator(modifier: Modifier = Modifier, totalPages: Int, currentPage: I
     }
 }
 
-@FleaMarketPreview
+@FleaMarketPreviews
 @Composable
 fun PageIndicatorPreview() {
     FleaMarketThemePreview {

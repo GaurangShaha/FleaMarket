@@ -13,16 +13,16 @@ import com.flea.market.ui.cart.R
 import com.flea.market.ui.component.FMButton
 
 @Composable
-internal fun CheckoutButton(modifier: Modifier = Modifier, checkout: () -> Unit) {
+internal fun CheckoutButton(modifier: Modifier = Modifier, onCheckout: () -> Unit) {
     Box(
         modifier
             .background(MaterialTheme.colors.surface)
             .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
     ) {
         FMButton(
-            modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.checkout),
-            onClick = checkout
+            modifier = Modifier.fillMaxWidth(),
+            onClick = onCheckout
         )
     }
 }

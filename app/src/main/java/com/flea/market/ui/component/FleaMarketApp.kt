@@ -14,7 +14,7 @@ import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
 import com.flea.market.product.ui.navigation.addProductGraph
 import com.flea.market.profile.ui.navigation.addProfileGraph
 import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
 import com.flea.market.ui.main.MainIntent.UpdateSelectedNavigationItemIndex
 import com.flea.market.ui.main.MainViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -39,17 +39,19 @@ internal fun FleaMarketApp() {
     val viewModel: MainViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val selectedIndex by uiState.selectedNavigationItemIndex.collectAsStateWithLifecycle()
-    when (LocalWindowSizeClass.current.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> ScreenWithBottomBar(navHost = navHost,
+    when (LocalWindowSizeClassProvider.current.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> ScreenWithBottomBar(
             selectedIndex = selectedIndex,
-            updateSelectedNavigationItemIndex = {
-                viewModel.handleIntent(UpdateSelectedNavigationItemIndex(it))
-            })
+            navHost = navHost
+        ) {
+            viewModel.onHandleIntent(UpdateSelectedNavigationItemIndex(it))
+        }
 
-        else -> ScreenWithNavigationRail(navHost = navHost,
+        else -> ScreenWithNavigationRail(
             selectedIndex = selectedIndex,
-            updateSelectedNavigationItemIndex = {
-                viewModel.handleIntent(UpdateSelectedNavigationItemIndex(it))
-            })
+            navHost = navHost
+        ) {
+            viewModel.onHandleIntent(UpdateSelectedNavigationItemIndex(it))
+        }
     }
 }

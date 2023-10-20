@@ -23,12 +23,16 @@ import com.flea.market.ui.theme.extraShape
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-internal fun AddToCart(modifier: Modifier, state: StateFlow<ButtonState>, addToCart: () -> Unit) {
+internal fun AddToCart(
+    state: StateFlow<ButtonState>,
+    modifier: Modifier = Modifier,
+    onAddToCart: () -> Unit
+) {
 
     val buttonState by state.collectAsStateWithLifecycle()
 
     AddToCartButton(
-        modifier = modifier,
+        buttonState = buttonState,
         initialContent = {
             Icon(imageVector = Icons.Default.Add, contentDescription = null)
             Spacer(modifier = Modifier.size(8.dp))
@@ -49,9 +53,9 @@ internal fun AddToCart(modifier: Modifier, state: StateFlow<ButtonState>, addToC
                 style = MaterialTheme.typography.button
             )
         },
-        onClick = addToCart,
+        onClick = onAddToCart,
+        modifier = modifier,
         shape = MaterialTheme.extraShape.capsuleShape,
-        contentPadding = PaddingValues(14.dp),
-        buttonState = buttonState
+        contentPadding = PaddingValues(14.dp)
     )
 }
