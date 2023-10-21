@@ -1,10 +1,11 @@
 package com.flea.market.product.ui.list.component
 
+import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.list.ProductListUiState
 
 @Suppress("MaxLineLength")
 internal val dummyProductList = listOf(
-    com.flea.market.product.ui.common.entity.ProductDetailsViewEntity(
+    ProductDetailsViewEntity(
         title = "Mens Cotton Jacket",
         id = 0,
         price = 55.99,
@@ -17,7 +18,7 @@ internal val dummyProductList = listOf(
         count = 500,
         rate = 4.7
     ),
-    com.flea.market.product.ui.common.entity.ProductDetailsViewEntity(
+    ProductDetailsViewEntity(
         title = "Womens Cotton Jacket",
         id = 1,
         price = 50.99,

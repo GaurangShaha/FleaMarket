@@ -4,7 +4,7 @@ import com.flea.market.cart.local.entity.CartProductDetailsEntity
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 
 internal fun FavouriteItemViewEntity.toCartProductDetails() =
-    com.flea.market.cart.local.entity.CartProductDetailsEntity(
+    CartProductDetailsEntity(
         id = id,
         category = category,
         image = image,
