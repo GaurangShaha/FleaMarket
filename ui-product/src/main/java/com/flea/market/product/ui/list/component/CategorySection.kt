@@ -36,7 +36,8 @@ internal fun CategorySection(
             .padding(top = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        itemsIndexed(items = categories, key = { _, category -> category }) { index, category ->
+        itemsIndexed(items = categories,
+            key = { _, category -> category }) { index, category ->
             val bgColor by animateColorAsState(
                 targetValue = getBackgroundColor(selectedCategoryIndex, index),
                 animationSpec = tween(TEXT_COLOR_ANIMATION_TIME),

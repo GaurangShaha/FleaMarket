@@ -2,7 +2,6 @@
 <resources>
     <string name="empty_favourite">No favourites yet.</string>
     <string name="favourites">Favourites</string>
-    <string name="remove_from_favourite">REMOVE</string>
     <string name="move_to_cart">ADD TO CART</string>
     <string name="move_to_cart_success">Item has been added to cart.</string>
 </resources>

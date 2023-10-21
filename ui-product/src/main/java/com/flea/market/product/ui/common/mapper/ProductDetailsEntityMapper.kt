@@ -29,5 +29,5 @@ internal fun List<ProductDetailsEntity>.toCategoryList(): List<String> {
         }
     })
 
-    return categoryList
+    return categoryList.toList()
 }

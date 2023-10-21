@@ -51,6 +51,7 @@ internal fun ProfileScreen() {
     Column {
         FleaMarketAppBar(title = R.string.profile)
 
+        @Suppress("MagicNumber")
         val columnCount =
             if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
 
@@ -63,27 +64,7 @@ internal fun ProfileScreen() {
         ) {
 
             item {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    LazyImage(
-                        url = "https://miro.medium.com/v2/resize:fit:2400/2*AXmi0bvdz7eiHuUyaD2KBg.jpeg",
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .size(104.dp)
-                            .clip(CircleShape)
-                    )
-
-                    Text(text = "Gaurang Shaha", style = MaterialTheme.typography.h6)
-
-                    Text(
-                        text = "gaurang.shaha@gmail.com",
-                        style = MaterialTheme.extraTypography.body1DarkGray
-                    )
-
-                    Spacer(modifier = Modifier.size(16.dp))
-                }
+                UserDetails()
             }
 
             item {
@@ -121,6 +102,31 @@ internal fun ProfileScreen() {
                 ) { /*TODO*/ }
             }
         }
+    }
+}
+
+@Composable
+private fun UserDetails() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        LazyImage(
+            url = "https://miro.medium.com/v2/resize:fit:2400/2*AXmi0bvdz7eiHuUyaD2KBg.jpeg",
+            modifier = Modifier
+                .padding(16.dp)
+                .size(104.dp)
+                .clip(CircleShape)
+        )
+
+        Text(text = "Gaurang Shaha", style = MaterialTheme.typography.h6)
+
+        Text(
+            text = "gaurang.shaha@gmail.com",
+            style = MaterialTheme.extraTypography.body1DarkGray
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
     }
 }
 

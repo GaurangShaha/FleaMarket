@@ -1,8 +1,8 @@
 package com.flea.market.product.ui.list.component
 
-import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.list.ProductListUiState
 
+@Suppress("MaxLineLength")
 internal val dummyProductList = listOf(
     com.flea.market.product.ui.common.entity.ProductDetailsViewEntity(
         title = "Mens Cotton Jacket",

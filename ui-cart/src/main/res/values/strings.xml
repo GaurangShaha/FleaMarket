@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="free_shipping">Free Shipping</string>
-    <string name="products">Products</string>
-    <string name="price_details">Price Details</string>
     <string name="sub_total">Sub Total</string>
     <string name="discount">Discount</string>
     <string name="tax">Tax</string>

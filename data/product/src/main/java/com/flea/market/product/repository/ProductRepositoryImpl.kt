@@ -4,6 +4,7 @@ import com.flea.market.common.remote.request
 import com.flea.market.product.remote.entity.ProductDetailsEntity
 import com.flea.market.product.remote.source.ProductRemoteSource
 
+@Suppress("MaxLineLength")
 internal class ProductRepositoryImpl(
     private val productRemoteSource: ProductRemoteSource
 ) : ProductRepository {
@@ -94,19 +95,17 @@ internal class ProductRepositoryImpl(
         )
     )
 
-    override suspend fun getProductList() =
-        com.flea.market.common.remote.request(onSuccess = { _, _, productList ->
-            productList.map { it.getProductDetailsEntityWithImageList() }
-        }) {
-            productRemoteSource.getProductList()
-        }
+    override suspend fun getProductList() = request(onSuccess = { _, _, productList ->
+        productList.map { it.getProductDetailsEntityWithImageList() }
+    }) {
+        productRemoteSource.getProductList()
+    }
 
-    override suspend fun getProductDetails(id: Int) =
-        com.flea.market.common.remote.request(onSuccess = { _, _, it ->
-            it.getProductDetailsEntityWithImageList()
-        }) {
-            productRemoteSource.getProductDetails(id)
-        }
+    override suspend fun getProductDetails(id: Int) = request(onSuccess = { _, _, productDetails ->
+        productDetails.getProductDetailsEntityWithImageList()
+    }) {
+        productRemoteSource.getProductDetails(id)
+    }
 
     private fun ProductDetailsEntity.getProductDetailsEntityWithImageList() =
         this.copy(imageList = productImageList.getOrElse(id - 1) { _ -> listOf(image) })
