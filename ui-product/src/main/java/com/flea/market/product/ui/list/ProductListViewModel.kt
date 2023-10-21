@@ -70,12 +70,10 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
 
             updateUiState(
                 currentState.copy(
-                    productList = filteredList, selectedCategoryIndex = selectedCategoryIndex
+                    productList = filteredList,
+                    selectedCategoryIndex = selectedCategoryIndex
                 )
             )
         }
     }
 }
-
-
-

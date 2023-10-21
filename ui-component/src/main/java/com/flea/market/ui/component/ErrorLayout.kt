@@ -45,7 +45,7 @@ fun ErrorLayout(
             text = errorMessage,
             textAlign = TextAlign.Center,
 
-            )
+        )
 
         Spacer(modifier = Modifier.size(14.dp))
 

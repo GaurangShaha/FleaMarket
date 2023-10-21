@@ -45,7 +45,8 @@ internal fun FavouriteListScreen(
 
                 val snackBarUiState by uiState.snackbarUiState.collectAsStateWithLifecycle()
                 FleaMarketSnackBar(
-                    snackBarUiState = snackBarUiState, onSnackbarResult = onSnackbarResult
+                    snackBarUiState = snackBarUiState,
+                    onSnackbarResult = onSnackbarResult
                 )
             }
 
@@ -85,8 +86,10 @@ private fun FavouriteListScreenEmptyPreview() {
 @Composable
 private fun FavouriteListScreenErrorPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Error(NetworkException),
+        FavouriteListScreen(
+            uiState = Error(NetworkException),
             onHandleIntent = {},
-            onSnackbarResult = {})
+            onSnackbarResult = {}
+        )
     }
 }

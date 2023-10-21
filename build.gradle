@@ -15,6 +15,7 @@ allprojects {
 
     detekt {
         toolVersion = "1.23.1"
+        autoCorrect = true
         config.setFrom(file(rootDir.path + "/config/detekt/detekt.yml"))
     }
 

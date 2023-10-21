@@ -21,13 +21,19 @@ internal fun List<ProductDetailsEntity>.toCategoryList(): List<String> {
     val categoryList = mutableListOf<String>()
     categoryList.add("All")
 
-    categoryList.addAll(distinctBy { it.category }.map { productDetailsEntity ->
-        productDetailsEntity.category.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
-            ) else it.toString()
+    categoryList.addAll(
+        distinctBy { it.category }.map { productDetailsEntity ->
+            productDetailsEntity.category.replaceFirstChar {
+                if (it.isLowerCase()) {
+                    it.titlecase(
+                        Locale.getDefault()
+                    )
+                } else {
+                    it.toString()
+                }
+            }
         }
-    })
+    )
 
     return categoryList.toList()
 }

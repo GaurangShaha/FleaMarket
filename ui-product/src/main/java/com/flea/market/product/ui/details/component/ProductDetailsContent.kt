@@ -27,13 +27,13 @@ import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
-
 @Composable
 internal fun ProductDetailsContent(
-    state: Content, onHandleIntent: (ProductDetailsIntent) -> Unit
+    state: Content,
+    onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
-    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact
-        || LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
+    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact ||
+        LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
     ) {
         ContentForCompactScreen(state, onHandleIntent)
     } else {
@@ -45,9 +45,9 @@ internal const val DELAY_FOR_SWITCHING_IMAGE: Long = 8000
 
 @Composable
 private fun ContentForMediumAndExpandedScreen(
-    state: Content, onHandleIntent: (ProductDetailsIntent) -> Unit
+    state: Content,
+    onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
-
     Row {
         PagerWithIndicator(
             uiState = state,
@@ -61,7 +61,6 @@ private fun ContentForMediumAndExpandedScreen(
                 .background(MaterialTheme.colors.secondary),
             contentAlignment = Alignment.BottomCenter
         ) {
-
             ProductInformation(
                 state = state,
                 modifier = Modifier
@@ -70,7 +69,8 @@ private fun ContentForMediumAndExpandedScreen(
                     .padding(start = 16.dp, end = 16.dp, bottom = 70.dp, top = 72.dp)
             )
             AddToCart(
-                state = state.addToCartButtonState, modifier = Modifier
+                state = state.addToCartButtonState,
+                modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth()
             ) { onHandleIntent(AddToCart) }
@@ -80,7 +80,8 @@ private fun ContentForMediumAndExpandedScreen(
 
 @Composable
 private fun ContentForCompactScreen(
-    state: Content, onHandleIntent: (ProductDetailsIntent) -> Unit
+    state: Content,
+    onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
     Box(contentAlignment = Alignment.BottomCenter) {
         val scrollState = rememberScrollState()
@@ -108,13 +109,13 @@ private fun ContentForCompactScreen(
             }
         }
         AddToCart(
-            state = state.addToCartButtonState, modifier = Modifier
+            state = state.addToCartButtonState,
+            modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
         ) { onHandleIntent(AddToCart) }
     }
 }
-
 
 @FleaMarketPreviews
 @Composable

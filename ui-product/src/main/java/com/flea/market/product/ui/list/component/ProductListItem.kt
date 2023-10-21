@@ -40,7 +40,8 @@ internal fun ProductListItem(
         ) {
             Column {
                 LazyImage(
-                    url = productDetails.imageList.first(), modifier = Modifier
+                    url = productDetails.imageList.first(),
+                    modifier = Modifier
                         .height(200.dp)
                         .width(150.dp)
                         .padding(1.dp)
@@ -68,7 +69,10 @@ internal fun ProductListItem(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(
-                        start = 10.dp, end = 10.dp, top = 2.dp, bottom = 8.dp
+                        start = 10.dp,
+                        end = 10.dp,
+                        top = 2.dp,
+                        bottom = 8.dp
                     ),
                     style = MaterialTheme.extraTypography.body1Bold
                 )

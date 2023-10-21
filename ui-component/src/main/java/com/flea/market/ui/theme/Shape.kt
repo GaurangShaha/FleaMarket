@@ -26,10 +26,11 @@ data class ExtraShape(
 
 internal val LocalExtraShape = staticCompositionLocalOf { ExtraShape() }
 
-
 internal val ExtraShapes = ExtraShape(
-    xlargeShape = RoundedCornerShape(32.dp), capsuleShape = CircleShape
+    xlargeShape = RoundedCornerShape(32.dp),
+    capsuleShape = CircleShape
 )
 
 val MaterialTheme.extraShape: ExtraShape
-    @Composable @ReadOnlyComposable get() = LocalExtraShape.current
+    @Composable @ReadOnlyComposable
+    get() = LocalExtraShape.current

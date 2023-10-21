@@ -16,7 +16,8 @@ internal val dummyProductList = listOf(
         ),
         count = 500,
         rate = 4.7
-    ), com.flea.market.product.ui.common.entity.ProductDetailsViewEntity(
+    ),
+    com.flea.market.product.ui.common.entity.ProductDetailsViewEntity(
         title = "Womens Cotton Jacket",
         id = 1,
         price = 50.99,

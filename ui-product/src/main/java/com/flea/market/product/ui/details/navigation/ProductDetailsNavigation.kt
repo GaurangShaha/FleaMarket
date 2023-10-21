@@ -22,16 +22,19 @@ private const val PRODUCT_DETAILS_ROUTE =
 internal fun NavGraphBuilder.productDetailsScreen() {
     composable(
         route = PRODUCT_DETAILS_ROUTE,
-        arguments = listOf(navArgument(PRODUCT_DETAILS_ARGUMENT_PRODUCT_ID) {
-            type = NavType.IntType
-        }),
+        arguments = listOf(
+            navArgument(PRODUCT_DETAILS_ARGUMENT_PRODUCT_ID) {
+                type = NavType.IntType
+            }
+        ),
         deepLinks = listOf(ProductDetailsDeepLink.navDeeplink())
     ) {
         val productDetailsViewModel: ProductDetailsViewModel = koinViewModel()
         val uiState by productDetailsViewModel.uiState.collectAsStateWithLifecycle()
 
         ProductDetailsScreen(
-            uiState = uiState, onHandleIntent = productDetailsViewModel::onHandleIntent
+            uiState = uiState,
+            onHandleIntent = productDetailsViewModel::onHandleIntent
         )
     }
 }

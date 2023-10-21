@@ -27,7 +27,7 @@ fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, onSnackbarResult: (Boo
             }
         }
 
-        //Snackbar is getting displayed on navigating back to screen if LaunchEffect got cancelled
+        // Snackbar is getting displayed on navigating back to screen if LaunchEffect got cancelled
         // before receiving SnackbarResult. This is a fix created to avoid this.
         // Created a suspendCancellableCoroutine which reset the snackbarFlow.
         snackBarUiState?.let {

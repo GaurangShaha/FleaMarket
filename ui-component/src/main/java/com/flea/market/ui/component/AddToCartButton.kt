@@ -62,6 +62,7 @@ import com.flea.market.ui.component.ButtonState.Result
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -95,7 +96,8 @@ fun AddToCartButton(
     var initialHeight by remember { mutableStateOf(0.dp) }
     var initialWidth by remember { mutableStateOf(0.dp) }
 
-    Button(enabled = enabled,
+    Button(
+        enabled = enabled,
         interactionSource = interactionSource,
         elevation = elevation,
         shape = shape,
@@ -122,7 +124,8 @@ fun AddToCartButton(
                     animationWobbleCartProgress,
                     painter
                 )
-            }) {
+            }
+    ) {
         ButtonContent(
             buttonState,
             animationCartProgress,
@@ -156,61 +159,72 @@ private fun AnimateAsPerButtonState(
     LaunchedEffect(buttonState) {
         when (buttonState) {
             Result -> {
-                launch {
-                    animationCartProgress.animateTo(
-                        targetValue = 1f,
-                        animationSpec = tween(durationMillis = 900, easing = FastOutSlowInEasing)
-                    )
-
-                    animationWobbleCartProgress.animateTo(
-                        targetValue = 1f, animationSpec = repeatable(
-                            iterations = 3,
-                            animation = tween(durationMillis = 200),
-                            repeatMode = Reverse
-                        )
-                    )
-                    animationWobbleCartProgress.snapTo(0f)
-
-                    animationCartProgress.animateTo(
-                        targetValue = 2f, animationSpec = tween(
-                            durationMillis = 600, easing = FastOutLinearInEasing, delayMillis = 100
-                        )
-                    )
-                }
-
-                launch {
-                    animationItemProgress.animateTo(
-                        targetValue = 1f, animationSpec = tween(
-                            durationMillis = LOADING_DOT_ANIMATION_MILLIS,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-
-                    animationItemProgress.animateTo(
-                        targetValue = 0f,
-                        animationSpec = tween(durationMillis = 500, easing = FastOutLinearInEasing)
-                    )
-                }
-
+                animateCart(animationCartProgress, animationWobbleCartProgress)
+                animateItemInCart(animationItemProgress)
             }
-
             Initial -> {
                 animationCartProgress.snapTo(0f)
                 animationWobbleCartProgress.snapTo(0f)
                 animationItemProgress.snapTo(0f)
                 animationLoadingDotProgress.snapTo(0f)
             }
-
             Loading -> {
                 launch {
                     animationLoadingDotProgress.animateTo(
-                        targetValue = 1f, animationSpec = infiniteRepeatable(
-                            animation = tween(LOADING_DOT_ANIMATION_MILLIS), repeatMode = Reverse
+                        targetValue = 1f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(LOADING_DOT_ANIMATION_MILLIS),
+                            repeatMode = Reverse
                         )
                     )
                 }
             }
         }
+    }
+}
+
+private fun CoroutineScope.animateItemInCart(animationItemProgress: Animatable<Float, AnimationVector1D>) {
+    launch {
+        animationItemProgress.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(
+                durationMillis = LOADING_DOT_ANIMATION_MILLIS,
+                easing = FastOutSlowInEasing
+            )
+        )
+        animationItemProgress.animateTo(
+            targetValue = 0f,
+            animationSpec = tween(durationMillis = 500, easing = FastOutLinearInEasing)
+        )
+    }
+}
+
+private fun CoroutineScope.animateCart(
+    animationCartProgress: Animatable<Float, AnimationVector1D>,
+    animationWobbleCartProgress: Animatable<Float, AnimationVector1D>
+) {
+    launch {
+        animationCartProgress.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 900, easing = FastOutSlowInEasing)
+        )
+        animationWobbleCartProgress.animateTo(
+            targetValue = 1f,
+            animationSpec = repeatable(
+                iterations = 3,
+                animation = tween(durationMillis = 200),
+                repeatMode = Reverse
+            )
+        )
+        animationWobbleCartProgress.snapTo(0f)
+        animationCartProgress.animateTo(
+            targetValue = 2f,
+            animationSpec = tween(
+                durationMillis = 600,
+                easing = FastOutLinearInEasing,
+                delayMillis = 100
+            )
+        )
     }
 }
 
@@ -255,14 +269,11 @@ private fun ContentDrawScope.drawItemsAsPerState(
 ) {
     val halfWidth = this.size.width / 2
     val halfHeight = this.size.height / 2
-
     val cartIconSize = 26.dp.toPx()
-
     val dotOffset = 2.dp.toPx()
     val dotRadius = 2.dp.toPx()
     val dotDiameter = dotRadius * 2
     val dotSpacing = 2.dp.toPx()
-
     val loadingRadius = 4.dp.toPx()
     val loadingDiameter = loadingRadius * 2
     val loadingSpacing = 8.dp.toPx()
@@ -277,7 +288,6 @@ private fun ContentDrawScope.drawItemsAsPerState(
             loadingSpacing = loadingSpacing,
             halfHeight = halfHeight
         )
-
         Result -> {
             if (animationItemProgress.value != 0f) {
                 drawItems(
@@ -292,7 +302,6 @@ private fun ContentDrawScope.drawItemsAsPerState(
                 )
             }
 
-
             if (animationCartProgress.value != 0f && animationCartProgress.value != 2f) {
                 drawCart(
                     animationCartProgress = animationCartProgress,
@@ -304,7 +313,6 @@ private fun ContentDrawScope.drawItemsAsPerState(
                 )
             }
         }
-
         Initial -> {}
     }
 }
@@ -329,7 +337,8 @@ private fun ContentDrawScope.drawLoading(
         color = contentColor,
         radius = loadingRadius * animationLoadingDotProgress.value,
         center = Offset(
-            halfWidth - loadingDiameter - loadingSpacing, halfHeight
+            halfWidth - loadingDiameter - loadingSpacing,
+            halfHeight
         )
     )
 
@@ -343,7 +352,8 @@ private fun ContentDrawScope.drawLoading(
         color = contentColor,
         radius = loadingRadius * animationLoadingDotProgress.value,
         center = Offset(
-            halfWidth + loadingDiameter + loadingSpacing, halfHeight
+            halfWidth + loadingDiameter + loadingSpacing,
+            halfHeight
         )
     )
 }
@@ -387,57 +397,68 @@ private fun DrawScope.drawItems(
     halfHeight: Float
 ) {
     drawCircle(
-        color = contentColor, radius = dotRadius, center = Offset(
+        color = contentColor,
+        radius = dotRadius,
+        center = Offset(
             halfWidth + dotOffset - dotDiameter - dotSpacing,
             halfHeight - animationItemProgress.value * 28.dp.value
         )
     )
 
     drawCircle(
-        color = contentColor, radius = dotRadius, center = Offset(
-            halfWidth + dotOffset, halfHeight - animationItemProgress.value * 36.dp.value
+        color = contentColor,
+        radius = dotRadius,
+        center = Offset(
+            halfWidth + dotOffset,
+            halfHeight - animationItemProgress.value * 36.dp.value
         )
     )
 
     drawCircle(
-        color = contentColor, radius = dotRadius, center = Offset(
+        color = contentColor,
+        radius = dotRadius,
+        center = Offset(
             halfWidth + dotOffset + dotDiameter + dotSpacing,
             halfHeight - animationItemProgress.value * 42.dp.value
         )
     )
 }
 
-
-@FleaMarketPreviews// Start interactive mode to see the animations
+@FleaMarketPreviews // Start interactive mode to see the animations
 @Composable
 fun AddToCartButtonInitialPreview() {
     FleaMarketThemePreview {
         var buttonState: ButtonState by remember { mutableStateOf(Initial) }
         val coroutineScope = rememberCoroutineScope()
 
-        AddToCartButton(buttonState = buttonState, initialContent = {
-            Icon(imageVector = Icons.Default.Add, contentDescription = null)
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(text = "ADD TO CART")
-        }, resultContent = {
-            Icon(
-                imageVector = Icons.Default.Check,
-                contentDescription = null,
-                tint = MaterialTheme.extraColors.successColor
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(text = "ADDED")
-        }, onClick = {
-            buttonState = Loading
-            coroutineScope.launch {
-                delay(2000)
-                buttonState = Result
-                delay(4000)
-                buttonState = Initial
-            }
-        }, modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
+        AddToCartButton(
+            buttonState = buttonState,
+            initialContent = {
+                Icon(imageVector = Icons.Default.Add, contentDescription = null)
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(text = "ADD TO CART")
+            },
+            resultContent = {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = null,
+                    tint = MaterialTheme.extraColors.successColor
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(text = "ADDED")
+            },
+            onClick = {
+                buttonState = Loading
+                coroutineScope.launch {
+                    delay(2000)
+                    buttonState = Result
+                    delay(4000)
+                    buttonState = Initial
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         )
     }
 }

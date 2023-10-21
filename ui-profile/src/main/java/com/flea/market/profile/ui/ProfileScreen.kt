@@ -62,7 +62,6 @@ internal fun ProfileScreen() {
                 .background(MaterialTheme.colors.surface),
             contentPadding = PaddingValues(bottom = 66.dp)
         ) {
-
             item {
                 UserDetails()
             }
@@ -81,7 +80,8 @@ internal fun ProfileScreen() {
 
             item {
                 ProfileRowItem(
-                    icon = Icons.Outlined.LocationOn, textRes = R.string.delivery_address
+                    icon = Icons.Outlined.LocationOn,
+                    textRes = R.string.delivery_address
                 )
             }
 
@@ -150,7 +150,8 @@ private fun ProfileRowItem(icon: ImageVector, @StringRes textRes: Int) {
                 tint = MaterialTheme.extraColors.darkGrey
             )
             Text(
-                text = stringResource(id = textRes), style = MaterialTheme.typography.body1
+                text = stringResource(id = textRes),
+                style = MaterialTheme.typography.body1
             )
         }
     }

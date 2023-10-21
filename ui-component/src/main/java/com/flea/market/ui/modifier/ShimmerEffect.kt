@@ -35,7 +35,8 @@ fun Modifier.shimmer(): Modifier = composed {
         targetValue = 2 * size.width.toFloat(),
         animationSpec = infiniteRepeatable(
             animation = tween(SHIMMER_ANIMATION_TIME)
-        ), label = "ShifferStartOffsetX"
+        ),
+        label = "ShifferStartOffsetX"
     )
 
     background(

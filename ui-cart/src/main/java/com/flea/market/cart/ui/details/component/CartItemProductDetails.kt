@@ -56,7 +56,8 @@ internal fun CartItemProductDetails(
         Box(contentAlignment = Alignment.TopEnd) {
             Row(Modifier.fillMaxWidth()) {
                 LazyImage(
-                    url = itemsInCart.image, modifier = Modifier
+                    url = itemsInCart.image,
+                    modifier = Modifier
                         .height(90.dp)
                         .aspectRatio(PRODUCT_IMAGE_ASPECT_RATIO)
                         .padding(1.dp)
@@ -73,13 +74,15 @@ internal fun CartItemProductDetails(
 
 @Composable
 private fun RemoveFromCartButton(onRemoveFromCart: () -> Unit) {
-    Surface(modifier = Modifier
-        .height(32.dp)
-        .width(40.dp)
-        .clickable { onRemoveFromCart() }
-        .padding(bottom = 6.dp),
+    Surface(
+        modifier = Modifier
+            .height(32.dp)
+            .width(40.dp)
+            .clickable { onRemoveFromCart() }
+            .padding(bottom = 6.dp),
         color = MaterialTheme.colors.error,
-        shape = RoundedCornerShape(topEnd = 16.dp, bottomStart = 16.dp)) {
+        shape = RoundedCornerShape(topEnd = 16.dp, bottomStart = 16.dp)
+    ) {
         Icon(
             modifier = Modifier.padding(4.dp),
             imageVector = Icons.Default.Clear,
@@ -123,9 +126,11 @@ private fun RowScope.ItemDetailsSection(
                 style = MaterialTheme.extraTypography.body1Bold
             )
 
-            Stepper(quantity = itemsInCart.quantity,
+            Stepper(
+                quantity = itemsInCart.quantity,
                 onIncreaseQuantity = { onIncreaseQuantity() },
-                onDecreaseQuantity = { onDecreaseQuantity() })
+                onDecreaseQuantity = { onDecreaseQuantity() }
+            )
         }
     }
 }
@@ -134,7 +139,8 @@ private fun RowScope.ItemDetailsSection(
 @FleaMarketPreviews
 private fun CartItemDetailsPreview() {
     FleaMarketThemePreview {
-        CartItemProductDetails(itemsInCart = dummyItemsInCartList.first(),
+        CartItemProductDetails(
+            itemsInCart = dummyItemsInCartList.first(),
             onDecreaseQuantity = {},
             onIncreaseQuantity = {},
             onRemoveFromCart = {}

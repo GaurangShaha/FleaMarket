@@ -30,10 +30,14 @@ internal fun PagerWithIndicator(
     delayForSwitchingImage: Long = 0,
     scrollState: ScrollState? = null
 ) {
-    Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.graphicsLayer {
-        scrollState?.value?.let { translationY = PARALLAX_FACTOR * it
+    Box(
+        contentAlignment = Alignment.BottomCenter,
+        modifier = Modifier.graphicsLayer {
+            scrollState?.value?.let {
+                translationY = PARALLAX_FACTOR * it
+            }
         }
-    }) {
+    ) {
         val pagerState = rememberPagerState()
         HorizontalPager(
             state = pagerState,
@@ -41,15 +45,20 @@ internal fun PagerWithIndicator(
             modifier = modifier.aspectRatio(PRODUCT_IMAGE_ASPECT_RATIO)
         ) {
             LazyImage(
-                url = uiState.productDetails.imageList[it], modifier = Modifier.fillMaxSize()
+                url = uiState.productDetails.imageList[it],
+                modifier = Modifier.fillMaxSize()
             )
         }
 
-        PageIndicator(totalPages = uiState.productDetails.imageList.size,
+        PageIndicator(
+            totalPages = uiState.productDetails.imageList.size,
             currentPage = pagerState.currentPage,
-            modifier = Modifier.padding(bottom = scrollState?.let { 40.dp } ?: 8.dp,
+            modifier = Modifier.padding(
+                bottom = scrollState?.let { 40.dp } ?: 8.dp,
                 start = 8.dp,
-                end = 8.dp))
+                end = 8.dp
+            )
+        )
 
         if (delayForSwitchingImage != 0L) {
             LaunchedEffect(pagerState.settledPage) {

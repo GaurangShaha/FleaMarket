@@ -11,7 +11,9 @@ import com.flea.market.ui.theme.extraShape
 
 @Composable
 fun FMButton(
-    text: String, modifier: Modifier = Modifier, onClick: () -> Unit
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Button(modifier = modifier, shape = MaterialTheme.extraShape.capsuleShape, onClick = onClick) {
         Text(modifier = Modifier.padding(6.dp), text = text)

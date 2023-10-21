@@ -25,14 +25,13 @@ import com.flea.market.ui.theme.extraShape
 
 @Composable
 internal fun ProductDetailsLoading() {
-    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact
-        || LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
+    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact ||
+        LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
     ) {
         LoadingCompactScreen()
     } else {
         LoadingMediumAndExpandedScreen()
     }
-
 }
 
 private const val LOADING_BOX_ASPECT_RATIO = 0.9f

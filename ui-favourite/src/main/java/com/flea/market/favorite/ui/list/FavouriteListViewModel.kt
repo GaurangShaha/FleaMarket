@@ -61,7 +61,8 @@ internal class FavouriteListViewModel(
             cartRepository.addOrUpdateItem(favouriteItemViewEntity.toCartProductDetails())
                 .onSuccess {
                     val snackBarDetails = SnackBarDetails(
-                        message = R.string.move_to_cart_success, snackbarType = SnackbarType.SUCCESS
+                        message = R.string.move_to_cart_success,
+                        snackbarType = SnackbarType.SUCCESS
                     )
 
                     showSnackBar(snackBarDetails)

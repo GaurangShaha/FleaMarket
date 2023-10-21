@@ -33,7 +33,9 @@ fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier = Modifi
                     .padding(6.dp)
                     .clip(CircleShape)
                     .border(
-                        width = 1.dp, color = MaterialTheme.colors.secondary, shape = CircleShape
+                        width = 1.dp,
+                        color = MaterialTheme.colors.secondary,
+                        shape = CircleShape
                     )
                     .background(color)
             )

@@ -28,7 +28,6 @@ internal fun AddToCart(
     modifier: Modifier = Modifier,
     onAddToCart: () -> Unit
 ) {
-
     val buttonState by state.collectAsStateWithLifecycle()
 
     AddToCartButton(

@@ -20,11 +20,11 @@ import com.flea.market.product.ui.details.navigation.ProductDetailsArgs
 import com.flea.market.ui.component.ButtonState
 import com.flea.market.ui.component.ButtonState.Initial
 import com.flea.market.ui.component.ButtonState.Result
-import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 internal class ProductDetailsViewModel(
     private val productDetailsArgs: ProductDetailsArgs,
@@ -66,7 +66,7 @@ internal class ProductDetailsViewModel(
                 cartRepository.addOrUpdateItem(currentUiState.productDetails.toCartProductDetails())
                     .onSuccess {
                         addToCartButtonState.value = Result
-                        //Code to reset the button after
+                        // Code to reset the button after
                         delay(RESET_DELAY)
                         addToCartButtonState.value = Initial
                     }
@@ -104,7 +104,7 @@ internal class ProductDetailsViewModel(
         )
     }
 
-    companion object{
+    companion object {
         private const val MIN_DELAY: Long = 100
         private const val MAX_DELAY: Long = 3000
         private const val RESET_DELAY: Long = 5000

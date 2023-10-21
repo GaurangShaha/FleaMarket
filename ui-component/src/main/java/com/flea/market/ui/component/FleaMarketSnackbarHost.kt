@@ -27,7 +27,8 @@ import com.flea.market.ui.theme.extraColors
 @Composable
 fun FleaMarketSnackbarHost(modifier: Modifier = Modifier) {
     SnackbarHost(
-        modifier = modifier.padding(16.dp), hostState = LocalSnackbarHostStateProvider.current
+        modifier = modifier.padding(16.dp),
+        hostState = LocalSnackbarHostStateProvider.current
     ) { snackbarData ->
         val iconColor: Color
         val icon: ImageVector?
@@ -48,15 +49,19 @@ fun FleaMarketSnackbarHost(modifier: Modifier = Modifier) {
             }
         }
 
-        Snackbar(backgroundColor = MaterialTheme.colors.primary,
+        Snackbar(
+            backgroundColor = MaterialTheme.colors.primary,
             contentColor = MaterialTheme.colors.onPrimary,
             action = snackbarData.actionLabel?.let {
                 @Composable {
-                    TextButton(colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colors.onPrimary),
+                    TextButton(
+                        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colors.onPrimary),
                         onClick = { snackbarData.performAction() },
-                        content = { Text(it) })
+                        content = { Text(it) }
+                    )
                 }
-            }) {
+            }
+        ) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically

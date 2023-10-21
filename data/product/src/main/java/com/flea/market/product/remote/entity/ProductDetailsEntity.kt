@@ -12,4 +12,3 @@ data class ProductDetailsEntity(
     @Json(name = "title") val title: String,
     val imageList: List<String>
 )
-

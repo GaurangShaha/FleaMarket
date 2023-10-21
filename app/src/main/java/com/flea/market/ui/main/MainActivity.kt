@@ -24,10 +24,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FleaMarketTheme {
-                CompositionLocalProvider(LocalWindowSizeClassProvider provides calculateWindowSizeClass(this),
+                CompositionLocalProvider(
+                    LocalWindowSizeClassProvider provides calculateWindowSizeClass(this),
                     LocalNavControllerProvider provides rememberNavController(),
                     LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
-                    LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {
+                    LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }
+                ) {
                     FleaMarketApp()
                 }
             }

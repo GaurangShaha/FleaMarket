@@ -90,7 +90,10 @@ internal fun FavouriteProductItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(
-                            start = 10.dp, end = 10.dp, top = 2.dp, bottom = 8.dp
+                            start = 10.dp,
+                            end = 10.dp,
+                            top = 2.dp,
+                            bottom = 8.dp
                         ),
                         style = MaterialTheme.extraTypography.body1Bold
                     )
@@ -106,13 +109,15 @@ internal fun FavouriteProductItem(
 
 @Composable
 private fun AddToCartButton(onMoveToCart: () -> Unit) {
-    Button(modifier = Modifier
-        .padding(1.dp)
-        .fillMaxWidth()
-        .height(44.dp),
+    Button(
+        modifier = Modifier
+            .padding(1.dp)
+            .fillMaxWidth()
+            .height(44.dp),
         shape = MaterialTheme.shapes.large,
         elevation = ButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
-        onClick = { onMoveToCart() }) {
+        onClick = { onMoveToCart() }
+    ) {
         Text(
             text = stringResource(id = string.move_to_cart),
             maxLines = 1,
@@ -145,8 +150,10 @@ private fun RemoveFromFavouriteButton(onRemoveFromFavourite: () -> Unit) {
 @Composable
 private fun ProductListItemPreview() {
     FleaMarketThemePreview {
-        FavouriteProductItem(favouriteItem = dummyFavouriteItemList.first(),
+        FavouriteProductItem(
+            favouriteItem = dummyFavouriteItemList.first(),
             onRemoveFromFavourite = {},
-            onMoveToCart = {})
+            onMoveToCart = {}
+        )
     }
 }

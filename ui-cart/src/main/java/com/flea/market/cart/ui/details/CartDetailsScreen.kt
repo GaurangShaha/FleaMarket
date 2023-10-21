@@ -23,7 +23,8 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun CartDetailsScreen(
-    uiState: CartDetailsUiState, onHandleIntent: (CartDetailsIntent) -> Unit
+    uiState: CartDetailsUiState,
+    onHandleIntent: (CartDetailsIntent) -> Unit
 ) {
     Column {
         FleaMarketAppBar(title = R.string.cart)

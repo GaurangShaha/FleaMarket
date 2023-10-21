@@ -22,7 +22,8 @@ import java.text.NumberFormat
 
 @Composable
 internal fun PriceDetails(
-    priceDetails: PriceDetailsViewEntity, modifier: Modifier = Modifier
+    priceDetails: PriceDetailsViewEntity,
+    modifier: Modifier = Modifier
 ) {
     val currencyFormatter = remember {
         NumberFormat.getCurrencyInstance().apply {
@@ -56,7 +57,8 @@ internal fun PriceDetails(
 
 @Composable
 private fun TotalPayableRow(
-    currencyFormatter: NumberFormat, priceDetails: PriceDetailsViewEntity
+    currencyFormatter: NumberFormat,
+    priceDetails: PriceDetailsViewEntity
 ) {
     Row {
         Text(
@@ -68,7 +70,7 @@ private fun TotalPayableRow(
             text = currencyFormatter.format(priceDetails.totalPayable),
             style = MaterialTheme.extraTypography.body1Bold,
 
-            )
+        )
     }
 }
 
@@ -84,13 +86,14 @@ private fun DeliveryRow() {
             text = stringResource(string.free_shipping),
             style = MaterialTheme.extraTypography.body1Bold,
 
-            )
+        )
     }
 }
 
 @Composable
 private fun TaxRow(
-    currencyFormatter: NumberFormat, priceDetails: PriceDetailsViewEntity
+    currencyFormatter: NumberFormat,
+    priceDetails: PriceDetailsViewEntity
 ) {
     Row {
         Text(
@@ -102,13 +105,14 @@ private fun TaxRow(
             text = currencyFormatter.format(priceDetails.tax),
             style = MaterialTheme.extraTypography.body1Bold,
 
-            )
+        )
     }
 }
 
 @Composable
 private fun DiscountRow(
-    currencyFormatter: NumberFormat, priceDetails: PriceDetailsViewEntity
+    currencyFormatter: NumberFormat,
+    priceDetails: PriceDetailsViewEntity
 ) {
     Row {
         Text(
@@ -120,13 +124,14 @@ private fun DiscountRow(
             text = "-" + currencyFormatter.format(priceDetails.discount),
             style = MaterialTheme.extraTypography.body1Bold,
 
-            )
+        )
     }
 }
 
 @Composable
 private fun SubtotalRow(
-    currencyFormatter: NumberFormat, priceDetails: PriceDetailsViewEntity
+    currencyFormatter: NumberFormat,
+    priceDetails: PriceDetailsViewEntity
 ) {
     Row {
         Text(
@@ -138,10 +143,9 @@ private fun SubtotalRow(
             text = currencyFormatter.format(priceDetails.subTotal),
             style = MaterialTheme.extraTypography.body1Bold,
 
-            )
+        )
     }
 }
-
 
 @Composable
 @FleaMarketPreviews

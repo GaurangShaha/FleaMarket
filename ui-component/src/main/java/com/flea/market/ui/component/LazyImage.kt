@@ -21,12 +21,14 @@ fun LazyImage(
     contentDescription: String? = null,
     contentScale: ContentScale = ContentScale.Crop
 ) {
-    SubcomposeAsyncImage(model = url,
+    SubcomposeAsyncImage(
+        model = url,
         contentDescription = contentDescription,
         modifier = modifier,
         contentScale = contentScale,
         loading = { Box(modifier = Modifier.shimmer()) },
-        error = { Box(modifier = Modifier.background(MaterialTheme.extraColors.darkGrey)) })
+        error = { Box(modifier = Modifier.background(MaterialTheme.extraColors.darkGrey)) }
+    )
 }
 
 @FleaMarketPreviews

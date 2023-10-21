@@ -21,7 +21,9 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 fun EmptyLayout(
-    message: String, icon: Painter, modifier: Modifier = Modifier
+    message: String,
+    icon: Painter,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
@@ -31,7 +33,9 @@ fun EmptyLayout(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = icon, contentDescription = null, modifier = Modifier.size(82.dp)
+            painter = icon,
+            contentDescription = null,
+            modifier = Modifier.size(82.dp)
         )
 
         Spacer(modifier = Modifier.size(24.dp))

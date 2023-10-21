@@ -20,7 +20,8 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun ProductListScreen(
-    state: ProductListUiState, onHandleIntent: (ProductListIntent) -> Unit
+    state: ProductListUiState,
+    onHandleIntent: (ProductListIntent) -> Unit
 ) {
     Column {
         FleaMarketAppBar(title = com.flea.market.ui.common.R.string.app_name)
@@ -33,7 +34,8 @@ internal fun ProductListScreen(
             Loading -> ProductListLoading()
 
             is Content -> ProductListContent(
-                state = state, onHandleIntent = onHandleIntent
+                state = state,
+                onHandleIntent = onHandleIntent
             )
         }
     }

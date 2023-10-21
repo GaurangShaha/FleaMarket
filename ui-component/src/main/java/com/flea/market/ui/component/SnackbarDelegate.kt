@@ -6,7 +6,10 @@ import androidx.compose.material.SnackbarResult
 object SnackbarDelegate {
     var currentSnackbarType: SnackbarType = SnackbarType.DEFAULT
     suspend fun showSnackbar(
-        snackbarHostState: SnackbarHostState, message: String, action: String?, type: SnackbarType
+        snackbarHostState: SnackbarHostState,
+        message: String,
+        action: String?,
+        type: SnackbarType
     ): SnackbarResult {
         currentSnackbarType = type
         return snackbarHostState.showSnackbar(message, action)

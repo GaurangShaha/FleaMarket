@@ -47,7 +47,8 @@ private val DarkColorPalette = darkColors(
 
 @Composable
 fun FleaMarketTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
+    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
 ) {
     val extraColorsPalette: ExtraColorsPalette
     val extraTypography: ExtraTypography
@@ -80,7 +81,10 @@ fun FleaMarketTheme(
         LocalExtraShape provides ExtraShapes
     ) {
         MaterialTheme(
-            colors = colorPalette, typography = Typography, shapes = Shapes, content = content
+            colors = colorPalette,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
         )
     }
 }

@@ -26,7 +26,7 @@ internal fun ProductInformation(state: Content, modifier: Modifier = Modifier) {
             text = state.productDetails.title,
             style = MaterialTheme.extraTypography.h6Bold,
 
-            )
+        )
         Text(
             text = state.productDetails.category,
             style = MaterialTheme.extraTypography.captionDarkGray
@@ -46,7 +46,7 @@ internal fun ProductInformation(state: Content, modifier: Modifier = Modifier) {
                 text = numberFormatter.format(state.productDetails.price),
                 style = MaterialTheme.extraTypography.h6Bold,
 
-                )
+            )
 
             ComposeStars(
                 value = state.productDetails.rate.toFloat(),

@@ -32,8 +32,10 @@ fun Stepper(
         modifier = modifier
             .border(
                 border = BorderStroke(
-                    width = 1.dp, color = MaterialTheme.colors.primary
-                ), shape = MaterialTheme.extraShape.capsuleShape
+                    width = 1.dp,
+                    color = MaterialTheme.colors.primary
+                ),
+                shape = MaterialTheme.extraShape.capsuleShape
             )
             .padding(start = 8.dp, end = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),

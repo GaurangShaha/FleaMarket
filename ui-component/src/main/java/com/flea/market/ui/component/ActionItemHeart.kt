@@ -30,7 +30,9 @@ fun HeartToggleButton(
     onToggleMarkAsFavourite: (Boolean) -> Unit
 ) {
     IconToggleButton(
-        modifier = modifier, checked = onAddToFavourite, onCheckedChange = onToggleMarkAsFavourite
+        modifier = modifier,
+        checked = onAddToFavourite,
+        onCheckedChange = onToggleMarkAsFavourite
     ) {
         val transition = updateTransition(targetState = onAddToFavourite, label = "transition")
 
@@ -52,7 +54,8 @@ fun HeartToggleButton(
                 } else {
                     spring(stiffness = Spring.StiffnessVeryLow)
                 }
-            }, "size"
+            },
+            "size"
         ) { _ -> 30.dp }
 
         Icon(

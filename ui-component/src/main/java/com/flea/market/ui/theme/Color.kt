@@ -64,4 +64,5 @@ internal val DarkExtraColorsPalette = ExtraColorsPalette(
 )
 
 val MaterialTheme.extraColors: ExtraColorsPalette
-    @Composable @ReadOnlyComposable get() = LocalExtraColorsPalette.current
+    @Composable @ReadOnlyComposable
+    get() = LocalExtraColorsPalette.current

@@ -36,8 +36,10 @@ internal fun CategorySection(
             .padding(top = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        itemsIndexed(items = categories,
-            key = { _, category -> category }) { index, category ->
+        itemsIndexed(
+            items = categories,
+            key = { _, category -> category }
+        ) { index, category ->
             val bgColor by animateColorAsState(
                 targetValue = getBackgroundColor(selectedCategoryIndex, index),
                 animationSpec = tween(TEXT_COLOR_ANIMATION_TIME),
@@ -58,8 +60,13 @@ internal fun CategorySection(
                     })
                     .background(bgColor)
                     .padding(
-                        start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp
-                    ), text = category, color = textColor
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 4.dp,
+                        bottom = 4.dp
+                    ),
+                text = category,
+                color = textColor
             )
         }
     }
@@ -67,7 +74,8 @@ internal fun CategorySection(
 
 @Composable
 private fun getTextColor(
-    selectedCategoryIndex: Int, index: Int
+    selectedCategoryIndex: Int,
+    index: Int
 ) = if (selectedCategoryIndex == index) {
     MaterialTheme.colors.onPrimary
 } else {
@@ -76,7 +84,8 @@ private fun getTextColor(
 
 @Composable
 private fun getBackgroundColor(
-    selectedCategoryIndex: Int, index: Int
+    selectedCategoryIndex: Int,
+    index: Int
 ) = if (selectedCategoryIndex == index) {
     MaterialTheme.colors.primary
 } else {
@@ -88,7 +97,8 @@ private fun getBackgroundColor(
 private fun CategorySectionPreview() {
     FleaMarketThemePreview {
         CategorySection(
-            categories = dummyCategoryList, selectedCategoryIndex = 0
+            categories = dummyCategoryList,
+            selectedCategoryIndex = 0
         ) {}
     }
 }

@@ -14,7 +14,8 @@ internal val dummyFavouriteItemList = listOf(
         category = "Men's clothing",
         image = "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
         rating = 4.7
-    ), FavouriteItemViewEntity(
+    ),
+    FavouriteItemViewEntity(
         title = "Womens Cotton Jacket",
         id = 1,
         price = 50.99,
@@ -22,7 +23,8 @@ internal val dummyFavouriteItemList = listOf(
         category = "Women's clothing",
         image = "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
         rating = 4.0
-    ), FavouriteItemViewEntity(
+    ),
+    FavouriteItemViewEntity(
         title = "Womens Woolen Jacket",
         id = 2,
         price = 70.99,

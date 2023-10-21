@@ -36,6 +36,6 @@ internal val DarkExtraTypography = ExtraTypography(
     h6Bold = Typography.h6.copy(fontWeight = FontWeight.Bold)
 )
 
-
 val MaterialTheme.extraTypography: ExtraTypography
-    @Composable @ReadOnlyComposable get() = LocalExtraTypography.current
+    @Composable @ReadOnlyComposable
+    get() = LocalExtraTypography.current

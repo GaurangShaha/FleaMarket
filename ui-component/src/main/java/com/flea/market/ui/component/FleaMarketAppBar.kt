@@ -33,23 +33,32 @@ fun FleaMarketAppBar(
     @StringRes title: Int,
     modifier: Modifier = Modifier,
     navigationIcon: Pair<ImageVector, () -> Unit> = Icons.Default.Menu to {},
-    actionItems: @Composable() (RowScope.() -> Unit) = {},
+    actionItems:
+    @Composable()
+    (RowScope.() -> Unit) = {},
     backgroundColor: Color = MaterialTheme.colors.background,
     contentColor: Color = contentColorFor(backgroundColor),
     elevation: Dp = 0.dp
 ) {
-    TopAppBar(modifier = modifier.statusBarsPadding(), navigationIcon = {
-        val (icon, action) = navigationIcon
-        IconButton(onClick = action) {
-            Icon(
-                imageVector = icon,
-                modifier = Modifier.padding(18.dp),
-                contentDescription = null
-            )
-        }
-    }, actions = actionItems, title = {
-        Text(text = stringResource(id = title), textAlign = TextAlign.Center)
-    }, backgroundColor = backgroundColor, contentColor = contentColor, elevation = elevation
+    TopAppBar(
+        modifier = modifier.statusBarsPadding(),
+        navigationIcon = {
+            val (icon, action) = navigationIcon
+            IconButton(onClick = action) {
+                Icon(
+                    imageVector = icon,
+                    modifier = Modifier.padding(18.dp),
+                    contentDescription = null
+                )
+            }
+        },
+        actions = actionItems,
+        title = {
+            Text(text = stringResource(id = title), textAlign = TextAlign.Center)
+        },
+        backgroundColor = backgroundColor,
+        contentColor = contentColor,
+        elevation = elevation
     )
 }
 
@@ -73,13 +82,16 @@ fun FleaMarketAppBarNavigationItemPreview() {
 @Composable
 fun FleaMarketAppBarActionIconPreview() {
     FleaMarketThemePreview {
-        FleaMarketAppBar(title = R.string.retry,
+        FleaMarketAppBar(
+            title = R.string.retry,
             navigationIcon = Icons.Default.ArrowBack to {},
             actionItems = {
                 Icon(
-                    imageVector = Icons.Default.Search, contentDescription = null
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null
                 )
-            })
+            }
+        )
     }
 }
 
@@ -93,7 +105,8 @@ fun FleaMarketAppBarWithScrimPreview() {
             navigationIcon = Icons.Default.ArrowBack to {},
             actionItems = {
                 Icon(
-                    imageVector = Icons.Default.Search, contentDescription = null
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null
                 )
             },
             backgroundColor = Color.Transparent

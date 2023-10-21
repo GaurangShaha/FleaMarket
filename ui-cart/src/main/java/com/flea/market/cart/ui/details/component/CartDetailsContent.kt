@@ -30,9 +30,7 @@ internal fun CartDetailsContent(uiState: Content, onHandleIntent: (CartDetailsIn
     } else {
         ContentForMediumAndExpandedScreen(uiState = uiState, onHandleIntent = onHandleIntent)
     }
-
 }
-
 
 internal const val FIRST_COLUMN_WEIGHT_LARGE_SCREENS = 0.4f
 internal const val SECOND_COLUMN_WEIGHT_LARGE_SCREENS = 1 - FIRST_COLUMN_WEIGHT_LARGE_SCREENS
@@ -40,7 +38,8 @@ internal const val SECOND_COLUMN_WEIGHT_LARGE_SCREENS = 1 - FIRST_COLUMN_WEIGHT_
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ContentForMediumAndExpandedScreen(
-    uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit
+    uiState: Content,
+    onHandleIntent: (CartDetailsIntent) -> Unit
 ) {
     Row {
         LazyColumn(
@@ -95,9 +94,11 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
             CheckoutButton { onHandleIntent(CartDetailsIntent.Checkout) }
         }
 
-        items(key = { it.id },
+        items(
+            key = { it.id },
             items = uiState.productList,
-            contentType = { "productItem" }) { itemsInCartViewEntity ->
+            contentType = { "productItem" }
+        ) { itemsInCartViewEntity ->
             val navController = LocalNavControllerProvider.current
             CartItemProductDetails(
                 modifier = Modifier.animateItemPlacement(),
@@ -109,7 +110,6 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
         }
     }
 }
-
 
 @Composable
 @FleaMarketPreviews

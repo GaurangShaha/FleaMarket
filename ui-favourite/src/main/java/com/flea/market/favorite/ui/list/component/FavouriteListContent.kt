@@ -19,7 +19,8 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun FavouriteListContent(
-    uiState: FavouriteListUiState.Content, onHandleIntent: (FavouriteListIntent) -> Unit
+    uiState: FavouriteListUiState.Content,
+    onHandleIntent: (FavouriteListIntent) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(156.dp),
@@ -29,11 +30,15 @@ internal fun FavouriteListContent(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items = uiState.favouriteProductList, key = { it.id }) { favouriteItemViewEntity ->
-            FavouriteProductItem(favouriteItem = favouriteItemViewEntity, onRemoveFromFavourite = {
-                onHandleIntent(RemoveFromFavourite(favouriteItemViewEntity.id))
-            }, onMoveToCart = {
-                onHandleIntent(FavouriteListIntent.MoveToCart(favouriteItemViewEntity))
-            }, modifier = Modifier.animateItemPlacement()
+            FavouriteProductItem(
+                favouriteItem = favouriteItemViewEntity,
+                onRemoveFromFavourite = {
+                    onHandleIntent(RemoveFromFavourite(favouriteItemViewEntity.id))
+                },
+                onMoveToCart = {
+                    onHandleIntent(FavouriteListIntent.MoveToCart(favouriteItemViewEntity))
+                },
+                modifier = Modifier.animateItemPlacement()
             )
         }
     }

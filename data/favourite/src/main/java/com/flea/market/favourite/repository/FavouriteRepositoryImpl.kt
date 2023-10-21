@@ -3,17 +3,16 @@ package com.flea.market.favourite.repository
 import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
 import com.flea.market.favourite.local.source.FavouriteLocalSource
 import com.flea.market.foundation.model.Result
-import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 @Suppress("TooGenericExceptionCaught")
 internal class FavouriteRepositoryImpl(
     private val executionContext: CoroutineContext = Dispatchers.IO,
     private val favouriteLocalSource: FavouriteLocalSource
 ) : FavouriteRepository {
-
 
     override suspend fun markAsFavourite(favouriteProductDetailsEntity: FavouriteProductDetailsEntity) =
         withContext(executionContext) {

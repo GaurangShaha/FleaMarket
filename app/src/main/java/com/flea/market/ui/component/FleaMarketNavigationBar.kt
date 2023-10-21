@@ -110,7 +110,10 @@ private fun FMNavigationRail(
                 Text(
                     text = stringResource(id = destination.labelResourceId).uppercase(
                         Locale.getDefault()
-                    ), overflow = TextOverflow.Visible, softWrap = false, maxLines = 1
+                    ),
+                    overflow = TextOverflow.Visible,
+                    softWrap = false,
+                    maxLines = 1
                 )
             })
         }
@@ -142,38 +145,43 @@ private fun FMBottomNavigation(
                     onSelectNavigationItem(index)
                 }
 
-                BottomNavigationItem(selected = selectedNavigationItemIndex == index, icon = {
-                    if (selectedNavigationItemIndex != index) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            painter = painterResource(id = screen.iconResourceId),
-                            contentDescription = null
+                BottomNavigationItem(
+                    selected = selectedNavigationItemIndex == index,
+                    icon = {
+                        if (selectedNavigationItemIndex != index) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                painter = painterResource(id = screen.iconResourceId),
+                                contentDescription = null
+                            )
+                        } else {
+                            Box(
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .padding(8.dp)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.extraColors.selectedNavigationItemColor)
+                            )
+                        }
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = screen.labelResourceId).uppercase(Locale.getDefault()),
+                            overflow = TextOverflow.Visible,
+                            softWrap = false,
+                            maxLines = 1
                         )
-                    } else {
-                        Box(
-                            modifier = Modifier
-                                .size(24.dp)
-                                .padding(8.dp)
-                                .clip(CircleShape)
-                                .background(MaterialTheme.extraColors.selectedNavigationItemColor)
+                    },
+                    onClick = {
+                        navigateToDestinations(
+                            index,
+                            screen,
+                            navHost,
+                            currentDestinationRoute,
+                            onSelectNavigationItem
                         )
-                    }
-                }, label = {
-                    Text(
-                        text = stringResource(id = screen.labelResourceId).uppercase(Locale.getDefault()),
-                        overflow = TextOverflow.Visible,
-                        softWrap = false,
-                        maxLines = 1
-                    )
-                }, onClick = {
-                    navigateToDestinations(
-                        index,
-                        screen,
-                        navHost,
-                        currentDestinationRoute,
-                        onSelectNavigationItem
-                    )
-                }, alwaysShowLabel = false
+                    },
+                    alwaysShowLabel = false
                 )
             }
         }
@@ -195,13 +203,16 @@ fun navigateToDestinations(
         }
 
         navController.navigate(
-            route = bottomNavigationScreens.route, navOptions = topLevelNavOptions
+            route = bottomNavigationScreens.route,
+            navOptions = topLevelNavOptions
         )
     }
 }
 
 enum class BottomNavigationScreens(
-    val route: String, @StringRes val labelResourceId: Int, @DrawableRes val iconResourceId: Int
+    val route: String,
+    @StringRes val labelResourceId: Int,
+    @DrawableRes val iconResourceId: Int
 ) {
     HOME(
         route = PRODUCT_LIST_ROUTE,
@@ -225,7 +236,7 @@ enum class BottomNavigationScreens(
         route = PROFILE_ROUTE,
         labelResourceId = com.flea.market.ui.profile.R.string.profile,
         iconResourceId = R.drawable.ic_more
-    );
+    )
 }
 
 @Composable

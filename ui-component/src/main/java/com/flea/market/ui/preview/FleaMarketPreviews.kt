@@ -68,10 +68,12 @@ fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
         BoxWithConstraints {
             val calculateFromSize =
                 WindowSizeClass.calculateFromSize(DpSize(width = maxWidth, height = maxHeight))
-            CompositionLocalProvider(LocalWindowSizeClassProvider provides calculateFromSize,
+            CompositionLocalProvider(
+                LocalWindowSizeClassProvider provides calculateFromSize,
                 LocalNavControllerProvider provides rememberNavController(),
                 LocalDrawerStateProvider provides rememberDrawerState(initialValue = DrawerValue.Closed),
-                LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }) {
+                LocalSnackbarHostStateProvider provides remember { SnackbarHostState() }
+            ) {
                 Surface {
                     content()
                 }

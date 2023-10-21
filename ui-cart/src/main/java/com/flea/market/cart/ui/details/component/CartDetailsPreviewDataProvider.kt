@@ -12,7 +12,8 @@ internal val dummyItemsInCartList = listOf(
         category = "Men's clothing",
         image = "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
         quantity = 10
-    ), ItemsInCartViewEntity(
+    ),
+    ItemsInCartViewEntity(
         title = "Womens Cotton Jacket",
         id = 1,
         price = 35.99,

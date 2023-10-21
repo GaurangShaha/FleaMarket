@@ -35,7 +35,8 @@ import com.flea.market.ui.theme.extraColors
 
 @Composable
 internal fun ProductDetailsScreen(
-    uiState: ProductDetailsUiState, onHandleIntent: (ProductDetailsIntent) -> Unit
+    uiState: ProductDetailsUiState,
+    onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
     DarkStatusBarDisposableEffect()
 

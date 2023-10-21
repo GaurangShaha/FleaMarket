@@ -24,7 +24,8 @@ fun ScreenWithBottomBar(
         snackbarHostState = LocalSnackbarHostStateProvider.current
     )
 
-    Scaffold(modifier = modifier.navigationBarsPadding(),
+    Scaffold(
+        modifier = modifier.navigationBarsPadding(),
         scaffoldState = scaffoldState,
         snackbarHost = { FleaMarketSnackbarHost() },
         bottomBar = {
@@ -32,7 +33,8 @@ fun ScreenWithBottomBar(
                 selectedNavigationItemIndex = selectedIndex,
                 onSelectNavigationItem = onSelectNavigationItem
             )
-        }) { _ ->
+        }
+    ) { _ ->
         navHost()
     }
 }

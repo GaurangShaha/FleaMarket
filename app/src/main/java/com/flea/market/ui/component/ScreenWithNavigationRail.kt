@@ -34,12 +34,12 @@ fun ScreenWithNavigationRail(
     }
 }
 
-
 @FleaMarketPreviews
 @Composable
 fun ScreenWithNavigationRailPreview() {
     FleaMarketThemePreview {
-        ScreenWithNavigationRail(selectedIndex = 0,
+        ScreenWithNavigationRail(
+            selectedIndex = 0,
             navHost = {}
         ) {}
     }

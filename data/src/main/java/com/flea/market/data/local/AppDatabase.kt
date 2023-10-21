@@ -10,7 +10,8 @@ import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
 import com.flea.market.favourite.local.source.FavouriteLocalSource
 
 @Database(
-    entities = [CartProductDetailsEntity::class, FavouriteProductDetailsEntity::class], version = 1
+    entities = [CartProductDetailsEntity::class, FavouriteProductDetailsEntity::class],
+    version = 1
 )
 internal abstract class FleaMarketDatabase : RoomDatabase() {
     abstract fun cartLocalSource(): CartLocalSource

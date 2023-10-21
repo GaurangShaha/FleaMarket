@@ -49,17 +49,18 @@ internal fun ProductListContent(
                 text = stringResource(R.string.welcome_message),
                 style = MaterialTheme.typography.h4,
 
-                )
+            )
         }
 
         items(items = state.productList, key = { it.id }, contentType = { "productList" }) {
             val navController = LocalNavControllerProvider.current
-            ProductListItem(productDetails = it,
-                onProductClick = { navController.navigateToProductDetails(it.id) })
+            ProductListItem(
+                productDetails = it,
+                onProductClick = { navController.navigateToProductDetails(it.id) }
+            )
         }
     }
 }
-
 
 @FleaMarketPreviews
 @Composable

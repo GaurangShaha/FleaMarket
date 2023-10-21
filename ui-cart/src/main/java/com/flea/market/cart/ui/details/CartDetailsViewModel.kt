@@ -48,7 +48,6 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
         CartDetailsIntent.Checkout -> Unit
     }
 
-
     private fun increaseQuantity(itemsInCartViewEntity: ItemsInCartViewEntity) {
         viewModelScope.launch {
             cartRepository.updateQuantity(
@@ -73,7 +72,6 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
                 removeFromCart(itemsInCartViewEntity)
             }
         }
-
     }
 
     private fun getPriceDetails(productList: List<CartProductDetailsEntity>): PriceDetailsViewEntity {
