@@ -7,7 +7,7 @@ internal sealed class ProductListUiState {
     class Error(val throwable: Throwable) : ProductListUiState()
     data class Content(
         val productList: List<ProductDetailsViewEntity>,
-        val categoryList: List<String>,
+        val categoryListWrapper: CategoryListImmutableWrapper,
         val selectedCategoryIndex: Int
     ) : ProductListUiState()
 }

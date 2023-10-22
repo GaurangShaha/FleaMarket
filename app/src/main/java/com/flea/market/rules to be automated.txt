@@ -1,0 +1,14 @@
+Public function in repository should return either Result or Flow - Detekt
+Repository should not have retrofit classes
+Repository should not have room classes
+
+Every view model should have UiState, Screen, Intent and Navigation associated
+View model should not have savedHandleState as parameter - Detekt
+View model should not have any public method apart from onHandleIntent
+View model should not have any public parameter of type State, MutableState, LiveData, MutableLiveData or Flow
+All viewModel should be inherited by BaseViewModel
+No public property in view model - Need to check if there are exceptions
+
+Compose function should not have parameter of type view model - Can be achieved by name comparison in detekt
+Compose function should not have parameter of type nav controller - Detekt
+Compose function should not have parameter of type window size class - Detekt

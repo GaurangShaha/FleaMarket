@@ -1,6 +1,7 @@
 package com.flea.market.product.ui.list.component
 
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
+import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListUiState
 
 @Suppress("MaxLineLength")
@@ -30,12 +31,12 @@ internal val dummyProductList = listOf(
     )
 )
 
-internal val dummyCategoryList =
-    listOf("All", "Men's clothing", "Women's clothing", "Jewelry", "Electronics")
+internal val dummyCategoryListWrapper =
+    CategoryListImmutableWrapper(listOf("All", "Men's clothing", "Women's clothing", "Jewelry", "Electronics"))
 
 internal val dummyProductListContent =
     ProductListUiState.Content(
         dummyProductList,
-        dummyCategoryList,
+        dummyCategoryListWrapper,
         0
     )

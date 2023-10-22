@@ -34,17 +34,17 @@ internal fun ProductListContent(
     ) {
         item(
             span = StaggeredGridItemSpan.Companion.FullLine,
-            key = state.categoryList,
+            key = state.categoryListWrapper.toString(),
             contentType = "categories"
         ) {
             CategorySection(
-                categories = state.categoryList,
+                categoryListWrapper = state.categoryListWrapper,
                 selectedCategoryIndex = state.selectedCategoryIndex,
                 onHandleIntent = onHandleIntent
             )
         }
 
-        item(contentType = "welcomeBanner") {
+        item(contentType = "welcomeBanner", key = "welcome") {
             Text(
                 text = stringResource(R.string.welcome_message),
                 style = MaterialTheme.typography.h4,

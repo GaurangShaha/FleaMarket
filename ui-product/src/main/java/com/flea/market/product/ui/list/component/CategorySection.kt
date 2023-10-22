@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
@@ -25,7 +26,7 @@ private const val TEXT_COLOR_ANIMATION_TIME = 300
 
 @Composable
 internal fun CategorySection(
-    categories: List<String>,
+    categoryListWrapper: CategoryListImmutableWrapper,
     selectedCategoryIndex: Int,
     modifier: Modifier = Modifier,
     onHandleIntent: (ProductListIntent) -> Unit
@@ -37,7 +38,7 @@ internal fun CategorySection(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         itemsIndexed(
-            items = categories,
+            items = categoryListWrapper.items,
             key = { _, category -> category }
         ) { index, category ->
             val bgColor by animateColorAsState(
@@ -97,7 +98,7 @@ private fun getBackgroundColor(
 private fun CategorySectionPreview() {
     FleaMarketThemePreview {
         CategorySection(
-            categories = dummyCategoryList,
+            categoryListWrapper = dummyCategoryListWrapper,
             selectedCategoryIndex = 0
         ) {}
     }

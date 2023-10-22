@@ -6,7 +6,7 @@ import com.flea.market.foundation.extension.fold
 import com.flea.market.product.remote.entity.ProductDetailsEntity
 import com.flea.market.product.repository.ProductRepository
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
-import com.flea.market.product.ui.common.mapper.toCategoryList
+import com.flea.market.product.ui.common.mapper.toCategoryListWrapper
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.list.ProductListIntent.FilterByCategory
 import com.flea.market.product.ui.list.ProductListIntent.Reload
@@ -43,7 +43,7 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
         this.selectedCategoryIndex = selectedCategoryIndex
         val currentState = uiState.value
         if (currentState is Content) {
-            filterProductByCategory(currentState.categoryList[selectedCategoryIndex])
+            filterProductByCategory(currentState.categoryListWrapper.items[selectedCategoryIndex])
         }
     }
 
@@ -56,7 +56,7 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
         updateUiState(
             Content(
                 productList = productList,
-                categoryList = productDetailsEntities.toCategoryList(),
+                categoryListWrapper = productDetailsEntities.toCategoryListWrapper(),
                 selectedCategoryIndex = selectedCategoryIndex
             )
         )

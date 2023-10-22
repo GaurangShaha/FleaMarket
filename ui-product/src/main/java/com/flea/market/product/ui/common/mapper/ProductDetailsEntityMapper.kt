@@ -2,6 +2,7 @@ package com.flea.market.product.ui.common.mapper
 
 import com.flea.market.product.remote.entity.ProductDetailsEntity
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
+import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import java.util.Locale
 
 internal fun ProductDetailsEntity.toProductDetailsViewEntity() = ProductDetailsViewEntity(
@@ -17,7 +18,7 @@ internal fun ProductDetailsEntity.toProductDetailsViewEntity() = ProductDetailsV
     title = title
 )
 
-internal fun List<ProductDetailsEntity>.toCategoryList(): List<String> {
+internal fun List<ProductDetailsEntity>.toCategoryListWrapper(): CategoryListImmutableWrapper {
     val categoryList = mutableListOf<String>()
     categoryList.add("All")
 
@@ -35,5 +36,5 @@ internal fun List<ProductDetailsEntity>.toCategoryList(): List<String> {
         }
     )
 
-    return categoryList.toList()
+    return CategoryListImmutableWrapper(categoryList.toList())
 }
