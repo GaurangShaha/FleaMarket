@@ -15,18 +15,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.Build
-import androidx.compose.material.icons.outlined.Call
-import androidx.compose.material.icons.outlined.List
-import androidx.compose.material.icons.outlined.LocationOn
-import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,7 +41,7 @@ import com.flea.market.ui.theme.extraTypography
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun ProfileScreen() {
+internal fun ProfileScreen(uiState: ProfileUiState) {
     Column {
         FleaMarketAppBar(title = R.string.profile)
 
@@ -63,34 +57,11 @@ internal fun ProfileScreen() {
             contentPadding = PaddingValues(bottom = 66.dp)
         ) {
             item {
-                UserDetails()
+                UserDetails(uiState)
             }
 
-            item {
-                ProfileRowItem(icon = Icons.Outlined.AccountCircle, textRes = R.string.profile)
-            }
-
-            item {
-                ProfileRowItem(icon = Icons.Outlined.List, textRes = R.string.payment_methods)
-            }
-
-            item {
-                ProfileRowItem(icon = Icons.Outlined.ShoppingCart, textRes = R.string.order_history)
-            }
-
-            item {
-                ProfileRowItem(
-                    icon = Icons.Outlined.LocationOn,
-                    textRes = R.string.delivery_address
-                )
-            }
-
-            item {
-                ProfileRowItem(icon = Icons.Outlined.Call, textRes = R.string.support_center)
-            }
-
-            item {
-                ProfileRowItem(icon = Icons.Outlined.Build, textRes = R.string.settings)
+            items(uiState.menuItem) { (icon, stringRes) ->
+                ProfileMenuItem(icon, stringRes)
             }
 
             item(span = StaggeredGridItemSpan.SingleLane) {
@@ -106,23 +77,23 @@ internal fun ProfileScreen() {
 }
 
 @Composable
-private fun UserDetails() {
+private fun UserDetails(uiState: ProfileUiState) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LazyImage(
-            url = "https://miro.medium.com/v2/resize:fit:2400/2*AXmi0bvdz7eiHuUyaD2KBg.jpeg",
+            url = uiState.profileUrl,
             modifier = Modifier
                 .padding(16.dp)
                 .size(104.dp)
                 .clip(CircleShape)
         )
 
-        Text(text = "Gaurang Shaha", style = MaterialTheme.typography.h6)
+        Text(text = uiState.name, style = MaterialTheme.typography.h6)
 
         Text(
-            text = "gaurang.shaha@gmail.com",
+            text = uiState.email,
             style = MaterialTheme.extraTypography.body1DarkGray
         )
 
@@ -131,7 +102,7 @@ private fun UserDetails() {
 }
 
 @Composable
-private fun ProfileRowItem(icon: ImageVector, @StringRes textRes: Int) {
+private fun ProfileMenuItem(icon: ImageVector, @StringRes textRes: Int) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -161,6 +132,6 @@ private fun ProfileRowItem(icon: ImageVector, @StringRes textRes: Int) {
 @FleaMarketPreviews
 internal fun ProfileScreenPreview() {
     FleaMarketThemePreview {
-        ProfileScreen()
+        ProfileScreen(ProfileUiState())
     }
 }

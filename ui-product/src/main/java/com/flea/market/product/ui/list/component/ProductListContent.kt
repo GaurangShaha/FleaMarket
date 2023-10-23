@@ -34,7 +34,7 @@ internal fun ProductListContent(
     ) {
         item(
             span = StaggeredGridItemSpan.Companion.FullLine,
-            key = state.categoryListWrapper.toString(),
+            key = state.categoryListWrapper.items.toString(),
             contentType = "categories"
         ) {
             CategorySection(
