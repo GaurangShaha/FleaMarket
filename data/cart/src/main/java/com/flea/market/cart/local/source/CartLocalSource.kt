@@ -12,11 +12,11 @@ interface CartLocalSource {
     fun getAll(): Flow<List<CartProductDetailsEntity>>
 
     @Upsert
-    fun addOrUpdateProduct(productDetails: CartProductDetailsEntity)
+    suspend fun addOrUpdateProduct(productDetails: CartProductDetailsEntity)
 
     @Query("SELECT * FROM cartProductDetailsEntity WHERE id= :productId")
-    fun getProductById(productId: Int): CartProductDetailsEntity?
+    suspend fun getProductById(productId: Int): CartProductDetailsEntity?
 
     @Query("DELETE FROM cartProductDetailsEntity WHERE id = :productId")
-    fun removeProduct(productId: Int)
+    suspend fun removeProduct(productId: Int)
 }

@@ -12,11 +12,11 @@ interface FavouriteLocalSource {
     fun getFavouriteProducts(): Flow<List<FavouriteProductDetailsEntity>>
 
     @Insert
-    fun addFavouriteProduct(favouriteProductDetailsEntity: FavouriteProductDetailsEntity)
+    suspend fun addFavouriteProduct(favouriteProductDetailsEntity: FavouriteProductDetailsEntity)
 
     @Query("SELECT * FROM favouriteProductDetailsEntity WHERE id= :productId")
-    fun getFavouriteProductById(productId: Int): FavouriteProductDetailsEntity?
+    suspend fun getFavouriteProductById(productId: Int): FavouriteProductDetailsEntity?
 
     @Query("DELETE FROM favouriteProductDetailsEntity WHERE id = :productId")
-    fun removeFavouriteProduct(productId: Int)
+    suspend fun removeFavouriteProduct(productId: Int)
 }

@@ -1124,3 +1124,23 @@ TwitterCompose:
     active: true
   ViewModelInjection:
     active: true
+
+ArchitectureRule:
+  DBFunctionShouldBeSuspended:
+    active: true
+  PublicFunInRepositoryShouldReturnResultOrFlow:
+    active: true
+  RepositoryShouldNotDependOnRetrofit:
+    active: true
+  RepositoryShouldNotDependOnRoom:
+    active: true
+  RetrofitFunctionShouldBeSuspended:
+    active: true
+  ViewModelShouldDerivedFromBaseViewModel:
+    active: true
+  ViewModelShouldNotHaveSavedStateHandleAsParam:
+    active: true
+  ViewModelShouldNotHavePublicMethod:
+    active: true
+  ViewModelShouldNotHavePublicProperty:
+    active: true
