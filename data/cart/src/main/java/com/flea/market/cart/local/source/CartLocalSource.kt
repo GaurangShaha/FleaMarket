@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CartLocalSource {
     @Query("SELECT * FROM cartProductDetailsEntity")
-    fun getAll(): Flow<List<CartProductDetailsEntity>>
+    fun getItemsInCartStream(): Flow<List<CartProductDetailsEntity>>
 
     @Upsert
     suspend fun addOrUpdateProduct(productDetails: CartProductDetailsEntity)

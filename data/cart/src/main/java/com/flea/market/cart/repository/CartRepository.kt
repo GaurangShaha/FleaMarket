@@ -11,5 +11,5 @@ interface CartRepository {
 
     suspend fun updateQuantity(productId: Int, quantity: Int): Result<Unit, Throwable>
 
-    fun getAllItems(): Flow<List<CartProductDetailsEntity>>
+    fun getItemsInCartStream(): Flow<List<CartProductDetailsEntity>>
 }

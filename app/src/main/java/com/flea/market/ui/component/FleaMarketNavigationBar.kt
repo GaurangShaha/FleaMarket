@@ -31,7 +31,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.flea.market.R
@@ -59,7 +58,6 @@ internal fun FleaMarketNavigationBar(
 
     if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) {
         FMBottomNavigation(
-            navHost,
             currentDestinationRoute,
             selectedNavigationItemIndex,
             modifier,
@@ -67,7 +65,6 @@ internal fun FleaMarketNavigationBar(
         )
     } else {
         FMNavigationRail(
-            navHost,
             currentDestinationRoute,
             selectedNavigationItemIndex,
             modifier,
@@ -78,12 +75,12 @@ internal fun FleaMarketNavigationBar(
 
 @Composable
 private fun FMNavigationRail(
-    navHost: NavHostController,
     currentDestinationRoute: String?,
     selectedNavigationItemIndex: Int,
     modifier: Modifier = Modifier,
     onSelectNavigationItem: (Int) -> Unit
 ) {
+    val navHost = LocalNavControllerProvider.current
     NavigationRail(modifier = modifier.padding(end = 2.dp)) {
         BottomNavigationScreens.values().forEachIndexed { index, destination ->
             if (currentDestinationRoute == destination.route && index != selectedNavigationItemIndex) {
@@ -123,12 +120,12 @@ private fun FMNavigationRail(
 @Composable
 @OptIn(ExperimentalAnimationApi::class)
 private fun FMBottomNavigation(
-    navHost: NavHostController,
     currentDestinationRoute: String?,
     selectedNavigationItemIndex: Int,
     modifier: Modifier = Modifier,
     onSelectNavigationItem: (Int) -> Unit
 ) {
+    val navHost = LocalNavControllerProvider.current
     AnimatedVisibility(
         visible = BottomNavigationScreens.values()
             .any { currentDestinationRoute?.equals(it.route) ?: false },

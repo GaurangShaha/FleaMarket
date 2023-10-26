@@ -10,10 +10,6 @@ plugins {
     id "io.gitlab.arturbosch.detekt" version "1.23.1"
     id 'org.jetbrains.kotlin.jvm' version '1.7.0' apply false
 }
-//
-//tasks.withType() {
-//    dependsOn(":architecture-rules:assemble")
-//}
 
 allprojects {
     if (project.name != "architecture-rules") {

@@ -19,6 +19,11 @@ class ArchitectureRulesProvider : RuleSetProvider {
             ViewModelShouldNotHaveSavedStateHandleAsParam(config),
             ViewModelShouldNotHavePublicMethod(config),
             ViewModelShouldNotHavePublicProperty(config),
+            ComposeShouldNotHaveViewModelParam(config),
+            ComposeShouldNotHaveNavHostControllerParam(config),
+            ComposeShouldNotHaveWindowSizeClassParam(config),
+            ComposeShouldCollectFlowWithLifecycle(config),
+            FunctionReturnsFlowNaming(config),
         )
     )
 }

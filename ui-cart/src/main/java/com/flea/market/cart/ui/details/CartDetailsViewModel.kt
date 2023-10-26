@@ -28,7 +28,7 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
     BaseViewModel<CartDetailsIntent, CartDetailsUiState>(Loading) {
 
     init {
-        cartRepository.getAllItems().map { productList ->
+        cartRepository.getItemsInCartStream().map { productList ->
             if (productList.isNotEmpty()) {
                 Content(
                     productList = productList.map { it.toItemsInCartViewEntity() },

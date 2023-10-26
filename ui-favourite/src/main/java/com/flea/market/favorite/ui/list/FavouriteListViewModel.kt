@@ -33,7 +33,7 @@ internal class FavouriteListViewModel(
 ) : BaseViewModel<FavouriteListIntent, FavouriteListUiState>(Loading),
     SnackBarSlice by snackBarSlice {
     init {
-        favouriteRepository.getFavouriteProducts().map { it.toFavouriteItemViewEntity() }.map {
+        favouriteRepository.getFavouriteProductsStream().map { it.toFavouriteItemViewEntity() }.map {
             if (it.isNotEmpty()) {
                 Content(it, snackBarSlice.snackbarUiState)
             } else {

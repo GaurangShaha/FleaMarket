@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FavouriteLocalSource {
     @Query("SELECT * FROM favouriteProductDetailsEntity")
-    fun getFavouriteProducts(): Flow<List<FavouriteProductDetailsEntity>>
+    fun getFavouriteProductsStream(): Flow<List<FavouriteProductDetailsEntity>>
 
     @Insert
     suspend fun addFavouriteProduct(favouriteProductDetailsEntity: FavouriteProductDetailsEntity)

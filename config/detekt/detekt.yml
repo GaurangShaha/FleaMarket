@@ -1144,3 +1144,13 @@ ArchitectureRule:
     active: true
   ViewModelShouldNotHavePublicProperty:
     active: true
+  ComposeShouldNotHaveViewModelParam:
+    active: true
+  ComposeShouldNotHaveNavHostControllerParam:
+    active: true
+  ComposeShouldNotHaveWindowSizeClassParam:
+    active: true
+  ComposeShouldCollectFlowWithLifecycle:
+    active: true
+  FunctionReturnsFlowNaming:
+    active: true

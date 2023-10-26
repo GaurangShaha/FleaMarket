@@ -30,5 +30,5 @@ internal class FavouriteRepositoryImpl(
         Result.failure(e)
     }
 
-    override fun getFavouriteProducts() = favouriteLocalSource.getFavouriteProducts()
+    override fun getFavouriteProductsStream() = favouriteLocalSource.getFavouriteProductsStream()
 }

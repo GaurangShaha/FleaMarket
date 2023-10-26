@@ -11,5 +11,5 @@ interface FavouriteRepository {
 
     suspend fun isMarkedAsFavourite(productId: Int): Result<Boolean, Throwable>
 
-    fun getFavouriteProducts(): Flow<List<FavouriteProductDetailsEntity>>
+    fun getFavouriteProductsStream(): Flow<List<FavouriteProductDetailsEntity>>
 }

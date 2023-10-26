@@ -2,7 +2,6 @@ package com.flea.market.architecture.rules
 
 import io.gitlab.arturbosch.detekt.test.TestConfig
 import io.gitlab.arturbosch.detekt.test.lint
-import kotlin.io.path.Path
 import org.junit.jupiter.api.Test
 
 class DBFunctionShouldBeSuspendedTest {
@@ -36,7 +35,7 @@ class DBFunctionShouldBeSuspendedTest {
                     }
 """.trimIndent()
 
-        assert(rule.lint(Path("")).isEmpty())
+        assert(rule.lint(code).isEmpty())
     }
 
     @Test

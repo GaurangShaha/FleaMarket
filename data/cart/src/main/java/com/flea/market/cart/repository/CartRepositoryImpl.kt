@@ -32,7 +32,7 @@ internal class CartRepositoryImpl(private val cartLocalSource: CartLocalSource) 
             Result.failure(e)
         }
 
-    override fun getAllItems() = cartLocalSource.getAll()
+    override fun getItemsInCartStream() = cartLocalSource.getItemsInCartStream()
 
     private suspend fun getExistingProduct(productId: Int) =
         cartLocalSource.getProductById(productId)
