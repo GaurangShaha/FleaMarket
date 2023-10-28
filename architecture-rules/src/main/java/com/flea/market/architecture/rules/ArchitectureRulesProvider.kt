@@ -24,6 +24,7 @@ class ArchitectureRulesProvider : RuleSetProvider {
             ComposeShouldNotHaveWindowSizeClassParam(config),
             ComposeShouldCollectFlowWithLifecycle(config),
             FunctionReturnsFlowNaming(config),
+            RoomEntityShouldHaveColumnInfo(config)
         )
     )
 }
