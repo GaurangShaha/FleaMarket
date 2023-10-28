@@ -17,7 +17,7 @@ class RepositoryShouldNotDependOnRetrofit(config: Config) : Rule(config) {
     override val issue = Issue(
         javaClass.simpleName,
         CodeSmell,
-        """Repository should depend on classes from retrofit library. Please create a RemoteSource to encapsulate the dependency""",
+        """Repository should not depend on classes from retrofit library. Please create a RemoteSource to remove the dependency""",
         Debt.TEN_MINS
     )
 
@@ -32,18 +32,19 @@ class RepositoryShouldNotDependOnRetrofit(config: Config) : Rule(config) {
                 val hasRetrofitDependency = (file as KtFile).importList?.imports
                     ?.any { import -> import.text.contains("retrofit") } ?: false
 
-                if (hasRetrofitDependency)
+                if (hasRetrofitDependency) {
                     report(
                         CorrectableCodeSmell(
                             issue = issue,
                             entity = Entity.from(klass),
-                            message = """The repository ${klass.name} has a dependency on classes from retrofit library.Please create a ${
+                            message = """The repository ${klass.name} has a dependency on classes from retrofit library. Please create a ${
                                 klass.name?.replace("Repository", "")
-                            }RemoteSource to encapsulate the dependency""",
+                            }RemoteSource to remove the dependency""",
                             references = emptyList(),
                             autoCorrectEnabled = false
                         )
                     )
+                }
             }
     }
 }

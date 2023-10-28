@@ -17,8 +17,8 @@ class RepositoryShouldNotDependOnRoom(config: Config) : Rule(config) {
     override val issue = Issue(
         javaClass.simpleName,
         CodeSmell,
-        """Repository should depend on classes from room library. Please create a LocalSource to encapsulate the dependency""",
-        Debt.TEN_MINS
+        """Repository should not depend on classes from room library. Please create a LocalSource to remove the dependency""",
+        Debt.TWENTY_MINS
     )
 
     override fun visitFile(file: PsiFile) {
@@ -32,18 +32,19 @@ class RepositoryShouldNotDependOnRoom(config: Config) : Rule(config) {
                 val hasRetrofitDependency = (file as KtFile).importList?.imports
                     ?.any { import -> import.text.contains("androidx.room") } ?: false
 
-                if (hasRetrofitDependency)
+                if (hasRetrofitDependency) {
                     report(
                         CorrectableCodeSmell(
                             issue = issue,
                             entity = Entity.from(klass),
-                            message = """The repository ${klass.name} has a dependency on classes from room library.Please create a ${
+                            message = """The repository ${klass.name} has a dependency on classes from room library. Please create a ${
                                 klass.name?.replace("Repository", "")
-                            }RemoteSource to encapsulate the dependency""",
+                            }LocalSource to remove the dependency""",
                             references = emptyList(),
                             autoCorrectEnabled = false
                         )
                     )
+                }
             }
     }
 }

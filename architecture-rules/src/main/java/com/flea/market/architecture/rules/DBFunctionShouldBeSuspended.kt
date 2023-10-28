@@ -34,7 +34,7 @@ class DBFunctionShouldBeSuspended(config: Config) : Rule(config) {
                 CorrectableCodeSmell(
                     issue = issue,
                     entity = Entity.from(function),
-                    message = """The function ${function.name} should be marked as suspended""",
+                    message = """The function ${function.name} should be marked as suspend as it is performing CURD operations on DB.""",
                     references = emptyList(),
                     autoCorrectEnabled = false
                 )

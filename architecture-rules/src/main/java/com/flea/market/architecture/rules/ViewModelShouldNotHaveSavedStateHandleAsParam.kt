@@ -14,7 +14,7 @@ class ViewModelShouldNotHaveSavedStateHandleAsParam(config: Config) : Rule(confi
         javaClass.simpleName,
         CodeSmell,
         "ViewModel should not have SavedStateHandle",
-        Debt.TEN_MINS
+        Debt.TWENTY_MINS
     )
 
     override fun visitClass(klass: KtClass) {
@@ -25,12 +25,12 @@ class ViewModelShouldNotHaveSavedStateHandleAsParam(config: Config) : Rule(confi
         if (isViewModel) {
             klass.primaryConstructor?.valueParameters
                 ?.filter { it?.typeReference?.text == "SavedStateHandle" }
-                ?.forEach { _ ->
+                ?.forEach {
                     report(
                         CorrectableCodeSmell(
                             issue = issue,
-                            entity = Entity.from(klass),
-                            message = """Remove variable of SavedStateHandle from viewmodel, instead pass it by creating a wrapper class for navigation argument""",
+                            entity = Entity.from(it),
+                            message = """Remove variable of SavedStateHandle from ${klass.name}, instead pass it by creating a wrapper class for navigation argument.""",
                             references = emptyList(),
                             autoCorrectEnabled = false
                         )

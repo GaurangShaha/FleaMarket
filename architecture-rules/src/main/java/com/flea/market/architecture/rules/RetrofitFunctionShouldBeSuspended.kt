@@ -33,7 +33,7 @@ class RetrofitFunctionShouldBeSuspended(config: Config) : Rule(config) {
                 CorrectableCodeSmell(
                     issue = issue,
                     entity = Entity.from(function),
-                    message = """The function ${function.name} should be marked as suspended""",
+                    message = """The function ${function.name} should be marked as suspend""",
                     references = emptyList(),
                     autoCorrectEnabled = false
                 )

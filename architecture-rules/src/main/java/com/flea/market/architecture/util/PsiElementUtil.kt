@@ -14,6 +14,6 @@ val KtNamedFunction.returnsFlow: Boolean
 val KtNamedFunction.returnsResult: Boolean
     get() = typeReference?.text?.startsWith("Result") ?: false
 
-val KtNamedFunction.isComposed: Boolean
+val KtNamedFunction.isComposable: Boolean
     get() = annotationEntries.any { it.shortName.toString() == "Composable" }
 

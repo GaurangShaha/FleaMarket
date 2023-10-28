@@ -1,6 +1,6 @@
 package com.flea.market.architecture.rules
 
-import com.flea.market.architecture.util.isComposed
+import com.flea.market.architecture.util.isComposable
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.CorrectableCodeSmell
 import io.gitlab.arturbosch.detekt.api.Debt
@@ -20,7 +20,7 @@ class ComposeShouldNotHaveNavHostControllerParam(config: Config) : Rule(config) 
 
     override fun visitNamedFunction(function: KtNamedFunction) {
         super.visitNamedFunction(function)
-        if (function.isComposed) {
+        if (function.isComposable) {
             function.valueParameters.filter {
                 it.typeReference?.text?.equals("NavHostController") ?: false
             }.map {
@@ -28,7 +28,7 @@ class ComposeShouldNotHaveNavHostControllerParam(config: Config) : Rule(config) 
                     CorrectableCodeSmell(
                         issue = issue,
                         entity = Entity.from(it),
-                        message = """The function ${function.name} should not have NavHostController as parameter.""",
+                        message = """The function ${function.name} should not have NavHostController as parameter. Instead use LocalNavControllerProvider.current to get it.""",
                         references = emptyList(),
                         autoCorrectEnabled = false
                     )

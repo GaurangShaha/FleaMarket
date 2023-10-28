@@ -15,7 +15,7 @@ class ViewModelShouldNotHavePublicMethod(config: Config) : Rule(config) {
         javaClass.simpleName,
         CodeSmell,
         "ViewModel should not have extra public methods",
-        Debt.TEN_MINS
+        Debt.FIVE_MINS
     )
 
     override fun visitClass(klass: KtClass) {
@@ -30,7 +30,7 @@ class ViewModelShouldNotHavePublicMethod(config: Config) : Rule(config) {
                         CorrectableCodeSmell(
                             issue = issue,
                             entity = Entity.from(it),
-                            message = """Make function ${it.name} as private.""",
+                            message = """ViewModel should not have extra public methods. Make function ${it.name} as private.""",
                             references = emptyList(),
                             autoCorrectEnabled = false
                         )

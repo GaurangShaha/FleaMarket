@@ -1,6 +1,6 @@
 package com.flea.market.architecture.rules
 
-import com.flea.market.architecture.util.isComposed
+import com.flea.market.architecture.util.isComposable
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.CorrectableCodeSmell
 import io.gitlab.arturbosch.detekt.api.Debt
@@ -20,7 +20,7 @@ class ComposeShouldCollectFlowWithLifecycle(config: Config) : Rule(config) {
 
     override fun visitNamedFunction(function: KtNamedFunction) {
         super.visitNamedFunction(function)
-        if (function.isComposed) {
+        if (function.isComposable) {
             function.containingKtFile.importList?.imports?.filter {
                 knowInvalidCollectCall.contains(it.importPath.toString())
             }?.forEach {
@@ -28,7 +28,7 @@ class ComposeShouldCollectFlowWithLifecycle(config: Config) : Rule(config) {
                     CorrectableCodeSmell(
                         issue = issue,
                         entity = Entity.from(it),
-                        message = """Please use collectAsStateWithLifecycle in the function ${function.name} instead of ${it.importPath.toString()}""",
+                        message = """Please use collectAsStateWithLifecycle() in the function ${function.name} instead of ${it.importPath.toString()}""",
                         references = emptyList(),
                         autoCorrectEnabled = false
                     )

@@ -17,7 +17,7 @@ class PublicFunInRepositoryShouldReturnResultOrFlow(config: Config) : Rule(confi
         javaClass.simpleName,
         CodeSmell,
         "Public function in repository should return either Result or Flow",
-        Debt.TEN_MINS
+        Debt.TWENTY_MINS
     )
 
     override fun visitClass(klass: KtClass) {
@@ -29,8 +29,8 @@ class PublicFunInRepositoryShouldReturnResultOrFlow(config: Config) : Rule(confi
                 report(
                     CorrectableCodeSmell(
                         issue,
-                        entity = Entity.from(klass),
-                        message = """The repository ${klass.name} has a function declarations ${namedFunction.name} which is public and does not return Flow or Result. Please consider removing ${namedFunction.name} or change return type to Result/Flow.""",
+                        entity = Entity.from(namedFunction),
+                        message = """The repository ${klass.name} has a public function ${namedFunction.name} which does not return Flow or Result. Please consider removing ${namedFunction.name} or change return type to Result/Flow.""",
                         references = emptyList(),
                         autoCorrectEnabled = false
                     )
