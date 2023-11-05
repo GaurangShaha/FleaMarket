@@ -13,8 +13,8 @@ test {
 }
 
 dependencies {
-    implementation "io.gitlab.arturbosch.detekt:detekt-core:1.22.0"
+    implementation libs.detekt.core
 
-    testImplementation "io.gitlab.arturbosch.detekt:detekt-test:1.22.0"
-    testImplementation "org.junit.jupiter:junit-jupiter:5.9.2"
+    testImplementation libs.detekt.test
+    testImplementation libs.jupiter
 }

@@ -5,10 +5,10 @@ plugins {
 
 android {
     namespace 'com.flea.market.ui.component'
-    compileSdk 33
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdk 24
+        minSdk libs.versions.minSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -25,13 +25,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = libs.versions.jvmTarget.get()
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerExtensionVersion libs.versions.kotlinCompilerExtensionVersion.get()
     }
     packagingOptions {
         resources {
@@ -41,18 +41,23 @@ android {
 }
 
 dependencies {
-    api 'androidx.core:core-ktx:1.10.1'
-    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    api "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
-    api 'androidx.activity:activity-compose:1.7.2'
-    api "androidx.compose.ui:ui:$compose_ui_version"
-    api "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    api "androidx.compose.material:material:$compose_ui_version"
-    api "io.coil-kt:coil-compose:2.4.0"
-    api 'com.github.a914-gowtham:compose-ratingbar:1.3.4'
-    api 'androidx.compose.material3:material3-window-size-class:1.1.1'
+    api libs.androidx.core
 
-    api "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_ui_version"
-    api "io.insert-koin:koin-androidx-compose:3.4.5"
-    api "androidx.navigation:navigation-compose:2.6.0"
+    api libs.lifecycle
+    api libs.lifecycle.compose
+    api libs.lifecycle.viewmodel.compose
+
+    api libs.activity.compose
+    api libs.compose.ui
+    api libs.compose.ui.tooling.preview
+    api libs.compose.material
+    api libs.window.size
+
+    api libs.coil
+    api libs.ratingbar
+
+    api libs.koin
+    api libs.navigation.compose
+
+    debugApi libs.compose.ui.tooling
 }

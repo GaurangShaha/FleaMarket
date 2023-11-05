@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace 'com.flea.market.data'
-    compileSdk 33
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdk 24
-        targetSdk 33
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,7 +27,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = libs.versions.jvmTarget.get()
     }
     ksp {
         arg('room.schemaLocation', "$projectDir/schemas")
@@ -41,6 +41,6 @@ dependencies {
 
     implementation(project(path: ':data:common'))
 
-    annotationProcessor "androidx.room:room-compiler:2.5.2"
-    ksp "androidx.room:room-compiler:2.5.2"
+    annotationProcessor libs.room.compiler
+    ksp libs.room.compiler
 }

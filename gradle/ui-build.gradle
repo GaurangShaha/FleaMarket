@@ -1,11 +1,7 @@
-plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp' version '1.7.0-1.0.6'
-}
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    namespace 'com.flea.market.data.favourite'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
@@ -29,8 +25,20 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.jvmTarget.get()
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.kotlinCompilerExtensionVersion.get()
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
-    implementation(project(path: ':data:common'))
+    api project(path: ':ui-common')
+    implementation project(path: ':data')
 }

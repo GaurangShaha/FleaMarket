@@ -33,9 +33,7 @@ fun FleaMarketAppBar(
     @StringRes title: Int,
     modifier: Modifier = Modifier,
     navigationIcon: Pair<ImageVector, () -> Unit> = Icons.Default.Menu to {},
-    actionItems:
-    @Composable()
-    (RowScope.() -> Unit) = {},
+    actionItems: @Composable (RowScope.() -> Unit) = {},
     backgroundColor: Color = MaterialTheme.colors.background,
     contentColor: Color = contentColorFor(backgroundColor),
     elevation: Dp = 0.dp

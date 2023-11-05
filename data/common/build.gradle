@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace 'com.flea.market.data.common'
-    compileSdk 33
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdk 24
-        targetSdk 33
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,19 +27,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = libs.versions.jvmTarget.get()
     }
 }
 
 dependencies {
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    api 'com.squareup.okhttp3:logging-interceptor:4.11.0'
-
-    api "androidx.room:room-runtime:2.5.2"
-    api "androidx.room:room-ktx:2.5.2"
-
-    api "io.insert-koin:koin-androidx-compose:3.4.5"
-
     api project(path: ':foundation')
+
+    api libs.retrofit
+    api libs.retrofit.converter.moshi
+    api libs.retrofit.logging
+
+    api libs.room.runtime
+    api libs.room
+
+    api libs.koin
 }
