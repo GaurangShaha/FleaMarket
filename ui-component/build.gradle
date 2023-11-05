@@ -48,6 +48,7 @@ dependencies {
     api libs.lifecycle.viewmodel.compose
 
     api libs.activity.compose
+    api platform(libs.compose.bom)
     api libs.compose.ui
     api libs.compose.ui.tooling.preview
     api libs.compose.material
@@ -59,5 +60,6 @@ dependencies {
     api libs.koin
     api libs.navigation.compose
 
+    debugApi platform(libs.compose.bom)
     debugApi libs.compose.ui.tooling
 }

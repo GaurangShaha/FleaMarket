@@ -38,10 +38,9 @@ internal fun PagerWithIndicator(
             }
         }
     ) {
-        val pagerState = rememberPagerState()
+        val pagerState = rememberPagerState { uiState.productDetails.imageList.size }
         HorizontalPager(
             state = pagerState,
-            pageCount = uiState.productDetails.imageList.size,
             modifier = modifier.aspectRatio(PRODUCT_IMAGE_ASPECT_RATIO)
         ) {
             LazyImage(
