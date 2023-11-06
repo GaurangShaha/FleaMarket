@@ -18,8 +18,7 @@ internal fun NavGraphBuilder.favouriteListScreen() {
 
         FavouriteListScreen(
             uiState = uiState,
-            onHandleIntent = favouriteListViewModel::onHandleIntent,
-            onSnackbarResult = favouriteListViewModel::onSnackbarResult
+            onHandleIntent = favouriteListViewModel::onHandleIntent
         )
     }
 }

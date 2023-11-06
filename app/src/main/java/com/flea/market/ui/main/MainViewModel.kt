@@ -8,9 +8,8 @@ internal class MainViewModel(
 ) : BaseViewModel<MainIntent, MainState>(MainState(navigationBarVMSlice.selectedNavigationItemIndex)) {
     override fun onHandleIntent(intent: MainIntent) {
         when (intent) {
-            is UpdateSelectedNavigationItemIndex -> navigationBarVMSlice.updateSelectedNavigationItemIndex(
-                intent.index
-            )
+            is UpdateSelectedNavigationItemIndex ->
+                navigationBarVMSlice.updateSelectedNavigationItemIndex(intent.index)
         }
     }
 }

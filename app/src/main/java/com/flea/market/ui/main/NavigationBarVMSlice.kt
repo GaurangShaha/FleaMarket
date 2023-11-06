@@ -1,8 +1,10 @@
 package com.flea.market.ui.main
 
-import kotlinx.coroutines.flow.StateFlow
+import com.flea.market.common.base.viewmodel.BaseViewModelSlice
 
-internal interface NavigationBarVMSlice {
-    val selectedNavigationItemIndex: StateFlow<Int>
-    fun updateSelectedNavigationItemIndex(index: Int)
+internal class NavigationBarVMSlice :
+    BaseViewModelSlice<Int>(0) {
+    val selectedNavigationItemIndex = sliceUiState
+
+    fun updateSelectedNavigationItemIndex(index: Int) = updateSliceUiState(index)
 }

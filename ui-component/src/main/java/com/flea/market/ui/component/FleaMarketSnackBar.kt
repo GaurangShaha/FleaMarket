@@ -1,11 +1,12 @@
 package com.flea.market.ui.component
 
+import androidx.annotation.StringRes
 import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
+import com.flea.market.ui.component.SnackbarDelegate.SnackbarType
 import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
-import com.flea.market.ui.slice.SnackBarSlice.SnackBarDetails
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 
@@ -39,3 +40,10 @@ fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, onSnackbarResult: (Boo
         }
     }
 }
+
+data class SnackBarDetails(
+    @StringRes val message: Int,
+    @StringRes val actionLabel: Int? = null,
+    val snackbarType: SnackbarType = SnackbarType.DEFAULT,
+    val onActionPerformed: (() -> Unit)? = null
+)
