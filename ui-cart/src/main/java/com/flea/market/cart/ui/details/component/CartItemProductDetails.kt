@@ -27,10 +27,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
-import com.flea.market.common.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import com.flea.market.ui.cart.R.string
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.component.Stepper
+import com.flea.market.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography

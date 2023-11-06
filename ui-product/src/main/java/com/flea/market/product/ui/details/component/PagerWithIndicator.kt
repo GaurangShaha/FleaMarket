@@ -14,10 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import com.flea.market.common.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.component.PageIndicator
+import com.flea.market.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import kotlinx.coroutines.delay
 
 private const val PARALLAX_FACTOR = 0.4f
