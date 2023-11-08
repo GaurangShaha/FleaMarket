@@ -68,5 +68,5 @@ dependencies {
     debugApi platform(libs.compose.bom)
     debugApi libs.compose.ui.tooling
 
-    ksp(files("D:\\Gaurang\\Work\\AndroidStudioProjects\\Storybook\\processor\\build\\libs\\processor-1.0-SNAPSHOT.jar"))
+    ksp libs.storybook
 }
