@@ -83,7 +83,7 @@ internal fun ProductListItem(
 
 @FleaMarketPreviews
 @Composable
-private fun ProductListItemPreview() {
+internal fun ProductListItemPreview() {
     FleaMarketThemePreview {
         ProductListItem(productDetails = dummyProductList.first()) {}
     }

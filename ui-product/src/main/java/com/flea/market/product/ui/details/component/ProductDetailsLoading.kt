@@ -97,7 +97,7 @@ private fun ProductImagesShimmer() {
 
 @FleaMarketPreviews
 @Composable
-private fun ProductDetailsLoadingPreview() {
+internal fun ProductDetailsLoadingPreview() {
     FleaMarketThemePreview {
         ProductDetailsLoading()
     }

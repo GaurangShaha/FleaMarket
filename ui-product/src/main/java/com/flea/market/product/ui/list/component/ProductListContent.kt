@@ -64,7 +64,7 @@ internal fun ProductListContent(
 
 @FleaMarketPreviews
 @Composable
-private fun ProductListContentPreview() {
+internal fun ProductListContentPreview() {
     FleaMarketThemePreview {
         ProductListContent(state = dummyProductListContent, onHandleIntent = {})
     }

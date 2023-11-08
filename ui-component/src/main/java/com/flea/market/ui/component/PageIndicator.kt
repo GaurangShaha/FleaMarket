@@ -45,7 +45,7 @@ fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier = Modifi
 
 @FleaMarketPreviews
 @Composable
-fun PageIndicatorPreview() {
+internal fun PageIndicatorPreview() {
     FleaMarketThemePreview {
         PageIndicator(totalPages = 5, currentPage = 1)
     }

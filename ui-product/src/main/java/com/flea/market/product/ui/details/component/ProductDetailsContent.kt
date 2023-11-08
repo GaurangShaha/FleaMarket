@@ -119,7 +119,7 @@ private fun ContentForCompactScreen(
 
 @FleaMarketPreviews
 @Composable
-private fun ProductDetailsContentScreen() {
+internal fun ProductDetailsContentScreen() {
     FleaMarketThemePreview {
         ProductDetailsContent(
             state = dummyContent

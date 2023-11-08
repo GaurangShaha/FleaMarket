@@ -137,7 +137,7 @@ private fun RowScope.ItemDetailsSection(
 
 @Composable
 @FleaMarketPreviews
-private fun CartItemDetailsPreview() {
+internal fun CartItemDetailsPreview() {
     FleaMarketThemePreview {
         CartItemProductDetails(
             itemsInCart = dummyItemsInCartList.first(),

@@ -33,7 +33,7 @@ fun LazyImage(
 
 @FleaMarketPreviews
 @Composable
-fun LazyImagePreview() {
+internal fun LazyImagePreview() {
     FleaMarketThemePreview {
         @Suppress("MaxLineLength")
         LazyImage(

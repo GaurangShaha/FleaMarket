@@ -52,7 +52,7 @@ fun Modifier.shimmer(): Modifier = composed {
 
 @Composable
 @FleaMarketPreviews
-fun ShimmerPreview() {
+internal fun ShimmerPreview() {
     FleaMarketThemePreview {
         Box(
             modifier = Modifier

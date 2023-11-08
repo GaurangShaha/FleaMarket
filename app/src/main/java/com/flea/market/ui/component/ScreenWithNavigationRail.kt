@@ -36,7 +36,7 @@ fun ScreenWithNavigationRail(
 
 @FleaMarketPreviews
 @Composable
-fun ScreenWithNavigationRailPreview() {
+internal fun ScreenWithNavigationRailPreview() {
     FleaMarketThemePreview {
         ScreenWithNavigationRail(
             selectedIndex = 0,

@@ -1,6 +1,7 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
+    alias libs.plugins.ksp
 }
 
 android {
@@ -40,6 +41,10 @@ android {
     }
 }
 
+ksp {
+    arg("extendedPreviews", "com.flea.market.ui.preview.FleaMarketPreviews")
+}
+
 dependencies {
     api libs.androidx.core
 
@@ -62,4 +67,6 @@ dependencies {
 
     debugApi platform(libs.compose.bom)
     debugApi libs.compose.ui.tooling
+
+    ksp(files("D:\\Gaurang\\Work\\AndroidStudioProjects\\Storybook\\processor\\build\\libs\\processor-1.0-SNAPSHOT.jar"))
 }

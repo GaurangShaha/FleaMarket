@@ -46,7 +46,7 @@ internal fun FavouriteListContent(
 
 @FleaMarketPreviews
 @Composable
-private fun FavouriteListContentPreview() {
+internal fun FavouriteListContentPreview() {
     FleaMarketThemePreview {
         FavouriteListContent(uiState = dummyContent, onHandleIntent = {})
     }

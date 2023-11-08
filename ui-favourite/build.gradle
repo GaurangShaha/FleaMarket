@@ -1,6 +1,7 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
+    alias libs.plugins.ksp
 }
 
 android {
@@ -41,7 +42,12 @@ android {
     }
 }
 
+ksp {
+    arg("extendedPreviews", "com.flea.market.ui.preview.FleaMarketPreviews")
+}
+
 dependencies {
     api project(path: ':ui-common')
     implementation project(path: ':data')
+    ksp(files("D:\\Gaurang\\Work\\AndroidStudioProjects\\Storybook\\processor\\build\\libs\\processor-1.0-SNAPSHOT.jar"))
 }

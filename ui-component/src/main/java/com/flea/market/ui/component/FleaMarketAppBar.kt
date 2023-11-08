@@ -62,7 +62,7 @@ fun FleaMarketAppBar(
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarPreview() {
+internal fun FleaMarketAppBarPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(title = R.string.retry)
     }
@@ -70,7 +70,7 @@ fun FleaMarketAppBarPreview() {
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarNavigationItemPreview() {
+internal fun FleaMarketAppBarNavigationItemPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(title = R.string.retry, navigationIcon = Icons.Default.ArrowBack to {})
     }
@@ -78,7 +78,7 @@ fun FleaMarketAppBarNavigationItemPreview() {
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarActionIconPreview() {
+internal fun FleaMarketAppBarActionIconPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(
             title = R.string.retry,
@@ -95,7 +95,7 @@ fun FleaMarketAppBarActionIconPreview() {
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarWithScrimPreview() {
+internal fun FleaMarketAppBarWithScrimPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(
             title = R.string.retry,

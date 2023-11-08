@@ -46,7 +46,7 @@ fun EmptyLayout(
 
 @FleaMarketPreviews
 @Composable
-private fun EmptyLayoutPreview() {
+internal fun EmptyLayoutPreview() {
     FleaMarketThemePreview {
         EmptyLayout(
             message = stringResource(id = R.string.retry),

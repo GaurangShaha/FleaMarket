@@ -113,7 +113,7 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
 
 @Composable
 @FleaMarketPreviews
-private fun CartDetailsContentPreview() {
+internal fun CartDetailsContentPreview() {
     FleaMarketThemePreview {
         CartDetailsContent(uiState = dummyContent, onHandleIntent = {})
     }

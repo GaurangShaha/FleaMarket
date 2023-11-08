@@ -41,7 +41,7 @@ fun ScreenWithBottomBar(
 
 @FleaMarketPreviews
 @Composable
-fun ScreenWithBottomBarPreview() {
+internal fun ScreenWithBottomBarPreview() {
     FleaMarketThemePreview {
         ScreenWithBottomBar(selectedIndex = 0, navHost = {}) {}
     }

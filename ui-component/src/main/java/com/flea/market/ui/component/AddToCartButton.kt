@@ -426,7 +426,7 @@ private fun DrawScope.drawItems(
 
 @FleaMarketPreviews // Start interactive mode to see the animations
 @Composable
-fun AddToCartButtonInitialPreview() {
+internal fun AddToCartButtonInitialPreview() {
     FleaMarketThemePreview {
         var buttonState: ButtonState by remember { mutableStateOf(Initial) }
         val coroutineScope = rememberCoroutineScope()

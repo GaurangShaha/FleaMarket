@@ -95,7 +95,7 @@ private fun getBackgroundColor(
 
 @FleaMarketPreviews
 @Composable
-private fun CategorySectionPreview() {
+internal fun CategorySectionPreview() {
     FleaMarketThemePreview {
         CategorySection(
             categoryListWrapper = dummyCategoryListWrapper,

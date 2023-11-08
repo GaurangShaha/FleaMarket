@@ -149,7 +149,7 @@ private fun SubtotalRow(
 
 @Composable
 @FleaMarketPreviews
-private fun PriceDetailsPreview() {
+internal fun PriceDetailsPreview() {
     FleaMarketThemePreview {
         PriceDetails(
             priceDetails = PriceDetailsViewEntity(

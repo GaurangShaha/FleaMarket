@@ -238,7 +238,7 @@ enum class BottomNavigationScreens(
 
 @Composable
 @FleaMarketPreviews
-private fun FleaMarketNavigationBarPreview() {
+internal fun FleaMarketNavigationBarPreview() {
     FleaMarketThemePreview {
         FleaMarketNavigationBar(
             selectedNavigationItemIndex = 0

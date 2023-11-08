@@ -60,7 +60,7 @@ fun ErrorLayout(
 
 @FleaMarketPreviews
 @Composable
-private fun ErrorLayoutPreview() {
+internal fun ErrorLayoutPreview() {
     FleaMarketThemePreview {
         ErrorLayout(
             errorMessage = stringResource(id = R.string.retry),

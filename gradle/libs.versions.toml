@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "24"
 targetSdk = "34"
 jvmTarget = "1.8"
-kotlinCompilerExtensionVersion = "1.5.3"
+kotlinCompilerExtensionVersion = "1.5.2"
 
 lifecycle = "2.6.2"
 composeUI = "1.4.3"
@@ -14,8 +14,8 @@ composeBom = "2023.10.01"
 detekt = "1.23.3"
 
 androidGradlePlugin = "8.1.2"
-kotlin = "1.9.10"
-ksp = "1.9.10-1.0.13"
+kotlin = "1.9.0"
+ksp = "1.9.0-1.0.12"
 
 [libraries]
 androidx-core = { group = "androidx.core", name = "core-ktx", version = "1.12.0" }

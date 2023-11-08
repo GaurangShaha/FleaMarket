@@ -78,7 +78,7 @@ internal fun ProductListLoading() {
 
 @FleaMarketPreviews
 @Composable
-fun ProductListLoadingPreview() {
+internal fun ProductListLoadingPreview() {
     FleaMarketThemePreview {
         ProductListLoading()
     }

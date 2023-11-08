@@ -148,7 +148,7 @@ private fun RemoveFromFavouriteButton(onRemoveFromFavourite: () -> Unit) {
 
 @FleaMarketPreviews
 @Composable
-private fun ProductListItemPreview() {
+internal fun ProductListItemPreview() {
     FleaMarketThemePreview {
         FavouriteProductItem(
             favouriteItem = dummyFavouriteItemList.first(),

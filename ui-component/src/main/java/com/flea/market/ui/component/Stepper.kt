@@ -63,7 +63,7 @@ fun Stepper(
 
 @Composable
 @FleaMarketPreviews
-fun StepperPreview() {
+internal fun StepperPreview() {
     FleaMarketThemePreview {
         Stepper(quantity = 0, onIncreaseQuantity = {}, onDecreaseQuantity = { })
     }

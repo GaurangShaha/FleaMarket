@@ -101,7 +101,7 @@ private fun ColumnScope.ProductInfoAndCheckoutShimmer() {
 
 @Composable
 @FleaMarketPreviews
-private fun CartDetailsLoadingPreview() {
+internal fun CartDetailsLoadingPreview() {
     FleaMarketThemePreview {
         CartDetailsLoading()
     }
