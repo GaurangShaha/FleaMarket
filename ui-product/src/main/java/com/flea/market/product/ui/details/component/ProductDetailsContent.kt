@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.details.ProductDetailsIntent
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
@@ -32,8 +32,8 @@ internal fun ProductDetailsContent(
     state: Content,
     onHandleIntent: (ProductDetailsIntent) -> Unit
 ) {
-    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact ||
-        LocalWindowSizeClassProvider.current.heightSizeClass == WindowHeightSizeClass.Expanded
+    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact ||
+        LocalWindowSizeClass.current.heightSizeClass == WindowHeightSizeClass.Expanded
     ) {
         ContentForCompactScreen(state, onHandleIntent)
     } else {
@@ -69,7 +69,7 @@ private fun ContentForMediumAndExpandedScreen(
                     .padding(start = 16.dp, end = 16.dp, bottom = 70.dp, top = 72.dp)
             )
             AddToCart(
-                state = state.addToCartButtonState,
+                buttonState = state.addToCartButtonState,
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth()
@@ -109,7 +109,7 @@ private fun ContentForCompactScreen(
             }
         }
         AddToCart(
-            state = state.addToCartButtonState,
+            buttonState = state.addToCartButtonState,
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()

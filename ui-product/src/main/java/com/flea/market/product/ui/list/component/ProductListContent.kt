@@ -1,6 +1,5 @@
 package com.flea.market.product.ui.list.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -15,12 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.details.navigation.navigateToProductDetails
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.product.ui.list.ProductListUiState.Content
-import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
+import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.product.R
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ProductListContent(
     state: Content,
@@ -53,7 +51,7 @@ internal fun ProductListContent(
         }
 
         items(items = state.productList, key = { it.id }, contentType = { "productList" }) {
-            val navController = LocalNavControllerProvider.current
+            val navController = LocalNavController.current
             ProductListItem(
                 productDetails = it,
                 onProductClick = { navController.navigateToProductDetails(it.id) }

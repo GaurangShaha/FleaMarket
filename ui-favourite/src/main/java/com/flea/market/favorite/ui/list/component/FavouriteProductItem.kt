@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.common.navigation.ProductDetailsDeepLink
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
+import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.favourite.R.string
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
@@ -52,7 +52,7 @@ internal fun FavouriteProductItem(
             modifier = Modifier.clip(MaterialTheme.shapes.large),
             contentAlignment = Alignment.TopEnd
         ) {
-            val navController = LocalNavControllerProvider.current
+            val navController = LocalNavController.current
             Card(
                 onClick = { navController.navigate(ProductDetailsDeepLink.getUri(favouriteItem.id)) },
                 backgroundColor = MaterialTheme.colors.secondary,

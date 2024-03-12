@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<I, S>(initialUiState: S) : ViewModel() {
     private val _uiState: MutableStateFlow<S> = MutableStateFlow(initialUiState)
-    open val uiState: StateFlow<S> = _uiState.asStateFlow()
+    val uiState: StateFlow<S> = _uiState.asStateFlow()
 
     abstract fun onHandleIntent(intent: I)
 
@@ -25,6 +25,13 @@ abstract class BaseViewModel<I, S>(initialUiState: S) : ViewModel() {
     fun Flow<S>.collectAndUpdateUiState(scope: CoroutineScope = viewModelScope) {
         scope.launch {
             collect { updateUiState(it) }
+        }
+    }
+
+    inline fun <reified S> StateFlow<*>.ifInstanceOf(block: (S) -> Unit) {
+        val currentState = value
+        if (currentState is S) {
+            block(currentState)
         }
     }
 }

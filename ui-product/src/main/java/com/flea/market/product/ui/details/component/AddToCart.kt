@@ -14,22 +14,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flea.market.ui.component.AddToCartButton
 import com.flea.market.ui.component.ButtonState
 import com.flea.market.ui.product.R
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraShape
-import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 internal fun AddToCart(
-    state: StateFlow<ButtonState>,
+    buttonState: ButtonState,
     modifier: Modifier = Modifier,
     onAddToCart: () -> Unit
 ) {
-    val buttonState by state.collectAsStateWithLifecycle()
-
     AddToCartButton(
         buttonState = buttonState,
         initialContent = {

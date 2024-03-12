@@ -1083,7 +1083,7 @@ TwitterCompose:
   CompositionLocalAllowlist:
     active: true
     # You can optionally define a list of CompositionLocals that are allowed here
-    allowedCompositionLocals: LocalDrawerStateProvider,LocalNavControllerProvider,LocalSnackbarHostStateProvider,LocalWindowSizeClassProvider,LocalExtraColorsPalette,LocalExtraTypography,LocalExtraShape
+    allowedCompositionLocals: LocalDrawerState,LocalNavController,LocalSnackbarHostState,LocalWindowSizeClass,LocalExtraColorsPalette,LocalExtraTypography,LocalExtraShape
   CompositionLocalNaming:
     active: true
   ContentEmitterReturningValues:

@@ -2,7 +2,6 @@ package com.flea.market.favorite.ui.list.component
 
 import com.flea.market.favorite.ui.list.FavouriteListUiState
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Suppress("MaxLineLength")
 internal val dummyFavouriteItemList = listOf(
@@ -36,4 +35,4 @@ internal val dummyFavouriteItemList = listOf(
 )
 
 internal val dummyContent =
-    FavouriteListUiState.Content(dummyFavouriteItemList, MutableStateFlow(null))
+    FavouriteListUiState.Content(dummyFavouriteItemList, null)

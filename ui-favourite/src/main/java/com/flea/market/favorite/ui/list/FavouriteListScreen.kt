@@ -2,10 +2,8 @@ package com.flea.market.favorite.ui.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
 import com.flea.market.favorite.ui.list.FavouriteListIntent.SnackbarResult
@@ -43,9 +41,8 @@ internal fun FavouriteListScreen(
             is Content -> {
                 FavouriteListContent(uiState = uiState, onHandleIntent = onHandleIntent)
 
-                val snackBarUiState by uiState.snackbarUiState.collectAsStateWithLifecycle()
                 FleaMarketSnackBar(
-                    snackBarUiState = snackBarUiState,
+                    snackBarDetails = uiState.snackBarDetails,
                     onSnackbarResult = { onHandleIntent(SnackbarResult(it)) }
                 )
             }

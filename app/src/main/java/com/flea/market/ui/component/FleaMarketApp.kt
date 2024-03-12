@@ -13,8 +13,8 @@ import com.flea.market.favorite.ui.navigation.addFavouriteGraph
 import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
 import com.flea.market.product.ui.navigation.addProductGraph
 import com.flea.market.profile.ui.navigation.addProfileGraph
-import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.compositionlocal.LocalNavController
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.main.MainIntent.UpdateSelectedNavigationItemIndex
 import com.flea.market.ui.main.MainViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -25,7 +25,7 @@ internal fun FleaMarketApp() {
         movableContentOf {
             Surface {
                 NavHost(
-                    navController = LocalNavControllerProvider.current,
+                    navController = LocalNavController.current,
                     startDestination = PRODUCT_LIST_ROUTE
                 ) {
                     addProductGraph()
@@ -38,17 +38,16 @@ internal fun FleaMarketApp() {
     }
     val viewModel: MainViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val selectedIndex by uiState.selectedNavigationItemIndex.collectAsStateWithLifecycle()
-    when (LocalWindowSizeClassProvider.current.widthSizeClass) {
+    when (LocalWindowSizeClass.current.widthSizeClass) {
         WindowWidthSizeClass.Compact -> ScreenWithBottomBar(
-            selectedIndex = selectedIndex,
+            selectedIndex = uiState.selectedNavigationItemIndex,
             navHost = navHost
         ) {
             viewModel.onHandleIntent(UpdateSelectedNavigationItemIndex(it))
         }
 
         else -> ScreenWithNavigationRail(
-            selectedIndex = selectedIndex,
+            selectedIndex = uiState.selectedNavigationItemIndex,
             navHost = navHost
         ) {
             viewModel.onHandleIntent(UpdateSelectedNavigationItemIndex(it))

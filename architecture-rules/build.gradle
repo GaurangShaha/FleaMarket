@@ -8,6 +8,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+jar {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+}
+
 test {
     useJUnitPlatform()
 }

@@ -21,14 +21,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.flea.market.ui.component.SnackbarDelegate.SnackbarType
-import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
+import com.flea.market.ui.compositionlocal.LocalSnackbarHostState
 import com.flea.market.ui.theme.extraColors
 
 @Composable
 fun FleaMarketSnackbarHost(modifier: Modifier = Modifier) {
     SnackbarHost(
         modifier = modifier.padding(16.dp),
-        hostState = LocalSnackbarHostStateProvider.current
+        hostState = LocalSnackbarHostState.current
     ) { snackbarData ->
         val iconColor: Color
         val icon: ImageVector?

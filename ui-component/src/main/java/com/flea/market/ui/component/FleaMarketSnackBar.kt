@@ -6,17 +6,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import com.flea.market.ui.component.SnackbarDelegate.SnackbarType
-import com.flea.market.ui.compositionlocal.LocalSnackbarHostStateProvider
+import com.flea.market.ui.compositionlocal.LocalSnackbarHostState
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 @Composable
-fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, onSnackbarResult: (Boolean) -> Unit) {
+fun FleaMarketSnackBar(snackBarDetails: SnackBarDetails?, onSnackbarResult: (Boolean) -> Unit) {
     val context = LocalContext.current
-    val snackbarHostState = LocalSnackbarHostStateProvider.current
-    LaunchedEffect(snackBarUiState) {
+    val snackbarHostState = LocalSnackbarHostState.current
+    LaunchedEffect(snackBarDetails) {
         launch {
-            snackBarUiState?.let { snackBarDetails ->
+            snackBarDetails?.let { snackBarDetails ->
                 onSnackbarResult(
                     SnackbarDelegate.showSnackbar(
                         snackbarHostState,
@@ -31,7 +31,7 @@ fun FleaMarketSnackBar(snackBarUiState: SnackBarDetails?, onSnackbarResult: (Boo
         // Snackbar is getting displayed on navigating back to screen if LaunchEffect got cancelled
         // before receiving SnackbarResult. This is a fix created to avoid this.
         // Created a suspendCancellableCoroutine which reset the snackbarFlow.
-        snackBarUiState?.let {
+        snackBarDetails?.let {
             launch {
                 suspendCancellableCoroutine<Unit> {
                     it.invokeOnCancellation { onSnackbarResult(false) }

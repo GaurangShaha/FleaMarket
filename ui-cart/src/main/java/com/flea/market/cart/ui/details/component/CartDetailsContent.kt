@@ -18,14 +18,14 @@ import com.flea.market.cart.ui.details.CartDetailsIntent.IncreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.RemoveFromCart
 import com.flea.market.cart.ui.details.CartDetailsUiState.Content
 import com.flea.market.common.navigation.ProductDetailsDeepLink
-import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.compositionlocal.LocalNavController
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun CartDetailsContent(uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit) {
-    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) {
+    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) {
         ContentForCompactScreen(uiState = uiState, onHandleIntent = onHandleIntent)
     } else {
         ContentForMediumAndExpandedScreen(uiState = uiState, onHandleIntent = onHandleIntent)
@@ -63,7 +63,7 @@ private fun ContentForMediumAndExpandedScreen(
             contentPadding = PaddingValues(bottom = 8.dp)
         ) {
             items(key = { it.id }, items = uiState.productList) { itemsInCartViewEntity ->
-                val navController = LocalNavControllerProvider.current
+                val navController = LocalNavController.current
                 CartItemProductDetails(
                     itemsInCart = itemsInCartViewEntity,
                     onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
@@ -99,7 +99,7 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
             items = uiState.productList,
             contentType = { "productItem" }
         ) { itemsInCartViewEntity ->
-            val navController = LocalNavControllerProvider.current
+            val navController = LocalNavController.current
             CartItemProductDetails(
                 modifier = Modifier.animateItemPlacement(),
                 itemsInCart = itemsInCartViewEntity,

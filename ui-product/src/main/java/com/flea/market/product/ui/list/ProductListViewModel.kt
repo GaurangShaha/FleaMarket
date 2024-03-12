@@ -41,9 +41,8 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
 
     private fun filterByCategory(selectedCategoryIndex: Int) {
         this.selectedCategoryIndex = selectedCategoryIndex
-        val currentState = uiState.value
-        if (currentState is Content) {
-            filterProductByCategory(currentState.categoryListWrapper.items[selectedCategoryIndex])
+        uiState.ifInstanceOf<Content> {
+            filterProductByCategory(it.categoryListWrapper.items[selectedCategoryIndex])
         }
     }
 
@@ -63,13 +62,12 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
     }
 
     private fun filterProductByCategory(category: String) {
-        val currentState = uiState.value
-        if (currentState is Content) {
+        uiState.ifInstanceOf<Content> { content ->
             val filteredList =
                 productList.filter { it.category.equals(category, true) }.ifEmpty { productList }
 
             updateUiState(
-                currentState.copy(
+                content.copy(
                     productList = filteredList,
                     selectedCategoryIndex = selectedCategoryIndex
                 )

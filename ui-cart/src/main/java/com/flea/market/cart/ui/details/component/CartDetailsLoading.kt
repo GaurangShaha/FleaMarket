@@ -16,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.modifier.shimmer
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
@@ -24,7 +24,7 @@ import com.flea.market.ui.theme.extraShape
 
 @Composable
 internal fun CartDetailsLoading() {
-    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) {
+    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) {
         LoadingCompactScreen()
     } else {
         LoadingMediumAndExpandedScreen()

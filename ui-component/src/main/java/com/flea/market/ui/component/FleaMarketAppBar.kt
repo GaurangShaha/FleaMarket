@@ -12,7 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
@@ -72,7 +72,7 @@ fun FleaMarketAppBarPreview() {
 @Composable
 fun FleaMarketAppBarNavigationItemPreview() {
     FleaMarketThemePreview {
-        FleaMarketAppBar(title = R.string.retry, navigationIcon = Icons.Default.ArrowBack to {})
+        FleaMarketAppBar(title = R.string.retry, navigationIcon = Icons.AutoMirrored.Filled.ArrowBack to {})
     }
 }
 
@@ -82,7 +82,7 @@ fun FleaMarketAppBarActionIconPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(
             title = R.string.retry,
-            navigationIcon = Icons.Default.ArrowBack to {},
+            navigationIcon = Icons.AutoMirrored.Filled.ArrowBack to {},
             actionItems = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -100,7 +100,7 @@ fun FleaMarketAppBarWithScrimPreview() {
         FleaMarketAppBar(
             title = R.string.retry,
             modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor)),
-            navigationIcon = Icons.Default.ArrowBack to {},
+            navigationIcon = Icons.AutoMirrored.Filled.ArrowBack to {},
             actionItems = {
                 Icon(
                     imageVector = Icons.Default.Search,

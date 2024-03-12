@@ -1,7 +1,6 @@
 package com.flea.market.profile.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,14 +31,13 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.ui.component.FMButton
 import com.flea.market.ui.component.FleaMarketAppBar
 import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.profile.R
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraTypography
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ProfileScreen(uiState: ProfileUiState) {
     Column {
@@ -47,7 +45,7 @@ internal fun ProfileScreen(uiState: ProfileUiState) {
 
         @Suppress("MagicNumber")
         val columnCount =
-            if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
+            if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
 
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(columnCount),

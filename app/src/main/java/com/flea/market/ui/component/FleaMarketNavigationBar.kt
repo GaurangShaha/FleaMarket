@@ -38,8 +38,8 @@ import com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE
 import com.flea.market.favorite.ui.list.navigation.FAVOURITE_LIST_ROUTE
 import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
 import com.flea.market.profile.ui.navigation.PROFILE_ROUTE
-import com.flea.market.ui.compositionlocal.LocalNavControllerProvider
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClassProvider
+import com.flea.market.ui.compositionlocal.LocalNavController
+import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
@@ -52,11 +52,11 @@ internal fun FleaMarketNavigationBar(
     modifier: Modifier = Modifier,
     onSelectNavigationItem: (Int) -> Unit
 ) {
-    val navHost = LocalNavControllerProvider.current
+    val navHost = LocalNavController.current
     val navBackStackEntry by navHost.currentBackStackEntryAsState()
     val currentDestinationRoute = navBackStackEntry?.destination?.route
 
-    if (LocalWindowSizeClassProvider.current.widthSizeClass == WindowWidthSizeClass.Compact) {
+    if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) {
         FMBottomNavigation(
             currentDestinationRoute,
             selectedNavigationItemIndex,
@@ -80,7 +80,7 @@ private fun FMNavigationRail(
     modifier: Modifier = Modifier,
     onSelectNavigationItem: (Int) -> Unit
 ) {
-    val navHost = LocalNavControllerProvider.current
+    val navHost = LocalNavController.current
     NavigationRail(modifier = modifier.padding(end = 2.dp)) {
         BottomNavigationScreens.values().forEachIndexed { index, destination ->
             if (currentDestinationRoute == destination.route && index != selectedNavigationItemIndex) {
@@ -125,7 +125,7 @@ private fun FMBottomNavigation(
     modifier: Modifier = Modifier,
     onSelectNavigationItem: (Int) -> Unit
 ) {
-    val navHost = LocalNavControllerProvider.current
+    val navHost = LocalNavController.current
     AnimatedVisibility(
         visible = BottomNavigationScreens.values()
             .any { currentDestinationRoute?.equals(it.route) ?: false },

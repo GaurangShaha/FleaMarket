@@ -3,7 +3,6 @@ package com.flea.market.favorite.ui.list
 import androidx.lifecycle.viewModelScope
 import com.flea.market.cart.repository.CartRepository
 import com.flea.market.common.base.viewmodel.BaseViewModel
-import com.flea.market.common.slice.SnackBarSlice
 import com.flea.market.favorite.ui.list.FavouriteListIntent.MoveToCart
 import com.flea.market.favorite.ui.list.FavouriteListIntent.RemoveFromFavourite
 import com.flea.market.favorite.ui.list.FavouriteListIntent.SnackbarResult
@@ -29,14 +28,16 @@ private const val DELAY_FOR_SIMULATING_LOADING = 1000L
 
 internal class FavouriteListViewModel(
     private val favouriteRepository: FavouriteRepository,
-    private val cartRepository: CartRepository,
-    private val snackBarSlice: SnackBarSlice
+    private val cartRepository: CartRepository
 ) : BaseViewModel<FavouriteListIntent, FavouriteListUiState>(Loading) {
     init {
         favouriteRepository.getFavouriteProductsStream().map { it.toFavouriteItemViewEntity() }
-            .map {
-                if (it.isNotEmpty()) {
-                    Content(it, snackBarSlice.snackbarUiState)
+            .map { favouriteItemList ->
+                if (favouriteItemList.isNotEmpty()) {
+                    Content(
+                        favouriteProductList = favouriteItemList,
+                        snackBarDetails = with(uiState.value) { if (this is Content) snackBarDetails else null }
+                    )
                 } else {
                     Empty
                 }
@@ -48,8 +49,12 @@ internal class FavouriteListViewModel(
         when (intent) {
             is MoveToCart -> moveToCart(intent.favouriteItemViewEntity)
             is RemoveFromFavourite -> removeFromFavourite(intent.productId)
-            is SnackbarResult -> snackBarSlice.onSnackbarResult(intent.isActionPerformed)
+            is SnackbarResult -> snackbarResult()
         }
+    }
+
+    private fun snackbarResult() {
+        uiState.ifInstanceOf<Content> { updateUiState(it.copy(snackBarDetails = null)) }
     }
 
     private fun removeFromFavourite(productId: Int) {
@@ -59,17 +64,19 @@ internal class FavouriteListViewModel(
     }
 
     private fun moveToCart(favouriteItemViewEntity: FavouriteItemViewEntity) {
-        viewModelScope.launch {
-            cartRepository.addOrUpdateItem(favouriteItemViewEntity.toCartProductDetails())
-                .onSuccess {
-                    val snackBarDetails = SnackBarDetails(
-                        message = string.move_to_cart_success,
-                        snackbarType = SUCCESS
-                    )
+        uiState.ifInstanceOf<Content> { content ->
+            viewModelScope.launch {
+                cartRepository.addOrUpdateItem(favouriteItemViewEntity.toCartProductDetails())
+                    .onSuccess {
+                        val snackBarDetails = SnackBarDetails(
+                            message = string.move_to_cart_success,
+                            snackbarType = SUCCESS
+                        )
+                        updateUiState(content.copy(snackBarDetails = snackBarDetails))
 
-                    snackBarSlice.showSnackBar(snackBarDetails)
-                    favouriteRepository.removeFromFavourite(favouriteItemViewEntity.id)
-                }
+                        favouriteRepository.removeFromFavourite(favouriteItemViewEntity.id)
+                    }
+            }
         }
     }
 }
