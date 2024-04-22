@@ -218,20 +218,20 @@ enum class BottomNavigationScreens(
     ),
 
     CART(
-        route = CART_DETAILS_ROUTE,
+        route = com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE,
         labelResourceId = R.string.cart,
         iconResourceId = com.flea.market.ui.component.R.drawable.ic_cart
     ),
 
     FAVOURITE(
-        route = FAVOURITE_LIST_ROUTE,
+        route = com.flea.market.favorite.ui.list.navigation.FAVOURITE_LIST_ROUTE,
         labelResourceId = R.string.favourites,
         iconResourceId = R.drawable.ic_favourite
     ),
 
     PROFILE(
         route = PROFILE_ROUTE,
-        labelResourceId = com.flea.market.ui.profile.R.string.profile,
+        labelResourceId = com.flea.market.profile.ui.R.string.profile,
         iconResourceId = R.drawable.ic_more
     )
 }

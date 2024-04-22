@@ -1,24 +1,18 @@
 plugins {
-    alias libs.plugins.android.application
+    alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
-    alias libs.plugins.ksp
 }
 
 android {
-    namespace 'com.flea.market'
+    namespace 'com.flea.market.favourite.ui'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        applicationId "com.flea.market"
         minSdk libs.versions.minSdk.get().toInteger()
         targetSdk libs.versions.targetSdk.get().toInteger()
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -45,30 +39,11 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-
-    applicationVariants.configureEach { variant ->
-        variant.addJavaSourceFoldersToModel(
-                new File(buildDir, "generated/ksp/${variant.name}/kotlin")
-        )
-    }
 }
 
 dependencies {
     api project(path: ':ui-common')
-    implementation project(path: ':product:ui')
-    implementation project(path: ':product:data')
-    implementation project(path: ':cart:ui')
+    implementation project(path: ':networking')
     implementation project(path: ':cart:data')
-    implementation project(path: ':favourite:ui')
     implementation project(path: ':favourite:data')
-    implementation project(path: ':profile:ui')
-
-    implementation libs.room.runtime
-    implementation libs.room
-    annotationProcessor libs.room.compiler
-    ksp libs.room.compiler
-
-    implementation libs.retrofit
-    implementation libs.retrofit.converter.moshi
-    implementation libs.retrofit.logging
 }

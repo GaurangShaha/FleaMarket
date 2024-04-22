@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="product_details">Product Details</string>
+    <string name="welcome_message">Welcome Gaurang!</string>
+    <string name="added_to_cart">ADDED</string>
+</resources>
