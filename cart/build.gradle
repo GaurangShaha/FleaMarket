@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.flea.market.cart'
+    namespace 'com.flea.market.cart.ui'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
@@ -39,4 +39,9 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+}
+
+dependencies {
+    api project(path: ':ui-common')
+    api project(path: ':cart:data')
 }

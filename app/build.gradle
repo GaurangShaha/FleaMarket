@@ -55,10 +55,10 @@ android {
 
 dependencies {
     api project(path: ':ui-common')
-    implementation project(path: ':product:ui')
-    implementation project(path: ':cart:ui')
-    implementation project(path: ':favourite:ui')
-    implementation project(path: ':profile:ui')
+    implementation project(path: ':product')
+    implementation project(path: ':cart')
+    implementation project(path: ':favourite')
+    implementation project(path: ':profile')
     implementation project(':networking')
 
     implementation libs.room.runtime
