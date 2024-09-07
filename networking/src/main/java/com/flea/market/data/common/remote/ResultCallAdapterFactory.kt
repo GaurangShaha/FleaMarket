@@ -50,7 +50,6 @@ public class ResultCallAdapterFactory private constructor(
     }
 
     public companion object {
-        @JvmStatic
         public fun create(
             coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO),
         ): ResultCallAdapterFactory = ResultCallAdapterFactory(coroutineScope = coroutineScope)

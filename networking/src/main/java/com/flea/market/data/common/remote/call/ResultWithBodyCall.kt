@@ -1,7 +1,7 @@
 package com.flea.market.data.common.remote.call
 
+import com.flea.market.data.common.remote.mapper.toInternetConnectionExceptionOrSelf
 import com.flea.market.foundation.helper.executeCatching
-import com.flea.market.foundation.model.InternetConnectionException
 import com.flea.market.foundation.model.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ensureActive
@@ -15,8 +15,6 @@ import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.awaitResponse
 import java.lang.reflect.Type
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
 @Suppress("TooGenericExceptionCaught")
 internal class ResultWithBodyCall<T : Any>(
@@ -80,9 +78,4 @@ internal class ResultWithBodyCall<T : Any>(
             }
         }
     }
-}
-
-internal fun Exception.toInternetConnectionExceptionOrSelf() = when (this) {
-    is UnknownHostException, is SocketTimeoutException -> InternetConnectionException
-    else -> this
 }

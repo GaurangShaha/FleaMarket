@@ -1,5 +1,6 @@
 package com.flea.market.data.common.remote.call
 
+import com.flea.market.data.common.remote.mapper.toInternetConnectionExceptionOrSelf
 import com.flea.market.foundation.helper.executeCatching
 import com.flea.market.foundation.model.Result
 import kotlinx.coroutines.CoroutineScope
