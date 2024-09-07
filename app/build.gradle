@@ -56,12 +56,10 @@ android {
 dependencies {
     api project(path: ':ui-common')
     implementation project(path: ':product:ui')
-    implementation project(path: ':product:data')
     implementation project(path: ':cart:ui')
-    implementation project(path: ':cart:data')
     implementation project(path: ':favourite:ui')
-    implementation project(path: ':favourite:data')
     implementation project(path: ':profile:ui')
+    implementation project(':networking')
 
     implementation libs.room.runtime
     implementation libs.room
@@ -71,4 +69,6 @@ dependencies {
     implementation libs.retrofit
     implementation libs.retrofit.converter.moshi
     implementation libs.retrofit.logging
+
+    implementation libs.androidx.startup.runtime
 }

@@ -10,20 +10,20 @@ inline fun <S, E : Throwable> Result<S, E>.fold(onSuccess: (S) -> Unit, onError:
 }
 
 inline fun <S, V, E : Throwable> Result<S, E>.map(
-    onSuccess: (S) -> Result<V, E>
+    onSuccess: (S) -> V
 ): Result<V, E> {
     return when (this) {
-        is Result.Success -> onSuccess(value)
+        is Result.Success -> Result.success(onSuccess(value))
         is Result.Failure -> this
     }
 }
 
 inline fun <S, V : Throwable, E : Throwable> Result<S, E>.mapError(
-    onError: (E) -> Result<S, V>
+    onError: (E) -> V
 ): Result<S, V> {
     return when (this) {
         is Result.Success -> this
-        is Result.Failure -> onError(error)
+        is Result.Failure -> Result.failure(onError(error))
     }
 }
 
@@ -46,5 +46,12 @@ fun <S, E : Throwable> Result<S, E>.getOrElse(defaultValue: S): S {
     return when (this) {
         is Result.Success -> value
         is Result.Failure -> defaultValue
+    }
+}
+
+fun <S, E : Throwable> Result<S, E>.getOrThrow(): S {
+    return when (this) {
+        is Result.Success -> value
+        is Result.Failure -> throw this.error
     }
 }

@@ -6,7 +6,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.foundation.model.NetworkException
+import com.flea.market.foundation.model.InternetConnectionException
 import com.flea.market.product.ui.list.ProductListUiState.Content
 import com.flea.market.product.ui.list.ProductListUiState.Error
 import com.flea.market.product.ui.list.ProductListUiState.Loading
@@ -53,7 +53,7 @@ private fun ProductListScreenLoadingPreview() {
 @Composable
 private fun ProductListScreenErrorPreview() {
     FleaMarketThemePreview {
-        ProductListScreen(state = Error(throwable = NetworkException), onHandleIntent = {})
+        ProductListScreen(state = Error(throwable = InternetConnectionException), onHandleIntent = {})
     }
 }
 

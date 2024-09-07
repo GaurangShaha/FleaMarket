@@ -3,7 +3,6 @@ package com.flea.market.ui.component
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
@@ -34,14 +33,10 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.flea.market.R
-import com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE
-import com.flea.market.favorite.ui.list.navigation.FAVOURITE_LIST_ROUTE
 import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
 import com.flea.market.profile.ui.navigation.PROFILE_ROUTE
 import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraShape
 import java.util.Locale
@@ -82,7 +77,7 @@ private fun FMNavigationRail(
 ) {
     val navHost = LocalNavController.current
     NavigationRail(modifier = modifier.padding(end = 2.dp)) {
-        BottomNavigationScreens.values().forEachIndexed { index, destination ->
+        BottomNavigationScreens.entries.forEachIndexed { index, destination ->
             if (currentDestinationRoute == destination.route && index != selectedNavigationItemIndex) {
                 onSelectNavigationItem(index)
             }
@@ -118,7 +113,6 @@ private fun FMNavigationRail(
 }
 
 @Composable
-@OptIn(ExperimentalAnimationApi::class)
 private fun FMBottomNavigation(
     currentDestinationRoute: String?,
     selectedNavigationItemIndex: Int,
@@ -127,7 +121,7 @@ private fun FMBottomNavigation(
 ) {
     val navHost = LocalNavController.current
     AnimatedVisibility(
-        visible = BottomNavigationScreens.values()
+        visible = BottomNavigationScreens.entries
             .any { currentDestinationRoute?.equals(it.route) ?: false },
         enter = scaleIn(),
         exit = scaleOut()
@@ -137,7 +131,7 @@ private fun FMBottomNavigation(
                 .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                 .clip(MaterialTheme.extraShape.capsuleShape)
         ) {
-            BottomNavigationScreens.values().forEachIndexed { index, screen ->
+            BottomNavigationScreens.entries.forEachIndexed { index, screen ->
                 if (currentDestinationRoute == screen.route && index != selectedNavigationItemIndex) {
                     onSelectNavigationItem(index)
                 }
@@ -234,14 +228,4 @@ enum class BottomNavigationScreens(
         labelResourceId = com.flea.market.profile.ui.R.string.profile,
         iconResourceId = R.drawable.ic_more
     )
-}
-
-@Composable
-@FleaMarketPreviews
-private fun FleaMarketNavigationBarPreview() {
-    FleaMarketThemePreview {
-        FleaMarketNavigationBar(
-            selectedNavigationItemIndex = 0
-        ) {}
-    }
 }

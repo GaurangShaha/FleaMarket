@@ -43,5 +43,4 @@ android {
 
 dependencies {
     api project(path: ':ui-common')
-    implementation project(path: ':networking')
 }

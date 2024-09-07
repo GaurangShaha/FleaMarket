@@ -2,8 +2,9 @@ package com.flea.market.product.ui.details.mapper
 
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
+import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 
-internal fun com.flea.market.product.ui.common.entity.ProductDetailsViewEntity.toCartProductDetails() =
+internal fun ProductDetailsViewEntity.toCartProductDetails() =
     CartProductDetailsEntity(
         id = id,
         category = category,
@@ -13,7 +14,7 @@ internal fun com.flea.market.product.ui.common.entity.ProductDetailsViewEntity.t
         quantity = 1
     )
 
-internal fun com.flea.market.product.ui.common.entity.ProductDetailsViewEntity.toFavouriteProductDetails() =
+internal fun ProductDetailsViewEntity.toFavouriteProductDetails() =
     FavouriteProductDetailsEntity(
         id = id,
         category = category,

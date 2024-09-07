@@ -1,13 +1,13 @@
 package com.flea.market.product.data.repository
 
-import com.flea.market.data.common.remote.request
+import com.flea.market.foundation.extension.map
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.remote.source.ProductRemoteSource
 
-@Suppress("MaxLineLength")
 internal class ProductRepositoryImpl(
     private val productRemoteSource: ProductRemoteSource
 ) : ProductRepository {
+    @Suppress("MaxLineLength")
     private val productImageList: List<List<String>> = listOf(
         listOf(
             "https://images.asos-media.com/products/fjallraven-foldsack-no1-backpack-16l/6044196-3?wid=720",
@@ -114,17 +114,11 @@ internal class ProductRepositoryImpl(
         )
     )
 
-    override suspend fun getProductList() = request(onSuccess = { _, _, productList ->
-        productList.map { it.getProductDetailsEntityWithImageList() }
-    }) {
-        productRemoteSource.getProductList()
-    }
+    override suspend fun getProductList() = productRemoteSource.getProductList()
+        .map { it.map { detailsEntity -> detailsEntity.getProductDetailsEntityWithImageList() } }
 
-    override suspend fun getProductDetails(id: Int) = request(onSuccess = { _, _, productDetails ->
-        productDetails.getProductDetailsEntityWithImageList()
-    }) {
-        productRemoteSource.getProductDetails(id)
-    }
+    override suspend fun getProductDetails(id: Int) =
+        productRemoteSource.getProductDetails(id).map { it.getProductDetailsEntityWithImageList() }
 
     private fun ProductDetailsEntity.getProductDetailsEntityWithImageList() =
         this.copy(imageList = productImageList.getOrElse(id - 1) { _ -> listOf(image) })

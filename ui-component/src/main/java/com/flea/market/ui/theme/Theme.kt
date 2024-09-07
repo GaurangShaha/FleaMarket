@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.flea.market.ui.mapper.toActivity
+import com.flea.market.ui.helper.findActivity
 
 private val LightColorPalette = lightColors(
     primary = Black200,
@@ -63,9 +63,8 @@ fun FleaMarketTheme(
         colorPalette = LightColorPalette
     }
 
-    val view = LocalView.current
-    val activity = view.context.toActivity()
-    if (!view.isInEditMode && activity != null) {
+    findActivity()?.let { activity ->
+        val view = LocalView.current
         SideEffect {
             val window = activity.window
             WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -91,8 +90,8 @@ fun FleaMarketTheme(
 
 @Composable
 fun DarkStatusBarDisposableEffect(useDarkTheme: Boolean = isSystemInDarkTheme()) {
-    val view = LocalView.current
-    view.context.toActivity()?.let { activity ->
+    findActivity()?.let { activity ->
+        val view = LocalView.current
         DisposableEffect(Unit) {
             val window = activity.window
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false

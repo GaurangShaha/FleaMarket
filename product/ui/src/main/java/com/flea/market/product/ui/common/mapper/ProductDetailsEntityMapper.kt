@@ -1,11 +1,12 @@
 package com.flea.market.product.ui.common.mapper
 
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
+import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import java.util.Locale
 
 internal fun ProductDetailsEntity.toProductDetailsViewEntity() =
-    com.flea.market.product.ui.common.entity.ProductDetailsViewEntity(
+    ProductDetailsViewEntity(
         category = category.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
         },

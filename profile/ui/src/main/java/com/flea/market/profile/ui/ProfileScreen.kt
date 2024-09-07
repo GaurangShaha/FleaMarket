@@ -28,7 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.component.FMButton
+import com.flea.market.ui.component.FMOutlinedButton
 import com.flea.market.ui.component.FleaMarketAppBar
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
@@ -62,7 +62,7 @@ internal fun ProfileScreen(uiState: ProfileUiState) {
             }
 
             item(span = StaggeredGridItemSpan.SingleLane) {
-                FMButton(
+                FMOutlinedButton(
                     text = stringResource(id = R.string.logout),
                     modifier = Modifier
                         .padding(16.dp)

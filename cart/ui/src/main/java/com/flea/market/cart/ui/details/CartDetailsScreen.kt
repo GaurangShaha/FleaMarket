@@ -14,7 +14,7 @@ import com.flea.market.cart.ui.details.component.CartDetailsLoading
 import com.flea.market.cart.ui.details.component.dummyContent
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.foundation.model.NetworkException
+import com.flea.market.foundation.model.InternetConnectionException
 import com.flea.market.ui.component.EmptyLayout
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
@@ -74,6 +74,6 @@ private fun CartDetailsLoadingScreenPreview() {
 @FleaMarketPreviews
 private fun CartDetailsErrorScreenPreview() {
     FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Error(NetworkException), onHandleIntent = {})
+        CartDetailsScreen(uiState = Error(InternetConnectionException), onHandleIntent = {})
     }
 }

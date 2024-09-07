@@ -15,7 +15,7 @@ import com.flea.market.favorite.ui.list.component.FavouriteListContent
 import com.flea.market.favorite.ui.list.component.ProductListLoading
 import com.flea.market.favorite.ui.list.component.dummyContent
 import com.flea.market.favourite.ui.R
-import com.flea.market.foundation.model.NetworkException
+import com.flea.market.foundation.model.InternetConnectionException
 import com.flea.market.ui.component.EmptyLayout
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
@@ -42,7 +42,7 @@ internal fun FavouriteListScreen(
                 FavouriteListContent(uiState = uiState, onHandleIntent = onHandleIntent)
 
                 FleaMarketSnackBar(
-                    snackBarDetails = uiState.snackBarDetails,
+                    snackbarDetails = uiState.snackbarDetails,
                     onSnackbarResult = { onHandleIntent(SnackbarResult(it)) }
                 )
             }
@@ -83,6 +83,6 @@ private fun FavouriteListScreenEmptyPreview() {
 @Composable
 private fun FavouriteListScreenErrorPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Error(NetworkException), onHandleIntent = {})
+        FavouriteListScreen(uiState = Error(InternetConnectionException), onHandleIntent = {})
     }
 }

@@ -11,7 +11,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
-import com.flea.market.ui.component.FleaMarketApp
+import com.flea.market.ui.component.FleaMarketComposeApp
 import com.flea.market.ui.compositionlocal.LocalDrawerState
 import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.compositionlocal.LocalSnackbarHostState
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     LocalDrawerState provides rememberDrawerState(initialValue = DrawerValue.Closed),
                     LocalSnackbarHostState provides remember { SnackbarHostState() }
                 ) {
-                    FleaMarketApp()
+                    FleaMarketComposeApp()
                 }
             }
         }

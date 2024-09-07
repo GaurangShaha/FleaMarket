@@ -27,11 +27,4 @@ abstract class BaseViewModel<I, S>(initialUiState: S) : ViewModel() {
             collect { updateUiState(it) }
         }
     }
-
-    inline fun <reified S> StateFlow<*>.ifInstanceOf(block: (S) -> Unit) {
-        val currentState = value
-        if (currentState is S) {
-            block(currentState)
-        }
-    }
 }

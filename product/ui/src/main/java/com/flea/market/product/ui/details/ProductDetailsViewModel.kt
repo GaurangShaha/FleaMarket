@@ -3,11 +3,10 @@ package com.flea.market.product.ui.details
 import androidx.lifecycle.viewModelScope
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.common.base.viewmodel.BaseViewModel
+import com.flea.market.common.extension.ifInstanceOf
 import com.flea.market.favourite.repository.FavouriteRepository
-import com.flea.market.foundation.extension.fold
-import com.flea.market.foundation.extension.getOrElse
+import com.flea.market.foundation.extension.getOrThrow
 import com.flea.market.foundation.extension.onSuccess
-import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.repository.ProductRepository
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
@@ -21,6 +20,8 @@ import com.flea.market.product.ui.details.navigation.ProductDetailsArgs
 import com.flea.market.ui.component.ButtonState
 import com.flea.market.ui.component.ButtonState.Initial
 import com.flea.market.ui.component.ButtonState.Result
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -45,10 +46,27 @@ internal class ProductDetailsViewModel(
     }
 
     private fun getProductDetails() {
-        viewModelScope.launch {
+        val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            updateUiState(Error(throwable))
+        }
+
+        viewModelScope.launch(coroutineExceptionHandler) {
             updateUiState(Loading)
-            productRepository.getProductDetails(productDetailsArgs.productId)
-                .fold(::handleGetProductDetailsSuccess, ::handleGetProductDetailsFailure)
+            val productDetailsDeferred = async {
+                productRepository.getProductDetails(productDetailsArgs.productId).getOrThrow()
+                    .toProductDetailsViewEntity()
+            }
+            val markedAsFavouriteDeferred = async {
+                favouriteRepository.isMarkedAsFavourite(productDetailsArgs.productId).getOrThrow()
+            }
+
+            updateUiState(
+                Content(
+                    productDetails = productDetailsDeferred.await(),
+                    markedAsFavourite = markedAsFavouriteDeferred.await(),
+                    addToCartButtonState = Initial
+                )
+            )
         }
     }
 
@@ -79,25 +97,6 @@ internal class ProductDetailsViewModel(
                         .onSuccess { updateUiState(content.copy(markedAsFavourite = false)) }
                 }
             }
-        }
-    }
-
-    private fun handleGetProductDetailsFailure(throwable: Throwable) {
-        updateUiState(Error(throwable))
-    }
-
-    private fun handleGetProductDetailsSuccess(productDetailsEntity: ProductDetailsEntity) {
-        viewModelScope.launch {
-            val markedAsFavourite = favouriteRepository.isMarkedAsFavourite(productDetailsEntity.id)
-                .getOrElse(false)
-
-            updateUiState(
-                Content(
-                    productDetails = productDetailsEntity.toProductDetailsViewEntity(),
-                    markedAsFavourite = markedAsFavourite,
-                    addToCartButtonState = Initial
-                )
-            )
         }
     }
 

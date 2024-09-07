@@ -43,7 +43,6 @@ android {
 
 dependencies {
     api project(path: ':ui-common')
-    implementation project(path: ':networking')
     implementation project(path: ':cart:data')
-    implementation project(path: ':favourite:data')
+    api project(path: ':favourite:data')
 }

@@ -26,7 +26,7 @@ import java.text.NumberFormat
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun ProductListItem(
-    productDetails: com.flea.market.product.ui.common.entity.ProductDetailsViewEntity,
+    productDetails: ProductDetailsViewEntity,
     modifier: Modifier = Modifier,
     onProductClick: () -> Unit
 ) {

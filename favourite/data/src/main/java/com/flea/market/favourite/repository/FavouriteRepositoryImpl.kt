@@ -2,7 +2,7 @@ package com.flea.market.favourite.repository
 
 import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
 import com.flea.market.favourite.local.source.FavouriteLocalSource
-import com.flea.market.foundation.model.Result
+import com.flea.market.foundation.helper.executeCatching
 
 @Suppress("TooGenericExceptionCaught")
 internal class FavouriteRepositoryImpl(
@@ -10,24 +10,16 @@ internal class FavouriteRepositoryImpl(
 ) : FavouriteRepository {
 
     override suspend fun markAsFavourite(favouriteProductDetailsEntity: FavouriteProductDetailsEntity) =
-        try {
+        executeCatching {
             favouriteLocalSource.addFavouriteProduct(favouriteProductDetailsEntity)
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
         }
 
-    override suspend fun removeFromFavourite(productId: Int) = try {
+    override suspend fun removeFromFavourite(productId: Int) = executeCatching {
         favouriteLocalSource.removeFavouriteProduct(productId)
-        Result.success(Unit)
-    } catch (e: Exception) {
-        Result.failure(e)
     }
 
-    override suspend fun isMarkedAsFavourite(productId: Int) = try {
-        Result.success(favouriteLocalSource.getFavouriteProductById(productId) != null)
-    } catch (e: Exception) {
-        Result.failure(e)
+    override suspend fun isMarkedAsFavourite(productId: Int) = executeCatching {
+        favouriteLocalSource.getFavouriteProductById(productId) != null
     }
 
     override fun getFavouriteProductsStream() = favouriteLocalSource.getFavouriteProductsStream()

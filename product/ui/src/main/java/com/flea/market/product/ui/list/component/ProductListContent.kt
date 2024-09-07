@@ -45,8 +45,7 @@ internal fun ProductListContent(
         item(contentType = "welcomeBanner", key = "welcome") {
             Text(
                 text = stringResource(R.string.welcome_message),
-                style = MaterialTheme.typography.h4,
-
+                style = MaterialTheme.typography.h4
             )
         }
 

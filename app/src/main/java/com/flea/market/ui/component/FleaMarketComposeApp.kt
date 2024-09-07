@@ -20,7 +20,7 @@ import com.flea.market.ui.main.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-internal fun FleaMarketApp() {
+internal fun FleaMarketComposeApp() {
     val navHost = remember {
         movableContentOf {
             Surface {

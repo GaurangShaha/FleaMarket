@@ -2,9 +2,11 @@ package com.flea.market.product.ui.list
 
 import androidx.lifecycle.viewModelScope
 import com.flea.market.common.base.viewmodel.BaseViewModel
+import com.flea.market.common.extension.ifInstanceOf
 import com.flea.market.foundation.extension.fold
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.repository.ProductRepository
+import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.common.mapper.toCategoryListWrapper
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.list.ProductListIntent.FilterByCategory
@@ -17,8 +19,7 @@ import kotlinx.coroutines.launch
 internal class ProductListViewModel(private val productRepository: ProductRepository) :
     BaseViewModel<ProductListIntent, ProductListUiState>(Loading) {
     private var selectedCategoryIndex: Int = 0
-    private lateinit var productList: List<com.flea.market.product.ui.common.entity.ProductDetailsViewEntity>
-
+    private lateinit var productList: List<ProductDetailsViewEntity>
     init {
         getProductList()
     }

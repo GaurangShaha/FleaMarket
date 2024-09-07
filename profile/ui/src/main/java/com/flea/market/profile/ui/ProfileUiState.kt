@@ -10,7 +10,7 @@ import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class ProfileUiState(
-    val profileUrl: String = "https://miro.medium.com/v2/resize:fit:2400/2*AXmi0bvdz7eiHuUyaD2KBg.jpeg",
+    val profileUrl: String = "https://miro.medium.com/v2/1*sVI9YLq7y81EAgFzndU5Yg.jpeg",
     val name: String = "Gaurang Shaha",
     val email: String = "gaurang.shaha@gmail.com",
     val menuItem: List<Pair<ImageVector, Int>> = listOf(
