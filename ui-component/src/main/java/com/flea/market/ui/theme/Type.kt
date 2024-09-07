@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 internal val Typography = Typography()
 
 @Immutable
-data class ExtraTypography(
+public data class ExtraTypography(
     val captionDarkGray: TextStyle = TextStyle.Default,
     val body1Bold: TextStyle = TextStyle.Default,
     val body1DarkGray: TextStyle = TextStyle.Default,
@@ -36,6 +36,6 @@ internal val DarkExtraTypography = ExtraTypography(
     h6Bold = Typography.h6.copy(fontWeight = FontWeight.Bold)
 )
 
-val MaterialTheme.extraTypography: ExtraTypography
+public val MaterialTheme.extraTypography: ExtraTypography
     @Composable @ReadOnlyComposable
     get() = LocalExtraTypography.current

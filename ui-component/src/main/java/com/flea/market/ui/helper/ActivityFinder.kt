@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun findActivity(): Activity? {
+public fun findActivity(): Activity? {
     var context = LocalContext.current
     while (context is ContextWrapper) {
         if (context is Activity) return context

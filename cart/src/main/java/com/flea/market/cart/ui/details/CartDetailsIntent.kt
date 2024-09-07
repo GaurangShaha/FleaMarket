@@ -3,7 +3,6 @@ package com.flea.market.cart.ui.details
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
 
 internal sealed class CartDetailsIntent {
-    object Checkout : CartDetailsIntent()
     data class IncreaseQuantity(val itemsInCartViewEntity: ItemsInCartViewEntity) :
         CartDetailsIntent()
 

@@ -7,16 +7,16 @@ import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface FavouriteLocalSource {
+public interface FavouriteLocalSource {
     @Query("SELECT * FROM favouriteProductDetailsEntity")
-    fun getFavouriteProductsStream(): Flow<List<FavouriteProductDetailsEntity>>
+    public fun getFavouriteProductsStream(): Flow<List<FavouriteProductDetailsEntity>>
 
     @Insert
-    suspend fun addFavouriteProduct(favouriteProductDetailsEntity: FavouriteProductDetailsEntity)
+    public suspend fun addFavouriteProduct(favouriteProductDetailsEntity: FavouriteProductDetailsEntity)
 
     @Query("SELECT * FROM favouriteProductDetailsEntity WHERE id= :productId")
-    suspend fun getFavouriteProductById(productId: Int): FavouriteProductDetailsEntity?
+    public suspend fun getFavouriteProductById(productId: Int): FavouriteProductDetailsEntity?
 
     @Query("DELETE FROM favouriteProductDetailsEntity WHERE id = :productId")
-    suspend fun removeFavouriteProduct(productId: Int)
+    public suspend fun removeFavouriteProduct(productId: Int)
 }

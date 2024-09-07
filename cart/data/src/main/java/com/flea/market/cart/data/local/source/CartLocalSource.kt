@@ -7,16 +7,16 @@ import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface CartLocalSource {
+public interface CartLocalSource {
     @Query("SELECT * FROM cartProductDetailsEntity")
-    fun getItemsInCartStream(): Flow<List<CartProductDetailsEntity>>
+    public fun getItemsInCartStream(): Flow<List<CartProductDetailsEntity>>
 
     @Upsert
-    suspend fun addOrUpdateProduct(productDetails: CartProductDetailsEntity)
+    public suspend fun addOrUpdateProduct(productDetails: CartProductDetailsEntity)
 
     @Query("SELECT * FROM cartProductDetailsEntity WHERE id= :productId")
-    suspend fun getProductById(productId: Int): CartProductDetailsEntity?
+    public suspend fun getProductById(productId: Int): CartProductDetailsEntity?
 
     @Query("DELETE FROM cartProductDetailsEntity WHERE id = :productId")
-    suspend fun removeProduct(productId: Int)
+    public suspend fun removeProduct(productId: Int)
 }

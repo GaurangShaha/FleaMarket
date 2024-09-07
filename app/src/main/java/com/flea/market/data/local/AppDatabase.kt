@@ -18,7 +18,7 @@ internal abstract class FleaMarketDatabase : RoomDatabase() {
     abstract fun favouriteLocalSource(): FavouriteLocalSource
 }
 
-object DatabaseProvider {
+internal object DatabaseProvider {
     private var INSTANCE: FleaMarketDatabase? = null
 
     internal fun getDatabase(context: Context): FleaMarketDatabase {

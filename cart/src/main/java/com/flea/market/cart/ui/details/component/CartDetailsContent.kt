@@ -38,8 +38,7 @@ internal const val SECOND_COLUMN_WEIGHT_LARGE_SCREENS = 1 - FIRST_COLUMN_WEIGHT_
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ContentForMediumAndExpandedScreen(
-    uiState: Content,
-    onHandleIntent: (CartDetailsIntent) -> Unit
+    uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit
 ) {
     Row {
         LazyColumn(
@@ -49,7 +48,7 @@ private fun ContentForMediumAndExpandedScreen(
             contentPadding = PaddingValues(bottom = 8.dp)
         ) {
             stickyHeader(contentType = "Checkout") {
-                CheckoutButton { onHandleIntent(CartDetailsIntent.Checkout) }
+                CheckoutButton { }
             }
 
             item(contentType = "PriceDetails") {
@@ -91,14 +90,12 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
         }
 
         stickyHeader(contentType = "Checkout") {
-            CheckoutButton { onHandleIntent(CartDetailsIntent.Checkout) }
+            CheckoutButton { }
         }
 
-        items(
-            key = { it.id },
+        items(key = { it.id },
             items = uiState.productList,
-            contentType = { "productItem" }
-        ) { itemsInCartViewEntity ->
+            contentType = { "productItem" }) { itemsInCartViewEntity ->
             val navController = LocalNavController.current
             CartItemProductDetails(
                 modifier = Modifier.animateItemPlacement(),

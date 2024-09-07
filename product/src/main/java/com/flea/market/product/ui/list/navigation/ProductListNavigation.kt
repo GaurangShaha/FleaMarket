@@ -9,7 +9,7 @@ import com.flea.market.product.ui.list.ProductListScreen
 import com.flea.market.product.ui.list.ProductListViewModel
 import org.koin.androidx.compose.koinViewModel
 
-const val PRODUCT_LIST_ROUTE = "product_list"
+public const val PRODUCT_LIST_ROUTE: String = "product_list"
 
 internal fun NavGraphBuilder.productListScreen() {
     composable(route = PRODUCT_LIST_ROUTE) {

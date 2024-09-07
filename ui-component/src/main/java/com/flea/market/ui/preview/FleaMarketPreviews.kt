@@ -58,12 +58,12 @@ import com.flea.market.ui.theme.FleaMarketTheme
     device = "spec:width=1280dp,height=800dp,orientation=portrait",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
-annotation class FleaMarketPreviews
+public annotation class FleaMarketPreviews
 
 @Suppress("ModifierMissing")
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
+public fun FleaMarketThemePreview(content: @Composable () -> Unit = {}) {
     FleaMarketTheme {
         BoxWithConstraints {
             val calculateFromSize =

@@ -1,8 +1,13 @@
 package com.flea.market.profile.ui
 
-import com.flea.market.common.base.viewmodel.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.flea.market.common.contract.viewmodel.ViewModelContract
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-class ProfileViewModel : BaseViewModel<ProfileIntent, ProfileUiState>(ProfileUiState()) {
+internal class ProfileViewModel : ViewModelContract<ProfileUiState, ProfileIntent>, ViewModel() {
+    override val uiState: StateFlow<ProfileUiState> = MutableStateFlow(ProfileUiState())
+
     override fun onHandleIntent(intent: ProfileIntent) {
         // Do nothing
     }

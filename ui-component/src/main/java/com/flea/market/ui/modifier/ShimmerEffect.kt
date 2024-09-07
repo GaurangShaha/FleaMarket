@@ -26,7 +26,7 @@ import com.flea.market.ui.theme.extraColors
 
 private const val SHIMMER_ANIMATION_TIME = 1000
 
-fun Modifier.shimmer(): Modifier = composed {
+public fun Modifier.shimmer(): Modifier = composed {
     var size by remember { mutableStateOf(IntSize.Zero) }
 
     val transition = rememberInfiniteTransition(label = "shimmerTransition")
@@ -52,7 +52,7 @@ fun Modifier.shimmer(): Modifier = composed {
 
 @Composable
 @FleaMarketPreviews
-fun ShimmerPreview() {
+private fun ShimmerPreview() {
     FleaMarketThemePreview {
         Box(
             modifier = Modifier

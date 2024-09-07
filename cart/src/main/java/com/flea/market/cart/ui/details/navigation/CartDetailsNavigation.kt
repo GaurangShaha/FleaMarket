@@ -9,10 +9,10 @@ import com.flea.market.cart.ui.details.CartDetailsScreen
 import com.flea.market.cart.ui.details.CartDetailsViewModel
 import org.koin.androidx.compose.koinViewModel
 
-const val CART_DETAILS_ROUTE = "cart_details"
+public const val CART_DETAILS_ROUTE: String = "cart_details"
 
 internal fun NavGraphBuilder.cartDetailsScreen() {
-    composable(route = com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE) {
+    composable(route = CART_DETAILS_ROUTE) {
         val cartDetailsViewModel: CartDetailsViewModel = koinViewModel()
         val uiState by cartDetailsViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -21,5 +21,5 @@ internal fun NavGraphBuilder.cartDetailsScreen() {
 }
 
 internal fun NavController.navigateToCart() {
-    navigate(com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE)
+    navigate(CART_DETAILS_ROUTE)
 }

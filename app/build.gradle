@@ -51,6 +51,10 @@ android {
                 new File(buildDir, "generated/ksp/${variant.name}/kotlin")
         )
     }
+
+    kotlin {
+        explicitApi()
+    }
 }
 
 dependencies {

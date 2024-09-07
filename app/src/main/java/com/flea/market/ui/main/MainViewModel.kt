@@ -1,12 +1,20 @@
 package com.flea.market.ui.main
 
-import com.flea.market.common.base.viewmodel.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.flea.market.common.contract.viewmodel.ViewModelContract
 import com.flea.market.ui.main.MainIntent.UpdateSelectedNavigationItemIndex
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-internal class MainViewModel : BaseViewModel<MainIntent, MainState>(MainState(0)) {
+internal class MainViewModel : ViewModelContract<MainState, MainIntent>, ViewModel() {
+
+    private val _uiState: MutableStateFlow<MainState> = MutableStateFlow(MainState(0))
+    override val uiState: StateFlow<MainState> = _uiState.asStateFlow()
+
     override fun onHandleIntent(intent: MainIntent) {
         when (intent) {
-            is UpdateSelectedNavigationItemIndex -> updateUiState(MainState(intent.index))
+            is UpdateSelectedNavigationItemIndex -> _uiState.value = MainState(intent.index)
         }
     }
 }

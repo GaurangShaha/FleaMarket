@@ -22,7 +22,7 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 @Composable
-fun Stepper(
+public fun Stepper(
     quantity: Int,
     onIncreaseQuantity: () -> Unit,
     onDecreaseQuantity: () -> Unit,
@@ -63,7 +63,7 @@ fun Stepper(
 
 @Composable
 @FleaMarketPreviews
-fun StepperPreview() {
+private fun StepperPreview() {
     FleaMarketThemePreview {
         Stepper(quantity = 0, onIncreaseQuantity = {}, onDecreaseQuantity = { })
     }

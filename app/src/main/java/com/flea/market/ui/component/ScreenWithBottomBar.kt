@@ -8,12 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.flea.market.ui.compositionlocal.LocalDrawerState
 import com.flea.market.ui.compositionlocal.LocalSnackbarHostState
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ScreenWithBottomBar(
+internal fun ScreenWithBottomBar(
     selectedIndex: Int,
     navHost: @Composable () -> Unit,
     modifier: Modifier = Modifier,
@@ -36,13 +34,5 @@ fun ScreenWithBottomBar(
         }
     ) { _ ->
         navHost()
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-fun ScreenWithBottomBarPreview() {
-    FleaMarketThemePreview {
-        ScreenWithBottomBar(selectedIndex = 0, navHost = {}) {}
     }
 }

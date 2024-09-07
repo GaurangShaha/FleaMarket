@@ -29,7 +29,7 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
-fun FleaMarketAppBar(
+public fun FleaMarketAppBar(
     @StringRes title: Int,
     modifier: Modifier = Modifier,
     navigationIcon: Pair<ImageVector, () -> Unit> = Icons.Default.Menu to {},
@@ -62,7 +62,7 @@ fun FleaMarketAppBar(
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarPreview() {
+private fun FleaMarketAppBarPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(title = R.string.retry)
     }
@@ -70,7 +70,7 @@ fun FleaMarketAppBarPreview() {
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarNavigationItemPreview() {
+private fun FleaMarketAppBarNavigationItemPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(title = R.string.retry, navigationIcon = Icons.AutoMirrored.Filled.ArrowBack to {})
     }
@@ -78,7 +78,7 @@ fun FleaMarketAppBarNavigationItemPreview() {
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarActionIconPreview() {
+private fun FleaMarketAppBarActionIconPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(
             title = R.string.retry,
@@ -95,7 +95,7 @@ fun FleaMarketAppBarActionIconPreview() {
 
 @FleaMarketPreviews
 @Composable
-fun FleaMarketAppBarWithScrimPreview() {
+private fun FleaMarketAppBarWithScrimPreview() {
     FleaMarketThemePreview {
         FleaMarketAppBar(
             title = R.string.retry,

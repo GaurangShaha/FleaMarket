@@ -1,7 +1,8 @@
 package com.flea.market.product.ui.list
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.flea.market.common.base.viewmodel.BaseViewModel
+import com.flea.market.common.contract.viewmodel.ViewModelContract
 import com.flea.market.common.extension.ifInstanceOf
 import com.flea.market.foundation.extension.fold
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
@@ -14,64 +15,59 @@ import com.flea.market.product.ui.list.ProductListIntent.Reload
 import com.flea.market.product.ui.list.ProductListUiState.Content
 import com.flea.market.product.ui.list.ProductListUiState.Error
 import com.flea.market.product.ui.list.ProductListUiState.Loading
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 internal class ProductListViewModel(private val productRepository: ProductRepository) :
-    BaseViewModel<ProductListIntent, ProductListUiState>(Loading) {
-    private var selectedCategoryIndex: Int = 0
+    ViewModelContract<ProductListUiState, ProductListIntent>, ViewModel() {
+    private val _uiState: MutableStateFlow<ProductListUiState> = MutableStateFlow(Loading)
+    override val uiState: StateFlow<ProductListUiState> = _uiState.asStateFlow()
+
     private lateinit var productList: List<ProductDetailsViewEntity>
+
     init {
-        getProductList()
+        viewModelScope.launch {
+            getProductList()
+        }
     }
 
     override fun onHandleIntent(intent: ProductListIntent) {
         when (intent) {
-            Reload -> getProductList()
+            Reload -> viewModelScope.launch { getProductList() }
             is FilterByCategory -> filterByCategory(intent.selectedCategoryIndex)
         }
     }
 
-    private fun getProductList() {
-        viewModelScope.launch {
-            updateUiState(Loading)
-            productRepository.getProductList()
-                .fold(::handleProductListSuccess, ::handleProductListFailure)
-        }
+    private suspend fun getProductList() {
+        _uiState.value = Loading
+        productRepository.getProductList()
+            .fold(::handleProductListSuccess, ::handleProductListFailure)
     }
 
     private fun filterByCategory(selectedCategoryIndex: Int) {
-        this.selectedCategoryIndex = selectedCategoryIndex
-        uiState.ifInstanceOf<Content> {
-            filterProductByCategory(it.categoryListWrapper.items[selectedCategoryIndex])
+        uiState.ifInstanceOf<Content> { content ->
+            val category = content.categoryListWrapper.items[selectedCategoryIndex]
+            val filteredList =
+                productList.filter { it.category.equals(category, true) }.ifEmpty { productList }
+
+            _uiState.value = content.copy(
+                productList = filteredList, selectedCategoryIndex = selectedCategoryIndex
+            )
         }
     }
 
     private fun handleProductListFailure(throwable: Throwable) {
-        updateUiState(Error(throwable))
+        _uiState.value = Error(throwable)
     }
 
     private fun handleProductListSuccess(productDetailsEntities: List<ProductDetailsEntity>) {
         productList = productDetailsEntities.map { it.toProductDetailsViewEntity() }
-        updateUiState(
-            Content(
-                productList = productList,
-                categoryListWrapper = productDetailsEntities.toCategoryListWrapper(),
-                selectedCategoryIndex = selectedCategoryIndex
-            )
+        _uiState.value = Content(
+            productList = productList,
+            categoryListWrapper = productDetailsEntities.toCategoryListWrapper(),
+            selectedCategoryIndex = 0
         )
-    }
-
-    private fun filterProductByCategory(category: String) {
-        uiState.ifInstanceOf<Content> { content ->
-            val filteredList =
-                productList.filter { it.category.equals(category, true) }.ifEmpty { productList }
-
-            updateUiState(
-                content.copy(
-                    productList = filteredList,
-                    selectedCategoryIndex = selectedCategoryIndex
-                )
-            )
-        }
     }
 }

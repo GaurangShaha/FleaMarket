@@ -19,7 +19,7 @@ internal val Shapes = Shapes(
 )
 
 @Immutable
-data class ExtraShape(
+public data class ExtraShape(
     val xlargeShape: Shape = GenericShape { _, _ -> },
     val capsuleShape: Shape = GenericShape { _, _ -> }
 )
@@ -31,6 +31,6 @@ internal val ExtraShapes = ExtraShape(
     capsuleShape = CircleShape
 )
 
-val MaterialTheme.extraShape: ExtraShape
+public val MaterialTheme.extraShape: ExtraShape
     @Composable @ReadOnlyComposable
     get() = LocalExtraShape.current

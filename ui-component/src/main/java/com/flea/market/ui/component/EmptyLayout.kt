@@ -20,7 +20,7 @@ import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
-fun EmptyLayout(
+public fun EmptyLayout(
     message: String,
     icon: Painter,
     modifier: Modifier = Modifier

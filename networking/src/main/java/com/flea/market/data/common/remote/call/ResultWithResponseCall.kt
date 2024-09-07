@@ -43,6 +43,7 @@ internal class ResultWithResponseCall<T : Any>(
             try {
                 Response.success(proxy.execute().toResult())
             } catch (e: Exception) {
+                coroutineContext.ensureActive()
                 Response.success(Result.failure(e.toInternetConnectionExceptionOrSelf()))
             }
         }

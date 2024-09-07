@@ -9,11 +9,11 @@ import com.flea.market.profile.ui.ProfileScreen
 import com.flea.market.profile.ui.ProfileViewModel
 import org.koin.androidx.compose.koinViewModel
 
-fun NavGraphBuilder.addProfileGraph() {
+public fun NavGraphBuilder.addProfileGraph() {
     profileScreen()
 }
 
-const val PROFILE_ROUTE = "profile"
+public const val PROFILE_ROUTE: String = "profile"
 
 internal fun NavGraphBuilder.profileScreen() {
     composable(route = PROFILE_ROUTE) {

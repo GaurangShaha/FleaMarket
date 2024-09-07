@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-class ResultCallAdapterFactory private constructor(
+public class ResultCallAdapterFactory private constructor(
     private val coroutineScope: CoroutineScope,
 ) : CallAdapter.Factory() {
 
@@ -49,9 +49,9 @@ class ResultCallAdapterFactory private constructor(
         }
     }
 
-    companion object {
+    public companion object {
         @JvmStatic
-        fun create(
+        public fun create(
             coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO),
         ): ResultCallAdapterFactory = ResultCallAdapterFactory(coroutineScope = coroutineScope)
     }

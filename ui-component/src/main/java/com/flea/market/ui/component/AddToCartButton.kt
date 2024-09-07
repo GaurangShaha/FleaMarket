@@ -67,7 +67,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddToCartButton(
+public fun AddToCartButton(
     buttonState: ButtonState,
     initialContent: @Composable (RowScope) -> Unit,
     resultContent: @Composable (RowScope) -> Unit,
@@ -317,10 +317,10 @@ private fun ContentDrawScope.drawItemsAsPerState(
     }
 }
 
-sealed class ButtonState {
-    object Initial : ButtonState()
-    object Loading : ButtonState()
-    object Result : ButtonState()
+public sealed class ButtonState {
+    public object Initial : ButtonState()
+    public object Loading : ButtonState()
+    public object Result : ButtonState()
 }
 
 @Suppress("LongParameterList")
@@ -426,7 +426,7 @@ private fun DrawScope.drawItems(
 
 @FleaMarketPreviews // Start interactive mode to see the animations
 @Composable
-fun AddToCartButtonInitialPreview() {
+private fun AddToCartButtonInitialPreview() {
     FleaMarketThemePreview {
         var buttonState: ButtonState by remember { mutableStateOf(Initial) }
         val coroutineScope = rememberCoroutineScope()

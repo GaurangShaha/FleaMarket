@@ -10,7 +10,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL = "https://fakestoreapi.com"
 
-val networkModule = module {
+internal val networkModule = module {
     single<Retrofit> {
         Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())

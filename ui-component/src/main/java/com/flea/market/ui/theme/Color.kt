@@ -13,7 +13,7 @@ internal val Grey = Color(0xFFEBEAEF)
 internal val Peach = Color(0xFFEE3140)
 
 @Immutable
-data class ExtraColorsPalette(
+public data class ExtraColorsPalette(
     val darkGrey: Color = Color.Unspecified,
     val scrimColor: List<Color> = listOf(Color.Unspecified, Color.Unspecified),
     val onScrimColor: Color = Color.Unspecified,
@@ -63,6 +63,6 @@ internal val DarkExtraColorsPalette = ExtraColorsPalette(
     selectedNavigationItemColor = Color(0xFFFF9800)
 )
 
-val MaterialTheme.extraColors: ExtraColorsPalette
+public val MaterialTheme.extraColors: ExtraColorsPalette
     @Composable @ReadOnlyComposable
     get() = LocalExtraColorsPalette.current

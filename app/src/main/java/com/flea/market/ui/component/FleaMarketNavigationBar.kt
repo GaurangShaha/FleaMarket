@@ -179,7 +179,7 @@ private fun FMBottomNavigation(
     }
 }
 
-fun navigateToDestinations(
+private fun navigateToDestinations(
     index: Int,
     bottomNavigationScreens: BottomNavigationScreens,
     navController: NavController,
@@ -200,7 +200,7 @@ fun navigateToDestinations(
     }
 }
 
-enum class BottomNavigationScreens(
+private enum class BottomNavigationScreens(
     val route: String,
     @StringRes val labelResourceId: Int,
     @DrawableRes val iconResourceId: Int

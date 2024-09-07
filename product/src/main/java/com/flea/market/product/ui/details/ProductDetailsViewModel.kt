@@ -1,8 +1,9 @@
 package com.flea.market.product.ui.details
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flea.market.cart.data.repository.CartRepository
-import com.flea.market.common.base.viewmodel.BaseViewModel
+import com.flea.market.common.contract.viewmodel.ViewModelContract
 import com.flea.market.common.extension.ifInstanceOf
 import com.flea.market.favourite.repository.FavouriteRepository
 import com.flea.market.foundation.extension.getOrThrow
@@ -23,6 +24,9 @@ import com.flea.market.ui.component.ButtonState.Result
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -31,7 +35,10 @@ internal class ProductDetailsViewModel(
     private val productRepository: ProductRepository,
     private val cartRepository: CartRepository,
     private val favouriteRepository: FavouriteRepository
-) : BaseViewModel<ProductDetailsIntent, ProductDetailsUiState>(Loading) {
+) : ViewModelContract<ProductDetailsUiState, ProductDetailsIntent>, ViewModel() {
+
+    private val _uiState: MutableStateFlow<ProductDetailsUiState> = MutableStateFlow(Loading)
+    override val uiState: StateFlow<ProductDetailsUiState> = _uiState.asStateFlow()
 
     init {
         getProductDetails()
@@ -39,19 +46,19 @@ internal class ProductDetailsViewModel(
 
     override fun onHandleIntent(intent: ProductDetailsIntent) {
         when (intent) {
-            AddToCart -> addToCart()
-            is ToggleMarkAsFavourite -> toggleMarkAsFavourite(intent.markAsFavourite)
+            AddToCart -> viewModelScope.launch { addToCart() }
+            is ToggleMarkAsFavourite -> viewModelScope.launch { toggleMarkAsFavourite(intent.markAsFavourite) }
             ProductDetailsIntent.Reload -> getProductDetails()
         }
     }
 
     private fun getProductDetails() {
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-            updateUiState(Error(throwable))
+            _uiState.value = Error(throwable)
         }
 
         viewModelScope.launch(coroutineExceptionHandler) {
-            updateUiState(Loading)
+            _uiState.value = Loading
             val productDetailsDeferred = async {
                 productRepository.getProductDetails(productDetailsArgs.productId).getOrThrow()
                     .toProductDetailsViewEntity()
@@ -60,42 +67,37 @@ internal class ProductDetailsViewModel(
                 favouriteRepository.isMarkedAsFavourite(productDetailsArgs.productId).getOrThrow()
             }
 
-            updateUiState(
-                Content(
-                    productDetails = productDetailsDeferred.await(),
-                    markedAsFavourite = markedAsFavouriteDeferred.await(),
-                    addToCartButtonState = Initial
-                )
+            _uiState.value = Content(
+                productDetails = productDetailsDeferred.await(),
+                markedAsFavourite = markedAsFavouriteDeferred.await(),
+                addToCartButtonState = Initial
             )
+
         }
     }
 
-    private fun addToCart() {
+    private suspend fun addToCart() {
         uiState.ifInstanceOf<Content> { content ->
-            viewModelScope.launch {
-                updateUiState(content.copy(addToCartButtonState = ButtonState.Loading))
-                delay(Random.nextLong(MIN_DELAY, MAX_DELAY))
-                cartRepository.addOrUpdateItem(content.productDetails.toCartProductDetails())
-                    .onSuccess {
-                        updateUiState(content.copy(addToCartButtonState = Result))
-                        // Code to reset the button after
-                        delay(RESET_DELAY)
-                        updateUiState(content.copy(addToCartButtonState = Initial))
-                    }
-            }
-        }
-    }
-
-    private fun toggleMarkAsFavourite(markAsFavourite: Boolean) {
-        uiState.ifInstanceOf<Content> { content ->
-            viewModelScope.launch {
-                if (markAsFavourite) {
-                    favouriteRepository.markAsFavourite(content.productDetails.toFavouriteProductDetails())
-                        .onSuccess { updateUiState(content.copy(markedAsFavourite = true)) }
-                } else {
-                    favouriteRepository.removeFromFavourite(content.productDetails.id)
-                        .onSuccess { updateUiState(content.copy(markedAsFavourite = false)) }
+            _uiState.value = content.copy(addToCartButtonState = ButtonState.Loading)
+            delay(Random.nextLong(MIN_DELAY, MAX_DELAY))
+            cartRepository.addOrUpdateItem(content.productDetails.toCartProductDetails())
+                .onSuccess {
+                    _uiState.value = content.copy(addToCartButtonState = Result)
+                    // Code to reset the button after
+                    delay(RESET_DELAY)
+                    _uiState.value = content.copy(addToCartButtonState = Initial)
                 }
+        }
+    }
+
+    private suspend fun toggleMarkAsFavourite(markAsFavourite: Boolean) {
+        uiState.ifInstanceOf<Content> { content ->
+            if (markAsFavourite) {
+                favouriteRepository.markAsFavourite(content.productDetails.toFavouriteProductDetails())
+                    .onSuccess { _uiState.value = content.copy(markedAsFavourite = true) }
+            } else {
+                favouriteRepository.removeFromFavourite(content.productDetails.id)
+                    .onSuccess { _uiState.value = content.copy(markedAsFavourite = false) }
             }
         }
     }

@@ -15,7 +15,7 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
-fun LazyImage(
+public fun LazyImage(
     url: String,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
@@ -33,7 +33,7 @@ fun LazyImage(
 
 @FleaMarketPreviews
 @Composable
-fun LazyImagePreview() {
+private fun LazyImagePreview() {
     FleaMarketThemePreview {
         @Suppress("MaxLineLength")
         LazyImage(

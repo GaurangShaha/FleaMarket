@@ -19,7 +19,7 @@ import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.theme.FleaMarketTheme
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-class MainActivity : ComponentActivity() {
+internal class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

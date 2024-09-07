@@ -13,7 +13,7 @@ import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraShape
 
 @Composable
-fun FMButton(
+public fun FMButton(
     text: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
@@ -24,7 +24,7 @@ fun FMButton(
 }
 
 @Composable
-fun FMOutlinedButton(
+public fun FMOutlinedButton(
     text: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit

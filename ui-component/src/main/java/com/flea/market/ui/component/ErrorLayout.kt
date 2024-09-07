@@ -20,7 +20,7 @@ import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
-fun ErrorLayout(
+public fun ErrorLayout(
     errorMessage: String,
     errorIcon: Painter,
     modifier: Modifier = Modifier,

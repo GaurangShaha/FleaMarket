@@ -24,7 +24,7 @@ import com.flea.market.ui.theme.extraColors
 
 @SuppressLint("UnusedTransitionTargetStateParameter")
 @Composable
-fun HeartToggleButton(
+public fun HeartToggleButton(
     onAddToFavourite: Boolean,
     modifier: Modifier = Modifier,
     onToggleMarkAsFavourite: (Boolean) -> Unit

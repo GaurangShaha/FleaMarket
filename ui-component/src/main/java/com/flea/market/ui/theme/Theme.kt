@@ -46,7 +46,7 @@ private val DarkColorPalette = darkColors(
 )
 
 @Composable
-fun FleaMarketTheme(
+public fun FleaMarketTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -89,7 +89,7 @@ fun FleaMarketTheme(
 }
 
 @Composable
-fun DarkStatusBarDisposableEffect(useDarkTheme: Boolean = isSystemInDarkTheme()) {
+public fun DarkStatusBarDisposableEffect(useDarkTheme: Boolean = isSystemInDarkTheme()) {
     findActivity()?.let { activity ->
         val view = LocalView.current
         DisposableEffect(Unit) {

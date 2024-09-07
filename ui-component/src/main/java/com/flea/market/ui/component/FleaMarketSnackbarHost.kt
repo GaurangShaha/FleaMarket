@@ -25,7 +25,7 @@ import com.flea.market.ui.compositionlocal.LocalSnackbarHostState
 import com.flea.market.ui.theme.extraColors
 
 @Composable
-fun FleaMarketSnackbarHost(modifier: Modifier = Modifier) {
+public fun FleaMarketSnackbarHost(modifier: Modifier = Modifier) {
     SnackbarHost(
         modifier = modifier.padding(16.dp),
         hostState = LocalSnackbarHostState.current

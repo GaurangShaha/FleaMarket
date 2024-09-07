@@ -8,11 +8,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
-fun ScreenWithNavigationRail(
+internal fun ScreenWithNavigationRail(
     selectedIndex: Int,
     navHost: @Composable () -> Unit,
     modifier: Modifier = Modifier,
@@ -31,16 +29,5 @@ fun ScreenWithNavigationRail(
             navHost()
             FleaMarketSnackbarHost()
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-fun ScreenWithNavigationRailPreview() {
-    FleaMarketThemePreview {
-        ScreenWithNavigationRail(
-            selectedIndex = 0,
-            navHost = {}
-        ) {}
     }
 }

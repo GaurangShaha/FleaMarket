@@ -18,7 +18,7 @@ import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
-fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier = Modifier) {
+public fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier = Modifier) {
     if (totalPages == 1) return
     Row(modifier = modifier, horizontalArrangement = Arrangement.Center) {
         repeat(totalPages) {
@@ -45,7 +45,7 @@ fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier = Modifi
 
 @FleaMarketPreviews
 @Composable
-fun PageIndicatorPreview() {
+private fun PageIndicatorPreview() {
     FleaMarketThemePreview {
         PageIndicator(totalPages = 5, currentPage = 1)
     }
