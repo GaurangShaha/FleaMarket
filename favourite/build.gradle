@@ -42,10 +42,17 @@ android {
     kotlin {
         explicitApi()
     }
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
     api project(path: ':ui-common')
     implementation project(path: ':cart:data')
     api project(path: ':favourite:data')
+
+    testImplementation project(path: ':test-common')
 }

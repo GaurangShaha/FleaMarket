@@ -83,9 +83,10 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                 And("onHandleIntent called with AddToCart") {
                     coEvery { cartRepositoryMock.addOrUpdateItem(any()) } returns Success(Unit)
 
-                    runTest {
-                        productDetailsViewModel.onHandleIntent(AddToCart)
-                    }
+                    productDetailsViewModel.onHandleIntent(AddToCart)
+
+                    // Test case works fine only if this line is present, need to find proper solution for it
+                    runTest {}
 
                     Then("cartRepository addOrUpdateItem function should be called") {
                         coVerify { cartRepositoryMock.addOrUpdateItem(any()) }
