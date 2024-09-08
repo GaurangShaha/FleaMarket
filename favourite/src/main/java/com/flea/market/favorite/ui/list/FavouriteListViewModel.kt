@@ -32,7 +32,8 @@ import kotlinx.coroutines.launch
 private const val DELAY_FOR_SIMULATING_LOADING = 1000L
 
 internal class FavouriteListViewModel(
-    private val favouriteRepository: FavouriteRepository, private val cartRepository: CartRepository
+    private val favouriteRepository: FavouriteRepository,
+    private val cartRepository: CartRepository
 ) : ViewModelContract<FavouriteListUiState, FavouriteListIntent>, ViewModel() {
 
     private val _uiState: MutableStateFlow<FavouriteListUiState> = MutableStateFlow(Loading)
@@ -43,10 +44,12 @@ internal class FavouriteListViewModel(
             favouriteRepository.getFavouriteProductsStream().map { it.toFavouriteItemViewEntity() }
                 .map { favouriteItemList ->
                     if (favouriteItemList.isNotEmpty()) {
-                        Content(favouriteProductList = favouriteItemList,
+                        Content(
+                            favouriteProductList = favouriteItemList,
                             snackbarDetails = with(uiState.value) {
                                 if (this is Content) snackbarDetails else null
-                            })
+                            }
+                        )
                     } else {
                         Empty
                     }
@@ -76,7 +79,8 @@ internal class FavouriteListViewModel(
             cartRepository.addOrUpdateItem(favouriteItemViewEntity.toCartProductDetails())
                 .onSuccess {
                     val snackbarDetails = SnackbarDetails(
-                        message = R.string.move_to_cart_success, snackbarType = SUCCESS
+                        message = R.string.move_to_cart_success,
+                        snackbarType = SUCCESS
                     )
                     _uiState.value = content.copy(snackbarDetails = snackbarDetails)
 

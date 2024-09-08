@@ -32,6 +32,11 @@ android {
     kotlin {
         explicitApi()
     }
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -43,4 +48,6 @@ dependencies {
     implementation libs.room
     annotationProcessor libs.room.compiler
     ksp libs.room.compiler
+
+    testImplementation project(path: ':test-common')
 }

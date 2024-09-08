@@ -31,10 +31,17 @@ android {
     kotlin {
         explicitApi()
     }
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
     implementation(project(":networking"))
 
     implementation libs.koin
+
+    testImplementation project(path: ':test-common')
 }

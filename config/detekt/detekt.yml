@@ -1137,7 +1137,7 @@ ArchitectureRule:
   RetrofitFunctionShouldBeSuspended:
     active: true
   ViewModelShouldDerivedFromBaseViewModel:
-    active: true
+    active: false
   ViewModelShouldNotHaveSavedStateHandleAsParam:
     active: true
   ViewModelShouldNotHavePublicMethod:

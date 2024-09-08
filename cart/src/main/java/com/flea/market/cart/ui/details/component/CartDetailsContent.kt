@@ -38,7 +38,8 @@ internal const val SECOND_COLUMN_WEIGHT_LARGE_SCREENS = 1 - FIRST_COLUMN_WEIGHT_
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ContentForMediumAndExpandedScreen(
-    uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit
+    uiState: Content,
+    onHandleIntent: (CartDetailsIntent) -> Unit
 ) {
     Row {
         LazyColumn(
@@ -68,7 +69,7 @@ private fun ContentForMediumAndExpandedScreen(
                     onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
                     onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
                     onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
-                    modifier = Modifier.animateItemPlacement()
+                    modifier = Modifier.animateItem()
                 ) {
                     navController.navigate(ProductDetailsDeepLink.getUri(itemsInCartViewEntity.id))
                 }
@@ -93,12 +94,14 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
             CheckoutButton { }
         }
 
-        items(key = { it.id },
+        items(
+            key = { it.id },
             items = uiState.productList,
-            contentType = { "productItem" }) { itemsInCartViewEntity ->
+            contentType = { "productItem" }
+        ) { itemsInCartViewEntity ->
             val navController = LocalNavController.current
             CartItemProductDetails(
-                modifier = Modifier.animateItemPlacement(),
+                modifier = Modifier.animateItem(),
                 itemsInCart = itemsInCartViewEntity,
                 onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
                 onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },

@@ -41,7 +41,9 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
                 Empty
             }
         }.catch { emit(Error(it)) }.onStart { delay(DELAY_FOR_SIMULATING_LOADING) }.stateIn(
-            scope = viewModelScope, started = startWithFiveSecStopTimeout, initialValue = Loading
+            scope = viewModelScope,
+            started = startWithFiveSecStopTimeout,
+            initialValue = Loading
         )
 
     override fun onHandleIntent(intent: CartDetailsIntent) {
@@ -56,7 +58,8 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
 
     private suspend fun increaseQuantity(itemsInCartViewEntity: ItemsInCartViewEntity) {
         cartRepository.updateQuantity(
-            productId = itemsInCartViewEntity.id, quantity = itemsInCartViewEntity.quantity.inc()
+            productId = itemsInCartViewEntity.id,
+            quantity = itemsInCartViewEntity.quantity.inc()
         )
     }
 

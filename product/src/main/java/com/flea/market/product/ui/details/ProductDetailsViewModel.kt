@@ -11,6 +11,7 @@ import com.flea.market.foundation.extension.onSuccess
 import com.flea.market.product.data.repository.ProductRepository
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
+import com.flea.market.product.ui.details.ProductDetailsIntent.Reload
 import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavourite
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.details.ProductDetailsUiState.Error
@@ -48,7 +49,7 @@ internal class ProductDetailsViewModel(
         when (intent) {
             AddToCart -> viewModelScope.launch { addToCart() }
             is ToggleMarkAsFavourite -> viewModelScope.launch { toggleMarkAsFavourite(intent.markAsFavourite) }
-            ProductDetailsIntent.Reload -> getProductDetails()
+            Reload -> getProductDetails()
         }
     }
 
@@ -72,7 +73,6 @@ internal class ProductDetailsViewModel(
                 markedAsFavourite = markedAsFavouriteDeferred.await(),
                 addToCartButtonState = Initial
             )
-
         }
     }
 

@@ -38,7 +38,7 @@ internal fun FavouriteListContent(
                 onMoveToCart = {
                     onHandleIntent(FavouriteListIntent.MoveToCart(favouriteItemViewEntity))
                 },
-                modifier = Modifier.animateItemPlacement()
+                modifier = Modifier.animateItem()
             )
         }
     }
