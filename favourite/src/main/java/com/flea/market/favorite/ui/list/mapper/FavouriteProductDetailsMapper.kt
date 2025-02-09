@@ -14,3 +14,15 @@ internal fun List<FavouriteProductDetailsEntity>.toFavouriteItemViewEntity() = m
         title = it.title
     )
 }
+
+internal fun FavouriteItemViewEntity.toFavouriteProductDetailsEntity(): FavouriteProductDetailsEntity {
+    return FavouriteProductDetailsEntity(
+        id = id,
+        category = category,
+        image = image,
+        price = price,
+        title = title,
+        description = description,
+        rating = rating
+    )
+}

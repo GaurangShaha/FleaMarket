@@ -1,8 +1,9 @@
 package com.flea.market.data.common.remote.call
 
 import com.flea.market.data.common.remote.mapper.toInternetConnectionExceptionOrSelf
-import com.flea.market.foundation.helper.executeCatching
+import com.flea.market.foundation.helper.executeSafely
 import com.flea.market.foundation.model.Result
+import com.flea.market.foundation.model.Result.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
@@ -19,9 +20,9 @@ import retrofit2.awaitResponse
 internal class ResultWithResponseCall<T : Any>(
     private val proxy: Call<T?>,
     private val coroutineScope: CoroutineScope,
-) : Call<Result<Response<T?>, Throwable>> {
+) : Call<Result<Response<T?>>> {
 
-    override fun enqueue(callback: Callback<Result<Response<T?>, Throwable>>) {
+    override fun enqueue(callback: Callback<Result<Response<T?>>>) {
         coroutineScope.launch {
             try {
                 val response = proxy.awaitResponse()
@@ -33,23 +34,23 @@ internal class ResultWithResponseCall<T : Any>(
                 coroutineContext.ensureActive()
                 callback.onResponse(
                     this@ResultWithResponseCall,
-                    Response.success(Result.failure(e.toInternetConnectionExceptionOrSelf()))
+                    Response.success(Failure(e.toInternetConnectionExceptionOrSelf()))
                 )
             }
         }
     }
 
-    override fun execute(): Response<Result<Response<T?>, Throwable>> =
+    override fun execute(): Response<Result<Response<T?>>> =
         runBlocking(coroutineScope.coroutineContext) {
             try {
                 Response.success(proxy.execute().toResult())
             } catch (e: Exception) {
                 coroutineContext.ensureActive()
-                Response.success(Result.failure(e.toInternetConnectionExceptionOrSelf()))
+                Response.success(Failure(e.toInternetConnectionExceptionOrSelf()))
             }
         }
 
-    override fun clone(): Call<Result<Response<T?>, Throwable>> =
+    override fun clone(): Call<Result<Response<T?>>> =
         ResultWithResponseCall(proxy.clone(), coroutineScope)
 
     override fun request(): Request = proxy.request()
@@ -63,8 +64,8 @@ internal class ResultWithResponseCall<T : Any>(
     override fun cancel() = proxy.cancel()
 
     @Suppress("UNCHECKED_CAST")
-    private fun <T> Response<T?>.toResult(): Result<Response<T?>, Throwable> {
-        return executeCatching {
+    private suspend fun <T> Response<T?>.toResult(): Result<Response<T?>> {
+        return executeSafely {
             if (isSuccessful) {
                 this
             } else {

@@ -1,5 +1,6 @@
 package com.flea.market.product.data.remote.entity
 
-import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-public data class RatingEntity(@Json(name = "count") val count: Int, @Json(name = "rate") val rate: Double)
+@JsonClass(generateAdapter = true)
+public data class RatingEntity(val count: Int, val rate: Double)

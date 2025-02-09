@@ -1,6 +1,7 @@
 package com.flea.market.product.ui.details
 
 import com.flea.market.cart.data.repository.CartRepository
+import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.favourite.repository.FavouriteRepository
 import com.flea.market.foundation.model.Result.Failure
 import com.flea.market.foundation.model.Result.Success
@@ -12,7 +13,6 @@ import com.flea.market.product.ui.details.ProductDetailsIntent.Reload
 import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavourite
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.details.ProductDetailsUiState.Error
-import com.flea.market.product.ui.details.navigation.ProductDetailsArgs
 import com.flea.market.product.ui.input.productDetailsEntityList
 import com.flea.market.ui.component.ButtonState.Initial
 import io.kotest.core.spec.style.BehaviorSpec
@@ -42,7 +42,7 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                 coEvery { favouriteRepositoryMock.isMarkedAsFavourite(any()) } returns Success(true)
 
                 val productDetailsViewModel = ProductDetailsViewModel(
-                    productDetailsArgs = ProductDetailsArgs(1),
+                    productDetailsDestination = ProductDetailsDestination(1),
                     productRepository = productRepositoryMock,
                     cartRepository = cartRepositoryMock,
                     favouriteRepository = favouriteRepositoryMock
@@ -98,7 +98,7 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                 coEvery { favouriteRepositoryMock.isMarkedAsFavourite(any()) } returns Success(false)
 
                 val productDetailsViewModel = ProductDetailsViewModel(
-                    productDetailsArgs = ProductDetailsArgs(1),
+                    productDetailsDestination = ProductDetailsDestination(1),
                     productRepository = productRepositoryMock,
                     cartRepository = cartRepositoryMock,
                     favouriteRepository = favouriteRepositoryMock
@@ -144,7 +144,7 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
             coEvery { productRepositoryMock.getProductDetails(any()) } returns Failure(Exception())
 
             val productDetailsViewModel = ProductDetailsViewModel(
-                productDetailsArgs = ProductDetailsArgs(1),
+                productDetailsDestination = ProductDetailsDestination(1),
                 productRepository = productRepositoryMock,
                 cartRepository = cartRepositoryMock,
                 favouriteRepository = favouriteRepositoryMock

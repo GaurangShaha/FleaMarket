@@ -33,9 +33,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.flea.market.R
-import com.flea.market.product.ui.list.navigation.PRODUCT_LIST_ROUTE
-import com.flea.market.profile.ui.navigation.PROFILE_ROUTE
+import com.flea.market.cart.ui.details.navigation.CartDetailsDestination
+import com.flea.market.favorite.ui.list.navigation.FavouriteListDestination
+import com.flea.market.product.ui.list.navigation.ProductListDestination
+import com.flea.market.profile.ui.navigation.ProfileDestination
+import com.flea.market.ui.component.shared.SharedUIController
 import com.flea.market.ui.compositionlocal.LocalNavController
+import com.flea.market.ui.compositionlocal.LocalSharedUIController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraShape
@@ -44,8 +48,7 @@ import java.util.Locale
 @Composable
 internal fun FleaMarketNavigationBar(
     selectedNavigationItemIndex: Int,
-    modifier: Modifier = Modifier,
-    onSelectNavigationItem: (Int) -> Unit
+    modifier: Modifier = Modifier
 ) {
     val navHost = LocalNavController.current
     val navBackStackEntry by navHost.currentBackStackEntryAsState()
@@ -55,15 +58,13 @@ internal fun FleaMarketNavigationBar(
         FMBottomNavigation(
             currentDestinationRoute,
             selectedNavigationItemIndex,
-            modifier,
-            onSelectNavigationItem
+            modifier
         )
     } else {
         FMNavigationRail(
             currentDestinationRoute,
             selectedNavigationItemIndex,
-            modifier,
-            onSelectNavigationItem
+            modifier
         )
     }
 }
@@ -72,25 +73,25 @@ internal fun FleaMarketNavigationBar(
 private fun FMNavigationRail(
     currentDestinationRoute: String?,
     selectedNavigationItemIndex: Int,
-    modifier: Modifier = Modifier,
-    onSelectNavigationItem: (Int) -> Unit
+    modifier: Modifier = Modifier
 ) {
     val navHost = LocalNavController.current
+    val sharedUIController = LocalSharedUIController.current
     NavigationRail(modifier = modifier.padding(end = 2.dp)) {
         BottomNavigationScreens.entries.forEachIndexed { index, destination ->
             if (currentDestinationRoute == destination.route && index != selectedNavigationItemIndex) {
-                onSelectNavigationItem(index)
+                sharedUIController.updateSelectedNavigationItemIndex(index)
             }
             if (index == 0) {
                 Spacer(modifier = Modifier.statusBarsPadding())
             }
             NavigationRailItem(selected = selectedNavigationItemIndex == index, onClick = {
                 navigateToDestinations(
-                    index,
-                    destination,
-                    navHost,
-                    currentDestinationRoute,
-                    onSelectNavigationItem
+                    index = index,
+                    bottomNavigationScreens = destination,
+                    navController = navHost,
+                    currentDestinationRoute = currentDestinationRoute,
+                    sharedUIController = sharedUIController
                 )
             }, alwaysShowLabel = false, icon = {
                 Icon(
@@ -116,13 +117,12 @@ private fun FMNavigationRail(
 private fun FMBottomNavigation(
     currentDestinationRoute: String?,
     selectedNavigationItemIndex: Int,
-    modifier: Modifier = Modifier,
-    onSelectNavigationItem: (Int) -> Unit
+    modifier: Modifier = Modifier
 ) {
     val navHost = LocalNavController.current
+    val sharedUIController = LocalSharedUIController.current
     AnimatedVisibility(
-        visible = BottomNavigationScreens.entries
-            .any { currentDestinationRoute?.equals(it.route) ?: false },
+        visible = isBottomBarVisible(currentDestinationRoute),
         enter = scaleIn(),
         exit = scaleOut()
     ) {
@@ -133,9 +133,8 @@ private fun FMBottomNavigation(
         ) {
             BottomNavigationScreens.entries.forEachIndexed { index, screen ->
                 if (currentDestinationRoute == screen.route && index != selectedNavigationItemIndex) {
-                    onSelectNavigationItem(index)
+                    sharedUIController.updateSelectedNavigationItemIndex(index)
                 }
-
                 BottomNavigationItem(
                     selected = selectedNavigationItemIndex == index,
                     icon = {
@@ -165,11 +164,11 @@ private fun FMBottomNavigation(
                     },
                     onClick = {
                         navigateToDestinations(
-                            index,
-                            screen,
-                            navHost,
-                            currentDestinationRoute,
-                            onSelectNavigationItem
+                            index = index,
+                            bottomNavigationScreens = screen,
+                            navController = navHost,
+                            currentDestinationRoute = currentDestinationRoute,
+                            sharedUIController = sharedUIController
                         )
                     },
                     alwaysShowLabel = false
@@ -179,15 +178,18 @@ private fun FMBottomNavigation(
     }
 }
 
+private fun isBottomBarVisible(currentDestinationRoute: String?) = BottomNavigationScreens.entries
+    .any { currentDestinationRoute?.equals(it.route::class.qualifiedName) ?: false }
+
 private fun navigateToDestinations(
     index: Int,
     bottomNavigationScreens: BottomNavigationScreens,
     navController: NavController,
     currentDestinationRoute: String?,
-    updateSelectedNavigationItemIndex: (Int) -> Unit
+    sharedUIController: SharedUIController
 ) {
     if (currentDestinationRoute != bottomNavigationScreens.route) {
-        updateSelectedNavigationItemIndex(index)
+        sharedUIController.updateSelectedNavigationItemIndex(index)
         val topLevelNavOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id)
             launchSingleTop = true
@@ -201,30 +203,30 @@ private fun navigateToDestinations(
 }
 
 private enum class BottomNavigationScreens(
-    val route: String,
+    val route: Any,
     @StringRes val labelResourceId: Int,
     @DrawableRes val iconResourceId: Int
 ) {
     HOME(
-        route = PRODUCT_LIST_ROUTE,
+        route = ProductListDestination,
         labelResourceId = R.string.home,
         iconResourceId = R.drawable.ic_home
     ),
 
     CART(
-        route = com.flea.market.cart.ui.details.navigation.CART_DETAILS_ROUTE,
+        route = CartDetailsDestination,
         labelResourceId = R.string.cart,
         iconResourceId = com.flea.market.ui.component.R.drawable.ic_cart
     ),
 
     FAVOURITE(
-        route = com.flea.market.favorite.ui.list.navigation.FAVOURITE_LIST_ROUTE,
+        route = FavouriteListDestination,
         labelResourceId = R.string.favourites,
         iconResourceId = R.drawable.ic_favourite
     ),
 
     PROFILE(
-        route = PROFILE_ROUTE,
+        route = ProfileDestination,
         labelResourceId = com.flea.market.profile.ui.R.string.profile,
         iconResourceId = R.drawable.ic_more
     )

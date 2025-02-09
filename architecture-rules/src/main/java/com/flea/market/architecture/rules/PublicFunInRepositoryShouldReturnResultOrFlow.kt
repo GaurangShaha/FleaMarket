@@ -22,7 +22,7 @@ class PublicFunInRepositoryShouldReturnResultOrFlow(config: Config) : Rule(confi
 
     override fun visitClass(klass: KtClass) {
         super.visitClass(klass)
-        if (klass.name?.endsWith("Repository") == true) {
+        if (klass.name?.endsWith("Repository") == true && klass.isInterface()) {
             klass.body?.functions?.filter { namedFunction ->
                 namedFunction.isPublic && !(namedFunction.returnsFlow || namedFunction.returnsResult)
             }?.forEach { namedFunction ->

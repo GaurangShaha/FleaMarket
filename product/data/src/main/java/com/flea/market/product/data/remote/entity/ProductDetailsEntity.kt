@@ -1,14 +1,15 @@
 package com.flea.market.product.data.remote.entity
 
-import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 public data class ProductDetailsEntity(
-    @Json(name = "category") val category: String,
-    @Json(name = "description") val description: String,
-    @Json(name = "id") val id: Int,
-    @Json(name = "image") val image: String,
-    @Json(name = "price") val price: Double,
-    @Json(name = "rating") val rating: RatingEntity,
-    @Json(name = "title") val title: String,
-    val imageList: List<String>
+    val category: String,
+    val description: String,
+    val id: Int,
+    val image: String,
+    val price: Double,
+    val rating: RatingEntity,
+    val title: String,
+    val imageList: List<String> = emptyList()
 )

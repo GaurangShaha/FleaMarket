@@ -62,6 +62,7 @@ dependencies {
 
     api libs.koin
     api libs.navigation.compose
+    api libs.compose.material.icons.core
 
     debugApi platform(libs.compose.bom)
     debugApi libs.compose.ui.tooling

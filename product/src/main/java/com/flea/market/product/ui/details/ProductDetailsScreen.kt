@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.foundation.model.InternetConnectionException
+import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.product.ui.R
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.details.ProductDetailsUiState.Error
@@ -84,7 +84,7 @@ private fun ProductDetailsLoadingScreenPreview() {
 @FleaMarketPreviews
 private fun ProductDetailsErrorScreenPreview() {
     FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Error(InternetConnectionException), onHandleIntent = {})
+        ProductDetailsScreen(uiState = Error(InternetDisconnectionException), onHandleIntent = {})
     }
 }
 

@@ -11,10 +11,10 @@ import java.lang.reflect.Type
 internal class ResultWithResponseCallAdapter(
     private val resultType: Type,
     private val coroutineScope: CoroutineScope,
-) : CallAdapter<Type, Call<Result<Response<Type?>, Throwable>>> {
+) : CallAdapter<Type, Call<Result<Response<Type?>>>> {
 
     override fun responseType(): Type = resultType
 
-    override fun adapt(call: Call<Type?>): Call<Result<Response<Type?>, Throwable>> =
+    override fun adapt(call: Call<Type?>): Call<Result<Response<Type?>>> =
         ResultWithResponseCall(call, coroutineScope)
 }

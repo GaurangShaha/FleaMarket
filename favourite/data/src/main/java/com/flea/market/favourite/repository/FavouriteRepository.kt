@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.Flow
 public interface FavouriteRepository {
     public suspend fun markAsFavourite(
         favouriteProductDetailsEntity: FavouriteProductDetailsEntity
-    ): Result<Unit, Throwable>
+    ): Result<Unit>
 
-    public suspend fun removeFromFavourite(productId: Int): Result<Unit, Throwable>
+    public suspend fun removeFromFavourite(productId: Int): Result<Unit>
 
-    public suspend fun isMarkedAsFavourite(productId: Int): Result<Boolean, Throwable>
+    public suspend fun isMarkedAsFavourite(productId: Int): Result<Boolean>
 
     public fun getFavouriteProductsStream(): Flow<List<FavouriteProductDetailsEntity>>
 }

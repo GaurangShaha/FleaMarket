@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.common.contract.viewmodel.ViewModelContract
 import com.flea.market.common.extension.ifInstanceOf
+import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.favourite.repository.FavouriteRepository
 import com.flea.market.foundation.extension.getOrThrow
 import com.flea.market.foundation.extension.onSuccess
@@ -18,7 +19,6 @@ import com.flea.market.product.ui.details.ProductDetailsUiState.Error
 import com.flea.market.product.ui.details.ProductDetailsUiState.Loading
 import com.flea.market.product.ui.details.mapper.toCartProductDetails
 import com.flea.market.product.ui.details.mapper.toFavouriteProductDetails
-import com.flea.market.product.ui.details.navigation.ProductDetailsArgs
 import com.flea.market.ui.component.ButtonState
 import com.flea.market.ui.component.ButtonState.Initial
 import com.flea.market.ui.component.ButtonState.Result
@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 internal class ProductDetailsViewModel(
-    private val productDetailsArgs: ProductDetailsArgs,
+    private val productDetailsDestination: ProductDetailsDestination,
     private val productRepository: ProductRepository,
     private val cartRepository: CartRepository,
     private val favouriteRepository: FavouriteRepository
@@ -61,11 +61,11 @@ internal class ProductDetailsViewModel(
         viewModelScope.launch(coroutineExceptionHandler) {
             _uiState.value = Loading
             val productDetailsDeferred = async {
-                productRepository.getProductDetails(productDetailsArgs.productId).getOrThrow()
+                productRepository.getProductDetails(productDetailsDestination.productId).getOrThrow()
                     .toProductDetailsViewEntity()
             }
             val markedAsFavouriteDeferred = async {
-                favouriteRepository.isMarkedAsFavourite(productDetailsArgs.productId).getOrThrow()
+                favouriteRepository.isMarkedAsFavourite(productDetailsDestination.productId).getOrThrow()
             }
 
             _uiState.value = Content(

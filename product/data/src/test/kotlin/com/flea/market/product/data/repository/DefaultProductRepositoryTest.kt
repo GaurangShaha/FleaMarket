@@ -12,9 +12,9 @@ import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
 import io.mockk.mockk
 
-class ProductRepositoryImplTest : BehaviorSpec({
+class DefaultProductRepositoryTest : BehaviorSpec({
     val productRemoteSource = mockk<ProductRemoteSource>()
-    val productRepository: ProductRepository = ProductRepositoryImpl(productRemoteSource)
+    val productRepository: ProductRepository = DefaultProductRepository(productRemoteSource)
 
     Given("product repository's getProductList function is called") {
         When("product list got fetched successfully") {
@@ -45,7 +45,7 @@ class ProductRepositoryImplTest : BehaviorSpec({
             val result = productRepository.getProductList()
 
             Then("should return failure") {
-                result.shouldBeTypeOf<Failure<Throwable>>()
+                result.shouldBeTypeOf<Failure>()
             }
         }
     }
@@ -79,7 +79,7 @@ class ProductRepositoryImplTest : BehaviorSpec({
             val result = productRepository.getProductDetails(1)
 
             Then("should return failure") {
-                result.shouldBeTypeOf<Failure<Throwable>>()
+                result.shouldBeTypeOf<Failure>()
             }
         }
     }

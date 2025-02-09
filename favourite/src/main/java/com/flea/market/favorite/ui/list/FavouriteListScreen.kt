@@ -6,7 +6,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.favorite.ui.list.FavouriteListIntent.SnackbarResult
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Content
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Empty
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Error
@@ -15,11 +14,10 @@ import com.flea.market.favorite.ui.list.component.FavouriteListContent
 import com.flea.market.favorite.ui.list.component.ProductListLoading
 import com.flea.market.favorite.ui.list.component.dummyContent
 import com.flea.market.favourite.ui.R
-import com.flea.market.foundation.model.InternetConnectionException
+import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.ui.component.EmptyLayout
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
-import com.flea.market.ui.component.FleaMarketSnackBar
 import com.flea.market.ui.preview.FleaMarketPreviews
 import com.flea.market.ui.preview.FleaMarketThemePreview
 
@@ -40,11 +38,6 @@ internal fun FavouriteListScreen(
 
             is Content -> {
                 FavouriteListContent(uiState = uiState, onHandleIntent = onHandleIntent)
-
-                FleaMarketSnackBar(
-                    snackbarDetails = uiState.snackbarDetails,
-                    onSnackbarResult = { onHandleIntent(SnackbarResult(it)) }
-                )
             }
 
             is Error -> ErrorLayout(
@@ -59,7 +52,10 @@ internal fun FavouriteListScreen(
 @Composable
 private fun FavouriteListScreenLoadingPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Loading, onHandleIntent = {})
+        FavouriteListScreen(
+            uiState = Loading,
+            onHandleIntent = {}
+        )
     }
 }
 
@@ -67,7 +63,10 @@ private fun FavouriteListScreenLoadingPreview() {
 @Composable
 private fun FavouriteListScreenContentPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = dummyContent, onHandleIntent = {})
+        FavouriteListScreen(
+            uiState = dummyContent,
+            onHandleIntent = {}
+        )
     }
 }
 
@@ -75,7 +74,10 @@ private fun FavouriteListScreenContentPreview() {
 @Composable
 private fun FavouriteListScreenEmptyPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Empty, onHandleIntent = {})
+        FavouriteListScreen(
+            uiState = Empty,
+            onHandleIntent = {}
+        )
     }
 }
 
@@ -83,6 +85,9 @@ private fun FavouriteListScreenEmptyPreview() {
 @Composable
 private fun FavouriteListScreenErrorPreview() {
     FleaMarketThemePreview {
-        FavouriteListScreen(uiState = Error(InternetConnectionException), onHandleIntent = {})
+        FavouriteListScreen(
+            uiState = Error(InternetDisconnectionException),
+            onHandleIntent = {}
+        )
     }
 }

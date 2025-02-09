@@ -16,9 +16,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlin.coroutines.cancellation.CancellationException
 
-internal class CartRepositoryImplTest : BehaviorSpec({
+internal class DefaultCartRepositoryTest : BehaviorSpec({
     val cartLocalSource = mockk<CartLocalSource>()
-    val cartRepository: CartRepository = CartRepositoryImpl(cartLocalSource)
+    val cartRepository: DefaultCartRepository = DefaultCartRepository(cartLocalSource)
 
     Given("cart repository's getItemsInCartStream function is called") {
         When("items in cart got fetched successfully") {
@@ -64,7 +64,7 @@ internal class CartRepositoryImplTest : BehaviorSpec({
                     cartRepository.addOrUpdateItem(cartProductDetailsEntityList.first())
 
                 Then("should return failure") {
-                    result.shouldBeInstanceOf<Failure<Throwable>>()
+                    result.shouldBeInstanceOf<Failure>()
                 }
             }
         }
@@ -91,7 +91,7 @@ internal class CartRepositoryImplTest : BehaviorSpec({
                     cartRepository.addOrUpdateItem(cartProductDetailsEntityList.first())
 
                 Then("should return failure") {
-                    result.shouldBeInstanceOf<Failure<Throwable>>()
+                    result.shouldBeInstanceOf<Failure>()
                 }
             }
         }
@@ -112,7 +112,7 @@ internal class CartRepositoryImplTest : BehaviorSpec({
             val result = cartRepository.removeItem(1)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure<Throwable>>()
+                result.shouldBeInstanceOf<Failure>()
             }
         }
     }
@@ -132,7 +132,7 @@ internal class CartRepositoryImplTest : BehaviorSpec({
             val result = cartRepository.updateQuantity(1, 2)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure<Throwable>>()
+                result.shouldBeInstanceOf<Failure>()
             }
         }
     }

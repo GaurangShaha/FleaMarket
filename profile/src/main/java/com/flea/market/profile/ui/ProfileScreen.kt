@@ -23,10 +23,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,10 +31,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.flea.market.ui.component.FMOutlinedButton
 import com.flea.market.ui.component.FleaMarketAppBar
-import com.flea.market.ui.component.FleaMarketSnackBar
 import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.component.SnackbarDelegate
-import com.flea.market.ui.component.SnackbarDetails
+import com.flea.market.ui.component.snackbar.model.SnackbarDetails
+import com.flea.market.ui.compositionlocal.LocalSharedUIController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.helper.findActivity
 import com.flea.market.ui.preview.FleaMarketPreviews
@@ -55,8 +50,7 @@ internal fun ProfileScreen(uiState: ProfileUiState) {
         val columnCount =
             if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
 
-        var snackbarDetails by remember { mutableStateOf(null as SnackbarDetails?) }
-
+        val sharedUIController = LocalSharedUIController.current
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(columnCount),
             modifier = Modifier
@@ -70,10 +64,7 @@ internal fun ProfileScreen(uiState: ProfileUiState) {
 
             items(uiState.menuItem) { (icon, stringRes) ->
                 ProfileMenuItem(icon, stringRes) {
-                    snackbarDetails = SnackbarDetails(
-                        message = R.string.coming_soon,
-                        snackbarType = SnackbarDelegate.SnackbarType.DEFAULT
-                    )
+                    sharedUIController.showSnackbar(SnackbarDetails(message = R.string.coming_soon))
                 }
             }
 
@@ -88,11 +79,6 @@ internal fun ProfileScreen(uiState: ProfileUiState) {
                 ) { activity?.finishAndRemoveTask() }
             }
         }
-
-        FleaMarketSnackBar(
-            snackbarDetails = snackbarDetails,
-            onSnackbarResult = { snackbarDetails = null }
-        )
     }
 }
 

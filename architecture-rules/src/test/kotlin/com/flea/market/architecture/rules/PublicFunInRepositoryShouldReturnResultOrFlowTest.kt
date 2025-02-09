@@ -16,7 +16,7 @@ class PublicFunInRepositoryShouldReturnResultOrFlowTest {
             
             fun d(): SharedFlow<Unit>
             
-            fun b(): Result<Unit, Throwable>
+            fun b(): Result<Unit>
             
             fun c(val a: Int): Flow<String>
         }""".trimIndent()
@@ -28,7 +28,7 @@ class PublicFunInRepositoryShouldReturnResultOrFlowTest {
         val code = """interface NewsRepository{
             fun a():Unit
             
-            fun b(): Result<Unit, Throwable>
+            fun b(): Result<Unit>
             
             fun c(val a: Int): Flow<String>
         }""".trimIndent()

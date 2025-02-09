@@ -19,9 +19,9 @@ import io.mockk.mockk
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 
-internal class FavouriteRepositoryImplTest : BehaviorSpec({
+internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
     val favouriteLocalSource = mockk<FavouriteLocalSource>()
-    val favouriteRepository: FavouriteRepository = FavouriteRepositoryImpl(favouriteLocalSource)
+    val favouriteRepository: FavouriteRepository = DefaultFavouriteRepository(favouriteLocalSource)
 
     Given("Favourite repository's markAsFavourite function is called") {
         When("Favourite product is added successfully") {
@@ -40,7 +40,7 @@ internal class FavouriteRepositoryImplTest : BehaviorSpec({
                 favouriteRepository.markAsFavourite(favouriteProductDetailsEntityList.first())
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure<Throwable>>()
+                result.shouldBeInstanceOf<Failure>()
             }
         }
     }
@@ -60,7 +60,7 @@ internal class FavouriteRepositoryImplTest : BehaviorSpec({
             val result = favouriteRepository.removeFromFavourite(1)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure<Throwable>>()
+                result.shouldBeInstanceOf<Failure>()
             }
         }
     }
@@ -91,7 +91,7 @@ internal class FavouriteRepositoryImplTest : BehaviorSpec({
             val result = favouriteRepository.isMarkedAsFavourite(1)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure<Throwable>>()
+                result.shouldBeInstanceOf<Failure>()
             }
         }
     }

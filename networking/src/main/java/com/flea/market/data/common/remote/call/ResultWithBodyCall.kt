@@ -1,8 +1,9 @@
 package com.flea.market.data.common.remote.call
 
 import com.flea.market.data.common.remote.mapper.toInternetConnectionExceptionOrSelf
-import com.flea.market.foundation.helper.executeCatching
+import com.flea.market.foundation.helper.executeSafely
 import com.flea.market.foundation.model.Result
+import com.flea.market.foundation.model.Result.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
@@ -21,9 +22,9 @@ internal class ResultWithBodyCall<T : Any>(
     private val proxy: Call<T>,
     private val resultRawType: Type,
     private val coroutineScope: CoroutineScope,
-) : Call<Result<T?, Throwable>> {
+) : Call<Result<T?>> {
 
-    override fun enqueue(callback: Callback<Result<T?, Throwable>>) {
+    override fun enqueue(callback: Callback<Result<T?>>) {
         coroutineScope.launch {
             try {
                 val response = proxy.awaitResponse()
@@ -35,23 +36,23 @@ internal class ResultWithBodyCall<T : Any>(
                 coroutineContext.ensureActive()
                 callback.onResponse(
                     this@ResultWithBodyCall,
-                    Response.success(Result.failure(e.toInternetConnectionExceptionOrSelf()))
+                    Response.success(Failure(e.toInternetConnectionExceptionOrSelf()))
                 )
             }
         }
     }
 
-    override fun execute(): Response<Result<T?, Throwable>> =
+    override fun execute(): Response<Result<T?>> =
         runBlocking(coroutineScope.coroutineContext) {
             try {
                 Response.success(proxy.execute().toResult(resultRawType))
             } catch (e: Exception) {
                 coroutineContext.ensureActive()
-                Response.success(Result.failure(e.toInternetConnectionExceptionOrSelf()))
+                Response.success(Failure(e.toInternetConnectionExceptionOrSelf()))
             }
         }
 
-    override fun clone(): Call<Result<T?, Throwable>> =
+    override fun clone(): Call<Result<T?>> =
         ResultWithBodyCall(proxy.clone(), resultRawType, coroutineScope)
 
     override fun request(): Request = proxy.request()
@@ -65,8 +66,8 @@ internal class ResultWithBodyCall<T : Any>(
     override fun cancel() = proxy.cancel()
 
     @Suppress("UNCHECKED_CAST")
-    private fun <T : Any?> Response<T>.toResult(resultRawType: Type): Result<T?, Throwable> {
-        return executeCatching {
+    private suspend fun <T : Any?> Response<T>.toResult(resultRawType: Type): Result<T?> {
+        return executeSafely {
             if (isSuccessful) {
                 if (resultRawType == Unit::class.java) {
                     Unit as T

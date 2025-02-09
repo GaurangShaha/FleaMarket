@@ -4,4 +4,5 @@
     <string name="favourites">Favourites</string>
     <string name="move_to_cart">ADD TO CART</string>
     <string name="move_to_cart_success">Item has been added to cart.</string>
+    <string name="undo">Undo</string>
 </resources>

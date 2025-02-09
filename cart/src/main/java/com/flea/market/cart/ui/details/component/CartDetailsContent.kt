@@ -17,7 +17,7 @@ import com.flea.market.cart.ui.details.CartDetailsIntent.DecreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.IncreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.RemoveFromCart
 import com.flea.market.cart.ui.details.CartDetailsUiState.Content
-import com.flea.market.common.navigation.ProductDetailsDeepLink
+import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.preview.FleaMarketPreviews
@@ -70,9 +70,7 @@ private fun ContentForMediumAndExpandedScreen(
                     onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
                     onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
                     modifier = Modifier.animateItem()
-                ) {
-                    navController.navigate(ProductDetailsDeepLink.getUri(itemsInCartViewEntity.id))
-                }
+                ) { navController.navigate(ProductDetailsDestination(itemsInCartViewEntity.id)) }
             }
         }
     }
@@ -106,7 +104,7 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
                 onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
                 onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
                 onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
-            ) { navController.navigate(ProductDetailsDeepLink.getUri(itemsInCartViewEntity.id)) }
+            ) { navController.navigate(ProductDetailsDestination(itemsInCartViewEntity.id)) }
         }
     }
 }

@@ -11,8 +11,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.product.ui.R
-import com.flea.market.product.ui.details.navigation.navigateToProductDetails
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.product.ui.list.ProductListUiState.Content
 import com.flea.market.ui.compositionlocal.LocalNavController
@@ -51,10 +51,9 @@ internal fun ProductListContent(
 
         items(items = state.productList, key = { it.id }, contentType = { "productList" }) {
             val navController = LocalNavController.current
-            ProductListItem(
-                productDetails = it,
-                onProductClick = { navController.navigateToProductDetails(it.id) }
-            )
+            ProductListItem(productDetails = it, onProductClick = {
+                navController.navigate(ProductDetailsDestination(it.id))
+            })
         }
     }
 }

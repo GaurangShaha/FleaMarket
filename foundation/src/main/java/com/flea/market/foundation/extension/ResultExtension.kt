@@ -1,57 +1,66 @@
 package com.flea.market.foundation.extension
 
 import com.flea.market.foundation.model.Result
+import com.flea.market.foundation.model.Result.Failure
+import com.flea.market.foundation.model.Result.Success
 
-public inline fun <S, E : Throwable> Result<S, E>.fold(onSuccess: (S) -> Unit, onError: (E) -> Unit) {
+public inline fun <S> Result<S>.fold(onSuccess: (S) -> Unit, onError: (Throwable) -> Unit) {
     when (this) {
-        is Result.Success -> onSuccess(value)
-        is Result.Failure -> onError(this.error)
+        is Success -> onSuccess(value)
+        is Failure -> onError(this.error)
     }
 }
 
-public inline fun <S, V, E : Throwable> Result<S, E>.map(
+public inline fun <S, V> Result<S>.map(
     onSuccess: (S) -> V
-): Result<V, E> {
+): Result<V> {
     return when (this) {
-        is Result.Success -> Result.success(onSuccess(value))
-        is Result.Failure -> this
+        is Success -> Success(onSuccess(value))
+        is Failure -> this
     }
 }
 
-public inline fun <S, V : Throwable, E : Throwable> Result<S, E>.mapError(
-    onError: (E) -> V
-): Result<S, V> {
+public inline fun <S, T> Result<S>.flatMap(function: (S) -> Result<T>): Result<T> {
     return when (this) {
-        is Result.Success -> this
-        is Result.Failure -> Result.failure(onError(error))
+        is Success -> function(value)
+        is Failure -> this
     }
 }
 
-public inline fun <S, E : Throwable> Result<S, E>.onSuccess(onSuccess: (S) -> Unit) {
-    if (this is Result.Success) onSuccess(value)
-}
-
-public inline fun <S, E : Throwable> Result<S, E>.onFailure(onFailure: (E) -> Unit) {
-    if (this is Result.Failure) onFailure(error)
-}
-
-public fun <S, E : Throwable> Result<S, E>.getOrNull(): S? {
+public inline fun <S> Result<S>.mapError(
+    onError: (Throwable) -> Throwable
+): Result<S> {
     return when (this) {
-        is Result.Success -> value
-        is Result.Failure -> null
+        is Success -> this
+        is Failure -> Failure(onError(error))
     }
 }
 
-public fun <S, E : Throwable> Result<S, E>.getOrElse(defaultValue: S): S {
+public inline fun <S> Result<S>.onSuccess(onSuccess: (S) -> Unit) {
+    if (this is Success) onSuccess(value)
+}
+
+public inline fun Result<*>.onFailure(onFailure: (Throwable) -> Unit) {
+    if (this is Failure) onFailure(error)
+}
+
+public fun <S> Result<S>.getOrNull(): S? {
     return when (this) {
-        is Result.Success -> value
-        is Result.Failure -> defaultValue
+        is Success -> value
+        is Failure -> null
     }
 }
 
-public fun <S, E : Throwable> Result<S, E>.getOrThrow(): S {
+public fun <S> Result<S>.getOrElse(defaultValue: S): S {
     return when (this) {
-        is Result.Success -> value
-        is Result.Failure -> throw this.error
+        is Success -> value
+        is Failure -> defaultValue
+    }
+}
+
+public fun <S> Result<S>.getOrThrow(): S {
+    return when (this) {
+        is Success -> value
+        is Failure -> throw this.error
     }
 }

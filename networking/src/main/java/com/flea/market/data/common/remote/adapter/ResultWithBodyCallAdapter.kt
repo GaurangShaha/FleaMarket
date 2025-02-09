@@ -11,7 +11,7 @@ internal class ResultWithBodyCallAdapter(
     private val resultType: Type,
     private val resultRawType: Type,
     private val coroutineScope: CoroutineScope,
-) : CallAdapter<Type, Call<Result<Type?, Throwable>>> {
+) : CallAdapter<Type, Call<Result<Type?>>> {
 
     override fun responseType(): Type = resultType
 

@@ -4,7 +4,7 @@ import com.flea.market.foundation.extension.map
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.remote.source.ProductRemoteSource
 
-internal class ProductRepositoryImpl(
+internal class DefaultProductRepository(
     private val productRemoteSource: ProductRemoteSource
 ) : ProductRepository {
     @Suppress("MaxLineLength")

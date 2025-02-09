@@ -26,7 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.flea.market.common.navigation.ProductDetailsDeepLink
+import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.favourite.ui.R
 import com.flea.market.ui.component.LazyImage
@@ -54,7 +54,7 @@ internal fun FavouriteProductItem(
         ) {
             val navController = LocalNavController.current
             Card(
-                onClick = { navController.navigate(ProductDetailsDeepLink.getUri(favouriteItem.id)) },
+                onClick = { navController.navigate(ProductDetailsDestination(favouriteItem.id)) },
                 backgroundColor = MaterialTheme.colors.secondary,
                 modifier = Modifier.width(156.dp),
                 elevation = 2.dp,

@@ -11,7 +11,7 @@ import com.flea.market.favorite.ui.list.FavouriteListUiState.Empty
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Error
 import com.flea.market.favorite.ui.list.mapper.toFavouriteItemViewEntity
 import com.flea.market.favourite.repository.FavouriteRepository
-import com.flea.market.foundation.model.InternetConnectionException
+import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.foundation.model.Result.Success
 import com.flea.market.product.test.MainThreadTestListener
 import io.kotest.core.spec.style.BehaviorSpec
@@ -51,7 +51,7 @@ internal class FavouriteListViewModelTest : BehaviorSpec({
 
         When("favourite products stream throws exception") {
             every { favouriteRepositoryMock.getFavouriteProductsStream() } returns flow {
-                throw InternetConnectionException
+                throw InternetDisconnectionException
             }
 
             val favouriteListViewModel =

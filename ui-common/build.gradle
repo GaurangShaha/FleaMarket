@@ -1,6 +1,7 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.serialization
 }
 
 android {
@@ -47,4 +48,5 @@ android {
 dependencies {
     api project(path: ':foundation')
     api project(path: ':ui-component')
+    api libs.kotlinx.serialization.json
 }

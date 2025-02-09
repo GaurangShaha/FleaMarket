@@ -11,7 +11,7 @@ import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
 import com.flea.market.cart.ui.details.input.cartProductDetailsEntityList
 import com.flea.market.cart.ui.details.input.itemsInCartViewEntity
 import com.flea.market.cart.ui.details.mapper.toItemsInCartViewEntity
-import com.flea.market.foundation.model.InternetConnectionException
+import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.foundation.model.Result.Success
 import com.flea.market.product.test.MainThreadTestListener
 import io.kotest.core.spec.style.BehaviorSpec
@@ -53,7 +53,7 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
 
         When("Cart item stream throws exception") {
             val itemInCartFlow = flow<List<CartProductDetailsEntity>> {
-                throw InternetConnectionException
+                throw InternetDisconnectionException
             }
             coEvery { cartRepository.getItemsInCartStream() } returns itemInCartFlow
 
@@ -101,7 +101,7 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
                 content.priceDetails shouldBe result
             }
 
-            And("onHandleIntent is called with IncreaseQuantity") {
+            When("onHandleIntent is called with IncreaseQuantity") {
                 coEvery { cartRepository.updateQuantity(any(), any()) } returns Success(Unit)
                 cartDetailsViewModel.onHandleIntent(IncreaseQuantity(itemsInCartViewEntity))
 
@@ -115,7 +115,7 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
                 }
             }
 
-            And("onHandleIntent is called with DecreaseQuantity") {
+            When("onHandleIntent is called with DecreaseQuantity") {
                 And("quantity of item in cart is 1") {
                     coEvery { cartRepository.removeItem(any()) } returns Success(Unit)
                     cartDetailsViewModel.onHandleIntent(DecreaseQuantity(itemsInCartViewEntity))
@@ -144,7 +144,7 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
                 }
             }
 
-            And("onHandleIntent is called with RemoveFromCart") {
+            When("onHandleIntent is called with RemoveFromCart") {
                 coEvery { cartRepository.removeItem(any()) } returns Success(Unit)
                 cartDetailsViewModel.onHandleIntent(RemoveFromCart(itemsInCartViewEntity))
 
