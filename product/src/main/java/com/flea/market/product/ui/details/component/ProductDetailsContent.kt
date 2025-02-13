@@ -22,8 +22,6 @@ import com.flea.market.product.ui.details.ProductDetailsIntent
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 @Composable
@@ -113,15 +111,5 @@ private fun ContentForCompactScreen(
                 .padding(16.dp)
                 .fillMaxWidth()
         ) { onHandleIntent(AddToCart) }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun ProductDetailsContentScreen() {
-    FleaMarketThemePreview {
-        ProductDetailsContent(
-            state = dummyContent
-        ) {}
     }
 }

@@ -1,4 +1,4 @@
-package com.flea.market.cart.ui.details.component
+package com.flea.market.cart.ui.dummy.data
 
 import com.flea.market.cart.ui.details.CartDetailsUiState
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity

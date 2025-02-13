@@ -17,8 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 @Composable
@@ -58,13 +56,5 @@ public fun Stepper(
                 contentDescription = null
             )
         }
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun StepperPreview() {
-    FleaMarketThemePreview {
-        Stepper(quantity = 0, onIncreaseQuantity = {}, onDecreaseQuantity = { })
     }
 }

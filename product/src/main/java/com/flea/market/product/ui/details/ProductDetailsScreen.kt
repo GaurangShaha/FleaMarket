@@ -14,20 +14,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.product.ui.R
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.details.ProductDetailsUiState.Error
 import com.flea.market.product.ui.details.ProductDetailsUiState.Loading
 import com.flea.market.product.ui.details.component.ProductDetailsContent
 import com.flea.market.product.ui.details.component.ProductDetailsLoading
-import com.flea.market.product.ui.details.component.dummyContent
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
 import com.flea.market.ui.component.HeartToggleButton
 import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.DarkStatusBarDisposableEffect
 import com.flea.market.ui.theme.extraColors
 
@@ -69,29 +65,5 @@ internal fun ProductDetailsScreen(
             backgroundColor = Color.Transparent,
             contentColor = MaterialTheme.extraColors.onScrimColor
         )
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun ProductDetailsLoadingScreenPreview() {
-    FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Loading, onHandleIntent = {})
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun ProductDetailsErrorScreenPreview() {
-    FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = Error(InternetDisconnectionException), onHandleIntent = {})
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun ProductDetailsContentScreenPreview() {
-    FleaMarketThemePreview {
-        ProductDetailsScreen(uiState = dummyContent, onHandleIntent = {})
     }
 }

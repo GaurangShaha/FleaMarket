@@ -31,8 +31,6 @@ import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.favourite.ui.R
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
@@ -142,18 +140,6 @@ private fun RemoveFromFavouriteButton(onRemoveFromFavourite: () -> Unit) {
             modifier = Modifier.padding(6.dp),
             imageVector = Icons.Default.Clear,
             contentDescription = null
-        )
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun ProductListItemPreview() {
-    FleaMarketThemePreview {
-        FavouriteProductItem(
-            favouriteItem = dummyFavouriteItemList.first(),
-            onRemoveFromFavourite = {},
-            onMoveToCart = {}
         )
     }
 }

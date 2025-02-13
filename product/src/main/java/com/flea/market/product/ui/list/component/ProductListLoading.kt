@@ -1,6 +1,5 @@
 package com.flea.market.product.ui.list.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,8 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.ui.modifier.shimmer
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 private const val CATEGORY_COUNT = 5
@@ -28,7 +25,6 @@ private const val PRODUCT_COUNT = 6
 private const val CATEGORY_MIN_WIDTH = 75
 private const val CATEGORY_MAX_WIDTH = 150
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ProductListLoading() {
     LazyVerticalStaggeredGrid(
@@ -73,13 +69,5 @@ internal fun ProductListLoading() {
                     .shimmer()
             )
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun ProductListLoadingPreview() {
-    FleaMarketThemePreview {
-        ProductListLoading()
     }
 }

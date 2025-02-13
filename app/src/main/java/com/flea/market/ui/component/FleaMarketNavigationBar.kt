@@ -43,6 +43,9 @@ import com.flea.market.ui.compositionlocal.LocalSharedUIController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraShape
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.serializer
 import java.util.Locale
 
 @Composable
@@ -79,7 +82,7 @@ private fun FMNavigationRail(
     val sharedUIController = LocalSharedUIController.current
     NavigationRail(modifier = modifier.padding(end = 2.dp)) {
         BottomNavigationScreens.entries.forEachIndexed { index, destination ->
-            if (currentDestinationRoute == destination.route && index != selectedNavigationItemIndex) {
+            if (currentDestinationRoute?.contains(destination.getSerializedRoute()) == true  && index != selectedNavigationItemIndex) {
                 sharedUIController.updateSelectedNavigationItemIndex(index)
             }
             if (index == 0) {
@@ -132,7 +135,7 @@ private fun FMBottomNavigation(
                 .clip(MaterialTheme.extraShape.capsuleShape)
         ) {
             BottomNavigationScreens.entries.forEachIndexed { index, screen ->
-                if (currentDestinationRoute == screen.route && index != selectedNavigationItemIndex) {
+                if (currentDestinationRoute?.contains(screen.getSerializedRoute()) == true && index != selectedNavigationItemIndex) {
                     sharedUIController.updateSelectedNavigationItemIndex(index)
                 }
                 BottomNavigationItem(
@@ -179,7 +182,7 @@ private fun FMBottomNavigation(
 }
 
 private fun isBottomBarVisible(currentDestinationRoute: String?) = BottomNavigationScreens.entries
-    .any { currentDestinationRoute?.equals(it.route::class.qualifiedName) ?: false }
+    .any { currentDestinationRoute?.contains(it.getSerializedRoute()) == true }
 
 private fun navigateToDestinations(
     index: Int,
@@ -229,5 +232,10 @@ private enum class BottomNavigationScreens(
         route = ProfileDestination,
         labelResourceId = com.flea.market.profile.ui.R.string.profile,
         iconResourceId = R.drawable.ic_more
-    )
+    );
+
+    @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
+    fun getSerializedRoute(): String {
+        return route::class.serializer().descriptor.serialName
+    }
 }

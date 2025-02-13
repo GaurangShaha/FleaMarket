@@ -18,8 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListIntent
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 private const val TEXT_COLOR_ANIMATION_TIME = 300
@@ -91,15 +89,4 @@ private fun getBackgroundColor(
     MaterialTheme.colors.primary
 } else {
     MaterialTheme.colors.secondary
-}
-
-@FleaMarketPreviews
-@Composable
-private fun CategorySectionPreview() {
-    FleaMarketThemePreview {
-        CategorySection(
-            categoryListWrapper = dummyCategoryListWrapper,
-            selectedCategoryIndex = 0
-        ) {}
-    }
 }

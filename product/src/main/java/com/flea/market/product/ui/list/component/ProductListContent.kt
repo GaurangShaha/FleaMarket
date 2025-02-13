@@ -16,8 +16,6 @@ import com.flea.market.product.ui.R
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.product.ui.list.ProductListUiState.Content
 import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun ProductListContent(
@@ -55,13 +53,5 @@ internal fun ProductListContent(
                 navController.navigate(ProductDetailsDestination(it.id))
             })
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun ProductListContentPreview() {
-    FleaMarketThemePreview {
-        ProductListContent(state = dummyProductListContent, onHandleIntent = {})
     }
 }

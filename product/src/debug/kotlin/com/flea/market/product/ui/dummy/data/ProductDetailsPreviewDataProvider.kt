@@ -1,8 +1,10 @@
-package com.flea.market.product.ui.list.component
+package com.flea.market.product.ui.dummy.data
 
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
+import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListUiState
+import com.flea.market.ui.component.ButtonState
 
 @Suppress("MaxLineLength")
 internal val dummyProductList = listOf(
@@ -32,7 +34,15 @@ internal val dummyProductList = listOf(
 )
 
 internal val dummyCategoryListWrapper =
-    CategoryListImmutableWrapper(listOf("All", "Men's clothing", "Women's clothing", "Jewelry", "Electronics"))
+    CategoryListImmutableWrapper(
+        listOf(
+            "All",
+            "Men's clothing",
+            "Women's clothing",
+            "Jewelry",
+            "Electronics"
+        )
+    )
 
 internal val dummyProductListContent =
     ProductListUiState.Content(
@@ -40,3 +50,11 @@ internal val dummyProductListContent =
         dummyCategoryListWrapper,
         0
     )
+
+internal val dummyProductDetails = dummyProductList.first()
+
+internal val dummyContent = Content(
+    productDetails = dummyProductDetails,
+    markedAsFavourite = false,
+    addToCartButtonState = ButtonState.Initial
+)

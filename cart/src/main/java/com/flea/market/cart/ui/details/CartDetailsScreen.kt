@@ -11,15 +11,11 @@ import com.flea.market.cart.ui.details.CartDetailsUiState.Error
 import com.flea.market.cart.ui.details.CartDetailsUiState.Loading
 import com.flea.market.cart.ui.details.component.CartDetailsContent
 import com.flea.market.cart.ui.details.component.CartDetailsLoading
-import com.flea.market.cart.ui.details.component.dummyContent
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.ui.component.EmptyLayout
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun CartDetailsScreen(
@@ -43,37 +39,5 @@ internal fun CartDetailsScreen(
                 errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
             )
         }
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun CartDetailsContentScreenPreview() {
-    FleaMarketThemePreview {
-        CartDetailsScreen(uiState = dummyContent, onHandleIntent = {})
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun CartDetailsEmptyScreenPreview() {
-    FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Empty, onHandleIntent = {})
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun CartDetailsLoadingScreenPreview() {
-    FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Loading, onHandleIntent = {})
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun CartDetailsErrorScreenPreview() {
-    FleaMarketThemePreview {
-        CartDetailsScreen(uiState = Error(InternetDisconnectionException), onHandleIntent = {})
     }
 }

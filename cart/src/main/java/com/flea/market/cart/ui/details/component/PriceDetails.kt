@@ -14,8 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.flea.market.cart.ui.R
 import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
@@ -143,21 +141,6 @@ private fun SubtotalRow(
             text = currencyFormatter.format(priceDetails.subTotal),
             style = MaterialTheme.extraTypography.body1Bold,
 
-        )
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun PriceDetailsPreview() {
-    FleaMarketThemePreview {
-        PriceDetails(
-            priceDetails = PriceDetailsViewEntity(
-                subTotal = 100.toDouble(),
-                discount = 10.toDouble(),
-                tax = 12.toDouble(),
-                totalPayable = 102.toDouble()
-            )
         )
     }
 }

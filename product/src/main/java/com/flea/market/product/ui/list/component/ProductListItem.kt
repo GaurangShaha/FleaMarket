@@ -18,8 +18,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
@@ -78,13 +76,5 @@ internal fun ProductListItem(
                 )
             }
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun ProductListItemPreview() {
-    FleaMarketThemePreview {
-        ProductListItem(productDetails = dummyProductList.first()) {}
     }
 }

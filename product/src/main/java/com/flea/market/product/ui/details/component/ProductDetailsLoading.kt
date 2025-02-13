@@ -19,8 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.modifier.shimmer
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraShape
 
 @Composable
@@ -93,12 +91,4 @@ private fun ProductImagesShimmer() {
             .aspectRatio(LOADING_BOX_ASPECT_RATIO)
             .shimmer()
     )
-}
-
-@FleaMarketPreviews
-@Composable
-private fun ProductDetailsLoadingPreview() {
-    FleaMarketThemePreview {
-        ProductDetailsLoading()
-    }
 }

@@ -13,13 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.ui.modifier.shimmer
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 private const val PRODUCT_COUNT = 10
 
 @Composable
-internal fun ProductListLoading() {
+internal fun FavouriteListLoading() {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(146.dp),
         modifier = Modifier.fillMaxSize(),
@@ -35,13 +33,5 @@ internal fun ProductListLoading() {
                     .shimmer()
             )
         }
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-internal fun ProductListLoadingPreview() {
-    FleaMarketThemePreview {
-        ProductListLoading()
     }
 }

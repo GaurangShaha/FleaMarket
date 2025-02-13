@@ -53,7 +53,6 @@ dependencies {
     api libs.activity.compose
     api platform(libs.compose.bom)
     api libs.compose.ui
-    api libs.compose.ui.tooling.preview
     api libs.compose.material
     api libs.window.size
 
@@ -64,6 +63,7 @@ dependencies {
     api libs.navigation.compose
     api libs.compose.material.icons.core
 
+    debugApi libs.compose.ui.tooling.preview
     debugApi platform(libs.compose.bom)
     debugApi libs.compose.ui.tooling
 }

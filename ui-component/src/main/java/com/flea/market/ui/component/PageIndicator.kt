@@ -13,8 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 
 @Composable
@@ -40,13 +38,5 @@ public fun PageIndicator(totalPages: Int, currentPage: Int, modifier: Modifier =
                     .background(color)
             )
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun PageIndicatorPreview() {
-    FleaMarketThemePreview {
-        PageIndicator(totalPages = 5, currentPage = 1)
     }
 }

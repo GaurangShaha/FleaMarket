@@ -25,8 +25,6 @@ import com.flea.market.favorite.ui.list.FavouriteListUiState
 import com.flea.market.ui.component.FleaMarketSnackbarHost
 import com.flea.market.ui.component.snackbar.SnackbarDelegate
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun FavouriteListContent(
@@ -87,13 +85,5 @@ internal fun FavouriteListContent(
                 onHandleIntent(SnackbarResult(result == ActionPerformed))
             }
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun FavouriteListContentPreview() {
-    FleaMarketThemePreview {
-        FavouriteListContent(uiState = dummyContent, onHandleIntent = {})
     }
 }

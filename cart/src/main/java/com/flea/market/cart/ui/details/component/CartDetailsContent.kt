@@ -20,8 +20,6 @@ import com.flea.market.cart.ui.details.CartDetailsUiState.Content
 import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun CartDetailsContent(uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit) {
@@ -106,13 +104,5 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
                 onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
             ) { navController.navigate(ProductDetailsDestination(itemsInCartViewEntity.id)) }
         }
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun CartDetailsContentPreview() {
-    FleaMarketThemePreview {
-        CartDetailsContent(uiState = dummyContent, onHandleIntent = {})
     }
 }

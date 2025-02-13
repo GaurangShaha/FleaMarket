@@ -1,4 +1,4 @@
-package com.flea.market.favorite.ui.list.component
+package com.flea.market.favorite.ui.dummy.data
 
 import com.flea.market.favorite.ui.list.FavouriteListUiState
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity

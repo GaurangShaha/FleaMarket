@@ -36,8 +36,6 @@ import com.flea.market.ui.component.snackbar.model.SnackbarDetails
 import com.flea.market.ui.compositionlocal.LocalSharedUIController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.helper.findActivity
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraColors
 import com.flea.market.ui.theme.extraTypography
 
@@ -137,13 +135,5 @@ private fun ProfileMenuItem(
                 style = MaterialTheme.typography.body1
             )
         }
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-internal fun ProfileScreenPreview() {
-    FleaMarketThemePreview {
-        ProfileScreen(ProfileUiState())
     }
 }

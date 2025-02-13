@@ -1,6 +1,5 @@
 package com.flea.market.product.ui.details.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -23,7 +22,6 @@ import kotlinx.coroutines.delay
 private const val PARALLAX_FACTOR = 0.4f
 
 @Composable
-@OptIn(ExperimentalFoundationApi::class)
 internal fun PagerWithIndicator(
     uiState: Content,
     modifier: Modifier = Modifier,

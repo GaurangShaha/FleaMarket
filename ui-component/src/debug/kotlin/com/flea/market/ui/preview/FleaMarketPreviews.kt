@@ -7,8 +7,6 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.tooling.preview.Devices.PHONE
-import androidx.compose.ui.tooling.preview.Devices.TABLET
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.navigation.compose.rememberNavController
@@ -19,11 +17,11 @@ import com.flea.market.ui.compositionlocal.LocalSharedUIController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.theme.FleaMarketTheme
 
-@Preview(group = "Day", name = "Phone - Portrait", device = PHONE)
+@Preview(group = "Day", name = "Phone - Portrait", device = "spec:width=411dp,height=891dp")
 @Preview(
     group = "Night",
     name = "Phone - Portrait",
-    device = PHONE,
+    device = "spec:width=411dp,height=891dp",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Preview(
@@ -37,11 +35,15 @@ import com.flea.market.ui.theme.FleaMarketTheme
     device = "spec:width=411dp,height=891dp,orientation=landscape",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
-@Preview(group = "Day", name = "Tablet - Landscape", device = TABLET)
+@Preview(
+    group = "Day",
+    name = "Tablet - Landscape",
+    device = "spec:width=1280dp,height=800dp,dpi=240"
+)
 @Preview(
     group = "Night",
     name = "Tablet - Landscape",
-    device = TABLET,
+    device = "spec:width=1280dp,height=800dp,dpi=240",
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Preview(

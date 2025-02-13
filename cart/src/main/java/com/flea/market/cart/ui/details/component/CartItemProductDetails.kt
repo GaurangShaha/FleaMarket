@@ -31,8 +31,6 @@ import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
 import com.flea.market.ui.component.LazyImage
 import com.flea.market.ui.component.Stepper
 import com.flea.market.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
@@ -132,18 +130,5 @@ private fun RowScope.ItemDetailsSection(
                 onDecreaseQuantity = { onDecreaseQuantity() }
             )
         }
-    }
-}
-
-@Composable
-@FleaMarketPreviews
-private fun CartItemDetailsPreview() {
-    FleaMarketThemePreview {
-        CartItemProductDetails(
-            itemsInCart = dummyItemsInCartList.first(),
-            onDecreaseQuantity = {},
-            onIncreaseQuantity = {},
-            onRemoveFromCart = {}
-        ) {}
     }
 }

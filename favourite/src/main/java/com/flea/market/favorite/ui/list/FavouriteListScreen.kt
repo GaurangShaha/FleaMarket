@@ -11,15 +11,11 @@ import com.flea.market.favorite.ui.list.FavouriteListUiState.Empty
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Error
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Loading
 import com.flea.market.favorite.ui.list.component.FavouriteListContent
-import com.flea.market.favorite.ui.list.component.ProductListLoading
-import com.flea.market.favorite.ui.list.component.dummyContent
+import com.flea.market.favorite.ui.list.component.FavouriteListLoading
 import com.flea.market.favourite.ui.R
-import com.flea.market.foundation.model.InternetDisconnectionException
 import com.flea.market.ui.component.EmptyLayout
 import com.flea.market.ui.component.ErrorLayout
 import com.flea.market.ui.component.FleaMarketAppBar
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 internal fun FavouriteListScreen(
@@ -30,7 +26,7 @@ internal fun FavouriteListScreen(
         FleaMarketAppBar(title = R.string.favourites)
 
         when (uiState) {
-            Loading -> ProductListLoading()
+            Loading -> FavouriteListLoading()
             Empty -> EmptyLayout(
                 message = stringResource(id = R.string.empty_favourite),
                 icon = painterResource(id = R.drawable.ic_empty_favourite)
@@ -45,49 +41,5 @@ internal fun FavouriteListScreen(
                 errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
             )
         }
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun FavouriteListScreenLoadingPreview() {
-    FleaMarketThemePreview {
-        FavouriteListScreen(
-            uiState = Loading,
-            onHandleIntent = {}
-        )
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun FavouriteListScreenContentPreview() {
-    FleaMarketThemePreview {
-        FavouriteListScreen(
-            uiState = dummyContent,
-            onHandleIntent = {}
-        )
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun FavouriteListScreenEmptyPreview() {
-    FleaMarketThemePreview {
-        FavouriteListScreen(
-            uiState = Empty,
-            onHandleIntent = {}
-        )
-    }
-}
-
-@FleaMarketPreviews
-@Composable
-private fun FavouriteListScreenErrorPreview() {
-    FleaMarketThemePreview {
-        FavouriteListScreen(
-            uiState = Error(InternetDisconnectionException),
-            onHandleIntent = {}
-        )
     }
 }
