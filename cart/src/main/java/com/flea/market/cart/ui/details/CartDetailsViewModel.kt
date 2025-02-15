@@ -46,7 +46,7 @@ internal class CartDetailsViewModel(private val cartRepository: CartRepository) 
             initialValue = Loading
         )
 
-    override fun onHandleIntent(intent: CartDetailsIntent) {
+    override fun processIntent(intent: CartDetailsIntent) {
         viewModelScope.launch {
             when (intent) {
                 is DecreaseQuantity -> decreaseQuantity(intent.itemsInCartViewEntity)

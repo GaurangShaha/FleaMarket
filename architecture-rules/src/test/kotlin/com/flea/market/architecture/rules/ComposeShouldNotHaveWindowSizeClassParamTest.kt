@@ -14,7 +14,7 @@ class ComposeShouldNotHaveWindowSizeClassParamTest {
         val code = """@Composable
                 internal fun ProductDetailsScreen(
                     uiState: ProductDetailsUiState,
-                    onHandleIntent: (ProductDetailsIntent) -> Unit
+                    processIntent: (ProductDetailsIntent) -> Unit
                 ) {}
         """.trimIndent()
 

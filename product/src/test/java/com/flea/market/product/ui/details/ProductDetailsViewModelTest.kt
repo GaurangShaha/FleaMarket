@@ -63,12 +63,12 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                     content.addToCartButtonState shouldBe Initial
                 }
 
-                And("onHandleIntent called with ToggleMarkAsFavourite with false") {
+                And("processIntent called with ToggleMarkAsFavourite with false") {
                     coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Success(
                         Unit
                     )
 
-                    productDetailsViewModel.onHandleIntent(ToggleMarkAsFavourite(false))
+                    productDetailsViewModel.processIntent(ToggleMarkAsFavourite(false))
 
                     Then("favouriteRepository removeFromFavourite function should be called") {
                         coVerify { favouriteRepositoryMock.removeFromFavourite(any()) }
@@ -80,10 +80,10 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                     }
                 }
 
-                And("onHandleIntent called with AddToCart") {
+                And("processIntent called with AddToCart") {
                     coEvery { cartRepositoryMock.addOrUpdateItem(any()) } returns Success(Unit)
 
-                    productDetailsViewModel.onHandleIntent(AddToCart)
+                    productDetailsViewModel.processIntent(AddToCart)
 
                     // Test case works fine only if this line is present, need to find proper solution for it
                     runTest {}
@@ -119,10 +119,10 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                     content.addToCartButtonState shouldBe Initial
                 }
 
-                And("onHandleIntent called with ToggleMarkAsFavourite with true") {
+                And("processIntent called with ToggleMarkAsFavourite with true") {
                     coEvery { favouriteRepositoryMock.markAsFavourite(any()) } returns Success(Unit)
 
-                    productDetailsViewModel.onHandleIntent(ToggleMarkAsFavourite(true))
+                    productDetailsViewModel.processIntent(ToggleMarkAsFavourite(true))
 
                     Then("favouriteRepository removeFromFavourite function should be called") {
                         coVerify { favouriteRepositoryMock.markAsFavourite(any()) }
@@ -154,8 +154,8 @@ internal class ProductDetailsViewModelTest : BehaviorSpec({
                 productDetailsViewModel.uiState.value.shouldBeTypeOf<Error>()
             }
 
-            When("onHandleIntent called with Reload") {
-                productDetailsViewModel.onHandleIntent(Reload)
+            When("processIntent called with Reload") {
+                productDetailsViewModel.processIntent(Reload)
 
                 Then("product repositories getProductDetails function should be called") {
                     coVerify(exactly = 2) { productRepositoryMock.getProductDetails(any()) }

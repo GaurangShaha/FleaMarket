@@ -14,7 +14,7 @@ class ComposeShouldNotHaveNavHostControllerParamTest {
         val code = """@Composable
                 internal fun ProductDetailsScreen(
                     uiState: ProductDetailsUiState,
-                    onHandleIntent: (ProductDetailsIntent) -> Unit
+                    processIntent: (ProductDetailsIntent) -> Unit
                 ) {}
         """.trimIndent()
 
@@ -26,7 +26,7 @@ class ComposeShouldNotHaveNavHostControllerParamTest {
         val code = """@Composable
                 internal fun ProductDetailsScreen(
                     uiState: ProductDetailsUiState,
-                    onHandleIntent: (ProductDetailsIntent) -> Unit,
+                    processIntent: (ProductDetailsIntent) -> Unit,
                     navHost: NavHostController
                 ) {}
         """.trimIndent()

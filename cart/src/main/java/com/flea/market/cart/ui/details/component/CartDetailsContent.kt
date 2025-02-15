@@ -22,11 +22,11 @@ import com.flea.market.ui.compositionlocal.LocalNavController
 import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 
 @Composable
-internal fun CartDetailsContent(uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit) {
+internal fun CartDetailsContent(uiState: Content, processIntent: (CartDetailsIntent) -> Unit) {
     if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) {
-        ContentForCompactScreen(uiState = uiState, onHandleIntent = onHandleIntent)
+        ContentForCompactScreen(uiState = uiState, processIntent = processIntent)
     } else {
-        ContentForMediumAndExpandedScreen(uiState = uiState, onHandleIntent = onHandleIntent)
+        ContentForMediumAndExpandedScreen(uiState = uiState, processIntent = processIntent)
     }
 }
 
@@ -37,7 +37,7 @@ internal const val SECOND_COLUMN_WEIGHT_LARGE_SCREENS = 1 - FIRST_COLUMN_WEIGHT_
 @Composable
 private fun ContentForMediumAndExpandedScreen(
     uiState: Content,
-    onHandleIntent: (CartDetailsIntent) -> Unit
+    processIntent: (CartDetailsIntent) -> Unit
 ) {
     Row {
         LazyColumn(
@@ -64,9 +64,9 @@ private fun ContentForMediumAndExpandedScreen(
                 val navController = LocalNavController.current
                 CartItemProductDetails(
                     itemsInCart = itemsInCartViewEntity,
-                    onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
-                    onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
-                    onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
+                    onDecreaseQuantity = { processIntent(DecreaseQuantity(itemsInCartViewEntity)) },
+                    onIncreaseQuantity = { processIntent(IncreaseQuantity(itemsInCartViewEntity)) },
+                    onRemoveFromCart = { processIntent(RemoveFromCart(itemsInCartViewEntity)) },
                     modifier = Modifier.animateItem()
                 ) { navController.navigate(ProductDetailsDestination(itemsInCartViewEntity.id)) }
             }
@@ -76,7 +76,7 @@ private fun ContentForMediumAndExpandedScreen(
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetailsIntent) -> Unit) {
+private fun ContentForCompactScreen(uiState: Content, processIntent: (CartDetailsIntent) -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(top = 16.dp, bottom = 90.dp),
@@ -99,9 +99,9 @@ private fun ContentForCompactScreen(uiState: Content, onHandleIntent: (CartDetai
             CartItemProductDetails(
                 modifier = Modifier.animateItem(),
                 itemsInCart = itemsInCartViewEntity,
-                onDecreaseQuantity = { onHandleIntent(DecreaseQuantity(itemsInCartViewEntity)) },
-                onIncreaseQuantity = { onHandleIntent(IncreaseQuantity(itemsInCartViewEntity)) },
-                onRemoveFromCart = { onHandleIntent(RemoveFromCart(itemsInCartViewEntity)) },
+                onDecreaseQuantity = { processIntent(DecreaseQuantity(itemsInCartViewEntity)) },
+                onIncreaseQuantity = { processIntent(IncreaseQuantity(itemsInCartViewEntity)) },
+                onRemoveFromCart = { processIntent(RemoveFromCart(itemsInCartViewEntity)) },
             ) { navController.navigate(ProductDetailsDestination(itemsInCartViewEntity.id)) }
         }
     }

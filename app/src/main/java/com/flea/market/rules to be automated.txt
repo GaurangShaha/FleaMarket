@@ -4,7 +4,7 @@ DONE - Repository should not have room classes
 
 DONE - Every view model should have UiState, Screen, Intent and Navigation associated or All viewModel should be inherited by BaseViewModel
 DONE - View model should not have savedHandleState as parameter - Detekt
-DONE - View model should not have any public method apart from onHandleIntent
+DONE - View model should not have any public method apart from processIntent
 DONE - View model should not have any public parameter of type State, MutableState, LiveData, MutableLiveData or Flow
 DONE - No public property in view model - Need to check if there are exceptions
 DONE - //file.findChildrenByClass<KtProperty>().filter { it.isPublic }.forEach { it.children.forEach {

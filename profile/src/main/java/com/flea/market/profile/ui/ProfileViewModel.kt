@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 internal class ProfileViewModel : ViewModelContract<ProfileUiState, ProfileIntent>, ViewModel() {
     override val uiState: StateFlow<ProfileUiState> = MutableStateFlow(ProfileUiState())
 
-    override fun onHandleIntent(intent: ProfileIntent) {
+    override fun processIntent(intent: ProfileIntent) {
         // Do nothing
     }
 }

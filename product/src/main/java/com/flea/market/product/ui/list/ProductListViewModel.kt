@@ -33,7 +33,7 @@ internal class ProductListViewModel(private val productRepository: ProductReposi
         }
     }
 
-    override fun onHandleIntent(intent: ProductListIntent) {
+    override fun processIntent(intent: ProductListIntent) {
         when (intent) {
             Reload -> viewModelScope.launch { getProductList() }
             is FilterByCategory -> filterByCategory(intent.selectedCategoryIndex)

@@ -62,6 +62,8 @@ dependencies {
     api libs.koin
     api libs.navigation.compose
     api libs.compose.material.icons.core
+    
+    api libs.kotlinx.serialization.json
 
     debugApi libs.compose.ui.tooling.preview
     debugApi platform(libs.compose.bom)

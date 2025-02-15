@@ -27,14 +27,14 @@ import com.flea.market.ui.theme.extraShape
 @Composable
 internal fun ProductDetailsContent(
     state: Content,
-    onHandleIntent: (ProductDetailsIntent) -> Unit
+    processIntent: (ProductDetailsIntent) -> Unit
 ) {
     if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact ||
         LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Medium
     ) {
-        ContentForCompactScreen(state, onHandleIntent)
+        ContentForCompactScreen(state, processIntent)
     } else {
-        ContentForMediumAndExpandedScreen(state, onHandleIntent)
+        ContentForMediumAndExpandedScreen(state, processIntent)
     }
 }
 
@@ -43,7 +43,7 @@ internal const val DELAY_FOR_SWITCHING_IMAGE: Long = 8000
 @Composable
 private fun ContentForMediumAndExpandedScreen(
     state: Content,
-    onHandleIntent: (ProductDetailsIntent) -> Unit
+    processIntent: (ProductDetailsIntent) -> Unit
 ) {
     Row {
         PagerWithIndicator(
@@ -70,7 +70,7 @@ private fun ContentForMediumAndExpandedScreen(
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth()
-            ) { onHandleIntent(AddToCart) }
+            ) { processIntent(AddToCart) }
         }
     }
 }
@@ -78,7 +78,7 @@ private fun ContentForMediumAndExpandedScreen(
 @Composable
 private fun ContentForCompactScreen(
     state: Content,
-    onHandleIntent: (ProductDetailsIntent) -> Unit
+    processIntent: (ProductDetailsIntent) -> Unit
 ) {
     Box(contentAlignment = Alignment.BottomCenter) {
         val scrollState = rememberScrollState()
@@ -110,6 +110,6 @@ private fun ContentForCompactScreen(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
-        ) { onHandleIntent(AddToCart) }
+        ) { processIntent(AddToCart) }
     }
 }

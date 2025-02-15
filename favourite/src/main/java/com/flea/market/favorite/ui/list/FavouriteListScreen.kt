@@ -1,6 +1,8 @@
 package com.flea.market.favorite.ui.list
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -20,10 +22,10 @@ import com.flea.market.ui.component.FleaMarketAppBar
 @Composable
 internal fun FavouriteListScreen(
     uiState: FavouriteListUiState,
-    onHandleIntent: (FavouriteListIntent) -> Unit
+    processIntent: (FavouriteListIntent) -> Unit
 ) {
     Column {
-        FleaMarketAppBar(title = R.string.favourites)
+        FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.favourites)
 
         when (uiState) {
             Loading -> FavouriteListLoading()
@@ -33,7 +35,7 @@ internal fun FavouriteListScreen(
             )
 
             is Content -> {
-                FavouriteListContent(uiState = uiState, onHandleIntent = onHandleIntent)
+                FavouriteListContent(uiState = uiState, processIntent = processIntent)
             }
 
             is Error -> ErrorLayout(

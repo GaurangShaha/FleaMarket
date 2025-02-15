@@ -20,7 +20,7 @@ import com.flea.market.ui.compositionlocal.LocalNavController
 @Composable
 internal fun ProductListContent(
     state: Content,
-    onHandleIntent: (ProductListIntent) -> Unit,
+    processIntent: (ProductListIntent) -> Unit,
 ) {
     LazyVerticalStaggeredGrid(
         verticalItemSpacing = 22.dp,
@@ -36,7 +36,7 @@ internal fun ProductListContent(
             CategorySection(
                 categoryListWrapper = state.categoryListWrapper,
                 selectedCategoryIndex = state.selectedCategoryIndex,
-                onHandleIntent = onHandleIntent
+                processIntent = processIntent
             )
         }
 

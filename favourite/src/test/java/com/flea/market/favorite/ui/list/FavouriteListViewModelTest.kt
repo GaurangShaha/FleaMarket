@@ -88,19 +88,19 @@ internal class FavouriteListViewModelTest : BehaviorSpec({
                 content.snackbarDetails shouldBe null
             }
 
-            And("onHandleIntent called with MoveToCart") {
+            And("processIntent called with MoveToCart") {
                 coEvery { cartRepositoryMock.addOrUpdateItem(any()) } returns Success(Unit)
                 coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Success(Unit)
 
-                favouriteListViewModel.onHandleIntent(MoveToCart(favouriteItemViewEntity))
+                favouriteListViewModel.processIntent(MoveToCart(favouriteItemViewEntity))
 
                 Then("uiState should have snackbarDetails") {
                     val content = favouriteListViewModel.uiState.value as Content
                     content.snackbarDetails.shouldNotBeNull()
                 }
 
-                And("onHandleIntent called with SnackbarResult") {
-                    favouriteListViewModel.onHandleIntent(SnackbarResult(false))
+                And("processIntent called with SnackbarResult") {
+                    favouriteListViewModel.processIntent(SnackbarResult(false))
 
                     Then("uiState should not have snackbarDetails") {
                         val content = favouriteListViewModel.uiState.value as Content
@@ -109,9 +109,9 @@ internal class FavouriteListViewModelTest : BehaviorSpec({
                 }
             }
 
-            And("onHandleIntent called with RemoveFromFavourite") {
+            And("processIntent called with RemoveFromFavourite") {
                 coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Success(Unit)
-                favouriteListViewModel.onHandleIntent(RemoveFromFavourite(1))
+                favouriteListViewModel.processIntent(RemoveFromFavourite(1))
 
                 Then("favourite repository's removeFromFavourite function should be called") {
                     coVerify { favouriteRepositoryMock.removeFromFavourite(eq(1)) }

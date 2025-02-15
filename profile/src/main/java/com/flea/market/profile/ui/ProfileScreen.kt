@@ -21,6 +21,8 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,7 +44,7 @@ import com.flea.market.ui.theme.extraTypography
 @Composable
 internal fun ProfileScreen(uiState: ProfileUiState) {
     Column {
-        FleaMarketAppBar(title = R.string.profile)
+        FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.profile)
 
         @Suppress("MagicNumber")
         val columnCount =

@@ -101,9 +101,9 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
                 content.priceDetails shouldBe result
             }
 
-            When("onHandleIntent is called with IncreaseQuantity") {
+            When("processIntent is called with IncreaseQuantity") {
                 coEvery { cartRepository.updateQuantity(any(), any()) } returns Success(Unit)
-                cartDetailsViewModel.onHandleIntent(IncreaseQuantity(itemsInCartViewEntity))
+                cartDetailsViewModel.processIntent(IncreaseQuantity(itemsInCartViewEntity))
 
                 Then("cart repository's updateQuantity function should be called") {
                     coVerify {
@@ -115,10 +115,10 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
                 }
             }
 
-            When("onHandleIntent is called with DecreaseQuantity") {
+            When("processIntent is called with DecreaseQuantity") {
                 And("quantity of item in cart is 1") {
                     coEvery { cartRepository.removeItem(any()) } returns Success(Unit)
-                    cartDetailsViewModel.onHandleIntent(DecreaseQuantity(itemsInCartViewEntity))
+                    cartDetailsViewModel.processIntent(DecreaseQuantity(itemsInCartViewEntity))
 
                     Then("cart repository's removeItem function should be called") {
                         coVerify {
@@ -129,7 +129,7 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
 
                 And("quantity of item in cart is greater than 1") {
                     coEvery { cartRepository.updateQuantity(any(), any()) } returns Success(Unit)
-                    cartDetailsViewModel.onHandleIntent(
+                    cartDetailsViewModel.processIntent(
                         DecreaseQuantity(itemsInCartViewEntity.copy(quantity = 2))
                     )
 
@@ -144,9 +144,9 @@ internal class CartDetailsViewModelTest : BehaviorSpec({
                 }
             }
 
-            When("onHandleIntent is called with RemoveFromCart") {
+            When("processIntent is called with RemoveFromCart") {
                 coEvery { cartRepository.removeItem(any()) } returns Success(Unit)
-                cartDetailsViewModel.onHandleIntent(RemoveFromCart(itemsInCartViewEntity))
+                cartDetailsViewModel.processIntent(RemoveFromCart(itemsInCartViewEntity))
 
                 Then("cart repository's removeItem function should be called") {
                     coVerify {

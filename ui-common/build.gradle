@@ -48,5 +48,4 @@ android {
 dependencies {
     api project(path: ':foundation')
     api project(path: ':ui-component')
-    api libs.kotlinx.serialization.json
 }

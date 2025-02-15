@@ -29,7 +29,7 @@ import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 @Composable
 internal fun FavouriteListContent(
     uiState: FavouriteListUiState.Content,
-    onHandleIntent: (FavouriteListIntent) -> Unit
+    processIntent: (FavouriteListIntent) -> Unit
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -62,10 +62,10 @@ internal fun FavouriteListContent(
                 FavouriteProductItem(
                     favouriteItem = favouriteItemViewEntity,
                     onRemoveFromFavourite = {
-                        onHandleIntent(RemoveFromFavourite(favouriteItemViewEntity.id))
+                        processIntent(RemoveFromFavourite(favouriteItemViewEntity.id))
                     },
                     onMoveToCart = {
-                        onHandleIntent(MoveToCart(favouriteItemViewEntity))
+                        processIntent(MoveToCart(favouriteItemViewEntity))
                     },
                     modifier = Modifier.animateItem()
                 )
@@ -82,7 +82,7 @@ internal fun FavouriteListContent(
                     action = action,
                     type = it.snackbarType
                 )
-                onHandleIntent(SnackbarResult(result == ActionPerformed))
+                processIntent(SnackbarResult(result == ActionPerformed))
             }
         }
     }

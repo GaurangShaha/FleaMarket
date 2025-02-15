@@ -17,7 +17,7 @@ class ComposeShouldCollectFlowWithLifecycleTest {
             @Composable
             internal fun ProductDetailsScreen(
                 uiState: ProductDetailsUiState,
-                onHandleIntent: (ProductDetailsIntent) -> Unit
+                processIntent: (ProductDetailsIntent) -> Unit
             ) {
                 val addedToFavourite by uiState.markedAsFavouriteFlow.collectAsStateWithLifecycle()
             }
@@ -33,7 +33,7 @@ class ComposeShouldCollectFlowWithLifecycleTest {
             @Composable
             internal fun ProductDetailsScreen(
                 uiState: ProductDetailsUiState,
-                onHandleIntent: (ProductDetailsIntent) -> Unit
+                processIntent: (ProductDetailsIntent) -> Unit
             ) {
                 val addedToFavourite by uiState.markedAsFavouriteFlow.collectAsState()
             } 

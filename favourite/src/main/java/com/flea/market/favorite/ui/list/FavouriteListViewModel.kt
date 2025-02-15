@@ -60,7 +60,7 @@ internal class FavouriteListViewModel(
         }
     }
 
-    override fun onHandleIntent(intent: FavouriteListIntent) {
+    override fun processIntent(intent: FavouriteListIntent) {
         when (intent) {
             is MoveToCart -> viewModelScope.launch { moveToCart(intent.favouriteItemViewEntity) }
             is RemoveFromFavourite -> viewModelScope.launch { removeFromFavourite(intent.productId) }

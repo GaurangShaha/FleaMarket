@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListIntent
+import com.flea.market.product.ui.list.ProductListIntent.FilterByCategory
 import com.flea.market.ui.theme.extraShape
 
 private const val TEXT_COLOR_ANIMATION_TIME = 300
@@ -27,7 +28,7 @@ internal fun CategorySection(
     categoryListWrapper: CategoryListImmutableWrapper,
     selectedCategoryIndex: Int,
     modifier: Modifier = Modifier,
-    onHandleIntent: (ProductListIntent) -> Unit
+    processIntent: (ProductListIntent) -> Unit
 ) {
     LazyRow(
         modifier = modifier
@@ -55,7 +56,7 @@ internal fun CategorySection(
                 modifier = Modifier
                     .clip(MaterialTheme.extraShape.capsuleShape)
                     .selectable(selectedCategoryIndex == index, onClick = {
-                        onHandleIntent(ProductListIntent.FilterByCategory(index))
+                        processIntent(FilterByCategory(index))
                     })
                     .background(bgColor)
                     .padding(

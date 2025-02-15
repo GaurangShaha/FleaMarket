@@ -12,11 +12,11 @@ kotlinCompilerExtensionVersion = "1.5.3"
 lifecycle = "2.8.7"
 retrofit = "2.9.0"
 room = "2.6.1"
-composeBom = "2025.01.01"
+composeBom = "2025.02.00"
 
 detekt = "1.23.7"
 
-androidGradlePlugin = "8.8.0"
+androidGradlePlugin = "8.8.1"
 kotlin = "1.9.10"
 ksp = "1.9.10-1.0.13"
 kotestRunnerJunit5Jvm = "5.9.1"
@@ -47,7 +47,7 @@ window-size = { group = "androidx.compose.material3", name = "material3-window-s
 
 koin = { group = "io.insert-koin", name = "koin-androidx-compose", version = "4.0.0" }
 
-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version = "2.8.6" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version = "2.8.7" }
 
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }

@@ -46,8 +46,8 @@ class ProductListViewModelTest : BehaviorSpec({
                 content.selectedCategoryIndex shouldBe 0
             }
 
-            When("onHandleIntent called with FilterByCategory with index 1") {
-                productListViewModel.onHandleIntent(FilterByCategory(1))
+            When("processIntent called with FilterByCategory with index 1") {
+                productListViewModel.processIntent(FilterByCategory(1))
 
                 Then("uiState should have filtered product list by men's clothing category") {
                     val content = productListViewModel.uiState.value as Content
@@ -57,8 +57,8 @@ class ProductListViewModelTest : BehaviorSpec({
                 }
             }
 
-            When("onHandleIntent called with FilterByCategory with index 0") {
-                productListViewModel.onHandleIntent(FilterByCategory(0))
+            When("processIntent called with FilterByCategory with index 0") {
+                productListViewModel.processIntent(FilterByCategory(0))
 
                 Then("uiState should have original filter list") {
                     val content = productListViewModel.uiState.value as Content
@@ -77,8 +77,8 @@ class ProductListViewModelTest : BehaviorSpec({
                 productRepository.uiState.value.shouldBeInstanceOf<Error>()
             }
 
-            When("onHandleIntent called with Reload") {
-                productRepository.onHandleIntent(Reload)
+            When("processIntent called with Reload") {
+                productRepository.processIntent(Reload)
 
                 Then("Product repositories getProductList function should be called") {
                     coVerify(exactly = 2) { productRepositoryMock.getProductList() }

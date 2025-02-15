@@ -29,7 +29,7 @@ internal class MainActivity : AppCompatActivity() {
                 CompositionLocalProvider(
                     LocalWindowSizeClass provides calculateWindowSizeClass(this),
                     LocalNavController provides rememberNavController(),
-                    LocalSharedUIController provides DefaultSharedUIController(viewModel::onHandleIntent)
+                    LocalSharedUIController provides DefaultSharedUIController(viewModel::processIntent)
                 ) {
                     FleaMarketComposeApp(uiState)
                 }

@@ -24,7 +24,7 @@ class ViewModelShouldNotHavePublicMethod(config: Config) : Rule(config) {
             ?.any { it.typeAsUserType?.referencedName == "BaseViewModel" } ?: false
 
         if (isViewModel) {
-            klass.body?.functions?.filter { it.isPublic && it.name != "onHandleIntent" }
+            klass.body?.functions?.filter { it.isPublic && it.name != "processIntent" }
                 ?.forEach {
                     report(
                         CorrectableCodeSmell(

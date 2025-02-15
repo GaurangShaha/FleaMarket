@@ -13,7 +13,7 @@ class ViewModelShouldNotHavePublicPropertyTest {
     fun `passes when viewmodel does not have public property`() {
         val code = """
             class NewsViewModel:BaseViewModel<ProductDetailsIntent, ProductDetailsUiState>(Loading){
-                override fun onHandleIntent(){}
+                override fun processIntent(){}
             }
 """.trimIndent()
 
@@ -25,7 +25,7 @@ class ViewModelShouldNotHavePublicPropertyTest {
         val code = """
             class NewsViewModel(val id: Int):BaseViewModel<ProductDetailsIntent, ProductDetailsUiState>(Loading){
                 val name = "Harry"
-                override fun onHandleIntent(){}
+                override fun processIntent(){}
             }
 """.trimIndent()
 

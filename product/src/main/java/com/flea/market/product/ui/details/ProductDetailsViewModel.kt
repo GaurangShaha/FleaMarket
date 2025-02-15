@@ -45,7 +45,7 @@ internal class ProductDetailsViewModel(
         getProductDetails()
     }
 
-    override fun onHandleIntent(intent: ProductDetailsIntent) {
+    override fun processIntent(intent: ProductDetailsIntent) {
         when (intent) {
             AddToCart -> viewModelScope.launch { addToCart() }
             is ToggleMarkAsFavourite -> viewModelScope.launch { toggleMarkAsFavourite(intent.markAsFavourite) }

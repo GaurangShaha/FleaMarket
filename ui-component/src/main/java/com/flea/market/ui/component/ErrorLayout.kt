@@ -21,7 +21,7 @@ public fun ErrorLayout(
     errorMessage: String,
     errorIcon: Painter,
     modifier: Modifier = Modifier,
-    retry: (() -> Unit)? = null
+    onRetry: (() -> Unit)? = null
 ) {
     Column(
         modifier = modifier
@@ -46,7 +46,7 @@ public fun ErrorLayout(
 
         Spacer(modifier = Modifier.size(14.dp))
 
-        retry?.let {
+        onRetry?.let {
             FMButton(
                 text = stringResource(R.string.retry),
                 onClick = it

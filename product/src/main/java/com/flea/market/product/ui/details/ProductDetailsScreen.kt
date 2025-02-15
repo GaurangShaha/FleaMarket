@@ -15,6 +15,8 @@ import androidx.compose.ui.res.stringResource
 import com.flea.market.common.mapper.toAPIErrorIcon
 import com.flea.market.common.mapper.toAPIErrorMessage
 import com.flea.market.product.ui.R
+import com.flea.market.product.ui.details.ProductDetailsIntent.Reload
+import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavourite
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.details.ProductDetailsUiState.Error
 import com.flea.market.product.ui.details.ProductDetailsUiState.Loading
@@ -30,7 +32,7 @@ import com.flea.market.ui.theme.extraColors
 @Composable
 internal fun ProductDetailsScreen(
     uiState: ProductDetailsUiState,
-    onHandleIntent: (ProductDetailsIntent) -> Unit
+    processIntent: (ProductDetailsIntent) -> Unit
 ) {
     DarkStatusBarDisposableEffect()
 
@@ -39,19 +41,23 @@ internal fun ProductDetailsScreen(
 
         when (uiState) {
             is Content -> {
-                ProductDetailsContent(state = uiState, onHandleIntent = onHandleIntent)
+                ProductDetailsContent(state = uiState, processIntent = processIntent)
 
                 actionItems = {
-                    HeartToggleButton(onAddToFavourite = uiState.markedAsFavourite, onToggleMarkAsFavourite = {
-                        onHandleIntent(ProductDetailsIntent.ToggleMarkAsFavourite(it))
-                    })
+                    HeartToggleButton(
+                        markedAsFavourite = uiState.markedAsFavourite,
+                        onToggleMarkAsFavourite = {
+                            processIntent(ToggleMarkAsFavourite(it))
+                        }
+                    )
                 }
             }
 
             is Error -> ErrorLayout(
                 errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
-                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
-            ) { onHandleIntent(ProductDetailsIntent.Reload) }
+                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon()),
+                onRetry = { processIntent(Reload) }
+            )
 
             Loading -> ProductDetailsLoading()
         }

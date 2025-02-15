@@ -16,6 +16,7 @@ internal class DefaultCartRepository(private val cartLocalSource: CartLocalSourc
         cartLocalSource.removeProduct(productId)
     }
 
+    @Suppress("UnsafeCallOnNullableType")
     override suspend fun updateQuantity(productId: Int, quantity: Int) = executeSafely {
         cartLocalSource.addOrUpdateProduct(getExistingProduct(productId)!!.copy(quantity = quantity))
     }

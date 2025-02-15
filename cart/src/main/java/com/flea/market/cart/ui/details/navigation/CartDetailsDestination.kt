@@ -17,6 +17,6 @@ internal fun NavGraphBuilder.cartDetailsScreen() {
         val cartDetailsViewModel: CartDetailsViewModel = koinViewModel()
         val uiState by cartDetailsViewModel.uiState.collectAsStateWithLifecycle()
 
-        CartDetailsScreen(uiState = uiState, onHandleIntent = cartDetailsViewModel::onHandleIntent)
+        CartDetailsScreen(uiState = uiState, processIntent = cartDetailsViewModel::processIntent)
     }
 }

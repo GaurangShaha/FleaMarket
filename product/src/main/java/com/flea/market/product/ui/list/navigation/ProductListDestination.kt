@@ -19,7 +19,7 @@ internal fun NavGraphBuilder.productListScreen() {
 
         ProductListScreen(
             state = uiState,
-            onHandleIntent = productListViewModel::onHandleIntent
+            processIntent = productListViewModel::processIntent
         )
     }
 }

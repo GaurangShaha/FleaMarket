@@ -13,7 +13,7 @@ class ViewModelShouldNotHavePublicMethodTest {
     fun `passes when viewmodel does not have parameter of type SavedStateHandle`() {
         val code = """
             class NewsViewModel:BaseViewModel<ProductDetailsIntent, ProductDetailsUiState>(Loading){
-                fun onHandleIntent(){}
+                fun processIntent(){}
             }
 """.trimIndent()
 
