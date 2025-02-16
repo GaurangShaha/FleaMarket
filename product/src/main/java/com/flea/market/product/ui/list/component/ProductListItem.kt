@@ -1,5 +1,7 @@
 package com.flea.market.product.ui.list.component
 
+import android.artisan.ui.component.LazyImage
+import android.artisan.ui.theme.extraTypography
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -17,8 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
-import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
 @OptIn(ExperimentalMaterialApi::class)

@@ -1,5 +1,8 @@
 package com.flea.market.cart.ui.details.component
 
+import android.artisan.ui.common.navigation.ProductDetailsDestination
+import android.artisan.ui.compositionlocal.LocalNavController
+import android.artisan.ui.compositionlocal.LocalWindowSizeClass
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,9 +20,6 @@ import com.flea.market.cart.ui.details.CartDetailsIntent.DecreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.IncreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.RemoveFromCart
 import com.flea.market.cart.ui.details.CartDetailsUiState.Content
-import com.flea.market.common.navigation.ProductDetailsDestination
-import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 
 @Composable
 internal fun CartDetailsContent(uiState: Content, processIntent: (CartDetailsIntent) -> Unit) {

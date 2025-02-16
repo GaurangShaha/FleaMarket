@@ -1,7 +1,7 @@
 package com.flea.market.data.di
 
+import android.artisan.networking.retrofit.remote.ResultCallAdapterFactory
 import com.flea.market.BuildConfig
-import com.flea.market.data.common.remote.ResultCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module

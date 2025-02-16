@@ -1,5 +1,7 @@
 package com.flea.market.cart.ui.details
 
+import android.artisan.ui.common.contract.viewmodel.ViewModelContract
+import android.artisan.ui.common.contract.viewmodel.ViewModelContract.Companion.startWithFiveSecStopTimeout
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
@@ -14,8 +16,6 @@ import com.flea.market.cart.ui.details.CartDetailsUiState.Loading
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
 import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
 import com.flea.market.cart.ui.details.mapper.toItemsInCartViewEntity
-import com.flea.market.common.contract.viewmodel.ViewModelContract
-import com.flea.market.common.contract.viewmodel.ViewModelContract.Companion.startWithFiveSecStopTimeout
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

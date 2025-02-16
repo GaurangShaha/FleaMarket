@@ -26,6 +26,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -59,21 +60,17 @@ android {
 }
 
 dependencies {
-    api project(path: ':ui-common')
+    api libs.ui.common
     implementation project(path: ':product')
     implementation project(path: ':cart')
     implementation project(path: ':favourite')
     implementation project(path: ':profile')
-    implementation project(':networking')
+    api libs.networking
 
     implementation libs.room.runtime
     implementation libs.room
     annotationProcessor libs.room.compiler
     ksp libs.room.compiler
-
-    implementation libs.retrofit
-    implementation libs.retrofit.converter.moshi
-    implementation libs.retrofit.logging
 
     implementation libs.androidx.startup.runtime
 }

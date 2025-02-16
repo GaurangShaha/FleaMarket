@@ -1,7 +1,7 @@
 package com.flea.market.profile.ui
 
+import android.artisan.ui.common.contract.viewmodel.ViewModelContract
 import androidx.lifecycle.ViewModel
-import com.flea.market.common.contract.viewmodel.ViewModelContract
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

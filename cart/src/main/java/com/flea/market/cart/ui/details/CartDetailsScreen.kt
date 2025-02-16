@@ -1,5 +1,10 @@
 package com.flea.market.cart.ui.details
 
+import android.artisan.ui.common.mapper.toAPIErrorIcon
+import android.artisan.ui.common.mapper.toAPIErrorMessage
+import android.artisan.ui.component.EmptyLayout
+import android.artisan.ui.component.ErrorLayout
+import android.artisan.ui.component.FleaMarketAppBar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -13,11 +18,6 @@ import com.flea.market.cart.ui.details.CartDetailsUiState.Error
 import com.flea.market.cart.ui.details.CartDetailsUiState.Loading
 import com.flea.market.cart.ui.details.component.CartDetailsContent
 import com.flea.market.cart.ui.details.component.CartDetailsLoading
-import com.flea.market.common.mapper.toAPIErrorIcon
-import com.flea.market.common.mapper.toAPIErrorMessage
-import com.flea.market.ui.component.EmptyLayout
-import com.flea.market.ui.component.ErrorLayout
-import com.flea.market.ui.component.FleaMarketAppBar
 
 @Composable
 internal fun CartDetailsScreen(

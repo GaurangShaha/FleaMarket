@@ -14,21 +14,23 @@ dependencyResolutionManagement {
         maven {
             url 'https://maven.pkg.github.com/GaurangShaha/Architecture_Rules'
             credentials {
-                Properties props = new Properties()
-                props.load(new FileInputStream(new File('local.properties')))
+                def propertiesFile = new File('local.properties')
+                if (propertiesFile.exists()) {
+                    Properties props = new Properties()
+                    props.load(new FileInputStream(propertiesFile))
 
-                username  props.getProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-                password  props.getProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+                    username props.getProperty("gpr.user")
+                    password props.getProperty("gpr.key")
+                } else {
+                    username System.getenv("GITHUB_ACTOR")
+                    password System.getenv("GITHUB_TOKEN")
+                }
             }
         }
     }
 }
 rootProject.name = "FleaMarket"
 include ':app'
-include ':networking'
-include ':foundation'
-include ':ui-common'
-include ':ui-component'
 include ':profile'
 include ':product'
 include ':product:data'
@@ -36,4 +38,3 @@ include ':cart'
 include ':cart:data'
 include ':favourite'
 include ':favourite:data'
-include ':test-common'

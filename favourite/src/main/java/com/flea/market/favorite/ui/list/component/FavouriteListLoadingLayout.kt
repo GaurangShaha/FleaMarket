@@ -1,5 +1,6 @@
 package com.flea.market.favorite.ui.list.component
 
+import android.artisan.ui.modifier.shimmer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.flea.market.ui.modifier.shimmer
 
 private const val PRODUCT_COUNT = 10
 

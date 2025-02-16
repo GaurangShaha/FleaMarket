@@ -1,10 +1,10 @@
 package com.flea.market.product.ui.dummy.data
 
+import android.artisan.ui.component.ButtonState
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListUiState
-import com.flea.market.ui.component.ButtonState
 
 @Suppress("MaxLineLength")
 internal val dummyProductList = listOf(

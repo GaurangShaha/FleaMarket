@@ -1,5 +1,7 @@
 package com.flea.market.product.ui.list.component
 
+import android.artisan.ui.common.navigation.ProductDetailsDestination
+import android.artisan.ui.compositionlocal.LocalNavController
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -11,11 +13,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.product.ui.R
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.product.ui.list.ProductListUiState.Content
-import com.flea.market.ui.compositionlocal.LocalNavController
 
 @Composable
 internal fun ProductListContent(

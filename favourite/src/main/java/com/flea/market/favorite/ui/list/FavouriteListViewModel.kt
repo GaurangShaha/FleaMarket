@@ -1,10 +1,13 @@
 package com.flea.market.favorite.ui.list
 
+import android.artisan.foundation.extension.onSuccess
+import android.artisan.ui.common.contract.viewmodel.ViewModelContract
+import android.artisan.ui.common.extension.ifInstanceOf
+import android.artisan.ui.component.snackbar.SnackbarDelegate.SnackbarType.SUCCESS
+import android.artisan.ui.component.snackbar.model.SnackbarWithActionDetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flea.market.cart.data.repository.CartRepository
-import com.flea.market.common.contract.viewmodel.ViewModelContract
-import com.flea.market.common.extension.ifInstanceOf
 import com.flea.market.favorite.ui.list.FavouriteListIntent.MoveToCart
 import com.flea.market.favorite.ui.list.FavouriteListIntent.RemoveFromFavourite
 import com.flea.market.favorite.ui.list.FavouriteListIntent.SnackbarResult
@@ -18,9 +21,6 @@ import com.flea.market.favorite.ui.list.mapper.toFavouriteItemViewEntity
 import com.flea.market.favorite.ui.list.mapper.toFavouriteProductDetailsEntity
 import com.flea.market.favourite.repository.FavouriteRepository
 import com.flea.market.favourite.ui.R
-import com.flea.market.foundation.extension.onSuccess
-import com.flea.market.ui.component.snackbar.SnackbarDelegate.SnackbarType.SUCCESS
-import com.flea.market.ui.component.snackbar.model.SnackbarWithActionDetails
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

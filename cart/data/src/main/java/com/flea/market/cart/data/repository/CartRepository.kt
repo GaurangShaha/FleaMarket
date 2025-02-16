@@ -1,7 +1,7 @@
 package com.flea.market.cart.data.repository
 
+import android.artisan.foundation.model.Result
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
-import com.flea.market.foundation.model.Result
 import kotlinx.coroutines.flow.Flow
 
 public interface CartRepository {

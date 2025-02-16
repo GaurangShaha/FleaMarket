@@ -1,5 +1,12 @@
 package com.flea.market.ui.component
 
+import android.artisan.ui.component.NavigationBarScreen
+import android.artisan.ui.component.ScreenWithBottomBar
+import android.artisan.ui.component.ScreenWithNavigationRail
+import android.artisan.ui.component.snackbar.SnackbarDelegate
+import android.artisan.ui.compositionlocal.LocalNavController
+import android.artisan.ui.compositionlocal.LocalSharedUIController
+import android.artisan.ui.compositionlocal.LocalWindowSizeClass
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.rememberDrawerState
@@ -19,10 +26,6 @@ import com.flea.market.product.ui.list.navigation.ProductListDestination
 import com.flea.market.product.ui.navigation.addProductGraph
 import com.flea.market.profile.ui.navigation.ProfileDestination
 import com.flea.market.profile.ui.navigation.addProfileGraph
-import com.flea.market.ui.component.snackbar.SnackbarDelegate
-import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.compositionlocal.LocalSharedUIController
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.ui.main.MainState
 import okhttp3.internal.immutableListOf
 
@@ -70,7 +73,7 @@ private val navigationScreens = immutableListOf(
     NavigationBarScreen(
         route = CartDetailsDestination,
         labelResourceId = R.string.cart,
-        iconResourceId = com.flea.market.ui.component.R.drawable.ic_cart
+        iconResourceId = android.artisan.ui.component.R.drawable.ic_cart
     ),
     NavigationBarScreen(
         route = FavouriteListDestination,

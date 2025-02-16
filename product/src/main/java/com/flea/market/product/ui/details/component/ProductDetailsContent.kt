@@ -1,5 +1,7 @@
 package com.flea.market.product.ui.details.component
 
+import android.artisan.ui.compositionlocal.LocalWindowSizeClass
+import android.artisan.ui.theme.extraShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,8 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.details.ProductDetailsIntent
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
-import com.flea.market.ui.compositionlocal.LocalWindowSizeClass
-import com.flea.market.ui.theme.extraShape
 
 @Composable
 internal fun ProductDetailsContent(

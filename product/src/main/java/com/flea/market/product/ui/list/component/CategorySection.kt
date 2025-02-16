@@ -1,5 +1,6 @@
 package com.flea.market.product.ui.list.component
 
+import android.artisan.ui.theme.extraShape
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -19,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.product.ui.list.ProductListIntent.FilterByCategory
-import com.flea.market.ui.theme.extraShape
 
 private const val TEXT_COLOR_ANIMATION_TIME = 300
 

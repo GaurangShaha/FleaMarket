@@ -1,5 +1,7 @@
 package com.flea.market.cart.ui.details.component
 
+import android.artisan.ui.theme.extraColors
+import android.artisan.ui.theme.extraTypography
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,8 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.flea.market.cart.ui.R
 import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
-import com.flea.market.ui.theme.extraColors
-import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
 @Composable

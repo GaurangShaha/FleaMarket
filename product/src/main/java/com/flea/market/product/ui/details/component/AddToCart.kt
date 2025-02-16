@@ -1,5 +1,9 @@
 package com.flea.market.product.ui.details.component
 
+import android.artisan.ui.component.AddToCartButton
+import android.artisan.ui.component.ButtonState
+import android.artisan.ui.theme.extraColors
+import android.artisan.ui.theme.extraShape
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -14,10 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.flea.market.product.ui.R
-import com.flea.market.ui.component.AddToCartButton
-import com.flea.market.ui.component.ButtonState
-import com.flea.market.ui.theme.extraColors
-import com.flea.market.ui.theme.extraShape
 
 @Composable
 internal fun AddToCart(

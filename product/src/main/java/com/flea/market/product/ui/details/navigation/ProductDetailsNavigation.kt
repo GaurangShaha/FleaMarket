@@ -1,12 +1,12 @@
 package com.flea.market.product.ui.details.navigation
 
+import android.artisan.ui.common.navigation.ProductDetailsDestination
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.product.ui.details.ProductDetailsScreen
 import com.flea.market.product.ui.details.ProductDetailsViewModel
 import org.koin.androidx.compose.koinViewModel

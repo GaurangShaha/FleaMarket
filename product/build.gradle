@@ -51,10 +51,10 @@ android {
 }
 
 dependencies {
-    api project(path: ':ui-common')
+    api libs.ui.common
     api project(path: ':product:data')
     implementation project(path: ':cart:data')
     implementation project(path: ':favourite:data')
 
-    testImplementation project(path: ':test-common')
+    testImplementation libs.test.common
 }

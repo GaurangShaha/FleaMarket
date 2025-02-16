@@ -51,8 +51,8 @@ android {
 }
 
 dependencies {
-    api project(path: ':ui-common')
+    api libs.ui.common
     api project(path: ':cart:data')
 
-    testImplementation project(path: ':test-common')
+    testImplementation libs.test.common
 }

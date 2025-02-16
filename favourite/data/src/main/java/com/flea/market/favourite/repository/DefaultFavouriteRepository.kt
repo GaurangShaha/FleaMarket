@@ -1,8 +1,8 @@
 package com.flea.market.favourite.repository
 
+import android.artisan.foundation.helper.executeSafely
 import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
 import com.flea.market.favourite.local.source.FavouriteLocalSource
-import com.flea.market.foundation.helper.executeSafely
 
 @Suppress("TooGenericExceptionCaught")
 internal class DefaultFavouriteRepository(

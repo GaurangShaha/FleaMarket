@@ -1,7 +1,7 @@
 package com.flea.market.ui.main
 
+import android.artisan.ui.common.contract.viewmodel.ViewModelContract
 import androidx.lifecycle.ViewModel
-import com.flea.market.common.contract.viewmodel.ViewModelContract
 import com.flea.market.ui.main.MainIntent.ResetSnackbarDetails
 import com.flea.market.ui.main.MainIntent.ShowSnackbar
 import kotlinx.coroutines.flow.MutableStateFlow

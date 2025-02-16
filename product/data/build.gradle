@@ -41,9 +41,9 @@ android {
 
 dependencies {
     ksp(libs.moshi.kotlin.codegen)
-    implementation(project(":networking"))
+    implementation libs.networking
 
     implementation libs.koin
 
-    testImplementation project(path: ':test-common')
+    testImplementation libs.test.common
 }

@@ -1,5 +1,9 @@
 package com.flea.market.cart.ui.details.component
 
+import android.artisan.ui.component.LazyImage
+import android.artisan.ui.component.Stepper
+import android.artisan.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
+import android.artisan.ui.theme.extraTypography
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,10 +32,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.flea.market.cart.ui.R
 import com.flea.market.cart.ui.details.entity.ItemsInCartViewEntity
-import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.component.Stepper
-import com.flea.market.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
-import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
 @Composable

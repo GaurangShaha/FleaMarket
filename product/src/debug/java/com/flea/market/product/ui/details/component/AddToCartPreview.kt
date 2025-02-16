@@ -1,9 +1,9 @@
 package com.flea.market.product.ui.details.component
 
+import android.artisan.ui.component.ButtonState
+import android.artisan.ui.preview.FleaMarketPreviews
+import android.artisan.ui.preview.FleaMarketThemePreview
 import androidx.compose.runtime.Composable
-import com.flea.market.ui.component.ButtonState
-import com.flea.market.ui.preview.FleaMarketPreviews
-import com.flea.market.ui.preview.FleaMarketThemePreview
 
 @Composable
 @FleaMarketPreviews

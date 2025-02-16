@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":networking"))
+    implementation libs.networking
 
     implementation libs.koin
 
@@ -49,5 +49,5 @@ dependencies {
     annotationProcessor libs.room.compiler
     ksp libs.room.compiler
 
-    testImplementation project(path: ':test-common')
+    testImplementation libs.test.common
 }

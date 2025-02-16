@@ -1,5 +1,9 @@
 package com.flea.market.favorite.ui.list.component
 
+import android.artisan.ui.common.navigation.ProductDetailsDestination
+import android.artisan.ui.component.LazyImage
+import android.artisan.ui.compositionlocal.LocalNavController
+import android.artisan.ui.theme.extraTypography
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,12 +30,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 import com.flea.market.favourite.ui.R
-import com.flea.market.ui.component.LazyImage
-import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.theme.extraTypography
 import java.text.NumberFormat
 
 @OptIn(ExperimentalMaterialApi::class)

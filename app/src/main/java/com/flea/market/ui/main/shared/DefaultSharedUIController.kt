@@ -1,7 +1,7 @@
 package com.flea.market.ui.main.shared
 
-import com.flea.market.ui.component.shared.SharedUIController
-import com.flea.market.ui.component.snackbar.model.SnackbarDetails
+import android.artisan.ui.component.shared.SharedUIController
+import android.artisan.ui.component.snackbar.model.SnackbarDetails
 import com.flea.market.ui.main.MainIntent
 import com.flea.market.ui.main.MainIntent.ResetSnackbarDetails
 import com.flea.market.ui.main.MainIntent.ShowSnackbar

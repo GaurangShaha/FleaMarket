@@ -1,8 +1,8 @@
 package com.flea.market.cart.data.repository
 
+import android.artisan.foundation.helper.executeSafely
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.cart.data.local.source.CartLocalSource
-import com.flea.market.foundation.helper.executeSafely
 
 internal class DefaultCartRepository(private val cartLocalSource: CartLocalSource) : CartRepository {
     override suspend fun addOrUpdateItem(productDetails: CartProductDetailsEntity) =

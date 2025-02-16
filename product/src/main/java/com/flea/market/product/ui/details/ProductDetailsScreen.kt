@@ -1,5 +1,13 @@
 package com.flea.market.product.ui.details
 
+import android.artisan.ui.common.mapper.toAPIErrorIcon
+import android.artisan.ui.common.mapper.toAPIErrorMessage
+import android.artisan.ui.component.ErrorLayout
+import android.artisan.ui.component.FleaMarketAppBar
+import android.artisan.ui.component.HeartToggleButton
+import android.artisan.ui.compositionlocal.LocalNavController
+import android.artisan.ui.theme.DarkStatusBarDisposableEffect
+import android.artisan.ui.theme.extraColors
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
@@ -12,8 +20,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.flea.market.common.mapper.toAPIErrorIcon
-import com.flea.market.common.mapper.toAPIErrorMessage
 import com.flea.market.product.ui.R
 import com.flea.market.product.ui.details.ProductDetailsIntent.Reload
 import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavourite
@@ -22,12 +28,6 @@ import com.flea.market.product.ui.details.ProductDetailsUiState.Error
 import com.flea.market.product.ui.details.ProductDetailsUiState.Loading
 import com.flea.market.product.ui.details.component.ProductDetailsContent
 import com.flea.market.product.ui.details.component.ProductDetailsLoading
-import com.flea.market.ui.component.ErrorLayout
-import com.flea.market.ui.component.FleaMarketAppBar
-import com.flea.market.ui.component.HeartToggleButton
-import com.flea.market.ui.compositionlocal.LocalNavController
-import com.flea.market.ui.theme.DarkStatusBarDisposableEffect
-import com.flea.market.ui.theme.extraColors
 
 @Composable
 internal fun ProductDetailsScreen(
