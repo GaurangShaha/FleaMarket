@@ -11,6 +11,16 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://maven.pkg.github.com/GaurangShaha/Architecture_Rules'
+            credentials {
+                Properties props = new Properties()
+                props.load(new FileInputStream(new File('local.properties')))
+
+                username  props.getProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                password  props.getProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
 rootProject.name = "FleaMarket"
@@ -19,7 +29,6 @@ include ':networking'
 include ':foundation'
 include ':ui-common'
 include ':ui-component'
-include ':architecture-rules'
 include ':profile'
 include ':product'
 include ':product:data'

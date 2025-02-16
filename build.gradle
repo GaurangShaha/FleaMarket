@@ -11,20 +11,18 @@ plugins {
 }
 
 allprojects {
-    if (project.name != "architecture-rules") {
-        apply plugin: "io.gitlab.arturbosch.detekt"
+    apply plugin: "io.gitlab.arturbosch.detekt"
 
-        detekt {
-            toolVersion = libs.versions.detekt.get()
-            autoCorrect = true
-            config.setFrom(file(rootDir.path + "/config/detekt/detekt.yml"))
-        }
+    detekt {
+        toolVersion = libs.versions.detekt.get()
+        autoCorrect = true
+        config.setFrom(file(rootDir.path + "/config/detekt/detekt.yml"))
+    }
 
-        dependencies {
-            detektPlugins libs.detekt.formatting
-            detektPlugins libs.detekt.appkode.compose
-            detektPlugins libs.detekt.twitter.compose
-            detektPlugins project(":architecture-rules")
-        }
+    dependencies {
+        detektPlugins libs.detekt.formatting
+        detektPlugins libs.detekt.appkode.compose
+        detektPlugins libs.detekt.twitter.compose
+        detektPlugins libs.architectural.rules
     }
 }
