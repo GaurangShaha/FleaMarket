@@ -1,12 +1,13 @@
 package com.flea.market.product.ui.details
 
+import android.artisan.foundation.model.Result.Failure
+import android.artisan.foundation.model.Result.Success
+import android.artisan.test.common.test.MainThreadTestListener
+import android.artisan.ui.common.navigation.ProductDetailsDestination
+import android.artisan.ui.component.ButtonState.Initial
 import com.flea.market.cart.data.repository.CartRepository
-import com.flea.market.common.navigation.ProductDetailsDestination
 import com.flea.market.favourite.repository.FavouriteRepository
-import com.flea.market.foundation.model.Result.Failure
-import com.flea.market.foundation.model.Result.Success
 import com.flea.market.product.data.repository.ProductRepository
-import com.flea.market.product.test.MainThreadTestListener
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsIntent.Reload
@@ -14,7 +15,6 @@ import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavou
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.details.ProductDetailsUiState.Error
 import com.flea.market.product.ui.input.productDetailsEntityList
-import com.flea.market.ui.component.ButtonState.Initial
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf

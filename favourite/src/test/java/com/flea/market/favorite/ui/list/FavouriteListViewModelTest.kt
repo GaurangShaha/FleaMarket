@@ -1,5 +1,8 @@
 package com.flea.market.favorite.ui.list
 
+import android.artisan.foundation.model.InternetDisconnectionException
+import android.artisan.foundation.model.Result.Success
+import android.artisan.test.common.test.MainThreadTestListener
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.favorite.ui.input.favouriteItemViewEntity
 import com.flea.market.favorite.ui.input.favouriteProductDetailsEntityList
@@ -11,9 +14,6 @@ import com.flea.market.favorite.ui.list.FavouriteListUiState.Empty
 import com.flea.market.favorite.ui.list.FavouriteListUiState.Error
 import com.flea.market.favorite.ui.list.mapper.toFavouriteItemViewEntity
 import com.flea.market.favourite.repository.FavouriteRepository
-import com.flea.market.foundation.model.InternetDisconnectionException
-import com.flea.market.foundation.model.Result.Success
-import com.flea.market.product.test.MainThreadTestListener
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe

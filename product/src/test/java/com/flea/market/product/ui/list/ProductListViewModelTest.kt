@@ -1,9 +1,9 @@
 package com.flea.market.product.ui.list
 
-import com.flea.market.foundation.model.Result.Failure
-import com.flea.market.foundation.model.Result.Success
+import android.artisan.foundation.model.Result.Failure
+import android.artisan.foundation.model.Result.Success
+import android.artisan.test.common.test.MainThreadTestListener
 import com.flea.market.product.data.repository.ProductRepository
-import com.flea.market.product.test.MainThreadTestListener
 import com.flea.market.product.ui.common.mapper.toCategoryListWrapper
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
 import com.flea.market.product.ui.input.productDetailsEntityList

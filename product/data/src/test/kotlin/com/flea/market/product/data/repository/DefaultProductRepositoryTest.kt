@@ -1,8 +1,8 @@
 package com.flea.market.product.data.repository
 
-import com.flea.market.foundation.extension.getOrThrow
-import com.flea.market.foundation.model.Result.Failure
-import com.flea.market.foundation.model.Result.Success
+import android.artisan.foundation.extension.getOrThrow
+import android.artisan.foundation.model.Result.Failure
+import android.artisan.foundation.model.Result.Success
 import com.flea.market.product.data.input.productDetailsEntityList
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.remote.source.ProductRemoteSource

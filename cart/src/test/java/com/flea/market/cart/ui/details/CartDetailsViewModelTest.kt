@@ -1,5 +1,8 @@
 package com.flea.market.cart.ui.details
 
+import android.artisan.foundation.model.InternetDisconnectionException
+import android.artisan.foundation.model.Result.Success
+import android.artisan.test.common.test.MainThreadTestListener
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.cart.ui.details.CartDetailsIntent.DecreaseQuantity
@@ -11,9 +14,6 @@ import com.flea.market.cart.ui.details.entity.PriceDetailsViewEntity
 import com.flea.market.cart.ui.details.input.cartProductDetailsEntityList
 import com.flea.market.cart.ui.details.input.itemsInCartViewEntity
 import com.flea.market.cart.ui.details.mapper.toItemsInCartViewEntity
-import com.flea.market.foundation.model.InternetDisconnectionException
-import com.flea.market.foundation.model.Result.Success
-import com.flea.market.product.test.MainThreadTestListener
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf

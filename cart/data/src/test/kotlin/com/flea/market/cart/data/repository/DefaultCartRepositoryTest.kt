@@ -1,10 +1,10 @@
 package com.flea.market.cart.data.repository
 
+import android.artisan.foundation.model.Result.Failure
+import android.artisan.foundation.model.Result.Success
 import com.flea.market.cart.data.input.cartProductDetailsEntityList
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.cart.data.local.source.CartLocalSource
-import com.flea.market.foundation.model.Result.Failure
-import com.flea.market.foundation.model.Result.Success
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.types.shouldBeInstanceOf
