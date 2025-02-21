@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://jitpack.io' }
         maven {
-            url 'https://maven.pkg.github.com/GaurangShaha/Architecture_Rules'
+            url 'https://maven.pkg.github.com/GaurangShaha/BuildingBlocks'
             credentials {
                 def propertiesFile = new File('local.properties')
                 if (propertiesFile.exists()) {
