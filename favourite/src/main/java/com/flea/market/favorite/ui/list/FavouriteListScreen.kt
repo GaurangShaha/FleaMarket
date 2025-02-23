@@ -6,6 +6,7 @@ import android.artisan.ui.component.EmptyLayout
 import android.artisan.ui.component.ErrorLayout
 import android.artisan.ui.component.FleaMarketAppBar
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
@@ -24,24 +25,26 @@ internal fun FavouriteListScreen(
     uiState: FavouriteListUiState,
     processIntent: (FavouriteListIntent) -> Unit
 ) {
-    Column {
-        FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.favourites)
+    Surface {
+        Column {
+            FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.favourites)
 
-        when (uiState) {
-            Loading -> FavouriteListLoading()
-            Empty -> EmptyLayout(
-                message = stringResource(id = R.string.empty_favourite),
-                icon = painterResource(id = R.drawable.ic_empty_favourite)
-            )
+            when (uiState) {
+                Loading -> FavouriteListLoading()
+                Empty -> EmptyLayout(
+                    message = stringResource(id = R.string.empty_favourite),
+                    icon = painterResource(id = R.drawable.ic_empty_favourite)
+                )
 
-            is Content -> {
-                FavouriteListContent(uiState = uiState, processIntent = processIntent)
+                is Content -> {
+                    FavouriteListContent(uiState = uiState, processIntent = processIntent)
+                }
+
+                is Error -> ErrorLayout(
+                    errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
+                    errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
+                )
             }
-
-            is Error -> ErrorLayout(
-                errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
-                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
-            )
         }
     }
 }

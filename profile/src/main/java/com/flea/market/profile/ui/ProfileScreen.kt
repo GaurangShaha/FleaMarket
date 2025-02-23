@@ -29,6 +29,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -43,40 +44,42 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun ProfileScreen(uiState: ProfileUiState) {
-    Column {
-        FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.profile)
+    Surface {
+        Column {
+            FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.profile)
 
-        @Suppress("MagicNumber")
-        val columnCount =
-            if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
+            @Suppress("MagicNumber")
+            val columnCount =
+                if (LocalWindowSizeClass.current.widthSizeClass == WindowWidthSizeClass.Compact) 1 else 3
 
-        val sharedUIController = LocalSharedUIController.current
-        LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(columnCount),
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.surface),
-            contentPadding = PaddingValues(bottom = 66.dp)
-        ) {
-            item {
-                UserDetails(uiState)
-            }
-
-            items(uiState.menuItem) { (icon, stringRes) ->
-                ProfileMenuItem(icon, stringRes) {
-                    sharedUIController.showSnackbar(SnackbarDetails(message = R.string.coming_soon))
+            val sharedUIController = LocalSharedUIController.current
+            LazyVerticalStaggeredGrid(
+                columns = StaggeredGridCells.Fixed(columnCount),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colors.surface),
+                contentPadding = PaddingValues(bottom = 66.dp)
+            ) {
+                item {
+                    UserDetails(uiState)
                 }
-            }
 
-            item(span = StaggeredGridItemSpan.SingleLane) {
-                val activity = findActivity()
+                items(uiState.menuItem) { (icon, stringRes) ->
+                    ProfileMenuItem(icon, stringRes) {
+                        sharedUIController.showSnackbar(SnackbarDetails(message = R.string.coming_soon))
+                    }
+                }
 
-                FMOutlinedButton(
-                    text = stringResource(id = R.string.logout),
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                ) { activity?.finishAndRemoveTask() }
+                item(span = StaggeredGridItemSpan.SingleLane) {
+                    val activity = findActivity()
+
+                    FMOutlinedButton(
+                        text = stringResource(id = R.string.logout),
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    ) { activity?.finishAndRemoveTask() }
+                }
             }
         }
     }

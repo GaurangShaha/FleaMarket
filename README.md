@@ -2,6 +2,8 @@
 
 FleaMarket is an Android application designed to facilitate the buying and selling of second-hand goods within a community. Users can browse various categories, add items to their cart, and manage their profiles seamlessly. It uses a FakeStoreAPI and local database to achieve the functionality. This application is created as an implementation sample for [BuildingBlocks](https://github.com/GaurangShaha/BuildingBlocks) library.
 
+## APK - [FleaMarket.apk](./images/app-release.apk)
+
 ## Features
 
 - **Product Listings**: Browse and search for items across multiple categories.

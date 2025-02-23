@@ -11,6 +11,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.flea.market.ui.component.FleaMarketComposeApp
@@ -29,7 +30,7 @@ internal class MainActivity : AppCompatActivity() {
                 CompositionLocalProvider(
                     LocalWindowSizeClass provides calculateWindowSizeClass(this),
                     LocalNavController provides rememberNavController(),
-                    LocalSharedUIController provides DefaultSharedUIController(viewModel::processIntent)
+                    LocalSharedUIController provides remember { DefaultSharedUIController(viewModel::processIntent) }
                 ) {
                     FleaMarketComposeApp(uiState)
                 }

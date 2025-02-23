@@ -12,6 +12,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -34,42 +35,44 @@ internal fun ProductDetailsScreen(
     uiState: ProductDetailsUiState,
     processIntent: (ProductDetailsIntent) -> Unit
 ) {
-    DarkStatusBarDisposableEffect()
+    Surface {
+        DarkStatusBarDisposableEffect()
 
-    Box {
-        var actionItems: @Composable (RowScope.() -> Unit) = {}
+        Box {
+            var actionItems: @Composable (RowScope.() -> Unit) = {}
 
-        when (uiState) {
-            is Content -> {
-                ProductDetailsContent(state = uiState, processIntent = processIntent)
+            when (uiState) {
+                is Content -> {
+                    ProductDetailsContent(state = uiState, processIntent = processIntent)
 
-                actionItems = {
-                    HeartToggleButton(
-                        markedAsFavourite = uiState.markedAsFavourite,
-                        onToggleMarkAsFavourite = {
-                            processIntent(ToggleMarkAsFavourite(it))
-                        }
-                    )
+                    actionItems = {
+                        HeartToggleButton(
+                            markedAsFavourite = uiState.markedAsFavourite,
+                            onToggleMarkAsFavourite = {
+                                processIntent(ToggleMarkAsFavourite(it))
+                            }
+                        )
+                    }
                 }
+
+                is Error -> ErrorLayout(
+                    errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
+                    errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon()),
+                    onRetry = { processIntent(Reload) }
+                )
+
+                Loading -> ProductDetailsLoading()
             }
 
-            is Error -> ErrorLayout(
-                errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
-                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon()),
-                onRetry = { processIntent(Reload) }
+            val navController = LocalNavController.current
+            FleaMarketAppBar(
+                title = R.string.product_details,
+                modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor)),
+                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack to { navController.navigateUp() },
+                actionItems = actionItems,
+                backgroundColor = Color.Transparent,
+                contentColor = MaterialTheme.extraColors.onScrimColor
             )
-
-            Loading -> ProductDetailsLoading()
         }
-
-        val navController = LocalNavController.current
-        FleaMarketAppBar(
-            title = R.string.product_details,
-            modifier = Modifier.background(Brush.verticalGradient(MaterialTheme.extraColors.scrimColor)),
-            navigationIcon = Icons.AutoMirrored.Filled.ArrowBack to { navController.navigateUp() },
-            actionItems = actionItems,
-            backgroundColor = Color.Transparent,
-            contentColor = MaterialTheme.extraColors.onScrimColor
-        )
     }
 }

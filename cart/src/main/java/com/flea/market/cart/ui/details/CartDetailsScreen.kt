@@ -6,6 +6,7 @@ import android.artisan.ui.component.EmptyLayout
 import android.artisan.ui.component.ErrorLayout
 import android.artisan.ui.component.FleaMarketAppBar
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
@@ -24,22 +25,24 @@ internal fun CartDetailsScreen(
     uiState: CartDetailsUiState,
     processIntent: (CartDetailsIntent) -> Unit
 ) {
-    Column {
-        FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.cart)
+    Surface {
+        Column {
+            FleaMarketAppBar(navigationIcon = Icons.Default.Menu to {}, title = R.string.cart)
 
-        when (uiState) {
-            Loading -> CartDetailsLoading()
-            Empty -> EmptyLayout(
-                message = stringResource(R.string.empty_cart),
-                icon = painterResource(id = R.drawable.ic_empty_cart)
-            )
+            when (uiState) {
+                Loading -> CartDetailsLoading()
+                Empty -> EmptyLayout(
+                    message = stringResource(R.string.empty_cart),
+                    icon = painterResource(id = R.drawable.ic_empty_cart)
+                )
 
-            is Content -> CartDetailsContent(uiState = uiState, processIntent = processIntent)
+                is Content -> CartDetailsContent(uiState = uiState, processIntent = processIntent)
 
-            is Error -> ErrorLayout(
-                errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
-                errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
-            )
+                is Error -> ErrorLayout(
+                    errorMessage = stringResource(id = uiState.throwable.toAPIErrorMessage()),
+                    errorIcon = painterResource(id = uiState.throwable.toAPIErrorIcon())
+                )
+            }
         }
     }
 }

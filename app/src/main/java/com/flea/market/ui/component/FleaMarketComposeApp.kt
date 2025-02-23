@@ -9,7 +9,6 @@ import android.artisan.ui.compositionlocal.LocalSharedUIController
 import android.artisan.ui.compositionlocal.LocalWindowSizeClass
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Surface
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -91,16 +90,14 @@ private val navigationScreens = immutableListOf(
 @Composable
 private fun getNavHost() = remember {
     movableContentOf {
-        Surface {
-            NavHost(
-                navController = LocalNavController.current,
-                startDestination = ProductListDestination
-            ) {
-                addProductGraph()
-                addCartGraph()
-                addFavouriteGraph()
-                addProfileGraph()
-            }
+        NavHost(
+            navController = LocalNavController.current,
+            startDestination = ProductListDestination
+        ) {
+            addProductGraph()
+            addCartGraph()
+            addFavouriteGraph()
+            addProfileGraph()
         }
     }
 }
