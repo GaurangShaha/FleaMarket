@@ -30,8 +30,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.valueOf(libs.versions.sourceCompatibility.get())
+        targetCompatibility JavaVersion.valueOf(libs.versions.targetCompatibility.get())
     }
     kotlinOptions {
         jvmTarget = libs.versions.jvmTarget.get()
@@ -44,7 +44,10 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += [
+                    '/META-INF/{AL2.0,LGPL2.1,LICENSE.md,licenses/ASM,LICENSE-notice.md}',
+                    '**/{win32-x86-64,win32-x86}/attach_hotspot_windows.dll'
+            ]
         }
     }
 

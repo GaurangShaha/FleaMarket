@@ -27,6 +27,7 @@ dependencyResolutionManagement {
                 }
             }
         }
+        mavenLocal()
     }
 }
 rootProject.name = "FleaMarket"

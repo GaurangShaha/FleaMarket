@@ -3,24 +3,27 @@ compileSdk = "35"
 minSdk = "24"
 moshiKotlinCodegen = "1.15.1"
 targetSdk = "34"
-jvmTarget = "1.8"
+jvmTarget = "21"
+sourceCompatibility = "VERSION_21"
+targetCompatibility = "VERSION_21"
 kotlinCompilerExtensionVersion = "1.5.14"
 
 room = "2.6.1"
 
 detekt = "1.23.7"
 
-androidGradlePlugin = "8.8.1"
+androidGradlePlugin = "8.9.0"
 kotlin = "1.9.24"
 ksp = "1.9.24-1.0.20"
 
 [libraries]
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version = "1.2.0" }
-architectural-rules = { module = "shaha.gaurang:architectural-rules", version = "1.0.0" }
 moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
-networking = { module = "android.artisan:networking", version = "1.0.1" }
-test-common = { module = "android.artisan:test-common", version = "1.0.1" }
-ui-common = { module = "android.artisan:ui-common", version = "1.0.2" }
+
+architectural-rules = { module = "shaha.gaurang:architectural-rules", version = "1.0.0" }
+networking = { module = "android.artisan:networking", version = "2.0.0" }
+test-common = { module = "android.artisan:test-common", version = "2.0.0" }
+ui-common = { module = "android.artisan:ui-common", version = "2.0.0" }
 
 koin = { group = "io.insert-koin", name = "koin-androidx-compose", version = "4.0.2" }
 
