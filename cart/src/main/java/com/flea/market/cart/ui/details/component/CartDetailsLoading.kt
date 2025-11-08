@@ -1,8 +1,5 @@
 package com.flea.market.cart.ui.details.component
 
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
-import android.artisan.ui.modifier.shimmer
-import android.artisan.ui.theme.extraShape
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -19,6 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
+import building.blocks.ui.modifier.shimmer
+import building.blocks.ui.theme.extraShape
 
 @Composable
 internal fun CartDetailsLoading() {

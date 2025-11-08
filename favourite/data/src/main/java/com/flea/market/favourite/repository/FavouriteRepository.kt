@@ -1,6 +1,5 @@
 package com.flea.market.favourite.repository
 
-import android.artisan.foundation.model.Result
 import com.flea.market.favourite.local.entity.FavouriteProductDetailsEntity
 import kotlinx.coroutines.flow.Flow
 

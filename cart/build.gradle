@@ -52,6 +52,7 @@ android {
 
 dependencies {
     api libs.ui.common
+    api libs.ui.component
     api project(path: ':cart:data')
 
     testImplementation libs.test.common

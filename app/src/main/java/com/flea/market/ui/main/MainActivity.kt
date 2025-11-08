@@ -1,9 +1,5 @@
 package com.flea.market.ui.main
 
-import android.artisan.ui.compositionlocal.LocalNavController
-import android.artisan.ui.compositionlocal.LocalSharedUIController
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
-import android.artisan.ui.theme.FleaMarketTheme
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +10,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import building.blocks.ui.compositionlocal.LocalNavController
+import building.blocks.ui.compositionlocal.LocalSharedUIController
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
+import building.blocks.ui.theme.FleaMarketTheme
 import com.flea.market.ui.component.FleaMarketComposeApp
 import com.flea.market.ui.main.shared.DefaultSharedUIController
 import org.koin.androidx.compose.koinViewModel

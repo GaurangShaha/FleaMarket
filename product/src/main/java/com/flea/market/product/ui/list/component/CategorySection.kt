@@ -1,6 +1,5 @@
 package com.flea.market.product.ui.list.component
 
-import android.artisan.ui.theme.extraShape
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -17,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.theme.extraShape
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper
 import com.flea.market.product.ui.list.ProductListIntent
 import com.flea.market.product.ui.list.ProductListIntent.FilterByCategory

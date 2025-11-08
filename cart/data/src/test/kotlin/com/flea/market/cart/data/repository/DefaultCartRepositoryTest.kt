@@ -1,7 +1,5 @@
 package com.flea.market.cart.data.repository
 
-import android.artisan.foundation.model.Result.Failure
-import android.artisan.foundation.model.Result.Success
 import com.flea.market.cart.data.input.cartProductDetailsEntityList
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.cart.data.local.source.CartLocalSource
@@ -14,6 +12,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import org.junit.jupiter.api.Assertions.assertTrue
 import kotlin.coroutines.cancellation.CancellationException
 
 internal class DefaultCartRepositoryTest : BehaviorSpec({
@@ -64,7 +63,7 @@ internal class DefaultCartRepositoryTest : BehaviorSpec({
                     cartRepository.addOrUpdateItem(cartProductDetailsEntityList.first())
 
                 Then("should return failure") {
-                    result.shouldBeInstanceOf<Failure>()
+                    assertTrue(result.isFailure)
                 }
             }
         }
@@ -91,7 +90,7 @@ internal class DefaultCartRepositoryTest : BehaviorSpec({
                     cartRepository.addOrUpdateItem(cartProductDetailsEntityList.first())
 
                 Then("should return failure") {
-                    result.shouldBeInstanceOf<Failure>()
+                    assertTrue(result.isFailure)
                 }
             }
         }
@@ -103,7 +102,7 @@ internal class DefaultCartRepositoryTest : BehaviorSpec({
             val result = cartRepository.removeItem(1)
 
             Then("should return success") {
-                result.shouldBeInstanceOf<Success<Unit>>()
+                assertTrue(result.isSuccess)
             }
         }
 
@@ -112,7 +111,7 @@ internal class DefaultCartRepositoryTest : BehaviorSpec({
             val result = cartRepository.removeItem(1)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure>()
+                assertTrue(result.isFailure)
             }
         }
     }
@@ -123,7 +122,7 @@ internal class DefaultCartRepositoryTest : BehaviorSpec({
             val result = cartRepository.updateQuantity(1, 2)
 
             Then("should return success") {
-                result.shouldBeInstanceOf<Success<Unit>>()
+                assertTrue(result.isSuccess)
             }
         }
 
@@ -132,7 +131,7 @@ internal class DefaultCartRepositoryTest : BehaviorSpec({
             val result = cartRepository.updateQuantity(1, 2)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure>()
+                assertTrue(result.isFailure)
             }
         }
     }

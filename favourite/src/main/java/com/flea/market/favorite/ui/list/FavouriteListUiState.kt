@@ -1,6 +1,6 @@
 package com.flea.market.favorite.ui.list
 
-import android.artisan.ui.component.snackbar.model.SnackbarWithActionDetails
+import building.blocks.ui.component.snackbar.model.SnackbarWithActionDetails
 import com.flea.market.favorite.ui.list.entity.FavouriteItemViewEntity
 
 internal sealed class FavouriteListUiState {

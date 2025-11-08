@@ -1,7 +1,5 @@
 package com.flea.market.product.ui.details.component
 
-import android.artisan.ui.theme.extraColors
-import android.artisan.ui.theme.extraTypography
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.theme.extraColors
+import building.blocks.ui.theme.extraTypography
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.gowtham.ratingbar.ComposeStars
 import com.gowtham.ratingbar.RatingBarStyle

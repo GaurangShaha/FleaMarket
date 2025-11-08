@@ -1,15 +1,13 @@
 package com.flea.market.product.ui.details
 
-import android.artisan.foundation.extension.getOrThrow
-import android.artisan.foundation.extension.onSuccess
-import android.artisan.ui.common.contract.viewmodel.ViewModelContract
-import android.artisan.ui.common.extension.ifInstanceOf
-import android.artisan.ui.common.navigation.ProductDetailsDestination
-import android.artisan.ui.component.ButtonState
-import android.artisan.ui.component.ButtonState.Initial
-import android.artisan.ui.component.ButtonState.Result
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import building.blocks.ui.common.contract.viewmodel.ViewModelContract
+import building.blocks.ui.common.extension.ifInstanceOf
+import building.blocks.ui.component.ButtonState
+import building.blocks.ui.component.ButtonState.Initial
+import building.blocks.ui.component.ButtonState.Result
+import building.blocks.ui.navigation.ProductDetailsDestination
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.favourite.repository.FavouriteRepository
 import com.flea.market.product.data.repository.ProductRepository

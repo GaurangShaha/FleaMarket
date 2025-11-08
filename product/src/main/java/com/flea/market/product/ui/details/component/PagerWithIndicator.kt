@@ -1,8 +1,5 @@
 package com.flea.market.product.ui.details.component
 
-import android.artisan.ui.component.LazyImage
-import android.artisan.ui.component.PageIndicator
-import android.artisan.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -16,6 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.component.LazyImage
+import building.blocks.ui.component.PageIndicator
+import building.blocks.ui.defaults.PRODUCT_IMAGE_ASPECT_RATIO
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import kotlinx.coroutines.delay
 

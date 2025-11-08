@@ -1,14 +1,5 @@
 package com.flea.market.profile.ui
 
-import android.artisan.ui.component.FMOutlinedButton
-import android.artisan.ui.component.FleaMarketAppBar
-import android.artisan.ui.component.LazyImage
-import android.artisan.ui.component.snackbar.model.SnackbarDetails
-import android.artisan.ui.compositionlocal.LocalSharedUIController
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
-import android.artisan.ui.helper.findActivity
-import android.artisan.ui.theme.extraColors
-import android.artisan.ui.theme.extraTypography
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +32,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.component.FMOutlinedButton
+import building.blocks.ui.component.FleaMarketAppBar
+import building.blocks.ui.component.LazyImage
+import building.blocks.ui.component.snackbar.model.SnackbarDetails
+import building.blocks.ui.compositionlocal.LocalSharedUIController
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
+import building.blocks.ui.helper.findActivity
+import building.blocks.ui.theme.extraColors
+import building.blocks.ui.theme.extraTypography
 
 @Composable
 internal fun ProfileScreen(uiState: ProfileUiState) {

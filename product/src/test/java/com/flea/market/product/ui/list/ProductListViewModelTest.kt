@@ -1,8 +1,6 @@
 package com.flea.market.product.ui.list
 
-import android.artisan.foundation.model.Result.Failure
-import android.artisan.foundation.model.Result.Success
-import android.artisan.test.common.test.MainThreadTestListener
+import building.blocks.test.common.test.MainThreadTestListener
 import com.flea.market.product.data.repository.ProductRepository
 import com.flea.market.product.ui.common.mapper.toCategoryListWrapper
 import com.flea.market.product.ui.common.mapper.toProductDetailsViewEntity
@@ -26,7 +24,8 @@ class ProductListViewModelTest : BehaviorSpec({
             val productList = productDetailsEntityList.map { it.toProductDetailsViewEntity() }
 
             val productRepositoryMock = mockk<ProductRepository>()
-            coEvery { productRepositoryMock.getProductList() } returns Success(productDetailsEntityList)
+            coEvery { productRepositoryMock.getProductList() } returns
+                Result.success(productDetailsEntityList)
 
             val productListViewModel = ProductListViewModel(productRepositoryMock)
 
@@ -69,7 +68,7 @@ class ProductListViewModelTest : BehaviorSpec({
 
         And("Product list failed to fetch") {
             val productRepositoryMock = mockk<ProductRepository>()
-            coEvery { productRepositoryMock.getProductList() } returns Failure(Exception())
+            coEvery { productRepositoryMock.getProductList() } returns Result.failure(Exception())
 
             val productRepository = ProductListViewModel(productRepositoryMock)
 

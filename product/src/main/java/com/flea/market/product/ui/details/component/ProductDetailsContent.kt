@@ -1,7 +1,5 @@
 package com.flea.market.product.ui.details.component
 
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
-import android.artisan.ui.theme.extraShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
+import building.blocks.ui.theme.extraShape
 import com.flea.market.product.ui.details.ProductDetailsIntent
 import com.flea.market.product.ui.details.ProductDetailsIntent.AddToCart
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content

@@ -21,9 +21,10 @@ androidx-startup-runtime = { module = "androidx.startup:startup-runtime", versio
 moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
 
 architectural-rules = { module = "shaha.gaurang:architectural-rules", version = "1.0.0" }
-networking = { module = "android.artisan:networking", version = "2.0.0" }
-test-common = { module = "android.artisan:test-common", version = "2.0.0" }
-ui-common = { module = "android.artisan:ui-common", version = "2.0.0" }
+networking = { module = "building.blocks:networking", version = "1.0.0" }
+test-common = { module = "building.blocks:test-common", version = "1.0.0" }
+ui-common = { module = "building.blocks:ui-common", version = "1.0.0" }
+ui-component = { module = "building.blocks:ui-component", version = "1.0.0" }
 
 koin = { group = "io.insert-koin", name = "koin-androidx-compose", version = "4.0.2" }
 

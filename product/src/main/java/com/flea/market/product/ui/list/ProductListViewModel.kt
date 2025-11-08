@@ -1,10 +1,9 @@
 package com.flea.market.product.ui.list
 
-import android.artisan.foundation.extension.fold
-import android.artisan.ui.common.contract.viewmodel.ViewModelContract
-import android.artisan.ui.common.extension.ifInstanceOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import building.blocks.ui.common.contract.viewmodel.ViewModelContract
+import building.blocks.ui.common.extension.ifInstanceOf
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.repository.ProductRepository
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity

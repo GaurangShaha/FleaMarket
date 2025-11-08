@@ -1,6 +1,6 @@
 package com.flea.market.cart.data.repository
 
-import android.artisan.foundation.helper.executeSafely
+import building.blocks.foundation.helper.executeSafely
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.cart.data.local.source.CartLocalSource
 

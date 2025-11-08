@@ -1,6 +1,5 @@
 package com.flea.market.product.data.repository
 
-import android.artisan.foundation.model.Result
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 
 public interface ProductRepository {

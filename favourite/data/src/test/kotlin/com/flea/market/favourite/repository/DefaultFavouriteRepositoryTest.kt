@@ -1,8 +1,5 @@
 package com.flea.market.favourite.repository
 
-import android.artisan.foundation.extension.getOrThrow
-import android.artisan.foundation.model.Result.Failure
-import android.artisan.foundation.model.Result.Success
 import com.flea.market.favourite.local.source.FavouriteLocalSource
 import com.flea.market.favourite.repository.input.favouriteProductDetailsEntityList
 import io.kotest.assertions.throwables.shouldThrow
@@ -10,7 +7,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.every
@@ -18,6 +14,7 @@ import io.mockk.just
 import io.mockk.mockk
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
     val favouriteLocalSource = mockk<FavouriteLocalSource>()
@@ -30,7 +27,7 @@ internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
                 favouriteRepository.markAsFavourite(favouriteProductDetailsEntityList.first())
 
             Then("should return success") {
-                result.shouldBeInstanceOf<Success<Unit>>()
+                assertTrue(result.isSuccess)
             }
         }
 
@@ -40,7 +37,7 @@ internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
                 favouriteRepository.markAsFavourite(favouriteProductDetailsEntityList.first())
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure>()
+                assertTrue(result.isFailure)
             }
         }
     }
@@ -51,7 +48,7 @@ internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
             val result = favouriteRepository.removeFromFavourite(1)
 
             Then("should return success") {
-                result.shouldBeInstanceOf<Success<Unit>>()
+                assertTrue(result.isSuccess)
             }
         }
 
@@ -60,7 +57,7 @@ internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
             val result = favouriteRepository.removeFromFavourite(1)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure>()
+                assertTrue(result.isFailure)
             }
         }
     }
@@ -91,7 +88,7 @@ internal class DefaultFavouriteRepositoryTest : BehaviorSpec({
             val result = favouriteRepository.isMarkedAsFavourite(1)
 
             Then("should return failure") {
-                result.shouldBeInstanceOf<Failure>()
+                assertTrue(result.isFailure)
             }
         }
     }

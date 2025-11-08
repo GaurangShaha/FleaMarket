@@ -1,6 +1,6 @@
 package com.flea.market.data.di
 
-import android.artisan.networking.retrofit.remote.ResultCallAdapterFactory
+import building.blocks.networking.retrofit.remote.ResultCallAdapterFactory
 import com.flea.market.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

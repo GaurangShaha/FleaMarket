@@ -1,8 +1,7 @@
 package com.flea.market.favorite.ui.list
 
-import android.artisan.foundation.model.InternetDisconnectionException
-import android.artisan.foundation.model.Result.Success
-import android.artisan.test.common.test.MainThreadTestListener
+import building.blocks.foundation.model.InternetDisconnectionException
+import building.blocks.test.common.test.MainThreadTestListener
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.favorite.ui.input.favouriteItemViewEntity
 import com.flea.market.favorite.ui.input.favouriteProductDetailsEntityList
@@ -89,8 +88,8 @@ internal class FavouriteListViewModelTest : BehaviorSpec({
             }
 
             And("processIntent called with MoveToCart") {
-                coEvery { cartRepositoryMock.addOrUpdateItem(any()) } returns Success(Unit)
-                coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Success(Unit)
+                coEvery { cartRepositoryMock.addOrUpdateItem(any()) } returns Result.success(Unit)
+                coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Result.success(Unit)
 
                 favouriteListViewModel.processIntent(MoveToCart(favouriteItemViewEntity))
 
@@ -110,7 +109,7 @@ internal class FavouriteListViewModelTest : BehaviorSpec({
             }
 
             And("processIntent called with RemoveFromFavourite") {
-                coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Success(Unit)
+                coEvery { favouriteRepositoryMock.removeFromFavourite(any()) } returns Result.success(Unit)
                 favouriteListViewModel.processIntent(RemoveFromFavourite(1))
 
                 Then("favourite repository's removeFromFavourite function should be called") {

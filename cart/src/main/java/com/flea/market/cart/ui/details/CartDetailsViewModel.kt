@@ -1,9 +1,9 @@
 package com.flea.market.cart.ui.details
 
-import android.artisan.ui.common.contract.viewmodel.ViewModelContract
-import android.artisan.ui.common.contract.viewmodel.ViewModelContract.Companion.startWithFiveSecStopTimeout
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import building.blocks.ui.common.contract.viewmodel.ViewModelContract
+import building.blocks.ui.common.contract.viewmodel.ViewModelContract.Companion.startWithFiveSecStopTimeout
 import com.flea.market.cart.data.local.entity.CartProductDetailsEntity
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.cart.ui.details.CartDetailsIntent.DecreaseQuantity

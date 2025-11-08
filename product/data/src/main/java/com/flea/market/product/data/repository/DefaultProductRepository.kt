@@ -1,6 +1,5 @@
 package com.flea.market.product.data.repository
 
-import android.artisan.foundation.extension.map
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import com.flea.market.product.data.remote.source.ProductRemoteSource
 

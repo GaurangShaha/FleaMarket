@@ -1,6 +1,5 @@
 package com.flea.market.product.data.remote.source
 
-import android.artisan.foundation.model.Result
 import com.flea.market.product.data.remote.entity.ProductDetailsEntity
 import retrofit2.http.GET
 import retrofit2.http.Path

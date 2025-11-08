@@ -1,6 +1,5 @@
 package com.flea.market.cart.ui.details.component
 
-import android.artisan.ui.component.FMButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.component.FMButton
 import com.flea.market.cart.ui.R
 
 @Composable

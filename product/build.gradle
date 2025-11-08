@@ -52,6 +52,7 @@ android {
 
 dependencies {
     api libs.ui.common
+    api libs.ui.component
     api project(path: ':product:data')
     implementation project(path: ':cart:data')
     implementation project(path: ':favourite:data')

@@ -1,12 +1,5 @@
 package com.flea.market.ui.component
 
-import android.artisan.ui.component.NavigationBarScreen
-import android.artisan.ui.component.ScreenWithBottomBar
-import android.artisan.ui.component.ScreenWithNavigationRail
-import android.artisan.ui.component.snackbar.SnackbarDelegate
-import android.artisan.ui.compositionlocal.LocalNavController
-import android.artisan.ui.compositionlocal.LocalSharedUIController
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.rememberDrawerState
@@ -17,6 +10,13 @@ import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
+import building.blocks.ui.component.NavigationBarScreen
+import building.blocks.ui.component.ScreenWithBottomBar
+import building.blocks.ui.component.ScreenWithNavigationRail
+import building.blocks.ui.component.snackbar.SnackbarDelegate
+import building.blocks.ui.compositionlocal.LocalNavController
+import building.blocks.ui.compositionlocal.LocalSharedUIController
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.R
 import com.flea.market.cart.ui.details.navigation.CartDetailsDestination
 import com.flea.market.cart.ui.navigation.addCartGraph
@@ -73,7 +73,7 @@ private val navigationScreens = immutableListOf(
     NavigationBarScreen(
         route = CartDetailsDestination,
         labelResourceId = R.string.cart,
-        iconResourceId = android.artisan.ui.component.R.drawable.ic_cart
+        iconResourceId = building.blocks.ui.component.R.drawable.ic_cart
     ),
     NavigationBarScreen(
         route = FavouriteListDestination,

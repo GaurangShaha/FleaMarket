@@ -1,6 +1,6 @@
 package com.flea.market.product.ui.dummy.data
 
-import android.artisan.ui.component.ButtonState
+import building.blocks.ui.component.ButtonState
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 import com.flea.market.product.ui.details.ProductDetailsUiState.Content
 import com.flea.market.product.ui.list.CategoryListImmutableWrapper

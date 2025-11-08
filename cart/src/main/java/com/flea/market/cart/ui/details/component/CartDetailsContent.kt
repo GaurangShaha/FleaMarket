@@ -1,8 +1,5 @@
 package com.flea.market.cart.ui.details.component
 
-import android.artisan.ui.common.navigation.ProductDetailsDestination
-import android.artisan.ui.compositionlocal.LocalNavController
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,6 +12,9 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.compositionlocal.LocalNavController
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
+import building.blocks.ui.navigation.ProductDetailsDestination
 import com.flea.market.cart.ui.details.CartDetailsIntent
 import com.flea.market.cart.ui.details.CartDetailsIntent.DecreaseQuantity
 import com.flea.market.cart.ui.details.CartDetailsIntent.IncreaseQuantity

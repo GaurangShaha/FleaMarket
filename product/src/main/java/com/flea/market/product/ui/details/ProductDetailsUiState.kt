@@ -1,6 +1,6 @@
 package com.flea.market.product.ui.details
 
-import android.artisan.ui.component.ButtonState
+import building.blocks.ui.component.ButtonState
 import com.flea.market.product.ui.common.entity.ProductDetailsViewEntity
 
 internal sealed class ProductDetailsUiState {

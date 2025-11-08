@@ -1,12 +1,11 @@
 package com.flea.market.favorite.ui.list
 
-import android.artisan.foundation.extension.onSuccess
-import android.artisan.ui.common.contract.viewmodel.ViewModelContract
-import android.artisan.ui.common.extension.ifInstanceOf
-import android.artisan.ui.component.snackbar.SnackbarDelegate.SnackbarType.SUCCESS
-import android.artisan.ui.component.snackbar.model.SnackbarWithActionDetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import building.blocks.ui.common.contract.viewmodel.ViewModelContract
+import building.blocks.ui.common.extension.ifInstanceOf
+import building.blocks.ui.component.snackbar.SnackbarDelegate.SnackbarType.SUCCESS
+import building.blocks.ui.component.snackbar.model.SnackbarWithActionDetails
 import com.flea.market.cart.data.repository.CartRepository
 import com.flea.market.favorite.ui.list.FavouriteListIntent.MoveToCart
 import com.flea.market.favorite.ui.list.FavouriteListIntent.RemoveFromFavourite

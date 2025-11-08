@@ -1,13 +1,5 @@
 package com.flea.market.product.ui.details
 
-import android.artisan.ui.common.mapper.toAPIErrorIcon
-import android.artisan.ui.common.mapper.toAPIErrorMessage
-import android.artisan.ui.component.ErrorLayout
-import android.artisan.ui.component.FleaMarketAppBar
-import android.artisan.ui.component.HeartToggleButton
-import android.artisan.ui.compositionlocal.LocalNavController
-import android.artisan.ui.theme.DarkStatusBarDisposableEffect
-import android.artisan.ui.theme.extraColors
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
@@ -21,6 +13,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import building.blocks.ui.component.ErrorLayout
+import building.blocks.ui.component.FleaMarketAppBar
+import building.blocks.ui.component.HeartToggleButton
+import building.blocks.ui.compositionlocal.LocalNavController
+import building.blocks.ui.mapper.toAPIErrorIcon
+import building.blocks.ui.mapper.toAPIErrorMessage
+import building.blocks.ui.theme.DarkStatusBarDisposableEffect
+import building.blocks.ui.theme.extraColors
 import com.flea.market.product.ui.R
 import com.flea.market.product.ui.details.ProductDetailsIntent.Reload
 import com.flea.market.product.ui.details.ProductDetailsIntent.ToggleMarkAsFavourite

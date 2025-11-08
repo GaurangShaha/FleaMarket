@@ -1,8 +1,8 @@
 package com.flea.market.product.ui.di
 
-import android.artisan.ui.common.navigation.ProductDetailsDestination
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.toRoute
+import building.blocks.ui.navigation.ProductDetailsDestination
 import com.flea.market.product.ui.details.ProductDetailsViewModel
 import com.flea.market.product.ui.list.ProductListViewModel
 import org.koin.core.module.Module

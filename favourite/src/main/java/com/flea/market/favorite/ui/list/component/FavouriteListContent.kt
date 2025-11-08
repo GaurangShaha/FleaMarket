@@ -1,8 +1,5 @@
 package com.flea.market.favorite.ui.list.component
 
-import android.artisan.ui.component.FleaMarketSnackbarHost
-import android.artisan.ui.component.snackbar.SnackbarDelegate
-import android.artisan.ui.compositionlocal.LocalWindowSizeClass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import building.blocks.ui.component.FleaMarketSnackbarHost
+import building.blocks.ui.component.snackbar.SnackbarDelegate
+import building.blocks.ui.compositionlocal.LocalWindowSizeClass
 import com.flea.market.favorite.ui.list.FavouriteListIntent
 import com.flea.market.favorite.ui.list.FavouriteListIntent.MoveToCart
 import com.flea.market.favorite.ui.list.FavouriteListIntent.RemoveFromFavourite
